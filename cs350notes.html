@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="shawnotes.css" type="text/css" />
+</head>
+<body>
+<h1 id="cs-350-notes">CS 350 Notes</h1>
+<p>Written by Shaw Tan</p>
+<hr />
+<h1 id="threads-and-concurrency">Threads and Concurrency</h1>
+<h2 id="thread">Thread</h2>
+<ul>
+<li>Way to express concurrency in a program</li>
+<li>A normal <em>sequential program</em> consists of a single thread of execution</li>
+<li><em>Threaded concurrent programs</em> have multiple threads of execution occuring at the same time</li>
+</ul>
+<h3 id="os161">OS/161</h3>
+<ul>
+<li>A thread creates new threads using <code>thread_fork</code></li>
+<li>Each thread's function activations are <em>private</em></li>
+<li><code>thread_yield</code> gives up control of the current thread (voluntary)</li>
+<li><code>thread_exit</code> ends the current thread</li>
+</ul>
+<h3 id="gdb-commands">GDB Commands</h3>
+<pre><code>c              Continue
+l              Lines
+b [func name]  Create a break point
+bt             Backtrace</code></pre>
+<h3 id="implementation">Implementation</h3>
+<p>Multiple processors, multiple cores, hardware multithreading per core</p>
+<ul>
+<li>Threads can execute simultaneously</li>
+<li>Problem: Upper bound on number of threads</li>
+<li>Problem: Still consuming resources while a thread is waiting (waste of a core)</li>
+</ul>
+<p>Time sharing</p>
+<ul>
+<li>Multiple threads share the same hardware thread</li>
+<li>Quick switches between threads so it feels like every thread is running at the same time</li>
+</ul>
+<h3 id="context-switch">Context Switch</h3>
+<ul>
+<li>The switch from one thread to another is called a <em>context switch</em>
+<ol style="list-style-type: decimal">
+<li>Decide which thread will run next (scheduling)</li>
+<li>Save register contents of current thread</li>
+<li>Load register contents of next thread</li>
+</ol></li>
+<li>This must be done very carefully</li>
+<li>Caused by
+<ul>
+<li><code>thread_yield</code></li>
+<li><code>thread_exit</code></li>
+<li><code>wchan_sleep</code> Wait channel sleep (Blocked)</li>
+<li>Thread is <em>preempted</em> (Thread involuntarilty stopped)</li>
+</ul></li>
+</ul>
+<h3 id="thead-states">Thead states</h3>
+<ul>
+<li><strong>Running</strong>: currently executing</li>
+<li><strong>Ready</strong>: ready to execute</li>
+<li><strong>Blocked</strong>: waiting for something, not ready</li>
+</ul>
+<h3 id="preemption">Preemption</h3>
+<ul>
+<li><em>Preemption</em> forces a running thread to stop running</li>
+<li>To implement this, there needs to be a means of 'getting control' of a thread</li>
+<li>Done using <em>interrupts</em></li>
+</ul>
+<h3 id="interrupts">Interrupts</h3>
+<ul>
+<li>Part of hardware devices (e.g Timer)</li>
+<li>Causes hardware to automatically transfer control to a fixed location in memory</li>
+<li>Place an <em>interrupt handler</em> in that memory location</li>
+<li>The <em>interrupt handler</em></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Creates a <em>trap frame</em> to record thread context (saves ALL registers)</li>
+<li>Determines which device caused the interrupt and performs device-specific processing</li>
+<li>Restores the saved thread context from trap frame and resumes execution</li>
+</ol>
+<h3 id="preemptive-scheduling">Preemptive Scheduling</h3>
+<ul>
+<li>A preemptive scheduler limits how long a thread can run before being preempted</li>
+<li>Set a threshold of how often a thread can be intrrupted before being preempted# Synchronization</li>
+</ul>
+<h2 id="thread-synchronization">Thread Synchronization</h2>
+<ul>
+<li>When threads need to talk to each other, synchronization problems can occur</li>
+<li>Threads have shared access to global variables</li>
+<li>What happens when two threads try to modify the same variable at the same time? UNDEFINED behaviour</li>
+</ul>
+<h2 id="mutual-exclusion">Mutual Exclusion</h2>
+<ul>
+<li>A <strong>critical section</strong> is a section accessing a shared object</li>
+<li>Only one thread can be running a <em>critical section</em> of code at one time</li>
+<li>Do this with locks</li>
+<li><code>Acquire</code> / <code>Release</code> locks</li>
+</ul>
+<h3 id="hardware-specific-implementation">Hardware-specific implementation</h3>
+<ul>
+<li>Use an <em>atomic</em> instruction that is indivisible</li>
+<li>x86 <code>xchg</code> instruction:</li>
+<li><code>xchg src,addr</code>
+<ul>
+<li><code>src</code> is a register</li>
+<li><code>addr</code> is a memory address</li>
+<li>Exchanges values in <code>src</code> and <code>addr</code></li>
+</ul></li>
+<li>MIPS</li>
+<li>load-linked <code>ll</code>
+<ul>
+<li>Places a watch on a variable</li>
+</ul></li>
+<li>store-conditional <code>sc</code>
+<ul>
+<li>Fails if the watched variable has been modified</li>
+</ul></li>
+</ul>
+<h2 id="spinlocks">Spinlocks</h2>
+<ul>
+<li><code>spinlock_init</code></li>
+<li><code>spinlock_acquire</code></li>
+<li><code>spinlock_release</code></li>
+<li><em>Problem:</em> Wasted cycles just 'spinning' waiting for the lock to release</li>
+</ul>
+<h2 id="locks">Locks</h2>
+<ul>
+<li>Notify the thread when lock is available</li>
+<li><code>lock_acquire</code> thread blocks after calling this</li>
+<li><code>lock_release</code></li>
+<li>Have a thread id attached, so only the acquiring thread can release the lock</li>
+<li>Kernal panic if the ids don't match!</li>
+</ul>
+<h3 id="blocking-in-os161">Blocking in OS/161</h3>
+<ul>
+<li><code>wchan_sleep(wchan)</code> blocks thread and adds it to wchan queue</li>
+<li>Call <code>wchan_lock</code> before this</li>
+<li><code>wchan_wakeall(wchan)</code> wakes up all threads on <code>wchan</code> queue</li>
+<li><code>wchan_wakeone(wchan)</code> wakes the oldest thread on wchan</li>
+<li><code>wchan_lock(wchan)</code> prevents operations on wchan</li>
+<li>So only 1 thread can be added to the queue at once</li>
+<li>wchan uses a spinlock</li>
+<li>Hoping that wchan critical channel is smaller than code critical section</li>
+</ul>
+<h2 id="semaphore">Semaphore</h2>
+<ul>
+<li>Synchronization primitive used to enforce mutual exclusion</li>
+<li>Two atomic operations:</li>
+<li><code>P</code>: If value greater than 0, decrement value. Otherwise block until value is greater than 0 and then decrement</li>
+<li><code>V</code>: Increment value of the semaphore</li>
+<li>No restriction that only same thread can call <code>P</code> and <code>V</code></li>
+<li>e.g Mutual exclusion</li>
+</ul>
+<pre><code>    Thread 1:
+        P(sem);
+          total++;
+        V(sem);
+
+    Thread 2:
+        P(sem);
+          total--;
+        V(sem);</code></pre>
+<ul>
+<li>e.g Producer/Consumer synchronization</li>
+</ul>
+<pre><code>    Producer’s Pseudo-code:
+      P(Spaces);
+      add item to the buffer
+      V(Items);
+
+    Consumer’s Pseudo-code:
+      P(Items);
+      remove item from the buffer
+      V(Spaces);</code></pre>
+<h2 id="condition-variables">Condition Variables</h2>
+<ul>
+<li>Synchronization primative</li>
+<li>3 operations</li>
+<li><code>wait</code> causes the current thread to block</li>
+<li><code>signal</code> unblocks one thread on the signalled condition variable</li>
+<li><code>broadcast</code> wakes all threads waiting on the condition</li>
+<li>e.g Producer / Consumer variable</li>
+<li>Two condition variables:
+<ul>
+<li><code>notempty</code> (count &gt; 0)</li>
+<li><code>notfull</code> (count &lt; N)</li>
+</ul></li>
+</ul>
+<h2 id="deadlocks">Deadlocks</h2>
+<ul>
+<li>e.g 2 threads T1, T2</li>
+</ul>
+<pre><code>    T1:
+        lock_acquire(lockA)
+        lock_acquire(lockB)
+    T2:
+        lock_acquire(lockB)
+        lock_acquire(lockA)</code></pre>
+<ul>
+<li>The threads are permanently stuck</li>
+</ul>
+<h3 id="deadlock-recovery">Deadlock Recovery</h3>
+<ul>
+<li>Release all locks and try again</li>
+<li>Restart the offending device (kill the threads)</li>
+<li>Problem: Deadlock recovery tends to break the program</li>
+</ul>
+<h3 id="deadlock-avoidance">Deadlock Avoidance</h3>
+<ul>
+<li>Tell OS all resources the thread needs, only run when they're available</li>
+<li><em>Problem:</em> A thread may not know all resources it needs so it requests all of them</li>
+<li>All threads do this, resulting in only one thread runnning</li>
+</ul>
+<h3 id="deadlock-prevention">Deadlock Prevention</h3>
+<ul>
+<li>Remove a requirement of deadlocks:</li>
+<li>Has locks (mutual exclusion)</li>
+<li><p>No resource preemption (threads with different priorities)</p></li>
+<li>No Hold and Wait</li>
+<li>Prevent a thread from requesting resources if it has resources allocated</li>
+<li>Must acquire all resources at once</li>
+<li><em>Problem:</em> Creates livelocks where each resource is trying to re-acquire resources
+<ul>
+<li>e.g Four cars arrive at a stop sign at the same time</li>
+<li>Livelock breaks when one thread just GOES</li>
+</ul></li>
+<li>Resource Ordering (use this)</li>
+<li><p>Requre each thread acquire resources in increasing resource type order</p></li>
+</ul>
+<h2 id="example-problem">Example Problem</h2>
+<ul>
+<li>Threaded programs with <code>N</code> queues.</li>
+<li>Implement <code>Transfer(i,j)</code> that takes something from queue <code>i</code> and puts it in queue <code>j</code></li>
+</ul>
+<pre><code>    Transfer(i,j) {
+
+        // Acquire locks in increasing order
+        if (i &lt; j) {
+          lock_acquire(lock[i]);
+          lock_acquire(lock[j]);
+        } else {
+          lock_acquire(lock[j]);
+          lock_acquire(lock[i]);
+        }
+
+        // Transfer the item
+        list_remove(l[i]);
+        list_remove(l[j]);
+
+        // Release locks
+        lock_release(lock[i]);
+        lock_release(lock[j]);
+    }</code></pre>
+<h2 id="example-problem-1">Example Problem</h2>
+<ul>
+<li>Traffic intersection</li>
+<li>Allowed:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Same origin</li>
+<li>Opposing direction</li>
+<li>A Right turn + Different destination</li>
+</ol>
+<ul>
+<li><code>intersection_before_entry</code></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Acquire lock</li>
+<li>Look at cars in intersection</li>
+<li>Block on condition variable until it can go</li>
+<li>Get woken up and check until it can go (maybe have a queue)</li>
+<li>Go</li>
+</ol>
+<ul>
+<li><code>intersection_after_exit</code></li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>Exit and Brodcast cv # Processes and System Calls</li>
+</ol>
+<h2 id="process">Process</h2>
+<ul>
+<li>Environment in which an application program runs</li>
+<li>Container for resources required to run an application</li>
+<li>Has virtual memory</li>
+<li>Isolates program from other programs in other processes</li>
+</ul>
+<h2 id="system-calls">System Calls</h2>
+<ul>
+<li>Interface between processes and kernel</li>
+<li>A process uses system calls to request OS services</li>
+<li>Protects kernel from programs</li>
+<li>e.g Create, destroy, manage processes, create, destroy, read, write files</li>
+<li><code>syscall library</code> grants privileges to the application</li>
+</ul>
+<h2 id="kernel-privilege">Kernel Privilege</h2>
+<ul>
+<li>Requires Hardware support</li>
+<li>You can only read and write kernel data when you have the privileges</li>
+<li>Prevents programs from messing with the kernel</li>
+<li>e.g Halting the CPU</li>
+</ul>
+<h2 id="how-system-calls-work">How System Calls Work</h2>
+<p>Two things can make kernel code run:</p>
+<ul>
+<li>Interrupts</li>
+<li>Jump to interrupt handler in the kernel</li>
+<li>Exceptions</li>
+<li>Exceptions cause a jump to exception handler in kernel</li>
+</ul>
+<h3 id="system-call-timeline">System call Timeline</h3>
+<ol start="0" style="list-style-type: decimal">
+<li>Arranges registers for call</li>
+<li>Application calls library wrapper</li>
+<li>Library preforms <code>syscall</code></li>
+<li>Kernel exception handler runs
+<ul>
+<li>Create trap frame</li>
+<li>Determine exception type</li>
+<li>Determine system call being requested</li>
+<li>Does the work for system call</li>
+<li>Restores application state</li>
+<li>Returns</li>
+</ul></li>
+<li>Library wrapper finishes and returns</li>
+<li>Application continues execution</li>
+</ol>
+<h3 id="exception-types">Exception Types</h3>
+<pre><code>EX_IRQ    0    Interrupt   (Interrupt is a type of exception)
+EX_SYS    8    Syscall</code></pre>
+<h3 id="how-to-tell-type-of-system-call">How to tell type of system call</h3>
+<ul>
+<li>Kernel defines a code for each system call it understands</li>
+<li>Application places a code in a specified location</li>
+<li>See <code>syscall.h</code></li>
+</ul>
+<h2 id="user-and-kernel-stacks">User and Kernel Stacks</h2>
+<p>User (Application) Stack</p>
+<ul>
+<li>Used while code is executing</li>
+<li>Located in application's virtual memory</li>
+</ul>
+<p>Kernel Stack</p>
+<ul>
+<li>Used while thread is executing kernel code (after exception or interrupt)</li>
+<li>Stack also holds trap frames and switch frames</li>
+</ul>
+<h2 id="exception-handling-in-os161">Exception Handling in OS/161</h2>
+<ol style="list-style-type: decimal">
+<li>Save application stack pointer</li>
+<li>Switch stacks to kernel stack</li>
+<li>Saves state in a trap frame</li>
+<li>Calls <code>mips_trap</code> which determines the type of exception and handles it (<code>trap.c</code>)</li>
+<li>Restore application state</li>
+<li>Jump back to application and switch back to unprivileged execution mode</li>
+</ol>
+<p><code>exception-mips1.S</code></p>
+<h2 id="specific-system-calls">Specific System Calls</h2>
+<h4 id="fork"><code>fork</code></h4>
+<ul>
+<li>Creates a (child) process that is identical to the original (parent) process</li>
+<li>Returns twice (once to parent, once to child)</li>
+<li>Returns with different pids</li>
+<li>Return value of parent is pid of child</li>
+<li>Return value of child is 0</li>
+</ul>
+<h4 id="exit"><code>_exit</code></h4>
+<ul>
+<li>Terminates the calling process</li>
+<li>Can pass an exit code which is passed to any other process asking for it</li>
+</ul>
+<h4 id="waitpid"><code>waitpid</code></h4>
+<ul>
+<li>Blocks until child terminates</li>
+<li>Retrieves exit code of child</li>
+</ul>
+<h4 id="execv"><code>execv</code></h4>
+<ul>
+<li>Replaces the program that a process is running</li>
+<li>Resets virtual memory and code to that of the new program</li>
+<li><code>execv(path, args)</code></li>
+<li>Often call <code>fork</code> and <code>execv</code> together</li>
+</ul>
+<h3 id="terminology">Terminology</h3>
+<ul>
+<li><strong>Orphan</strong>: When a child is still running when its parent dies</li>
+<li><strong>Zombie</strong>: When a child dies before the parent</li>
+</ul>
+<h1 id="virtual-memory">Virtual Memory</h1>
+<h2 id="virtual-memory-1">Virtual Memory</h2>
+<ul>
+<li>Isolates programs to prevent them from accessing other programs</li>
+<li>Each virtual memory is mapped to a different part of physical memory</li>
+<li>Address translation is performed in hardware</li>
+</ul>
+<h3 id="dynamic-relocation">Dynamic Relocation</h3>
+<ul>
+<li>Track virtual memory <em>offset</em> and <em>limit</em> of each process</li>
+<li>Memory Management Unit (MMU) has a <em>relocation register</em> and a <em>limit register</em></li>
+<li>Translates virtual address to a virtual address</li>
+<li>Kernel maintains R and L for each process and changes the values during context switches</li>
+</ul>
+<pre><code>    if v &gt;= L then 
+        generate exception
+    else 
+        p = v + R
+</code></pre>
+<ul>
+<li>Each virtual address space corresponds to a contiguous range of physical addresses</li>
+<li>Problem: Physical memory must be contiguous</li>
+<li>OS must track free and used physical memory</li>
+<li>Potential for <em>fragmentation</em> of physical memory</li>
+<li>Results in lots of small holes that are unusable by any program</li>
+<li>Problem: Requires hardware support (the MMU)</li>
+</ul>
+<h3 id="paging">Paging</h3>
+<ul>
+<li>Physical memory is divided into fixed-sized chunks called <em>frames</em></li>
+<li>Virtual memories are divided into fixed-size chunks called <em>pages</em></li>
+<li>Page size = Frame size</li>
+<li>Each page maps to a different frame</li>
+<li>Does this require hardware support? Yes</li>
+<li>Possibly a relocation register for every page</li>
+<li>Actually use a Page Table</li>
+<li>Does this solve fragmentation problem?</li>
+<li>Not completely; there is internal fragmentation.</li>
+<li>Smallest unit of memory is 1 page (4kb), a program may not need that much</li>
+</ul>
+<h4 id="page-table">Page Table</h4>
+<ul>
+<li>Has entry for every page-frame mapping in virtual address space</li>
+<li>Has a <em>valid</em> bit indicating if the mapping is in use (has physical address)</li>
+<li>Cannot have two page table entries pointing to the same frame (then two programs will share memory)</li>
+<li>Need 12 bits (4kb) to determine offset, the rest is location</li>
+<li>Don't put page number in page table! Use indexes instead</li>
+<li>Can also have other information (set by MMU)</li>
+<li>Write Protection bit: makes a page read only
+<ul>
+<li>Use for code segment</li>
+</ul></li>
+<li>Reference bit: When page is being read / written to
+<ul>
+<li>Can swap out unused pages to free up memory</li>
+</ul></li>
+<li>Dirty bit: When page contents change
+<ul>
+<li>Need to write to disk</li>
+<li>Cheaper swap operation for non-dirty pages</li>
+</ul></li>
+<li>Page Table Size = number of pages * size of page table entry</li>
+<li>Number of pages = virtual memory size / page size</li>
+<li>Located inside the kernel</li>
+<li>Problem: need to do a page lookup every time (expensive)</li>
+<li>Problem: Page table can be really big</li>
+</ul>
+<h3 id="hardware">Hardware</h3>
+<h4 id="kernel">Kernel</h4>
+<ul>
+<li>Manage MMU registers on address space switches (context switches)</li>
+<li>Creates and managers page tables</li>
+<li>Allocates and deallocates physical memory</li>
+<li>Handles MMU exceptions</li>
+</ul>
+<h4 id="mmu-memory-management-unit">MMU (Memory Management Unit)</h4>
+<ul>
+<li>Translates virtual addresses to physical addresses</li>
+<li>Check for and raise exceptions when necessary</li>
+<li>Steps</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Check for entry <code>(p, f)</code> in TLB. If it's there, return <code>f</code></li>
+<li>Find <code>p</code>'s frame number <code>f</code> in page table</li>
+<li>Add <code>(p, f)</code> to TLB (kick out old entry if full)</li>
+<li>Return <code>f</code></li>
+</ol>
+<ul>
+<li>Needs to be able to distinguish different address spaces</li>
+</ul>
+<h4 id="tlb-translation-lookaside-buffer">TLB (Translation Lookaside Buffer)</h4>
+<ul>
+<li>Reduces memory lookup cost (page table, translation, actually getting memory)</li>
+<li>Caches page translations</li>
+<li>Small, limited amount of entries</li>
+<li>Kernel clears or invalidates TLB on context switches</li>
+</ul>
+<h4 id="hardware-vs-software-managed-tlb">Hardware vs Software Managed TLB</h4>
+<ul>
+<li>Hardware-managed TLBs are not very flexible</li>
+<li>MMU must handle page misses and entry replacement</li>
+<li>Software-managed TLBs throw an exception if an entry does not exist</li>
+</ul>
+<h3 id="solving-page-table-memory-problem">Solving Page Table Memory Problem</h3>
+<ul>
+<li>A page table needs to be really big to store all page-frame translations, even when a program only uses a few pages</li>
+<li>Solution: Have a <strong>limit register</strong> of the farthest place memory is used
+<ul>
+<li>Doesn't actually work, memory is not laid out nicely</li>
+<li>Stack is placed farther out and grows inwards</li>
+</ul></li>
+<li>Solution: <strong>Segmentation</strong>
+<ul>
+<li>Offset register + Limit register per segment</li>
+<li>Program has a couple of segments</li>
+<li>Segment is decided by segment ID in first few bits</li>
+<li><em>Problem</em>: External fragmentation</li>
+</ul></li>
+<li>Solution: <strong>Two-Level Paging</strong>
+<ul>
+<li>Split page table into multiple smaller page tables</li>
+<li>Only split a smaller table if entires in it are valid</li>
+<li>Save memory by not creating page tables for unused addresses</li>
+<li><em>Problem</em>: Needs large page table directory for large address spaces</li>
+</ul></li>
+<li>Solution: <strong>Multi-Level Paging</strong>
+<ul>
+<li>Multiple levels of directory</li>
+<li>Can accommodate large and small programs without taking a lot of space</li>
+<li><em>Problem</em>: TLB misses are more expensive because you need to look up multiple page tables</li>
+</ul></li>
+</ul>
+<h4 id="translating-segment-addresses">Translating Segment Addresses</h4>
+<ul>
+<li>First k bits: which segment it belongs to</li>
+<li>Remaining bits: Check with that segment's limit register for validity</li>
+<li>Use relocation offset of that segment to get physical address</li>
+</ul>
+<h4 id="translating-two-level-paging-addresses">Translating Two-Level Paging Addresses</h4>
+<ul>
+<li>Each virtual address has three parts:
+<ul>
+<li><code>p1</code>: Lookup in <code>base register</code></li>
+<li><code>p2</code>: Lookup in 2nd level page table</li>
+<li><code>o</code>: offset</li>
+</ul></li>
+</ul>
+<h2 id="os161-virtual-memory">OS/161 Virtual Memory</h2>
+<ul>
+<li><code>dumbvm</code></li>
+<li>32-bit paged virtual and physical addresses</li>
+<li>Software-managed TLB
+<ul>
+<li>Exception is raised on every TLB miss</li>
+</ul></li>
+<li><code>vm_fault</code> handles TLB exceptions
+<ul>
+<li>Uses information from <code>addrspace</code> structure to determine page-frame mappings to load into TLB</li>
+<li>Separate <code>addrspace</code> for each process</li>
+<li>Stack size not specified because it is hardcoded
+<ul>
+<li>12 pages</li>
+<li>Page size 0x1000</li>
+<li>Starts at end of virtual memory
+<ul>
+<li>e.g 0x8000 0000 space -&gt; 0x7FFF 4000</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</body>
+</html>
