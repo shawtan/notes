@@ -87,8 +87,9 @@ bt             Backtrace</code></pre>
 <h3 id="preemptive-scheduling">Preemptive Scheduling</h3>
 <ul>
 <li>A preemptive scheduler limits how long a thread can run before being preempted</li>
-<li>Set a threshold of how often a thread can be intrrupted before being preempted# Synchronization</li>
+<li>Set a threshold of how often a thread can be intrrupted before being preempted</li>
 </ul>
+<h1 id="synchronization">Synchronization</h1>
 <h2 id="thread-synchronization">Thread Synchronization</h2>
 <ul>
 <li>When threads need to talk to each other, synchronization problems can occur</li>
@@ -281,8 +282,9 @@ bt             Backtrace</code></pre>
 <li><code>intersection_after_exit</code></li>
 </ul>
 <ol start="6" style="list-style-type: decimal">
-<li>Exit and Brodcast cv # Processes and System Calls</li>
+<li>Exit and Brodcast cv</li>
 </ol>
+<h1 id="processes-and-system-calls">Processes and System Calls</h1>
 <h2 id="process">Process</h2>
 <ul>
 <li>Environment in which an application program runs</li>
@@ -368,6 +370,16 @@ EX_SYS    8    Syscall</code></pre>
 <li>Returns with different pids</li>
 <li>Return value of parent is pid of child</li>
 <li>Return value of child is 0</li>
+<li>Steps
+<ol style="list-style-type: decimal">
+<li>Create process structure for child process</li>
+<li>Create and copy address space from parent to child</li>
+<li>Attach address space to child</li>
+<li>Assign a PID to the child</li>
+<li>Create a thread for the child</li>
+<li>Child puts modified trapframe on stack</li>
+<li>Go back to userspace</li>
+</ol></li>
 </ul>
 <h4 id="exit"><code>_exit</code></h4>
 <ul>
@@ -560,6 +572,185 @@ EX_SYS    8    Syscall</code></pre>
 </ul></li>
 </ul></li>
 </ul></li>
+</ul>
+<h3 id="initializing-an-address-space">Initializing an Address Space</h3>
+<ul>
+<li>A kernel must create an address space for each process it creates</li>
+<li>Program's code and data is described in an executable file created when program is compiled and linked
+<ul>
+<li>ELF (Executable and Linking Format)</li>
+</ul></li>
+<li><code>execv</code> system call creates address space and loads process</li>
+<li><em>Pre-loading</em>: read entire executable and load all of it (OS/161 does this)
+<ul>
+<li>Simpler to implement</li>
+<li>Don't need to wait to load functions</li>
+</ul></li>
+<li><em>Loading on demand</em>: Normally OS's will only load parts of program when it is used
+<ul>
+<li>Saves memory</li>
+</ul></li>
+</ul>
+<h4 id="elf-files">ELF files</h4>
+<ul>
+<li>Contain address space segment descriptions
+<ul>
+<li>Header describing segments and segment images
+<ul>
+<li>Virtual address of start of each segment</li>
+<li>Length of segment</li>
+<li>Location of start of segment image in ELF file</li>
+<li>Length of segment image in ELF file</li>
+</ul></li>
+<li>Image is an exact copy of the binary data that should be loaded into the specified portion
+<ul>
+<li>Extra space should be 0-filled</li>
+</ul></li>
+</ul></li>
+<li>Identifies the virtual address of the program's first instruction</li>
+<li>Contains information for compilers, linkers, debuggers, loaders, etc.</li>
+<li><strong>OS/161</strong> has 2 segments in ELF files (text segment (code) and data segment (global data))</li>
+</ul>
+<h3 id="virtual-memory-for-kernel">Virtual Memory for Kernel</h3>
+<ul>
+<li>Ideally, kernel is in virtual memory</li>
+<li>Easier to prevent other programs from accessing kernel memory</li>
+<li>Problems:
+<ul>
+<li>Bootstrapping: the kernel implements virtual memory, so how does it run in virtual memory when it's starting</li>
+<li>Sharing: data may need to be copied between kernel and applications but they are in separate virtual address spaces
+<ul>
+<li>Slower and more TLB flushing</li>
+<li>Solution: Put kernel in application address space</li>
+</ul></li>
+</ul></li>
+<li><code>kuseg</code>
+<ul>
+<li>TLB mapped</li>
+<li>Contains user segments</li>
+</ul></li>
+<li><code>kseg0</code>
+<ul>
+<li>Kernel segment</li>
+<li>Unmapped, cached</li>
+<li>Mapped to first 512 mb of physical memory</li>
+</ul></li>
+<li><code>kseg1</code>
+<ul>
+<li>Unmapped, uncached</li>
+<li>Mapped to first 512 mb of physical memory (same as kseg0)</li>
+<li>Used to talk to hardware devices</li>
+</ul></li>
+</ul>
+<h2 id="secondary-storage">Secondary Storage</h2>
+<ul>
+<li>e.g Opening many tabs in a browser. Tabs will be stored to hard drive instead of being kept in RAM</li>
+</ul>
+<h3 id="resident-set">Resident Set</h3>
+<ul>
+<li>Set of virtual pages present in physical memory
+<ul>
+<li>Changes over time as pages are swapped in and out</li>
+<li>Also depends on memory pressure</li>
+</ul></li>
+<li>Tracked with the <em>present</em> bit in the page table
+<ul>
+<li>1 = Page in memory, 0 = page not in memory</li>
+</ul></li>
+</ul>
+<h3 id="page-faults">Page Faults</h3>
+<ul>
+<li>Hardware-managed TLB:
+<ul>
+<li>MMU encounters 0 present bit in PTE</li>
+<li>Generate exception</li>
+</ul></li>
+<li>Software-managed TLB
+<ul>
+<li>Non present pages should never be in TLB</li>
+<li>Only load entires with a 1 present bit</li>
+</ul></li>
+<li>^ This causes the page fault</li>
+<li>Likely no memory available during page fault as memory pressure caused swapped memory</li>
+<li>Kernel will
+<ol style="list-style-type: decimal">
+<li>Swap memory in (likely evicting another page to do so)</li>
+<li>Update PTE (present bit, frame address)</li>
+<li>Set new page-frame mapping</li>
+<li>Return from exception</li>
+</ol></li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Secondary storage is slow
+<ul>
+<li>Milliseconds for hard drive, microseconds for SSD, nanoseconds for RAM</li>
+</ul></li>
+<li>Page faults will significantly increase average memory access times</li>
+<li>Ways to decrease page faults:
+<ul>
+<li>Limit number of processes
+<ul>
+<li><strong>Working set</strong>: number of pages a program actively uses (within period of time)</li>
+<li>As long as working set is all resident, page faults are minimal</li>
+</ul></li>
+<li>Be smart about which pages are kept</li>
+<li>Hide latencies (prefetch pages before it's needed)
+<ul>
+<li>Fetch data from storage in batches is often faster</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="program-properties">Program Properties</h3>
+<h4 id="locality">Locality</h4>
+<ul>
+<li>Temporal Locality: Programs are likely to access pages they have accessed recently</li>
+<li>Spatial location: Programs are likely to access close together parts of memory</li>
+</ul>
+<h3 id="page-replacement-policies">Page Replacement Policies</h3>
+<h4 id="fifo-first-in-first-out">FIFO (First in First Out)</h4>
+<ul>
+<li>Replace page that has been in memory the longest</li>
+<li>Very simple, but not very good</li>
+</ul>
+<h4 id="optimal-min">Optimal (MIN)</h4>
+<ul>
+<li>Replace page that will not be referenced for the longest time</li>
+<li>Optimal policy for demand paging</li>
+<li>Problem: Requires knowledge of the future</li>
+</ul>
+<h4 id="lru-least-recently-used">LRU (Least Recently Used)</h4>
+<ul>
+<li>Replace the least recently used page</li>
+<li>Works very well</li>
+<li>Problem: very expensive (need to update memory structure every time)</li>
+<li>Problem: kernel does not know which pages a program is using unless there's an exception</li>
+</ul>
+<h4 id="clock-algorithm-second-chance">Clock Algorithm (Second chance)</h4>
+<ul>
+<li>MMU sets a <em>reference</em> (<em>use</em>) bit when page is used</li>
+<li>Scan for entry with 0 reference bit
+<ul>
+<li>Zero out reference bits as you go</li>
+</ul></li>
+</ul>
+<pre><code>    while use bit of victim is set
+       clear use bit of victim
+       victim = (victim + 1) % num_frames
+    choose victim for replacement
+    victim = (victim + 1) % num_frames</code></pre>
+<h1 id="cpu-scheduling">CPU Scheduling</h1>
+<h2 id="simple-scheduling-model">Simple Scheduling Model</h2>
+<ul>
+<li>A job has:
+<ul>
+<li><code>a_i</code> Arrival time</li>
+<li><code>r_i</code> Run time</li>
+<li><code>f_i</code> Finish time</li>
+<li>Response time: arrival to run time</li>
+<li>Turnaround time: arrival to finish time</li>
+</ul></li>
+<li></li>
 </ul>
 </body>
 </html>
