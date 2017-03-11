@@ -77,13 +77,13 @@ bt             Backtrace</code></pre>
 <li>Part of hardware devices (e.g Timer)</li>
 <li>Causes hardware to automatically transfer control to a fixed location in memory</li>
 <li>Place an <em>interrupt handler</em> in that memory location</li>
-<li>The <em>interrupt handler</em></li>
-</ul>
+<li>The <em>interrupt handler</em>
 <ol style="list-style-type: decimal">
 <li>Creates a <em>trap frame</em> to record thread context (saves ALL registers)</li>
 <li>Determines which device caused the interrupt and performs device-specific processing</li>
 <li>Restores the saved thread context from trap frame and resumes execution</li>
-</ol>
+</ol></li>
+</ul>
 <h3 id="preemptive-scheduling">Preemptive Scheduling</h3>
 <ul>
 <li>A preemptive scheduler limits how long a thread can run before being preempted</li>
@@ -100,20 +100,25 @@ bt             Backtrace</code></pre>
 <ul>
 <li>A <strong>critical section</strong> is a section accessing a shared object</li>
 <li>Only one thread can be running a <em>critical section</em> of code at one time</li>
-<li>Do this with locks</li>
+<li>Do this with locks
+<ul>
 <li><code>Acquire</code> / <code>Release</code> locks</li>
+</ul></li>
 </ul>
 <h3 id="hardware-specific-implementation">Hardware-specific implementation</h3>
 <ul>
 <li>Use an <em>atomic</em> instruction that is indivisible</li>
-<li>x86 <code>xchg</code> instruction:</li>
+<li>x86 <code>xchg</code> instruction:
+<ul>
 <li><code>xchg src,addr</code>
 <ul>
 <li><code>src</code> is a register</li>
 <li><code>addr</code> is a memory address</li>
 <li>Exchanges values in <code>src</code> and <code>addr</code></li>
 </ul></li>
-<li>MIPS</li>
+</ul></li>
+<li>MIPS
+<ul>
 <li>load-linked <code>ll</code>
 <ul>
 <li>Places a watch on a variable</li>
@@ -121,6 +126,7 @@ bt             Backtrace</code></pre>
 <li>store-conditional <code>sc</code>
 <ul>
 <li>Fails if the watched variable has been modified</li>
+</ul></li>
 </ul></li>
 </ul>
 <h2 id="spinlocks">Spinlocks</h2>
@@ -134,27 +140,35 @@ bt             Backtrace</code></pre>
 <ul>
 <li>Notify the thread when lock is available</li>
 <li><code>lock_acquire</code> thread blocks after calling this</li>
-<li><code>lock_release</code></li>
+<li><code>lock_release</code>
+<ul>
 <li>Have a thread id attached, so only the acquiring thread can release the lock</li>
-<li>Kernal panic if the ids don't match!</li>
+<li>Kernel panic if the ids don't match!</li>
+</ul></li>
 </ul>
 <h3 id="blocking-in-os161">Blocking in OS/161</h3>
 <ul>
-<li><code>wchan_sleep(wchan)</code> blocks thread and adds it to wchan queue</li>
+<li><code>wchan_sleep(wchan)</code> blocks thread and adds it to wchan queue
+<ul>
 <li>Call <code>wchan_lock</code> before this</li>
+</ul></li>
 <li><code>wchan_wakeall(wchan)</code> wakes up all threads on <code>wchan</code> queue</li>
 <li><code>wchan_wakeone(wchan)</code> wakes the oldest thread on wchan</li>
-<li><code>wchan_lock(wchan)</code> prevents operations on wchan</li>
+<li><code>wchan_lock(wchan)</code> prevents operations on wchan
+<ul>
 <li>So only 1 thread can be added to the queue at once</li>
+</ul></li>
 <li>wchan uses a spinlock</li>
 <li>Hoping that wchan critical channel is smaller than code critical section</li>
 </ul>
 <h2 id="semaphore">Semaphore</h2>
 <ul>
 <li>Synchronization primitive used to enforce mutual exclusion</li>
-<li>Two atomic operations:</li>
+<li>Two atomic operations:
+<ul>
 <li><code>P</code>: If value greater than 0, decrement value. Otherwise block until value is greater than 0 and then decrement</li>
 <li><code>V</code>: Increment value of the semaphore</li>
+</ul></li>
 <li>No restriction that only same thread can call <code>P</code> and <code>V</code></li>
 <li>e.g Mutual exclusion</li>
 </ul>
@@ -182,15 +196,19 @@ bt             Backtrace</code></pre>
 <h2 id="condition-variables">Condition Variables</h2>
 <ul>
 <li>Synchronization primative</li>
-<li>3 operations</li>
+<li>3 operations
+<ul>
 <li><code>wait</code> causes the current thread to block</li>
 <li><code>signal</code> unblocks one thread on the signalled condition variable</li>
 <li><code>broadcast</code> wakes all threads waiting on the condition</li>
-<li>e.g Producer / Consumer variable</li>
+</ul></li>
+<li>e.g Producer / Consumer variable
+<ul>
 <li>Two condition variables:
 <ul>
 <li><code>notempty</code> (count &gt; 0)</li>
 <li><code>notfull</code> (count &lt; N)</li>
+</ul></li>
 </ul></li>
 </ul>
 <h2 id="deadlocks">Deadlocks</h2>
@@ -220,10 +238,13 @@ bt             Backtrace</code></pre>
 </ul>
 <h3 id="deadlock-prevention">Deadlock Prevention</h3>
 <ul>
-<li>Remove a requirement of deadlocks:</li>
+<li>Remove a requirement of deadlocks:
+<ul>
 <li>Has locks (mutual exclusion)</li>
-<li><p>No resource preemption (threads with different priorities)</p></li>
-<li>No Hold and Wait</li>
+<li>No resource preemption (threads with different priorities)</li>
+</ul></li>
+<li>No Hold and Wait
+<ul>
 <li>Prevent a thread from requesting resources if it has resources allocated</li>
 <li>Must acquire all resources at once</li>
 <li><em>Problem:</em> Creates livelocks where each resource is trying to re-acquire resources
@@ -231,8 +252,11 @@ bt             Backtrace</code></pre>
 <li>e.g Four cars arrive at a stop sign at the same time</li>
 <li>Livelock breaks when one thread just GOES</li>
 </ul></li>
-<li>Resource Ordering (use this)</li>
-<li><p>Requre each thread acquire resources in increasing resource type order</p></li>
+</ul></li>
+<li>Resource Ordering (use this)
+<ul>
+<li>Requre each thread acquire resources in increasing resource type order</li>
+</ul></li>
 </ul>
 <h2 id="example-problem">Example Problem</h2>
 <ul>
@@ -261,29 +285,25 @@ bt             Backtrace</code></pre>
 <h2 id="example-problem-1">Example Problem</h2>
 <ul>
 <li>Traffic intersection</li>
-<li>Allowed:</li>
-</ul>
+<li>Allowed:
 <ol style="list-style-type: decimal">
 <li>Same origin</li>
 <li>Opposing direction</li>
 <li>A Right turn + Different destination</li>
-</ol>
-<ul>
-<li><code>intersection_before_entry</code></li>
-</ul>
+</ol></li>
+<li><code>intersection_before_entry</code>
 <ol style="list-style-type: decimal">
 <li>Acquire lock</li>
 <li>Look at cars in intersection</li>
 <li>Block on condition variable until it can go</li>
 <li>Get woken up and check until it can go (maybe have a queue)</li>
 <li>Go</li>
-</ol>
-<ul>
-<li><code>intersection_after_exit</code></li>
-</ul>
+</ol></li>
+<li><code>intersection_after_exit</code>
 <ol start="6" style="list-style-type: decimal">
 <li>Exit and Brodcast cv</li>
-</ol>
+</ol></li>
+</ul>
 <h1 id="processes-and-system-calls">Processes and System Calls</h1>
 <h2 id="process">Process</h2>
 <ul>
@@ -304,16 +324,22 @@ bt             Backtrace</code></pre>
 <ul>
 <li>Requires Hardware support</li>
 <li>You can only read and write kernel data when you have the privileges</li>
-<li>Prevents programs from messing with the kernel</li>
+<li>Prevents programs from messing with the kernel
+<ul>
 <li>e.g Halting the CPU</li>
+</ul></li>
 </ul>
 <h2 id="how-system-calls-work">How System Calls Work</h2>
 <p>Two things can make kernel code run:</p>
 <ul>
-<li>Interrupts</li>
+<li>Interrupts
+<ul>
 <li>Jump to interrupt handler in the kernel</li>
-<li>Exceptions</li>
+</ul></li>
+<li>Exceptions
+<ul>
 <li>Exceptions cause a jump to exception handler in kernel</li>
+</ul></li>
 </ul>
 <h3 id="system-call-timeline">System call Timeline</h3>
 <ol start="0" style="list-style-type: decimal">
@@ -366,10 +392,11 @@ EX_SYS    8    Syscall</code></pre>
 <h4 id="fork"><code>fork</code></h4>
 <ul>
 <li>Creates a (child) process that is identical to the original (parent) process</li>
-<li>Returns twice (once to parent, once to child)</li>
-<li>Returns with different pids</li>
+<li>Returns twice (once to parent, once to child)
+<ul>
 <li>Return value of parent is pid of child</li>
 <li>Return value of child is 0</li>
+</ul></li>
 <li>Steps
 <ol style="list-style-type: decimal">
 <li>Create process structure for child process</li>
@@ -413,9 +440,11 @@ EX_SYS    8    Syscall</code></pre>
 <h3 id="dynamic-relocation">Dynamic Relocation</h3>
 <ul>
 <li>Track virtual memory <em>offset</em> and <em>limit</em> of each process</li>
-<li>Memory Management Unit (MMU) has a <em>relocation register</em> and a <em>limit register</em></li>
+<li>Memory Management Unit (MMU) has a <em>relocation register</em> and a <em>limit register</em>
+<ul>
 <li>Translates virtual address to a virtual address</li>
 <li>Kernel maintains R and L for each process and changes the values during context switches</li>
+</ul></li>
 </ul>
 <pre><code>    if v &gt;= L then 
         generate exception
@@ -424,10 +453,12 @@ EX_SYS    8    Syscall</code></pre>
 </code></pre>
 <ul>
 <li>Each virtual address space corresponds to a contiguous range of physical addresses</li>
-<li>Problem: Physical memory must be contiguous</li>
+<li>Problem: Physical memory must be contiguous
+<ul>
 <li>OS must track free and used physical memory</li>
 <li>Potential for <em>fragmentation</em> of physical memory</li>
 <li>Results in lots of small holes that are unusable by any program</li>
+</ul></li>
 <li>Problem: Requires hardware support (the MMU)</li>
 </ul>
 <h3 id="paging">Paging</h3>
@@ -436,12 +467,16 @@ EX_SYS    8    Syscall</code></pre>
 <li>Virtual memories are divided into fixed-size chunks called <em>pages</em></li>
 <li>Page size = Frame size</li>
 <li>Each page maps to a different frame</li>
-<li>Does this require hardware support? Yes</li>
+<li>Does this require hardware support? Yes
+<ul>
 <li>Possibly a relocation register for every page</li>
 <li>Actually use a Page Table</li>
-<li>Does this solve fragmentation problem?</li>
+</ul></li>
+<li>Does this solve fragmentation problem?
+<ul>
 <li>Not completely; there is internal fragmentation.</li>
 <li>Smallest unit of memory is 1 page (4kb), a program may not need that much</li>
+</ul></li>
 </ul>
 <h4 id="page-table">Page Table</h4>
 <ul>
@@ -450,7 +485,8 @@ EX_SYS    8    Syscall</code></pre>
 <li>Cannot have two page table entries pointing to the same frame (then two programs will share memory)</li>
 <li>Need 12 bits (4kb) to determine offset, the rest is location</li>
 <li>Don't put page number in page table! Use indexes instead</li>
-<li>Can also have other information (set by MMU)</li>
+<li>Can also have other information (set by MMU)
+<ul>
 <li>Write Protection bit: makes a page read only
 <ul>
 <li>Use for code segment</li>
@@ -463,6 +499,7 @@ EX_SYS    8    Syscall</code></pre>
 <ul>
 <li>Need to write to disk</li>
 <li>Cheaper swap operation for non-dirty pages</li>
+</ul></li>
 </ul></li>
 <li>Page Table Size = number of pages * size of page table entry</li>
 <li>Number of pages = virtual memory size / page size</li>
@@ -482,15 +519,13 @@ EX_SYS    8    Syscall</code></pre>
 <ul>
 <li>Translates virtual addresses to physical addresses</li>
 <li>Check for and raise exceptions when necessary</li>
-<li>Steps</li>
-</ul>
+<li>Steps
 <ol style="list-style-type: decimal">
 <li>Check for entry <code>(p, f)</code> in TLB. If it's there, return <code>f</code></li>
 <li>Find <code>p</code>'s frame number <code>f</code> in page table</li>
 <li>Add <code>(p, f)</code> to TLB (kick out old entry if full)</li>
 <li>Return <code>f</code></li>
-</ol>
-<ul>
+</ol></li>
 <li>Needs to be able to distinguish different address spaces</li>
 </ul>
 <h4 id="tlb-translation-lookaside-buffer">TLB (Translation Lookaside Buffer)</h4>
@@ -502,8 +537,10 @@ EX_SYS    8    Syscall</code></pre>
 </ul>
 <h4 id="hardware-vs-software-managed-tlb">Hardware vs Software Managed TLB</h4>
 <ul>
-<li>Hardware-managed TLBs are not very flexible</li>
+<li>Hardware-managed TLBs are not very flexible
+<ul>
 <li>MMU must handle page misses and entry replacement</li>
+</ul></li>
 <li>Software-managed TLBs throw an exception if an entry does not exist</li>
 </ul>
 <h3 id="solving-page-table-memory-problem">Solving Page Table Memory Problem</h3>
@@ -750,7 +787,171 @@ EX_SYS    8    Syscall</code></pre>
 <li>Response time: arrival to run time</li>
 <li>Turnaround time: arrival to finish time</li>
 </ul></li>
-<li></li>
+</ul>
+<h3 id="basic-non-preemptive-schedulers">Basic Non-Preemptive Schedulers</h3>
+<h4 id="fcfs-first-come-first-serve">FCFS (First come first serve)</h4>
+<ul>
+<li>Runs jobs in arrival time order</li>
+<li>Simple and avoids starvation</li>
+<li>Pre-emptive version = round-robin</li>
+</ul>
+<h4 id="sjf-shortest-job-first">SJF (Shortest job first)</h4>
+<ul>
+<li>Minimizes average turnaround time</li>
+<li>Long jobs may starve</li>
+<li>Pre-emptive variant: SRTF (shortest remaining time first)</li>
+</ul>
+<h2 id="cpu-scheduling-1">CPU Scheduling</h2>
+<ul>
+<li>'jobs' = threads</li>
+<li>Need to achieve balance between <em>responsiveness, fairness</em> and <em>efficiency</em></li>
+</ul>
+<h4 id="differences-from-simple-scheduling">Differences from Simple Scheduling</h4>
+<ul>
+<li>Run times are not known</li>
+<li>Threads are sometimes blocked</li>
+<li>Threads have different priorities</li>
+</ul>
+<h3 id="multi-level-feedback-queues">Multi-level Feedback Queues</h3>
+<ul>
+<li>Goal: Good responsiveness for interactive threads and let non-interactive threads make as much progress as possible</li>
+<li>Give high priority to interactive threads</li>
+<li>Problem: How to determine which threads are interactive</li>
+<li>Algorithm:
+<ol style="list-style-type: decimal">
+<li>Scheduler maintains <code>n</code> round-robin ready queues</li>
+<li>Scheduler always chooses a thread from highest non-empty queue</li>
+<li>Threads in <code>Q_i</code> use quantum <code>q_i</code> (lower priority threads have larger quanta)</li>
+<li>If a running thread is preempted, demote it to a lower queue</li>
+<li>If a thread blocks, put it in the highest queue</li>
+<li>Periodically move all threads to <code>Q_n</code> to prevent starvation</li>
+</ol></li>
+</ul>
+<h3 id="linux-completely-fair-scheduler-cfs">Linux Completely Fair Scheduler (CFS)</h3>
+<ul>
+<li>Goal: Ensure each thread gets processor time in proportion to its weight</li>
+<li>Each thread is assigned a weight</li>
+<li>Algorithm:
+<ul>
+<li>Track the 'virtual' runtime of each runnable thread</li>
+<li>Always run the thread with the lowest virtual runtime</li>
+</ul></li>
+<li>Virtual runtime = actual runtime adjusted by thread weights
+<ul>
+<li>Virtual runtime advances slower for higher weight threads</li>
+</ul></li>
+</ul>
+<h1 id="devices-and-io">Devices and I/O</h1>
+<h3 id="sys161-devices">Sys/161 Devices</h3>
+<ul>
+<li>Timer/clock</li>
+<li>Disk drive</li>
+<li>Seral console</li>
+<li>Text screen</li>
+<li>Network interface</li>
+</ul>
+<h2 id="device-register">Device Register</h2>
+<ul>
+<li>You interact with devices through a device register</li>
+<li>Different offsets contain different statues and commands</li>
+</ul>
+<h2 id="device-driver">Device Driver</h2>
+<ul>
+<li>Part of kernel that interacts with a device
+<ol style="list-style-type: decimal">
+<li>Write to the device register</li>
+<li>Repeatedly <em>poll</em> until status is <code>complete</code></li>
+<li>Set device register to acknowledge completion</li>
+</ol></li>
+<li>Problem: Polling is slow</li>
+<li>Solution: Use interrupts
+<ul>
+<li>Make device raise interrupt when it is complete</li>
+<li>Have a separate interrupt handler to make device ready again</li>
+</ul></li>
+</ul>
+<h2 id="access">Access</h2>
+<p>A device driver accesses device registers through two options: ### Special I/O instructions - Device registers are assigned 'port' numbers - Instructions transfer data between a specified port and a CPU register</p>
+<h3 id="memory-mapped-io">Memory-mapped I/O</h3>
+<ul>
+<li>Each device register has a physical memory address</li>
+<li>Device drivers can read/write to device registers using load and store intructions</li>
+</ul>
+<h4 id="os161-1">OS/161</h4>
+<ul>
+<li>32 x 64KB device slos</li>
+<li>Each device is assigned to a device slot</li>
+<li>Device register and data buffer are memory-mapped to slot</li>
+<li>Use <code>kseg1</code> of kernel space (to avoid caching, since device will modify values)</li>
+</ul>
+<h2 id="disk-drives">Disk Drives</h2>
+<ul>
+<li>Array of numbered blocks (sectors) of the same size</li>
+<li>Blocks are the unit of transfer</li>
+<li>Storage is non-volatile</li>
+<li>Disk platter has a bunch of tracks</li>
+<li>Arm needs to be on the right track for disk head read things</li>
+<li>Sometimes double sided with two platters and arms</li>
+<li>Performance:
+<ul>
+<li>Large files should be on outer track to be read quickly</li>
+</ul></li>
+</ul>
+<h3 id="cost">Cost</h3>
+<h4 id="moving-data-tofrom-a-disk">Moving data to/from a disk</h4>
+<ul>
+<li><strong>Seek time</strong>: moving disk head to appropriate track
+<ul>
+<li>Depends on distance between previous request and current request</li>
+<li>Assume to be linear</li>
+<li>~10ms</li>
+</ul></li>
+<li><strong>Rotational Latency</strong>: time for desired sectors to spin to disk head
+<ul>
+<li>Depends on rotational speed of disk</li>
+<li>~8ms</li>
+</ul></li>
+<li><strong>Transfer time</strong>: time for desired sectors to spin past disk head
+<ul>
+<li>Depends on number of sectors needed and the rotational speed of disk</li>
+<li>~8ms</li>
+</ul></li>
+<li><strong>Request Service Time</strong>: sum of seek time, rotational latency, transfer time</li>
+</ul>
+<h4 id="performance-implications">Performance Implications</h4>
+<ul>
+<li>Large transfers are more efficient than smaller ones</li>
+<li>Sequential I/O is faster than non-sequential I/O</li>
+</ul>
+<h3 id="disk-head-scheduling">Disk Head Scheduling</h3>
+<ul>
+<li>Goal: reduce seek times by controlling request serving order</li>
+</ul>
+<h4 id="first-come-first-serve-fcfs">First Come First Serve (FCFS)</h4>
+<ul>
+<li>Handle requests in the order they arrive</li>
+<li>Fair and simple, but no optimization</li>
+</ul>
+<h4 id="shortest-seek-time-first-sstf">Shortest Seek Time First (SSTF)</h4>
+<ul>
+<li>Choose closest request</li>
+<li>Reduced seek times, but requests may starve</li>
+</ul>
+<h4 id="elevator-algorithm-scan">Elevator Algorithm (SCAN)</h4>
+<ul>
+<li>Move in one direction until there are no requests in front, then reverse</li>
+<li>Reduces seek times and avoids starvation</li>
+</ul>
+<h2 id="data-transfer-tofrom-devices">Data Transfer To/From Devices</h2>
+<h4 id="program-controlled-io">Program-controlled I/O</h4>
+<ul>
+<li>Device driver moves data between memory and a buffer on the device</li>
+<li>Simple, but takes CPU time</li>
+</ul>
+<h4 id="direct-memory-access-dma">Direct Memory Access (DMA)</h4>
+<ul>
+<li>Device moves data to/from memory</li>
+<li>CPU is free</li>
 </ul>
 </body>
 </html>
