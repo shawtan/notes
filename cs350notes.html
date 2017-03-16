@@ -947,11 +947,207 @@ EX_SYS    8    Syscall</code></pre>
 <ul>
 <li>Device driver moves data between memory and a buffer on the device</li>
 <li>Simple, but takes CPU time</li>
+<li>os/161 does this</li>
 </ul>
 <h4 id="direct-memory-access-dma">Direct Memory Access (DMA)</h4>
 <ul>
 <li>Device moves data to/from memory</li>
 <li>CPU is free</li>
+<li>CPU initializes data transfer and is notified by device when transfer completes</li>
+<li>CPU is the bus master of the disk device</li>
+<li>Disk is bus master of memory</li>
+</ul>
+<h3 id="os161-2">os/161</h3>
+<ul>
+<li>Uses Program-controlled I/O</li>
+<li>Device Driver Write Handler
+<ol start="2" style="list-style-type: decimal">
+<li>Copy data from memory to device transfer buffer</li>
+<li>Write target sector number to register</li>
+<li>Write 'write' command to register</li>
+</ol></li>
+<li>Interrupt Handler
+<ol style="list-style-type: decimal">
+<li>Write disk status register to acknowledge completion</li>
+</ol></li>
+</ul>
+<h2 id="solid-state-drives">Solid State Drives</h2>
+<h3 id="dram">DRAM</h3>
+<ul>
+<li>Made of transistors with capacitors</li>
+<li>Problem: leaks charge, needs to be periodically refreshed by power</li>
+</ul>
+<h3 id="flash-memory">Flash Memory</h3>
+<ul>
+<li>Floating gate transistors</li>
+<li>Traps electrons in a quantum cage (physics magic)</li>
+<li>Holding electrons = 0</li>
+<li>Data is arranged into blocks and pages</li>
+<li>Advantages: Faster access, no mechanical parts, larger operational temperature ranges</li>
+<li>Disadvantages: Limited lifespan, data unrecoverable from dead drives, poor performance in full drives</li>
+</ul>
+<h4 id="writing">Writing</h4>
+<ul>
+<li>Pages initialized to 1, and can transition 1 -&gt; 0 at page level</li>
+<li>Switching 0 -&gt; 1 requires high voltage, can only be applied to blocks</li>
+<li>Solution: Read block to memory, re-initialize block, update and re-write
+<ul>
+<li>Problem: Slow, lots of re-initializing and copying</li>
+</ul></li>
+<li>Solution: Write to an unused page and update translation table
+<ul>
+<li>Mark original page as invalid, to be garbage collected</li>
+<li>Problem: Requires garbage collector</li>
+<li>Problem: Updates are slow if drive is near full</li>
+</ul></li>
+</ul>
+<h4 id="wear">Wear</h4>
+<ul>
+<li>SSD's have limited number of write cycles</li>
+<li>If a block is not writeable, it becomes read-only</li>
+<li>If a lot of blocks are read-only, the disk is read-only</li>
+<li><strong>Wear-levels</strong> ensure that write cycles are spread across all blocks</li>
+<li><em>Defragmentation</em> is bad for SSD's as it increases write cycles without any benefits
+<ul>
+<li>Random and sequential access have about the same cost</li>
+</ul></li>
+</ul>
+<h1 id="file-systems">File Systems</h1>
+<h2 id="files">Files</h2>
+<ul>
+<li>Persistent, named data objects</li>
+<li>File size may change over time</li>
+<li>File has meta-data: owner, permissions, file type, timestamps</li>
+</ul>
+<h3 id="file-interface">File Interface</h3>
+<ul>
+<li>Open
+<ul>
+<li>Returns a file identifier (descriptor)</li>
+<li>Adds entry to descriptor table that has more information on file</li>
+</ul></li>
+<li>Close
+<ul>
+<li>Removes entry from descriptor table</li>
+</ul></li>
+<li>Read, Write, Seek
+<ul>
+<li>Read: Copies data from file to virtual address space</li>
+<li>Write: Copies data from virtual address space into file</li>
+<li>Seek: Enables non-sequential reading/writing</li>
+</ul></li>
+<li>Get/Set File Meta-Data
+<ul>
+<li>e.g <code>fstat</code>, <code>chmod</code></li>
+</ul></li>
+</ul>
+<h3 id="file-position">File Position</h3>
+<ul>
+<li>Every file descriptor has an associated file position</li>
+<li>Read and write operations start from the current file position and update the current file position</li>
+<li>Sequential file I/O is easy</li>
+<li><code>lseek</code> is used for non-sequential file I/O to change the file position</li>
+</ul>
+<h2 id="directories">Directories</h2>
+<ul>
+<li>A directory maps <em>file names</em> to <em>i-numbers</em>
+<ul>
+<li>i-number = unique identifier for a file or directory</li>
+<li>i-number is used to find data and meta-data of a file</li>
+</ul></li>
+<li>Directories can be viewed as a tree</li>
+<li>Files and Directories can be identified by <em>pathnames</em></li>
+<li>Applications refer to files using pathnames</li>
+</ul>
+<h3 id="links">Links</h3>
+<ul>
+<li>A <em>hard link</em> is an association between a name and an i-number
+<ul>
+<li>Hard links are created with the file</li>
+<li>A file can have multiple hard links</li>
+</ul></li>
+</ul>
+<h4 id="unlinking">Unlinking</h4>
+<ul>
+<li>Unlinking removes a hard link</li>
+<li>The file is removed when the last hard link is removed</li>
+</ul>
+<h2 id="multiple-file-systems">Multiple File Systems</h2>
+<ul>
+<li>A global file namespace is needed</li>
+<li>e.g Windows mounts it on C:, D:,...</li>
+<li>e.g Unix mounts it in the existing namespace</li>
+<li>New namespace is temporary</li>
+</ul>
+<h2 id="file-system-implementation">File System Implementation</h2>
+<ul>
+<li>Persistent data:
+<ul>
+<li>File data</li>
+<li>File meta-data</li>
+<li>Directories and links</li>
+<li>File system meta-data</li>
+</ul></li>
+<li>Non-persistent information:
+<ul>
+<li>Open files per process</li>
+<li>File position for each open file</li>
+<li>Cached copies of persistent data</li>
+</ul></li>
+<li>Hardware
+<ul>
+<li>Memory is byte addressable</li>
+<li>Disk is sector addressable</li>
+<li>Problem: Need multiple sectors to store file system</li>
+<li>Solution: 8 consecutive sectors are grouped into a block
+<ul>
+<li>Better spatial locality</li>
+<li>Less block pointers</li>
+<li>Convenient size for on-demand paging</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="vsfs-very-simple-file-system">VSFS (Very Simple File System)</h3>
+<ul>
+<li>e.g 256KB disk, 512B sector, 512 sectors, 64 block</li>
+<li>Most blocks should be for storing user data (56 blocks)</li>
+<li>Array of i-nodes (5 blocks)
+<ul>
+<li>i-nodes limit the number of files there can be (80 i-nodes = 80 files max)</li>
+</ul></li>
+<li>Bitmap / Free list for data-blocks and i-nodes (2 blocks)
+<ul>
+<li>Tracks available and used i-nodes / data-blocks</li>
+</ul></li>
+<li>Superblock (1st block)
+<ul>
+<li>Contains meta-information about the file system</li>
+<li>e.g How many nodes / blocks, location of bitmap</li>
+</ul></li>
+</ul>
+<h3 id="i-nodes">i-nodes</h3>
+<ul>
+<li>Fixed size index structure holding both file meta-data and pointers to data blocks</li>
+<li>Stores:
+<ul>
+<li>file type, file permissions, file length, number of file blocks,</li>
+<li>timestamps,</li>
+<li>number of hard-links,</li>
+<li>direct data block pointers,</li>
+<li>indirect data block pointers (single, double, triple)</li>
+</ul></li>
+</ul>
+<h6 id="vsfs">VSFS</h6>
+<ul>
+<li>Assuming enough room for 12 direct pointers</li>
+<li>Maximum file size will be limited (12 * 4KB = 48KB)</li>
+<li>Problem: Can't store big files</li>
+<li>Solution: Indirect blocks
+<ul>
+<li>Point to a block of direct pointers</li>
+<li>Double indirect pointer can also point to block of indirect pointers</li>
+<li>Increases possible file size exponentially</li>
+</ul></li>
 </ul>
 </body>
 </html>
