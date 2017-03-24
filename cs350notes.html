@@ -1058,6 +1058,8 @@ EX_SYS    8    Syscall</code></pre>
 <li>Directories can be viewed as a tree</li>
 <li>Files and Directories can be identified by <em>pathnames</em></li>
 <li>Applications refer to files using pathnames</li>
+<li>Special type of directory file that contains directory entries</li>
+<li>Each directory entry consists of a file name and i-number</li>
 </ul>
 <h3 id="links">Links</h3>
 <ul>
@@ -1135,9 +1137,10 @@ EX_SYS    8    Syscall</code></pre>
 <li>number of hard-links,</li>
 <li>direct data block pointers,</li>
 <li>indirect data block pointers (single, double, triple)</li>
+<li>DOES NOT STORE the name</li>
 </ul></li>
 </ul>
-<h6 id="vsfs">VSFS</h6>
+<h4 id="vsfs">VSFS</h4>
 <ul>
 <li>Assuming enough room for 12 direct pointers</li>
 <li>Maximum file size will be limited (12 * 4KB = 48KB)</li>
@@ -1146,8 +1149,80 @@ EX_SYS    8    Syscall</code></pre>
 <ul>
 <li>Point to a block of direct pointers</li>
 <li>Double indirect pointer can also point to block of indirect pointers</li>
+<li>Triple indirect pointers point to block to double indirect pointers</li>
 <li>Increases possible file size exponentially</li>
+<li>Direct pointers still have fastest data access</li>
 </ul></li>
 </ul>
+<h2 id="file-system-design">File System Design</h2>
+<ul>
+<li>How many i-nodes (Number of files)</li>
+<li>How many direct vs indirect blocks (Size of files)</li>
+<li>Block size</li>
+<li>General File System
+<ul>
+<li>Most files are small</li>
+<li>Average file size is growing
+<ul>
+<li>Plan for larger file sizes than used today</li>
+</ul></li>
+<li>Most bytes are stored in large files
+<ul>
+<li>Need indirect data block pointers<br />
+</li>
+</ul></li>
+<li>File systems contain lots of files
+<ul>
+<li>Lots of i-nodes</li>
+</ul></li>
+<li>File systems are roughly half full
+<ul>
+<li>Use faster parts of drive first</li>
+</ul></li>
+<li>Directories are typically small
+<ul>
+<li>Directory list can be simple</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="in-memory-non-persistent-structures">In-Memory (Non-Persistent) Structures</h2>
+<ul>
+<li>Descriptor table for each process</li>
+<li>Open file table</li>
+<li>i-node cache</li>
+<li>block cache</li>
+</ul>
+<h2 id="reading-from-a-file-subfilesubsubfile">Reading From A File (/subfile/subsubfile)</h2>
+<ol style="list-style-type: decimal">
+<li>Read the root i-node</li>
+<li>Read the directory information
+<ul>
+<li>Find the subfile (error if it doesn't exist)</li>
+</ul></li>
+<li>Read the subfile i-node</li>
+<li>Read the subfile information
+<ul>
+<li>Find the subsubfile</li>
+</ul></li>
+<li>Read the subsubfile i-node
+<ul>
+<li>Check permissions</li>
+<li>Add entry to per-process descriptor table</li>
+<li>Increment global open file table</li>
+</ul></li>
+<li>Open the file
+<ul>
+<li>Find data blocks and read it</li>
+<li>Update file access time</li>
+<li>Update file position in descriptor table</li>
+</ul></li>
+</ol>
+<h2 id="creating-a-file">Creating a File</h2>
+<ol style="list-style-type: decimal">
+<li>Find unused i-node in i-node bitmap</li>
+<li>Read block of i-nodes (so we can write them back later)</li>
+<li>Modify i-node to contain new file information</li>
+<li>Update parent directory i-node to include new i-node size</li>
+</ol>
 </body>
 </html>
