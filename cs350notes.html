@@ -1185,30 +1185,23 @@ EX_SYS    8    Syscall</code></pre>
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="in-memory-non-persistent-structures">In-Memory (Non-Persistent) Structures</h2>
-<ul>
-<li>Descriptor table for each process</li>
-<li>Open file table</li>
-<li>i-node cache</li>
-<li>block cache</li>
-</ul>
-<h2 id="reading-from-a-file-subfilesubsubfile">Reading From A File (/subfile/subsubfile)</h2>
+<h2 id="reading-from-a-file-subfoldersubfile">Reading From A File (/subfolder/subfile)</h2>
 <ol style="list-style-type: decimal">
 <li>Read the root i-node</li>
 <li>Read the directory information
 <ul>
-<li>Find the subfile (error if it doesn't exist)</li>
+<li>Find the subfolder (error if it doesn't exist)</li>
 </ul></li>
-<li>Read the subfile i-node</li>
-<li>Read the subfile information
+<li>Read the subfolder i-node</li>
+<li>Read the subfolder information
 <ul>
-<li>Find the subsubfile</li>
+<li>Find the subfile</li>
 </ul></li>
-<li>Read the subsubfile i-node
+<li>Read the subfile i-node (update cache data, disk update later)
 <ul>
 <li>Check permissions</li>
 <li>Add entry to per-process descriptor table</li>
-<li>Increment global open file table</li>
+<li>Increment counter in global open file table</li>
 </ul></li>
 <li>Open the file
 <ul>
@@ -1217,12 +1210,85 @@ EX_SYS    8    Syscall</code></pre>
 <li>Update file position in descriptor table</li>
 </ul></li>
 </ol>
-<h2 id="creating-a-file">Creating a File</h2>
+<h2 id="creating-a-file-subfoldersubfile">Creating a File (/subfolder/subfile)</h2>
 <ol style="list-style-type: decimal">
-<li>Find unused i-node in i-node bitmap</li>
+<li>Read root i-node</li>
+<li>Read subfolder
+<ul>
+<li>Subfile does not exist in subfolder</li>
+</ul></li>
+<li>Read i-node bitmap
+<ul>
+<li>Find and allocate unused i-node in i-node bitmap</li>
 <li>Read block of i-nodes (so we can write them back later)</li>
-<li>Modify i-node to contain new file information</li>
-<li>Update parent directory i-node to include new i-node size</li>
+</ul></li>
+<li>Update subfolder i-node to include new i-node entry
+<ul>
+<li>Increase directory size</li>
+<li>Update last accessed / modified timestamp</li>
+</ul></li>
+<li>Modify i-node to contain new file information
+<ul>
+<li>Write data block pointers</li>
+</ul></li>
 </ol>
+<h2 id="in-memory-non-persistent-structures">In-Memory (Non-Persistent) Structures</h2>
+<ul>
+<li>Descriptor table for each process
+<ul>
+<li>First 3 entries: stdin, stdout, stderr</li>
+<li>Tracks open file descriptors</li>
+</ul></li>
+<li>Open file table
+<ul>
+<li>Makes sure that file can be written to and read from after it's been deleted, but still open</li>
+</ul></li>
+<li>i-node cache</li>
+<li><p>block cache</p></li>
+<li><p>These can be safely lost when power goes out</p></li>
+</ul>
+<h2 id="failures">Failures</h2>
+<ul>
+<li>e.g. Deleting a file
+<ol style="list-style-type: decimal">
+<li>Remove entry from directory</li>
+<li>Remove file index (i-node) from i-node bitmap</li>
+<li>Mark file's data blocks as free</li>
+</ol></li>
+<li>What if power loss occurs after (1) ?
+<ul>
+<li>Unreachable files are taking up space</li>
+</ul></li>
+<li>e.g. Moving file from dir A to dir B
+<ol style="list-style-type: decimal">
+<li>Update directory A to remove first link</li>
+<li>Update directory B to add link</li>
+</ol></li>
+<li>What if power loss occurs after (1) ?
+<ul>
+<li>Lost, unreachable file</li>
+</ul></li>
+<li>What if the steps are switched?
+<ul>
+<li>Corrupted file structure: Two hard links to a dir</li>
+<li>Could result in a recursive file structure</li>
+</ul></li>
+<li>File structure should be <em>crash consistent</em> (consistent whenever restarting from a failure)
+<ul>
+<li>Solution: Run a consistency check on bootup
+<ul>
+<li>e.g Linux <code>fsck</code></li>
+<li>Finds and attempts to repair inconsistent file system data structures</li>
+<li>Problem: May take a long time</li>
+</ul></li>
+<li>Solution: Journaling
+<ul>
+<li>Log meta-data changes so that sequences of changes can be written to disk in a single operation</li>
+<li><em>Write-ahead logging</em>: Update disk data structures after changes are journaled</li>
+<li>After a failure, redo journaled updates that were not completed</li>
+<li>Only redo full log entries (begin - ... - commit)</li>
+</ul></li>
+</ul></li>
+</ul>
 </body>
 </html>
