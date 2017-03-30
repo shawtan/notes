@@ -841,7 +841,19 @@ EX_SYS    8    Syscall</code></pre>
 <li>Virtual runtime advances slower for higher weight threads</li>
 </ul></li>
 </ul>
-<h1 id="devices-and-io">Devices and I/O</h1>
+<h3 id="multi-core-scheduling">Multi-core Scheduling</h3>
+<ul>
+<li>Queue per core vs with a single ready queue</li>
+<li>Concerns
+<ul>
+<li>Contention and Scalability
+<ul>
+<li>Scaling effects are not as large for queue per core</li>
+</ul></li>
+<li>Cache Affinity: Cached information on new core may not be as relevant</li>
+<li>Load imbalance# Devices and I/O</li>
+</ul></li>
+</ul>
 <h3 id="sys161-devices">Sys/161 Devices</h3>
 <ul>
 <li>Timer/clock</li>
@@ -875,14 +887,43 @@ EX_SYS    8    Syscall</code></pre>
 <h3 id="memory-mapped-io">Memory-mapped I/O</h3>
 <ul>
 <li>Each device register has a physical memory address</li>
-<li>Device drivers can read/write to device registers using load and store intructions</li>
+<li>Device drivers can read/write to device registers using load and store instructions</li>
 </ul>
 <h4 id="os161-1">OS/161</h4>
 <ul>
-<li>32 x 64KB device slos</li>
+<li>32 x 64KB device slots</li>
 <li>Each device is assigned to a device slot</li>
 <li>Device register and data buffer are memory-mapped to slot</li>
 <li>Use <code>kseg1</code> of kernel space (to avoid caching, since device will modify values)</li>
+</ul>
+<h2 id="data-transfer-tofrom-devices">Data Transfer To/From Devices</h2>
+<h4 id="program-controlled-io">Program-controlled I/O</h4>
+<ul>
+<li>Device driver moves data between memory and a buffer on the device</li>
+<li>Simple, but takes CPU time</li>
+<li>os/161 does this</li>
+</ul>
+<h4 id="direct-memory-access-dma">Direct Memory Access (DMA)</h4>
+<ul>
+<li>Device moves data to/from memory</li>
+<li>CPU is free</li>
+<li>CPU initializes data transfer and is notified by device when transfer completes</li>
+<li>CPU is the bus master of the disk device</li>
+<li>Disk is bus master of memory</li>
+</ul>
+<h3 id="os161-2">os/161</h3>
+<ul>
+<li>Uses Program-controlled I/O</li>
+<li>Device Driver Write Handler
+<ol start="2" style="list-style-type: decimal">
+<li>Copy data from memory to device transfer buffer</li>
+<li>Write target sector number to register</li>
+<li>Write 'write' command to register</li>
+</ol></li>
+<li>Interrupt Handler
+<ol style="list-style-type: decimal">
+<li>Write disk status register to acknowledge completion</li>
+</ol></li>
 </ul>
 <h2 id="disk-drives">Disk Drives</h2>
 <ul>
@@ -941,35 +982,6 @@ EX_SYS    8    Syscall</code></pre>
 <ul>
 <li>Move in one direction until there are no requests in front, then reverse</li>
 <li>Reduces seek times and avoids starvation</li>
-</ul>
-<h2 id="data-transfer-tofrom-devices">Data Transfer To/From Devices</h2>
-<h4 id="program-controlled-io">Program-controlled I/O</h4>
-<ul>
-<li>Device driver moves data between memory and a buffer on the device</li>
-<li>Simple, but takes CPU time</li>
-<li>os/161 does this</li>
-</ul>
-<h4 id="direct-memory-access-dma">Direct Memory Access (DMA)</h4>
-<ul>
-<li>Device moves data to/from memory</li>
-<li>CPU is free</li>
-<li>CPU initializes data transfer and is notified by device when transfer completes</li>
-<li>CPU is the bus master of the disk device</li>
-<li>Disk is bus master of memory</li>
-</ul>
-<h3 id="os161-2">os/161</h3>
-<ul>
-<li>Uses Program-controlled I/O</li>
-<li>Device Driver Write Handler
-<ol start="2" style="list-style-type: decimal">
-<li>Copy data from memory to device transfer buffer</li>
-<li>Write target sector number to register</li>
-<li>Write 'write' command to register</li>
-</ol></li>
-<li>Interrupt Handler
-<ol style="list-style-type: decimal">
-<li>Write disk status register to acknowledge completion</li>
-</ol></li>
 </ul>
 <h2 id="solid-state-drives">Solid State Drives</h2>
 <h3 id="dram">DRAM</h3>
@@ -1140,6 +1152,10 @@ EX_SYS    8    Syscall</code></pre>
 <li>DOES NOT STORE the name</li>
 </ul></li>
 </ul>
+<h3 id="bitmap">Bitmap</h3>
+<ul>
+<li>Stores availability of i-nodes and data blocks</li>
+</ul>
 <h4 id="vsfs">VSFS</h4>
 <ul>
 <li>Assuming enough room for 12 direct pointers</li>
@@ -1289,6 +1305,35 @@ EX_SYS    8    Syscall</code></pre>
 <li>Only redo full log entries (begin - ... - commit)</li>
 </ul></li>
 </ul></li>
+</ul>
+<h2 id="chaining">Chaining</h2>
+<ul>
+<li>Alternative to per-file index of direct and indirect pointers to access blocks</li>
+<li>Chaining
+<ul>
+<li>Each block includes a pointer to the next block</li>
+</ul></li>
+<li>External chaining
+<ul>
+<li>Chain is in an external data structure</li>
+<li>e.g Microsoft's FAT (File Allocation Table)</li>
+</ul></li>
+<li>Saves space (no direct / indirect pointers to unused data blocks)</li>
+<li>Good for sequential access</li>
+<li>Problem: Slow for random access</li>
+<li>Solution: Eternal chaining with a special file access table that specifies all the file chains</li>
+</ul>
+<h2 id="review-questions">Review Questions</h2>
+<ul>
+<li>Given a file offset, how do you determine which block pointers must be accessed to determine the block location?</li>
+<li>Understand design decisions for a file system
+<ul>
+<li>Why use indirect pointers?</li>
+<li>When to use an indexed file system vs chaining?</li>
+</ul></li>
+<li>How are directories implemented?</li>
+<li>What is a hard link?</li>
+<li>Given a file, which i-nodes / data blocks / bitmap nodes need to be accessed?</li>
 </ul>
 </body>
 </html>
