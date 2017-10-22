@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/Users/shaw/School/shawnotes.css" type="text/css" />
+</head>
+<body>
+<h1 id="searching">Searching</h1>
+<h2 id="terminology">Terminology</h2>
+<ul>
+<li>Informed search: available guidance on where to find solutions
+<ul>
+<li>e.g Distance from destination</li>
+</ul></li>
+<li>Uninformed Search: no such information</li>
+</ul>
+<h3 id="problem-solving-agents">Problem-Solving Agents</h3>
+<ul>
+<li>Goal: objective the agent is trying to achieve</li>
+<li>Problem: process of deciding what actions and states to consider</li>
+<li>Search: process of looking for the best sequence of actions</li>
+</ul>
+<h3 id="problem-components">Problem Components</h3>
+<ul>
+<li>Initial state</li>
+<li>Possible actions
+<ul>
+<li>Successor function: state reached by applying an action</li>
+<li><action, successor> pair</li>
+<li>e.g <Go(HKU), In(HKU)></li>
+</ul></li>
+<li>Goal test: determines if the state is a goal state</li>
+<li>Path cost: numeric cost for each path (can be all 0)</li>
+<li>e.g 8 sliding block puzzle</li>
+<li>e.g 8 queens problem</li>
+</ul>
+<h2 id="tree-search-algorithm">Tree Search Algorithm</h2>
+<ul>
+<li>Root: node corresponding to the initial state</li>
+<li>Expanding current node: generating successors of already-explored states</li>
+<li>Search strategy: choice of which state to expand</li>
+<li>BFS, DFS, etc are the same algorithm with different state management</li>
+</ul>
+<h3 id="state-vs-node">State vs Node</h3>
+<ul>
+<li>State: representation of physical configuration</li>
+<li>Node: data structure used for solving
+<ul>
+<li>Components:
+<ul>
+<li>State: corresponding state of the node</li>
+<li>Parent node</li>
+<li>Action: Action applied to parent to generate this node</li>
+<li>Path-cost: cost g(n) from initial state to this node</li>
+<li>Depth: number of steps from initial state</li>
+</ul></li>
+<li>Nodes are put in a queue, called 'fringe'</li>
+</ul></li>
+</ul>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<ul>
+<li>Completeness</li>
+<li>Optimality</li>
+<li>Time complexity</li>
+<li>Space complexity</li>
+<li>Complexity is measured in terms of
+<ul>
+<li><code>b</code> Max branching factor</li>
+<li><code>d</code> Depth of least cost solution</li>
+<li><code>m</code> Max depth of the state space</li>
+</ul></li>
+</ul>
+<h2 id="uninformed-search-strategies">Uninformed Search Strategies</h2>
+<div class="figure">
+<img src="03_search_complexity.png" alt="image" />
+<p class="caption">image</p>
+</div>
+<ul>
+<li>Breadth-first Search
+<ul>
+<li>fringe = FIFO queue</li>
+<li>Optimal if cost is constant</li>
+<li>Time complexity: O(b^(d+1))</li>
+<li>Space complexity: O(b^(d+1))</li>
+</ul></li>
+<li>Uniform-cost Search
+<ul>
+<li>fringe = queue ordered ascending by path cost</li>
+<li>Complete if step cost is non-zero</li>
+<li>Optimal</li>
+<li>Time complexity: number of nodes with g &lt;= cost of optimal solution
+<ul>
+<li>O(b^(1+))</li>
+</ul></li>
+<li>Space complexity: number of nodes with g &lt;= cost of optimal solution
+<ul>
+<li>O(b^(1+))</li>
+</ul></li>
+</ul></li>
+<li>Depth-first Search
+<ul>
+<li>fringe = LIFO queue</li>
+<li>Complete if space is finite</li>
+<li>Optimal if cost is constant</li>
+<li>Time complexity: O(b^m), m is the max depth</li>
+<li>Space complexity: O(bm)</li>
+</ul></li>
+<li>Depth-limited Search
+<ul>
+<li>Limit search depth, fail if that limit is reached</li>
+</ul></li>
+<li>Iterative Deepening Search
+<ul>
+<li>Depth-limited search with increasing limit</li>
+<li>Combines benefits of BFS and DFS</li>
+<li>Complete</li>
+<li>Optimal if step cost constant</li>
+<li>Time: (d+1)b^0 + db^1 + (d-1)b^2 + ... + b^d = O(b^d)</li>
+<li>Space: O(bd)</li>
+</ul></li>
+<li>Note: Make sure repeated states are skipped</li>
+</ul>
+<h1 id="informed-search-algorithms">Informed Search Algorithms</h1>
+<h2 id="best-first-search">Best-first search</h2>
+<ul>
+<li>Heuristic funtion h(n): estimates the cheapest path from node n to a goal node</li>
+</ul>
+<h3 id="greedy-search">Greedy Search</h3>
+<ul>
+<li>h(n) = estimated cost from n to the closest goal</li>
+<li>e.g Straight-line distance between two cities</li>
+<li>Not complete (can get stuck in loops)
+<ul>
+<li>Complete with repeated-state checking in a finite space</li>
+</ul></li>
+<li>Not optimal</li>
+<li>Time: O(b^m), a good heuristic can give dramatic improvement</li>
+<li>Space: O(b^m)</li>
+</ul>
+<h3 id="a-search">A* Search</h3>
+<ul>
+<li>Look at previous cost in addition to future cost</li>
+<li>f(n) = g(n) + h(n)
+<ul>
+<li>g(n) = cost so far to reach n</li>
+</ul></li>
+<li>Requires an 'admissible' heuristic (always &lt;= actual value)</li>
+<li>Optimality
+<ul>
+<li>Consistency: h(n) is consistent if for every node n and every successor n', h(n) &lt;= c(n, a, n') + h(n')</li>
+<li>A* is optimal if h(n) is consistent</li>
+<li>Consistency is stricter than admissibility</li>
+<li>Consistency is required for graph search</li>
+<li>Admissibility is required for tree search</li>
+</ul></li>
+<li>Properties
+<ul>
+<li>Complete</li>
+<li>Optimal (proof in slides)</li>
+<li>Time: Exponential</li>
+<li>Space: Exponential (risky)</li>
+</ul></li>
+<li>Optimally efficient for any given heuristic function (no other optimal algorithm is guaranteed to expand fewer nodes)</li>
+</ul>
+<h3 id="heuristic-functions">Heuristic Functions</h3>
+<ul>
+<li>Effective branching factor (b*): estimates the branching factor accross all nodes</li>
+<li>If for any node n, <span class="math inline"><em>h</em><sub>2</sub>(<em>n</em>)≥<em>h</em><sub>1</sub>(<em>n</em>)</span>, then h_2 <strong>dominates</strong> h_1 (h_2 is always better)
+<ul>
+<li>A* will never expand more nodes using h_2 than h_1</li>
+</ul></li>
+</ul>
+<h4 id="puzzle-problem">8 Puzzle Problem</h4>
+<ul>
+<li>h_1(n) = number of misplaced tiles</li>
+<li>h_2(n) = total Manhattan distance (number of squares from correct position for each tile)</li>
+</ul>
+<h3 id="finding-heuristics">Finding Heuristics</h3>
+<ul>
+<li>The cost of an optimal solution to a relaxed problem is an admissible heuristic for the original solution</li>
+</ul>
+<h3 id="generating-heuristics">Generating Heuristics</h3>
+<ul>
+<li>Construct heuristics by defining the problem formally</li>
+<li>Generate relaxed problems by removing problem constraints</li>
+<li>Optimal solution of a relaxed problem &lt;= optimal solution of the real problem</li>
+<li><span class="math inline"><em>h</em>(<em>n</em>)=max(<em>h</em><sub><em>a</em></sub>(<em>n</em>),<em>h</em><sub><em>b</em></sub>(<em>n</em>))</span></li>
+</ul>
+<h3 id="learning-heuristics">Learning Heuristics</h3>
+<ul>
+<li>Inductive learning, reinforcement learning</li>
+</ul>
+<h3 id="interactive-improvement-algorithms">Interactive Improvement Algorithms</h3>
+<ul>
+<li>Try to improve current state step by step</li>
+<li>e.g n-queens: given any state, try to move a queen to reduce the number of conflicts</li>
+<li>e.g Hill-climbing: trying to climb to the highest point</li>
+<li>Problem: Can be stuck at a local maxima</li>
+<li>Plateau: Can escape with random sideways moves</li>
+</ul>
+<h3 id="genetic-algorithm">Genetic Algorithm</h3>
+<ul>
+<li>Start with population of k randomly generated states</li>
+<li>Create the next generation, and keep the fittest k</li>
+<li>Next generation is chosen through:</li>
+<li>Crossover: Two parents are broken at a random crossover point and concatentated</li>
+<li>Mutation: Randomly change 1 symbol of the states</li>
+<li>Random probabilities are weighted</li>
+<li>​# Adversarial Search - Games</li>
+</ul>
+<h2 id="games-vs-search-problems">Games vs Search Problems</h2>
+<ul>
+<li>Zero-sum game: Utility for two opponents at the end is equal and opposite (+1 and -1)</li>
+<li>Opponent is unpredictable, so assume they are perfect</li>
+<li>Finding the optimal solution is infeasible due to size of search tree</li>
+</ul>
+<h3 id="types-of-games">Types of Games</h3>
+<ul>
+<li>Perfect information vs Imperfect information</li>
+<li>How much information about the game state do we know</li>
+<li>Deterministic vs Chance</li>
+</ul>
+<h3 id="game-tree">Game Tree</h3>
+<ul>
+<li>Initial state: beginning board position</li>
+<li>Successor function: (move, state)</li>
+<li>Terminal test: is game over?</li>
+<li>Terminal state = end states</li>
+<li>Utility function: numerical value of each terminal state (win, loss, draw)</li>
+<li>You try to maximize utility</li>
+<li>Opponent tries to minimize utility</li>
+</ul>
+<h3 id="optimal-strategies">Optimal Strategies</h3>
+<ul>
+<li>Fair game: Perfect play results in a draw</li>
+<li>Assume game is fair and the root node has utility 0</li>
+<li>\[(n)=
+
+\]</li>
+<li>Complete if tree is finite</li>
+<li>Optimal</li>
+<li>Time: <br /><span class="math display"><em>O</em>(<em>b</em><sup><em>m</em></sup>)</span><br />, b is number of legal moves at each point, m is bax depth</li>
+<li>Space: <br /><span class="math display"><em>O</em>(<em>b</em><em>m</em>)</span><br /> if all successors are generated at the same time. <br /><span class="math display"><em>O</em>(<em>m</em>)</span><br /> if only one successor is generated at the same time</li>
+</ul>
+<h3 id="multiplayer-games">Multiplayer Games</h3>
+<ul>
+<li>Need to calculate utlity for each player</li>
+<li>Complications: Alliances, alliance breakups</li>
+</ul>
+<h3 id="improvements">Improvements</h3>
+<h4 id="alpha-beta-pruning"><br /><span class="math display"><em>α</em></span><br />-<br /><span class="math display"><em>β</em></span><br /> Pruning</h4>
+<ul>
+<li>Prune away branches that will not influence the final decision</li>
+<li><br /><span class="math display"><em>α</em></span><br />: highest-value found so far along the MAX path</li>
+<li><br /><span class="math display"><em>β</em></span><br />: lowest-value found so far along MIN path</li>
+<li>If cost of <br /><span class="math display"><em>n</em></span><br /> is worse than minimax(<br /><span class="math display"><em>α</em></span><br />), that branch can be pruned for MAX</li>
+<li>If cost of <br /><span class="math display"><em>n</em></span><br /> is worse than minimax(<br /><span class="math display"><em>β</em></span><br />), that branch can be pruned for MIN</li>
+</ul>
+<h4 id="evaluation-function">Evaluation Function</h4>
+<ul>
+<li>Infeasible to expand until goal state</li>
+<li>Use Evaluation Function to estimate the expected utility of the distance to the goal</li>
+<li>A good evaulation function</li>
+<li>Orders terminal states the same way as the utility function</li>
+<li>Easy to compute</li>
+<li>Strongly correlated with the actual chance of winning</li>
+<li>How it works</li>
+<li>Identify features of the configuration</li>
+<li>Compute numerical value of each feature and combine</li>
+<li>Evaluation function can be learned by the program</li>
+</ul>
+<h4 id="cutting-off-search">Cutting off Search</h4>
+<ul>
+<li>Test for cut-off point instead of terminal node</li>
+<li>e.g. Only look forward 5 steps</li>
+<li>Should only be used for quiescent states (states unlikely to have wild swings in future)</li>
+</ul>
+<h4 id="horizon-effect">Horizon Effect</h4>
+<ul>
+<li>Unavoidable losing move in the future</li>
+<li>Stalling moves are available that delay the losing move past the 'horizon' (search depth)</li>
+</ul>
+<h3 id="non-deterministic-games">Non-Deterministic Games</h3>
+<ul>
+<li>Random element in game (e.g dice throw)</li>
+<li>Model using <strong>chance nodes</strong> which have the possible outcomes</li>
+<li>Value of the evaluation function becomes important
+<ul>
+<li>Should be a <em>positive linear</em> transformation to the actual probabilty of winning</li>
+</ul></li>
+</ul>
+<h4 id="card-games">Card Games</h4>
+<ul>
+<li>Opponent's cards are unknown (chance)</li>
+<li>Use probabilty of card deals and compute expected return</li>
+<li>Have a expected risk to prevent disastrous decisions (e.g Die if you choose wrong) # Constraint Satisfaction Problems</li>
+</ul>
+<h2 id="definition">Definition</h2>
+<ul>
+<li>Set of <em>variables</em> (<code>X_1, X_2, ... X_n</code>) from the domain D
+<ul>
+<li>Boolean variables = Boolean satisfiability problem</li>
+<li>Discrete variables = finite domains</li>
+<li>Continuous variables = linear programming</li>
+</ul></li>
+<li>Set of <em>constraints</em> (<code>C_1, C_2, ... C_m</code>)
+<ul>
+<li>Unary contraints: involves a single variable</li>
+<li>Binary contraints: invloves pairs of variables</li>
+<li>Higher-order contraints: 3 or more variables</li>
+<li>Preferences (Soft contraint): Cost for each assignment, optimization problem</li>
+</ul></li>
+<li>A <em>problem state</em> is an assignment of variable values
+<ul>
+<li>An assignment that does not violate any constraints is <em>consistent</em></li>
+<li>An assignment with every variable is <em>complete</em></li>
+</ul></li>
+<li>A <em>solution</em> is a complete assignment that satisfies all constraints</li>
+<li>e.g Map colouring
+<ul>
+<li>Variables are region nodes</li>
+<li>Constraints are edges between nodes</li>
+</ul></li>
+</ul>
+<h3 id="incremental-formulation">Incremental Formulation</h3>
+<ul>
+<li>Formulate as a search problem
+<ul>
+<li>Initial State: Empty assignment</li>
+<li>Successor function: A value is assigned to an unassigned variable without breaking constraints</li>
+<li>Goal Test: Is assignment complete?</li>
+<li>Path Cost: Constant cost for every step</li>
+</ul></li>
+<li>Depth of tree = number of variables
+<ul>
+<li>Use DFS</li>
+</ul></li>
+<li>e.g Cryptarithmetic Puzzle (TWO + TWO = FOUR)</li>
+</ul>
+<h3 id="backtracking-search">Backtracking Search</h3>
+<ul>
+<li>CSPs are <em>commutative</em> (Order of actions have no effect on outcome)</li>
+<li>Use <em>backtracking</em> where you backtrack if there are no legal value assignments left</li>
+</ul>
+<h4 id="improvements-to-backtracking">Improvements to Backtracking</h4>
+<ul>
+<li>Variable ordering
+<ul>
+<li>Minimum remaining values (fail-first):
+<ul>
+<li>Choose the variable with the fewest legal moves</li>
+<li>Prunes the search tree earlier</li>
+</ul></li>
+<li>Degree Heuristics:
+<ul>
+<li>Choose variable involved in the largest number of contraints</li>
+<li>Reduce branching factor</li>
+</ul></li>
+</ul></li>
+<li>Value ordering
+<ul>
+<li>Least Constraining Value
+<ul>
+<li>Choose value that rules out the fewest choices</li>
+<li>Keep options open for future assignments</li>
+</ul></li>
+</ul></li>
+<li>Propagate information through constraints
+<ul>
+<li>Forward Checking
+<ul>
+<li>Keep track of availiable legal values for unassigned variables</li>
+<li>When assigning X, check unassigned Y related to X and delete inconsistent values</li>
+<li>Terminate search when no legal values exist</li>
+</ul></li>
+<li>Arc Consistency
+<ul>
+<li>Forward checking through all connected nodes</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="k-consistency">k-consistency</h3>
+<ul>
+<li>A CSP is <em>k</em>-consistent if for any consistent assignment of <code>k-1</code> variables, a consistent value can be assigned to any kth variable</li>
+<li>Strong k-consistancy: k, k-1, ..., 1-consistent</li>
+<li>1-consistency = node consistency</li>
+<li>2-consistency = arc consistency</li>
+</ul>
+<h3 id="local-search">Local Search</h3>
+<ul>
+<li>Allow states with unsatisfied constraints</li>
+<li>Operator to reassign variable values</li>
+<li>Heuristic: min-conflict (violates the fewest constraints)</li>
+</ul>
+<h3 id="tree-structured-csps">Tree-structured CSPs</h3>
+<ul>
+<li>Convert tree to a Directed Acylic Graph and process in that order</li>
+<li><ol style="list-style-type: decimal">
+<li>Backward removal to ensure parents are consistent with child</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Forward assignment to assign values</li>
+</ol></li>
+</ul>
+<h3 id="near-tree-structured-csps">Near Tree-Structured CSPs</h3>
+<ul>
+<li>If deleting node X creates a tree, assign a value to SA and delete that value from inconsistent variables</li>
+</ul>
+<h1 id="logical-agents">Logical Agents</h1>
+<h2 id="knowledge-base">Knowledge Base</h2>
+<ul>
+<li>Set of sentences representing assertations about the world</li>
+<li>e.g
+<ul>
+<li>TELL: Add new sentences to knowledge base</li>
+<li>ASK: query knowledge base</li>
+</ul></li>
+<li>Agents have two levels
+<ul>
+<li>Knowledge level: what the agents know</li>
+<li>Implementation level: data structures and algorithms</li>
+</ul></li>
+</ul>
+<h2 id="knolwedge-based-agent">Knolwedge-Based Agent</h2>
+<ul>
+<li>Represents states, actions, etc.</li>
+<li>Incorporates new percepts</li>
+<li>Updates internal representation of the world</li>
+<li>Deduces hidden properties of the world</li>
+<li>Deduces appropriate actions</li>
+</ul>
+<h3 id="approaches">Approaches</h3>
+<ul>
+<li>Declarative Approach: Knowledge is a set of sentences describing the knowledge
+<ul>
+<li>Needs a reasoning module to process queries</li>
+</ul></li>
+<li>Procedural Approach: Encodes the desired behaviour directly
+<ul>
+<li>More efficient</li>
+</ul></li>
+</ul>
+<h4 id="example-wumpus-world">Example: Wumpus World</h4>
+<ul>
+<li>Cave with rooms connected by passageways</li>
+<li>A room can contain:
+<ul>
+<li>The 'wumpus' that eats anyone who enters its room
+<ul>
+<li>Agent can shoot the wumpus, but it only has 1 arrow</li>
+</ul></li>
+<li>A deep pit trapping anyone except the wumpus</li>
+<li>The heap of gold</li>
+</ul></li>
+</ul>
+<h5 id="peas-description">PEAS Description</h5>
+<ul>
+<li>Performance measure:
+<ul>
+<li>+1000 for picking up gold, -1000 for falling into pit or being eaten, -1 per step and -10 for using the arrow.</li>
+</ul></li>
+<li>Environment:
+<ul>
+<li>A 4×4 grid of rooms.</li>
+<li>Agent always starts at [1, 1], facing to the right.</li>
+<li>Location of wumpus and gold is chosen randomly, other than the start square.</li>
+<li>Each square, other than start, can be a pit with prob. 0.2</li>
+</ul></li>
+<li>Actuator:
+<ul>
+<li>agent can move forward, turn left or right.</li>
+<li>agent dies when entering a square with a pit or live wumpus.</li>
+<li>Grab — pick up an object in the same square.</li>
+<li>Shoot — fire an arrow in the direction the agent is facing, only the first shoot has effect, because agent has only one arrow.</li>
+</ul></li>
+<li>Sensors
+<ul>
+<li>Stench: Wumpus is adjacent</li>
+<li>Breeze: Pit is adjacent</li>
+<li>Glitter: Room contains gold</li>
+<li>Bump: Wall</li>
+<li>Scream: Wumpus is killed</li>
+</ul></li>
+</ul>
+<h2 id="logic">Logic</h2>
+<ul>
+<li>Just read your CS245 notes...</li>
+<li>Formal languages for representing information to draw conclusions</li>
+<li>Syntax: sentences in the language</li>
+<li>Semantics: meaning of sentences</li>
+<li><strong>Entailment</strong>: one idea semantically follows from another
+<ul>
+<li>e.g KB |= α iff α is true in all states where KB is true</li>
+</ul></li>
+<li>Models: formally structured worlds used to evaluate truth</li>
+</ul>
+<h3 id="inference">Inference</h3>
+<ul>
+<li>Soundness: If there is a proof, φ logically follows
+<ul>
+<li>Σ ⊢ φ implies Σ ⊨ φ</li>
+</ul></li>
+<li>Completeness: If φ logically follows, there is a proof
+<ul>
+<li>Σ ⊨ φ implies Σ ⊢ φ</li>
+</ul></li>
+</ul>
+<h3 id="propositional-logic-syntax">Propositional Logic Syntax</h3>
+<ul>
+<li>Atomic sentences: single boolean propositional symbol
+<ul>
+<li>e.g P_1, q, TRUE</li>
+</ul></li>
+<li>Complex sentences: connected atomic sentences
+<ul>
+<li>e.g P ∧ Q, ¬TRUE</li>
+</ul></li>
+</ul>
+<h3 id="inference-by-enumeration">Inference by Enumeration</h3>
+<ul>
+<li>Truth table with all possible states</li>
+<li>For every state where KB is true, check if α is true</li>
+<li>Sound by definition of entailment</li>
+<li>Complete as it works for every KB and α, and is guarenteed to terminate (finite states)</li>
+<li>2^n models for n symbols</li>
+</ul>
+<h3 id="validity-and-satisfiability">Validity and Satisfiability</h3>
+<ul>
+<li>Valid: True for all models</li>
+<li>Satisfiable: True in some models</li>
+<li>Unsatisfiable: True in no models</li>
+</ul>
+<h3 id="proof-methods">Proof Methods</h3>
+<ul>
+<li>Application of inference rules
+<ul>
+<li>Modus Ponen: (α =&gt; β, α) =&gt; β</li>
+<li>AND Elimination: (α ∧ β) =&gt; β</li>
+<li>Other rules</li>
+</ul></li>
+<li>Model Checking
+<ul>
+<li>Check every state</li>
+</ul></li>
+</ul>
+<h3 id="forward-and-backward-chaining">Forward and Backward Chaining</h3>
+<ul>
+<li>Automated inference rule application</li>
+<li>Require KB to contain <strong>Horn Clauses</strong></li>
+<li>Definite Clause: disjuction of literals where exactly literal is positive</li>
+<li>Horn Clause: disjunction of literals where at most one is positive</li>
+<li>Forward Chaining
+<ul>
+<li>Apply any rules whose premises are satisfied until query is found</li>
+</ul></li>
+<li>Backward Chaining
+<ul>
+<li>Check if query q is known already</li>
+<li>If not, use premises of rules containing q</li>
+</ul></li>
+</ul>
+<h3 id="resolution">Resolution</h3>
+<ul>
+<li>Conjunctive Normal Form (CNF)
+<ul>
+<li>Literal - Propositional variable or its negation</li>
+<li>Clause - Disjunction of literals</li>
+<li>CNF - Conjunction of clauses (A bunch of OR's joined by AND's)
+<ul>
+<li>Only connectives in CNF are ¬ ∨ ∧</li>
+</ul></li>
+</ul></li>
+<li>Resolution Proof Procedure
+<ul>
+<li>To prove φ from Σ, via a Resolution refutation:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Convert each formula in Σ to CNF.</li>
+<li>Convert ¬φ to CNF.</li>
+<li>Split the CNF formulas at the ∧s, yielding a set of clauses. Call them assumptions</li>
+<li>From the resulting set of clauses, keep applying the resolution inference rule until either:
+<ul>
+<li>The empty clause ⊥ results. In this case, φ is a theorem.
+<ul>
+<li>Σ ∪ {¬φ} is a contradiction</li>
+</ul></li>
+<li>The rule can no longer be applied to give a new formula. In this case, φ is not a theorem.
+<ul>
+<li>Σ ∪ {¬φ} is satisfiable</li>
+</ul></li>
+</ul></li>
+</ol></li>
+<li>e.g {(q ∨ r) → s ⊨ q → s}
+<ol style="list-style-type: decimal">
+<li>¬q ∨ s assumption</li>
+<li>¬r ∨ s assumption</li>
+<li>q assumption (from negated conclusion)</li>
+<li>¬s assumption (from negated conclusion)</li>
+<li>¬q 1, 4</li>
+<li>⊥ 3, 5</li>
+</ol>
+<ul>
+<li>Refutation complete # First-Order Logic</li>
+</ul></li>
+</ul>
+</body>
+</html>

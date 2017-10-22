@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/Users/shaw/School/shawnotes.css" type="text/css" />
+</head>
+<body>
+<h1 id="entity-relationship-model">Entity-Relationship Model</h1>
+<h2 id="legend">Legend</h2>
+<ul>
+<li>Rectangles: entity sets (table)
+<ul>
+<li>Double rectangle: weak entity set (table with column for primary key of identifying strong entity set)</li>
+</ul></li>
+<li>Ellipses: attributes of the entity (column in table)
+<ul>
+<li>Double ellipse: multi-valued attribute (separate table)</li>
+<li>Dashed ellipse: derived attribute</li>
+<li>Child ellipses: composite attributed (column in table)</li>
+</ul></li>
+<li>Diamonds: Relationship sets (between entities)
+<ul>
+<li>Relational Table:
+<ul>
+<li>many-to-many: seperate table with primary keys of participating entity sets</li>
+<li>many-to-one: if 'many' is total, add the primary key of the 'one'</li>
+<li>one-to-one: use many-to-one, where either side can be the 'many'</li>
+</ul></li>
+<li>Double diamond: identifying relationship</li>
+</ul></li>
+<li>Triangle: Specialization relationship
+<ul>
+<li>Relational Table: either
+<ul>
+<li>Table containing primary key of the higher-level entity set and local attributes)</li>
+<li>Table with all local and inherited attributes
+<ul>
+<li>PRO: Efficient data retrival</li>
+<li>CON: Storage redundancy</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Directed Line (-&gt;): one</li>
+<li>Undirected Line (--): many</li>
+<li>Double line (=): total relationship</li>
+<li>Single line (-): partial relationship</li>
+<li>Underline: Primary key
+<ul>
+<li>Dotted underline: weak set identifier</li>
+</ul></li>
+<li>Disjoint label: disjoint specialization</li>
+</ul>
+<h2 id="entity-and-entity-set">Entity and Entity set</h2>
+<ul>
+<li>Entity: an object
+<ul>
+<li>e.g Customer, Account</li>
+</ul></li>
+<li>Attribute: something an entity has
+<ul>
+<li>e.g Customers have names</li>
+</ul></li>
+<li>Entity set: set of entities of the same type that share the same properties
+<ul>
+<li>Represents a table with the same attributes</li>
+<li>e.g All Customers</li>
+</ul></li>
+<li>Relationship: association among entities</li>
+<li>Relationship set: set of relationships of the same type
+<ul>
+<li>Diamond with relationship type</li>
+</ul></li>
+</ul>
+<h2 id="constraints">Constraints</h2>
+<h3 id="mapping-cardinalities">Mapping cardinalities</h3>
+<ul>
+<li>Directed Line (-&gt;): one</li>
+<li>Undirected Line (--): many <img src="01_mapping_cardinalities.png" alt="image" /></li>
+</ul>
+<h3 id="participation-constraints">Participation constraints</h3>
+<ul>
+<li>Total participaction (=): every entity participates in at least one relationship</li>
+<li>Partial participation (-): some entity may not participate in any relationship</li>
+</ul>
+<h2 id="keys">Keys</h2>
+<ul>
+<li>Super key: set of one or more attributes that uniquely determine each entity
+<ul>
+<li>e.g {user_id, name}</li>
+</ul></li>
+<li>Candidate key: minimal (no subset super key exists) super key
+<ul>
+<li>e.g {user_id}</li>
+</ul></li>
+<li>Primary key (<u>underlined</u>): the candidate key selected to be the primary key</li>
+</ul>
+<h2 id="different-attribute-types">Different Attribute Types</h2>
+<ul>
+<li>Single vs Composite attributes (child ellipses)
+<ul>
+<li>Composite attributes are made of multiple attributes</li>
+<li>e.g Address = {street, city, state}</li>
+</ul></li>
+<li>Single-valued vs Multi-valued attributes (double ellipses)
+<ul>
+<li>e.g Multiple phone numbers</li>
+<li>Don't actually use this</li>
+</ul></li>
+<li>Derived attribute (dashed ellipses)
+<ul>
+<li>Values derived from other attributes</li>
+<li>e.g age derived from date_of_birth</li>
+</ul></li>
+</ul>
+<h2 id="weak-entity-set">Weak Entity Set</h2>
+<ul>
+<li>Represented by a double rectangle</li>
+<li>Entity set that does not have a primary key</li>
+<li>Must have a total, many-to-one identifying relationship set (double diamond) to the identifying entity set</li>
+<li>Discriminator (dotted underline): identifies entities within the weak set</li>
+<li>e.g Player's number is only unique within their team</li>
+</ul>
+<h2 id="role">Role</h2>
+<ul>
+<li>Relationship between entities in the same entity set</li>
+<li>Labeled with the different roles of the relationship <img src="01_role.png" alt="image" /></li>
+</ul>
+<h2 id="specialization">Specialization</h2>
+<ul>
+<li>Represented by a Triangle with relationship type (e.g ISA)</li>
+<li>Lower-level entity set that inherits all attributes and relationships of the higher level entity set</li>
+<li>Can also have its own attributes</li>
+<li>e.g Student can be full-time or part-time</li>
+<li>Disjoint vs Overlapping
+<ul>
+<li>Disjoint: entities can only belong to one specialization <img src="01_specialization.png" alt="image" /><br />
+# Structured Query Language</li>
+</ul></li>
+<li>Language for defining, modifying and querying data</li>
+<li>Declarative (states what we want, not how)</li>
+</ul>
+<h2 id="data-definition">Data Definition</h2>
+<h3 id="table-creation">Table Creation</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> table_name
+(
+    column1_name column_type CONDITIONS,
+    ...
+    <span class="kw">CONSTRAINTS</span>
+);</code></pre></div>
+<ul>
+<li>Conditions: <code>NOT NULL</code></li>
+<li>Constraints:
+<ul>
+<li><code>PRIMARY KEY(column_name)</code></li>
+<li><code>FOREIGN KEY(column_name) REFERENCES table_name(key)</code></li>
+</ul></li>
+</ul>
+<h3 id="table-deletion">Table Deletion</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DROP</span> <span class="kw">TABLE</span> table_name;</code></pre></div>
+<ul>
+<li>Drop instruction may be rejected if table is referenced by other tables via constraints</li>
+</ul>
+<h3 id="table-modification">Table Modification</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">ALTER</span> <span class="kw">TABLE</span> table_name <span class="kw">ADD</span> column_name;
+<span class="kw">ALTER</span> <span class="kw">TABLE</span> table_name <span class="kw">DROP</span> column_name;
+<span class="kw">ALTER</span> <span class="kw">TABLE</span> table_name <span class="kw">ADD</span> <span class="kw">CONSTRAINT</span>;</code></pre></div>
+<h2 id="insert-delete-update">Insert, Delete, Update</h2>
+<h3 id="insert">Insert</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">INSERT</span> <span class="kw">INTO</span> table_name <span class="kw">VALUES</span>
+    (column1_value, column2_value, column3_value) <span class="co">-- row 1</span>
+    (column1_value, column2_value, column3_value) <span class="co">-- row 2</span>
+    ;
+LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span class="st">&#39;filt.txt&#39;</span>
+    <span class="kw">INTO</span> <span class="kw">TABLE</span> table_name
+    FIELDS TERMINATED <span class="kw">BY</span> <span class="st">&#39;,&#39;</span>
+    LINES TERMINATED <span class="kw">BY</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>;    </code></pre></div>
+<h3 id="delete">Delete</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DELETE</span> <span class="kw">FROM</span> table_name; <span class="co">-- Delete all records</span>
+<span class="kw">DELETE</span> <span class="kw">FROM</span> table_name <span class="kw">WHERE</span> column_name = <span class="st">&#39;test_value&#39;</span>;</code></pre></div>
+<h3 id="update">Update</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">UPDATE</span> table_name 
+    <span class="kw">SET</span> column1_name = <span class="st">&#39;value&#39;</span>
+    <span class="kw">WHERE</span> column2_name = <span class="st">&#39;test_value&#39;</span>;
+<span class="kw">UPDATE</span> table_name
+    <span class="kw">SET</span> column1_name = column1_name * <span class="dv">10</span>;
+<span class="kw">UPDATE</span> table_name
+    <span class="kw">SET</span> column_name = <span class="kw">CASE</span>
+        <span class="kw">WHEN</span> column_name &lt;=<span class="dv">500</span> <span class="kw">THEN</span> column_name * <span class="fl">1.05</span>
+        <span class="kw">ELSE</span> column_name * <span class="fl">1.06</span>
+        <span class="kw">END</span>;</code></pre></div>
+<h2 id="querying">Querying</h2>
+</body>
+</html>
