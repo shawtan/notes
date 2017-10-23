@@ -87,6 +87,7 @@
 - Disjoint vs Overlapping
     - Disjoint: entities can only belong to one specialization
       ![image](01_specialization.png)    
+
 # Structured Query Language
 - Language for defining, modifying and querying data
 - Declarative (states what we want, not how)

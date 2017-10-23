@@ -435,3 +435,9 @@
     6. ⊥        3, 5
     - Refutation complete
 # First-Order Logic
+# Uncertainty
+- First-Order logic can't deal with uncertainty
+- Use probability to predict outcome
+- Assign utility to each outcome and calculate expected utility
+- Attempt to maximize utility
+
