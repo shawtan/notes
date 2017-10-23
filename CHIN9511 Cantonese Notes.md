@@ -26,6 +26,26 @@ Number | Mnemonic | Name
 5 | ^ᵥ | low rising | si^5
 6 | ↼ | low level | si^6
 
+### Vowels
+Vowel | Pronounciation
+:---: | :---:
+aa | f*a*ther
+e | ch*e*mistry
+i | s*ee*
+o | l*aw*
+u | m*oo*d
+oe | h*er*
+yu | ch*ew*
+
+### Initials
+Non-aspirated Voiceless | Aspirated Voiceless | Voiced Nasals | Fricatives and Continuants | Semi-vowels
+:-: | :-: | :-: | :-: | :-:
+b | p | m | f | j
+d | t | n | l | w
+g | k | ng | h
+gw | kw | | s
+z | c
+
 ## Vocabulary
 ### Terms
 Jyutping | Meaning
@@ -80,3 +100,58 @@ Q: nei5 hou2 maa3? 你好吗？
 - deoi3 m4 zyu6 对不起
 - m4 hou2 ji3 si1 不好意思
 - _Response:_ m4 gan2 jiu3 没关系
+
+## Numbers
+Number | Jyutping | other
+--- | --- | ---
+0 | ling4
+1 | jat1
+2 | ji6 | loeng5
+3 | saam1
+4 | sei3
+5 | ng5
+6 | luk6
+7 | cat1
+8 | baat3
+9 | gau2
+10 | sap6
+100 | baak3
+1000 | cin1
+10000 | maan5
+半 | bun3
+
+### Ordinals
+- dai6 第
+
+### Money
+Unit | Jyutping
+--- | ---
+$ | man1
+10¢ | hou4
+$\_.__ | __ go3 __ 
+$1.__ | go3 __
+
+### Date and Time
+Time | Jyutping
+--- | ---
+年 | nin4
+月 | jyut6
+号 | hou6
+日 | jat6
+星期 | sing1 kei4
+点 | dim2
+分 | fan1
+A.M | soeng6 zau3
+Noon | zung1 ng5
+P.M | haa6 zau3
+Midnight | ng5 je6
+
+### Measure Words
+Category | Measure word
+--- | ---
+Persons, general | go3
+Vehicles | gaa3
+Clothing | gin6
+Animals | zek3
+
+
