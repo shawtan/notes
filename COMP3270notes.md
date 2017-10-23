@@ -158,7 +158,8 @@
   - Crossover: Two parents are broken at a random crossover point and concatentated
   - Mutation: Randomly change 1 symbol of the states
   - Random probabilities are weighted
-- ​# Adversarial Search - Games
+
+# Adversarial Search - Games
 
 ## Games vs Search Problems
 - Zero-sum game: Utility for two opponents at the end is equal and opposite (+1 and -1)
@@ -232,6 +233,7 @@
 - Opponent's cards are unknown (chance)
 - Use probabilty of card deals and compute expected return
 - Have a expected risk to prevent disastrous decisions (e.g Die if you choose wrong)
+
 # Constraint Satisfaction Problems
 
 ## Definition
@@ -434,7 +436,9 @@
     5. ¬q       1, 4
     6. ⊥        3, 5
     - Refutation complete
+
 # First-Order Logic
+
 # Uncertainty
 - First-Order logic can't deal with uncertainty
 - Use probability to predict outcome
