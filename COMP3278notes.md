@@ -144,8 +144,10 @@ DELETE FROM table_name WHERE column_name = 'test_value';
 UPDATE table_name 
     SET column1_name = 'value'
     WHERE column2_name = 'test_value';
+    
 UPDATE table_name
     SET column1_name = column1_name * 10;
+    
 UPDATE table_name
     SET column_name = CASE
         WHEN column_name <=500 THEN column_name * 1.05
@@ -154,3 +156,90 @@ UPDATE table_name
 ~~~
 
 ## Querying
+### Select
+~~~sql
+SELECT * FROM table_name; -- all columns
+SELECT column_name FROM table_name;
+SELECT name, amount * 2 FROM table; -- can do math
+
+-- conditions
+SELECT table1.column_name FROM table1, table2 
+    WHERE table1.property = table2.property; 
+SELECT cost FROM table1 
+    WHERE cost >= 100 AND seller = 'Kelly';
+    
+-- distinct    
+SELECT DISTINCT column_name FROM table_name;
+
+-- renaming
+SELECT column_name AS alias FROM table_name T;
+~~~
+
+### String Operations
+~~~sql
+WHERE name LIKE 'J% D%';
+~~~
+- `%` matches any substring
+- `_` matches any character
+
+### Ordering
+~~~sql
+ORDER BY column_name ASC;
+ORDER BY column_name DESC;
+~~~
+
+### Nesting
+~~~sql
+-- IN, SOME, ALL, EXISTS
+SELECT a FROM t 
+WHERE id IN (
+    SELECT user_id FROM users
+); 
+~~~
+
+### Aggregation
+~~~sql
+-- AVG MIN MAX SUM COUNT
+SELECT AVG(column_name) FROM table_name;
+SELECT user_id, AVG(balance) 
+    FROM users
+    GROUP BY user_id
+    HAVING AVG(balance) >= 100;
+~~~
+
+### Join
+~~~sql
+-- OUTER JOIN, INNER JOIN, CROSS JOIN
+SELECT * FROM t1 JOIN t2 
+    ON t1.id = t2.id;
+~~~
+
+### Null
+- `value IS NULL`
+- `(5 + null) == null)`
+- `(null = null) == UNKNOWN`
+
+## Views
+~~~sql
+CREATE VIEW view_name AS (<query>)
+~~~
+- Mechanism to hide certain data from certain users
+
+## Authorization
+~~~sql
+GRANT privilege ON table_name TO user_or_role;
+REVOKE privilege ON table_name FROM user_or_role;
+
+CREATE ROLE role_name;
+GRANT role_name TO user_name;
+~~~
+
+## Assertions
+~~~sql
+CREATE ASSERTION assertion_name
+CHECK (
+    (SELECT COUNT(*) FROM t1) <= (SELECT COUNT(*) FROM t2)
+);
+~~~
+- Checked everytime the table is updated
+

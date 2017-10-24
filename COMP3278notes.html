@@ -224,13 +224,82 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">UPDATE</span> table_name 
     <span class="kw">SET</span> column1_name = <span class="st">'value'</span>
     <span class="kw">WHERE</span> column2_name = <span class="st">'test_value'</span>;
+    
 <span class="kw">UPDATE</span> table_name
     <span class="kw">SET</span> column1_name = column1_name * <span class="dv">10</span>;
+    
 <span class="kw">UPDATE</span> table_name
     <span class="kw">SET</span> column_name = <span class="kw">CASE</span>
         <span class="kw">WHEN</span> column_name &lt;=<span class="dv">500</span> <span class="kw">THEN</span> column_name * <span class="fl">1.05</span>
         <span class="kw">ELSE</span> column_name * <span class="fl">1.06</span>
         <span class="kw">END</span>;</code></pre></div>
 <h2 id="querying">Querying</h2>
+<h3 id="select">Select</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> table_name; <span class="co">-- all columns</span>
+<span class="kw">SELECT</span> column_name <span class="kw">FROM</span> table_name;
+<span class="kw">SELECT</span> name, amount * <span class="dv">2</span> <span class="kw">FROM</span> <span class="kw">table</span>; <span class="co">-- can do math</span>
+
+<span class="co">-- conditions</span>
+<span class="kw">SELECT</span> table1.column_name <span class="kw">FROM</span> table1, table2 
+    <span class="kw">WHERE</span> table1.property = table2.property; 
+<span class="kw">SELECT</span> <span class="kw">cost</span> <span class="kw">FROM</span> table1 
+    <span class="kw">WHERE</span> <span class="kw">cost</span> &gt;= <span class="dv">100</span> <span class="kw">AND</span> seller = <span class="st">'Kelly'</span>;
+    
+<span class="co">-- distinct    </span>
+<span class="kw">SELECT</span> <span class="kw">DISTINCT</span> column_name <span class="kw">FROM</span> table_name;
+
+<span class="co">-- renaming</span>
+<span class="kw">SELECT</span> column_name <span class="kw">AS</span> alias <span class="kw">FROM</span> table_name T;</code></pre></div>
+<h3 id="string-operations">String Operations</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="st">'J% D%'</span>;</code></pre></div>
+<ul>
+<li><code>%</code> matches any substring</li>
+<li><code>_</code> matches any character</li>
+</ul>
+<h3 id="ordering">Ordering</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">ORDER</span> <span class="kw">BY</span> column_name <span class="kw">ASC</span>;
+<span class="kw">ORDER</span> <span class="kw">BY</span> column_name <span class="kw">DESC</span>;</code></pre></div>
+<h3 id="nesting">Nesting</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- IN, SOME, ALL, EXISTS</span>
+<span class="kw">SELECT</span> a <span class="kw">FROM</span> t 
+<span class="kw">WHERE</span> <span class="kw">id</span> <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> user_id <span class="kw">FROM</span> users
+); </code></pre></div>
+<h3 id="aggregation">Aggregation</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- AVG MIN MAX SUM COUNT</span>
+<span class="kw">SELECT</span> <span class="fu">AVG</span>(column_name) <span class="kw">FROM</span> table_name;
+<span class="kw">SELECT</span> user_id, <span class="fu">AVG</span>(balance) 
+    <span class="kw">FROM</span> users
+    <span class="kw">GROUP</span> <span class="kw">BY</span> user_id
+    <span class="kw">HAVING</span> <span class="fu">AVG</span>(balance) &gt;= <span class="dv">100</span>;</code></pre></div>
+<h3 id="join">Join</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- OUTER JOIN, INNER JOIN, CROSS JOIN</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> t1 <span class="kw">JOIN</span> t2 
+    <span class="kw">ON</span> t1.id = t2.id;</code></pre></div>
+<h3 id="null">Null</h3>
+<ul>
+<li><code>value IS NULL</code></li>
+<li><code>(5 + null) == null)</code></li>
+<li><code>(null = null) == UNKNOWN</code></li>
+</ul>
+<h2 id="views">Views</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">VIEW</span> view_name <span class="kw">AS</span> (&lt;query&gt;)</code></pre></div>
+<ul>
+<li>Mechanism to hide certain data from certain users</li>
+</ul>
+<h2 id="authorization">Authorization</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">GRANT</span> <span class="kw">privilege</span> <span class="kw">ON</span> table_name <span class="kw">TO</span> user_or_role;
+<span class="kw">REVOKE</span> <span class="kw">privilege</span> <span class="kw">ON</span> table_name <span class="kw">FROM</span> user_or_role;
+
+<span class="kw">CREATE</span> <span class="kw">ROLE</span> role_name;
+<span class="kw">GRANT</span> role_name <span class="kw">TO</span> user_name;</code></pre></div>
+<h2 id="assertions">Assertions</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">ASSERTION</span> assertion_name
+<span class="kw">CHECK</span> (
+    (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">FROM</span> t1) &lt;= (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">FROM</span> t2)
+);</code></pre></div>
+<ul>
+<li>Checked everytime the table is updated</li>
+</ul>
 </body>
 </html>
