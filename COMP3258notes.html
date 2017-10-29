@@ -63,6 +63,7 @@ length [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</
 [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="fu">++</span> [<span class="dv">4</span>,<span class="dv">5</span>]    <span class="co">-- append lists</span>
 <span class="dv">1</span> <span class="fu">:</span> [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]       <span class="co">-- cons</span>
 null []             <span class="co">-- empty?</span>
+init [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]  <span class="co">-- last element</span>
 take <span class="dv">3</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
 drop <span class="dv">3</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
 reverse [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
@@ -96,7 +97,9 @@ product [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3<
 </ul></li>
 <li>Type Classes
 <ul>
-<li><code>Num</code>, <code>Eq</code>, <code>Ord</code></li>
+<li><code>Num</code>: can apply math (<code>+</code>, <code>-</code>, <code>*</code>, <code>negate</code>, <code>abs</code>, <code>signum</code>)</li>
+<li><code>Eq</code>: can be compared (<code>==</code>, <code>/=</code>)</li>
+<li><code>Ord</code>: can be ordered (<code>&lt;</code>, <code>&gt;=</code>, <code>min</code>, etc)</li>
 </ul></li>
 <li>List Type: sequence of values of the same type, any size</li>
 <li>Tuple Type: sequence of values of different types, fixed size</li>
@@ -138,9 +141,15 @@ tail (_<span class="fu">:</span>xs) <span class="fu">=</span> xs</code></pre></d
 <ul>
 <li>Used to formalize functions defined by currying</li>
 <li>Clarifies functions that return functions</li>
-<li>Avoids naming functions that are only used once ```haskell add x y = x+y -- means add = λx -&gt; (λy -&gt; x+y)</li>
+<li>Avoids naming functions that are only used once</li>
 </ul>
-<p>const ::a -&gt; b -&gt; a const x _ = x -- is more naturally defined by const ::a -&gt; (b -&gt; a) const x = λ_ -&gt; x ```</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">add x y <span class="fu">=</span> x<span class="fu">+</span>y
+<span class="co">-- means</span>
+add <span class="fu">=</span> λx <span class="ot">-&gt;</span> (λy <span class="ot">-&gt;</span> x<span class="fu">+</span>y)
+
+const<span class="ot"> ::</span>a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> a const x _ <span class="fu">=</span> x
+<span class="co">-- is more naturally defined by</span>
+const<span class="ot"> ::</span>a <span class="ot">-&gt;</span> (b <span class="ot">-&gt;</span> a) const x <span class="fu">=</span> λ_ <span class="ot">-&gt;</span> x</code></pre></div>
 <h4 id="sections">Sections</h4>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span><span class="fu">+</span>) (<span class="dv">1</span><span class="fu">/</span>) (<span class="fu">*</span><span class="dv">2</span>) (<span class="fu">/</span><span class="dv">2</span>)</code></pre></div>
 <h4 id="recursion">Recursion</h4>

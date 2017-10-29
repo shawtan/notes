@@ -16,6 +16,7 @@ length [1,2,3,4,5]  -- length
 [1,2,3] ++ [4,5]    -- append lists
 1 : [2,3,4,5]       -- cons
 null []             -- empty?
+init [1,2,3,4,5,6]  -- last element
 take 3 [1,2,3,4,5]
 drop 3 [1,2,3,4,5]
 reverse [1,2,3,4,5]
@@ -46,7 +47,9 @@ product [1,2,3,4,5]
     - `Integer`: arbitrary-precision
     - `Float`
 - Type Classes
-    - `Num`, `Eq`, `Ord`
+    - `Num`: can apply math (`+`, `-`, `*`, `negate`, `abs`, `signum`)
+    - `Eq`: can be compared (`==`, `/=`)
+    - `Ord`: can be ordered (`<`, `>=`, `min`, etc)
 - List Type: sequence of values of the same type, any size
 - Tuple Type: sequence of values of different types, fixed size
 - Function Type: mapping on values of one type to another
@@ -84,6 +87,7 @@ tail (_:xs) = xs
 - Used to formalize functions defined by currying
 - Clarifies functions that return functions
 - Avoids naming functions that are only used once
+
 ```haskell
 add x y = x+y
 -- means
