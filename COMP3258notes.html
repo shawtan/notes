@@ -73,11 +73,11 @@ product [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3<
 <ul>
 <li>Take priority over other operators</li>
 <li>Must begin with lowercase</li>
-<li><p>Lists end with <code>s</code> by convention</p>
+<li>Lists end with <code>s</code> by convention</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">&gt;</span> myAdd1 x <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
 <span class="fu">&gt;</span> myAdd1 <span class="dv">1</span>
-<span class="dv">2</span></code></pre></div></li>
-</ul>
+<span class="dv">2</span></code></pre></div>
 <h3 id="types">Types</h3>
 <ul>
 <li><em>Type error</em> if applying function to arguments of the wrong type</li>
@@ -184,7 +184,9 @@ foldr<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> b <span class=
 <ul>
 <li><code>(.)</code> Combines two functions into a single function</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">odd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">f <span class="fu">.</span> g <span class="fu">=</span> \ x <span class="ot">-&gt;</span> f (g x)
+
+odd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
 odd <span class="fu">=</span> not <span class="fu">.</span> even</code></pre></div>
 <h3 id="type-declaration">Type Declaration</h3>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Pos</span> <span class="fu">=</span> (<span class="dt">Int</span>, <span class="dt">Int</span>)

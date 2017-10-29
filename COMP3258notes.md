@@ -28,6 +28,7 @@ product [1,2,3,4,5]
 - Take priority over other operators
 - Must begin with lowercase
 - Lists end with `s` by convention
+
 ```haskell
 > myAdd1 x = x + 1
 > myAdd1 1
@@ -138,6 +139,8 @@ foldr :: (a -> b -> b) -> b -> [a] -> b
 - `(.)` Combines two functions into a single function
 
 ```haskell
+f . g = \ x -> f (g x)
+
 odd :: Int -> Bool
 odd = not . even
 ```
