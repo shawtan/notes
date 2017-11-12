@@ -243,3 +243,46 @@ CHECK (
 ~~~
 - Checked everytime the table is updated
 
+# Relational Algebra
+- Algebra with tables (relations) as operand, and new operators
+- Models lower-level operations of a relational DBMS
+
+## Basic Operators
+### Select (σ)
+- $\sigma_{p}(R) = \{t \mid t \in R \land p(t)\}$
+    - `SELECT * FROM Author WHERE name = "May"`
+    - $\sigma_{\text{name="May"}}(\text{Author})$
+
+### Projection (π)
+- $\pi_{A_1, A_2, \dots, A_k}(R)$
+- A copy of R with only the attributes `A_i, ..., A_k`
+    - `SELECT id, name FROM Users`
+    - $\pi_{\text{id, name}}(Users)$
+
+### Union (∪)
+- $R\cup S = \{t \mid t \in R \lor t \in S\}$
+- R and S must have
+    - the same number of attributes 
+    - compatible attribute domains
+- Example:
+    - `SELECT name FROM Students UNION SELECT name FROM Teachers`
+    - $\pi_{\text{name}}(\text{Students}) \cup \pi_{\text{name}}(\text{Teachers})$
+ 
+### Set difference (-)
+- $R-S = \{t \mid t \in R \land t \notin S\}$
+- R and S must have
+    - the same number of attributes 
+    - compatible attribute domains
+- Example:
+    - `SELECT id FROM Students EXCEPT SELECT id FROM Enrolled`
+    - $\pi_{\text{id}}(\text{Students}) - \pi_{\text{id}}(\text{Enrolled})$
+
+### Cartesian product (×)
+- $R \times S = \{tq \mid t \in R \land q \in S\}$
+- No common attributes in R and S
+- Example
+    - `SELECT * FROM Items, Orders WHERE Items.id = Orders.item_id;`
+
+### Rename (ρ)
+- $\rho_x(E)$
+- Renames expression E to the name X

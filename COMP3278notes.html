@@ -301,5 +301,70 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <ul>
 <li>Checked everytime the table is updated</li>
 </ul>
+<h1 id="relational-algebra">Relational Algebra</h1>
+<ul>
+<li>Algebra with tables (relations) as operand, and new operators</li>
+<li>Models lower-level operations of a relational DBMS</li>
+</ul>
+<h2 id="basic-operators">Basic Operators</h2>
+<h3 id="select-σ">Select (σ)</h3>
+<ul>
+<li><span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>R</em>)={<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>p</em>(<em>t</em>)}</span>
+<ul>
+<li><code>SELECT * FROM Author WHERE name = &quot;May&quot;</code></li>
+<li><span class="math inline"><em>σ</em><sub>name=&quot;May&quot;</sub>(Author)</span></li>
+</ul></li>
+</ul>
+<h3 id="projection-π">Projection (π)</h3>
+<ul>
+<li><span class="math inline"><em>π</em><sub><em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>, …, <em>A</em><sub><em>k</em></sub></sub>(<em>R</em>)</span></li>
+<li>A copy of R with only the attributes <code>A_i, ..., A_k</code>
+<ul>
+<li><code>SELECT id, name FROM Users</code></li>
+<li><span class="math inline"><em>π</em><sub>id, name</sub>(<em>U</em><em>s</em><em>e</em><em>r</em><em>s</em>)</span></li>
+</ul></li>
+</ul>
+<h3 id="union">Union (∪)</h3>
+<ul>
+<li><span class="math inline"><em>R</em> ∪ <em>S</em> = {<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∨ <em>t</em> ∈ <em>S</em>}</span></li>
+<li>R and S must have
+<ul>
+<li>the same number of attributes</li>
+<li>compatible attribute domains</li>
+</ul></li>
+<li>Example:
+<ul>
+<li><code>SELECT name FROM Students UNION SELECT name FROM Teachers</code></li>
+<li><span class="math inline"><em>π</em><sub>name</sub>(Students)∪<em>π</em><sub>name</sub>(Teachers)</span></li>
+</ul></li>
+</ul>
+<h3 id="set-difference--">Set difference (-)</h3>
+<ul>
+<li><span class="math inline"><em>R</em> − <em>S</em> = {<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>t</em> ∉ <em>S</em>}</span></li>
+<li>R and S must have
+<ul>
+<li>the same number of attributes</li>
+<li>compatible attribute domains</li>
+</ul></li>
+<li>Example:
+<ul>
+<li><code>SELECT id FROM Students EXCEPT SELECT id FROM Enrolled</code></li>
+<li><span class="math inline"><em>π</em><sub>id</sub>(Students)−<em>π</em><sub>id</sub>(Enrolled)</span></li>
+</ul></li>
+</ul>
+<h3 id="cartesian-product">Cartesian product (×)</h3>
+<ul>
+<li><span class="math inline"><em>R</em> × <em>S</em> = {<em>t</em><em>q</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>q</em> ∈ <em>S</em>}</span></li>
+<li>No common attributes in R and S</li>
+<li>Example
+<ul>
+<li><code>SELECT * FROM Items, Orders WHERE Items.id = Orders.item_id;</code></li>
+</ul></li>
+</ul>
+<h3 id="rename-ρ">Rename (ρ)</h3>
+<ul>
+<li><span class="math inline"><em>ρ</em><sub><em>x</em></sub>(<em>E</em>)</span></li>
+<li>Renames expression E to the name X</li>
+</ul>
 </body>
 </html>
