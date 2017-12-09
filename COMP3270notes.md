@@ -440,8 +440,143 @@
 # First-Order Logic
 
 # Uncertainty
-- First-Order logic can't deal with uncertainty
-- Use probability to predict outcome
-- Assign utility to each outcome and calculate expected utility
-- Attempt to maximize utility
+- First-Order logic can't deal with uncertainty due to
+    - Laziness: too much work to list out all possibilities
+    - Theoretical ignorance
+    - Practical ignorance
+- Use probability to come up with a degree of belief between 0 and 1
+- Probability depends on the knowledge state
 
+## Utility Theory
+- Utility is used to represent preferences for various outcomes
+- Decision Theory takes into account probability and utility
+    - Choose action with the highest expected value
+
+## Probability
+### Axioms of Probability
+- $0 \leq P(a) \leq 1$
+- $P(true) = 1 \quad P(false) = 0$
+- $P(a \lor b) = P(a) + P(b) - P(a \land b)$
+
+###  Bayes' Rule
+$$P(a \vert b) = \frac{P(b \vert a) P(a)}{P(b)}$$
+
+### Prior Probability
+- Unconditional probability
+- Degree of belief in the absence of any other information
+
+### Full joint probability distribution
+- Table of probability of each assignment of random variables
+
+# Learning
+
+## Types of Feedback
+- Supervised: supervisor is there to tell if decision if correct or not
+- Unsupervised: no training data
+- Reinforcement: learn from rewards
+
+## Inductive Learning
+- Given a set of observations, derive a hypothesis to predict unseen observations
+- Ockham's Razor: Choose the simplest hypothesis
+
+## Learning Decision Trees
+- Decision is reached by performing a sequence of tests
+- Input: set of attributes
+- Output: decision
+    - Discrete-value = classification
+    - Continuous function = regression
+- Constructing the tree:
+    - Choose the best splitting attribute
+    - If no attributes are left, the data is noisy
+
+## Training Methodology
+1. Construct large set of examples
+2. Divide data into *training* set and *test* set
+3. Apply learning algorithm to training set to obtain a hypothesis
+4. Measure percentage of correctly classified examples in the test set
+
+### Overfitting
+- If data is overfitted, it is only good for the training data, and not generally
+- Use a third dataset: validation data
+    - Tunes the parameters
+
+
+# Statistical Learning
+
+## Naive Bayes Model
+$$P(C \vert x_1, \dots, x_m) = \alpha P(x_1, \dots, x_n\vert C)P({}C) = \alpha P({}C) \prod_iP(x_i \vert C)$$
+
+## Bayes Classifier
+- Does not assume that attributes are independent
+- Use a multivariate distribution
+- Must have amount of data >> number of parameters
+
+### Procedure of Classification
+1. Collect large amount of training data
+2. Feature extraction of representative features
+3. Data is point in d-dimensional vector space
+    - Perform classification
+    - Dimension reduction if d is too large
+6. Divide data into training and test data
+7. Train on training data
+    - Find decision serfaces for different classes
+    - Find the probability distribution of the objects
+8. Test on testing data to determine performance
+
+### Small Data Set problems
+- Overfitting may occur
+    - Solve with dimension reduction
+- Test set will not be a good indicator
+    - Solve with cross validation
+        - Divide training data into k subsets
+        - Train with k-1 subsets and test using the remaining subset
+        - Repeat k times
+
+## Neural Networks
+- Output of previous neuron is linked to input of current neuron
+- Input: linear combination of input signals
+- Activation function: non-linear function that maps input to a range (e.g (0,1))
+- Output: linked to other neurons
+- Bias Weight (W_0): provides a constant term
+
+### Network Structures
+- Feed-forward networks
+    - e.g. Single-layer perceptrons
+    - e.g. Multi-layer perceptrons
+    - Represents a function of its current input
+    - Has no internal state other than the weights
+- Recurrent networks
+    - Contains cycles for feedback
+    - Internal states for short-term memory
+
+### Single-Layer Perceptrons
+- 1 input layer, 1 output layer
+- Output node only depends on links leading to it
+- Output unit with largest output value wins
+- Non-linear function must be monotonic, increasing
+    - Cannot change ordering of values
+- Cannot implement XOR
+
+### Perceptron Learning
+- Adject weights of network to reduce erroro n the training set
+    - Calculus
+- Better at majority function vs decision tree
+
+### Multilayer Perceptrons
+- Layers are (usually) fully connected
+- Hidden units are usually chosen by hand
+- Learn through back-propagation
+    
+### Neural Network Training
+1. Select next training pair from the training set and apply input to the network
+2. Calculate the output of network
+3. Calculate error between network output and desired output
+4. Adjust weights of network by gradient descent
+5. If error is larger than the threshold, repeat
+
+### Improvments
+- Momentum
+    - Keep a fraction of weights from the previous cycle
+- Weight Decay
+    - Decay weights every cycle
+    - Unneeded weights will eventually become insignificant

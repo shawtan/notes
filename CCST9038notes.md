@@ -30,7 +30,7 @@ Notes by Xiao Tan
 
 #### Science Concepts
 ##### Drake's Equation
-- Probability of existence of other intelligent life
+- Probability of finding other intelligent life
 - Based on:
     - Number of stars
     - % of stars with planets
@@ -105,4 +105,22 @@ Notes by Xiao Tan
 - SciFi gives a new background to highlight issues in a different context
 - e.g Cultural biases, gender, religion, war, education, class
 
+## Real Life Examples
+### Evolution
+- Sickle cell trait in humans prevents malaria
+- Eyes see things upside down, has a blind spot
+- Appendix is useless
 
+### Ecology
+- Carp is an invasive species world wide due to no natural predators
+- Store strawberries are hybrids and don't regrow well, fruit is irradiated to prevent spoiling
+
+### Wealth
+- US presidential election take donations from companies
+- Walmart, McDonalds give workers 31 hours, because 32 hours requires benefits
+- The **tragedy of the commons** is a problem that occurs when individuals exploit a shared resource to the extent that demand overwhelms supply and the resource becomes unavailable to some or all.
+
+### Feminism
+
+### Science
+- Assimilation vs Accommodation of knowledge

@@ -175,4 +175,136 @@ safehead xs = Just (head xs)
 
 -- Can be recursive
 data Nat = Zero | Succ Nat
+data Tree a = Leaf a
+            | Node (Tree a) a (Tree a)
 ```
+
+### Functional Parsers
+- Parsers analyze text to determine its syntactic structure
+- `data Parser = P (String -> [(a, String)])`
+    - `[]` would be a failure
+    - `a` is possible interpretations 
+    - `String` is any leftover input
+
+#### Basic Parsers
+- `item` fails if input is empty, consumes the first character otherwise
+- `failure` always fails
+- `return v` always returns `v` without consuming any input
+- `p +++ q` if `p` succeeds, behaves as `p`, otherwise `q`
+- `parse (P p)` applies parser p to a string
+
+#### Sequencing
+```haskell
+-- Allows you to take the needed parts from the syntax structure
+p :: Parser (Char,Char) 
+    p = do  x <- item
+            item
+            y ← item
+            return (x,y)
+```
+
+#### Derived Parsers
+- `sat p` parses a character that satisfies a predicate `p`
+    - `digit`, `char` parses a digit or specific characters
+- `many p` applies a parser 0+ times
+    - `string` parses many characters
+
+### Interactive Programs
+- Interactive programs have *side effects*
+- `IO a` defines a inpure actions with side effects
+    - `IO Char` returns a character
+    - `IO ()` has no result value
+
+#### Basic Actions
+- `getChar` reads, echos and returns a character from the keyboard
+- `putChar c` writes a character `c`
+- `return v` returns `v`
+
+#### Derived Primitives
+```haskell
+-- Reading a string from the keyboard:
+getLine :: IO String 
+getLine = do x ← getChar
+             if x == '\n' then
+                return []
+             else
+                do xs ← getLine
+                    return (x:xs)
+                        
+-- Writing a string to the screen:putStr :: String → IO ()
+putStr []     = return ()
+putStr (x:xs) = do putChar x
+                   putStr xs
+-- Writing a string and moving to a new line:putStrLn :: String → IO () 
+putStrLn xs = do putStr xs
+                 putChar '\n'
+```
+
+### Monads
+- Structure composed of two basic operations: 
+    - bind
+    - return
+
+```haskell
+class Monad m where
+    (>>=)   :: m a -> (a -> m b) -> m b
+    return  :: a -> m a
+```
+
+#### Do-notation    
+```haskell
+-- do notation is syntactic sugar
+do  x <- exp 
+    morelines
+exp >>= (\x -> do morelines)
+
+do  exp 
+    morelines
+exp >>= (\_ -> do morelines)
+
+do  return exp
+return exp
+```
+ 
+#### Creating Monads
+```haskell
+-- Parser
+newtype Parser a = P (String -> [(a,String)])
+instance Monad Parser where
+    return v = P (\inp -> [(v,inp)])
+    p >>= f = P (\inp -> case parse p inp of
+                    [] -> []
+                    [(v,out)] -> parse (f v) out)
+
+-- Simple
+data Option a = None | Some a
+instance Monad Option where
+    return x        = Some x 
+    None >>= f      = None 
+    (Some x) >>= f  = f x
+```
+
+#### Monad Laws
+- `return a >>= k = k a`
+- `m >>= return = m`
+- `m >>= (\x -> k x >>= h) = (m >>= k) >>= h`
+
+### Equational Reasoning
+- We can apply standard mathematical techniques to a functional language
+- Interpret programs as equations, substitute equals by equals
+- Induction can also be used
+
+### Functor
+```haskell
+class Functor f where
+fmap :: (a -> b) -> f a -> f b
+```
+
+#### Laws
+- `fmap f (fmap g fa) ≣ fmap (f . g) fa`
+- `fmap id fa ≣ fa`
+
+### Countdown Problem
+- List of positive natural numbers
+- Artithmetic operators: `+ - * /`
+- Construct an expression that equals the target number

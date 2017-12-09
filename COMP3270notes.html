@@ -611,10 +611,192 @@
 <h1 id="first-order-logic">First-Order Logic</h1>
 <h1 id="uncertainty">Uncertainty</h1>
 <ul>
-<li>First-Order logic can't deal with uncertainty</li>
-<li>Use probability to predict outcome</li>
-<li>Assign utility to each outcome and calculate expected utility</li>
-<li>Attempt to maximize utility</li>
+<li>First-Order logic can't deal with uncertainty due to
+<ul>
+<li>Laziness: too much work to list out all possibilities</li>
+<li>Theoretical ignorance</li>
+<li>Practical ignorance</li>
+</ul></li>
+<li>Use probability to come up with a degree of belief between 0 and 1</li>
+<li>Probability depends on the knowledge state</li>
+</ul>
+<h2 id="utility-theory">Utility Theory</h2>
+<ul>
+<li>Utility is used to represent preferences for various outcomes</li>
+<li>Decision Theory takes into account probability and utility
+<ul>
+<li>Choose action with the highest expected value</li>
+</ul></li>
+</ul>
+<h2 id="probability">Probability</h2>
+<h3 id="axioms-of-probability">Axioms of Probability</h3>
+<ul>
+<li><span class="math inline">0 ≤ <em>P</em>(<em>a</em>)≤1</span></li>
+<li><span class="math inline"><em>P</em>(<em>t</em><em>r</em><em>u</em><em>e</em>)=1 <em>P</em>(<em>f</em><em>a</em><em>l</em><em>s</em><em>e</em>)=0</span></li>
+<li><span class="math inline"><em>P</em>(<em>a</em> ∨ <em>b</em>)=<em>P</em>(<em>a</em>)+<em>P</em>(<em>b</em>)−<em>P</em>(<em>a</em> ∧ <em>b</em>)</span></li>
+</ul>
+<h3 id="bayes-rule">Bayes' Rule</h3>
+<p><br /><span class="math display">$$P(a \vert b) = \frac{P(b \vert a) P(a)}{P(b)}$$</span><br /></p>
+<h3 id="prior-probability">Prior Probability</h3>
+<ul>
+<li>Unconditional probability</li>
+<li>Degree of belief in the absence of any other information</li>
+</ul>
+<h3 id="full-joint-probability-distribution">Full joint probability distribution</h3>
+<ul>
+<li>Table of probability of each assignment of random variables</li>
+</ul>
+<h1 id="learning">Learning</h1>
+<h2 id="types-of-feedback">Types of Feedback</h2>
+<ul>
+<li>Supervised: supervisor is there to tell if decision if correct or not</li>
+<li>Unsupervised: no training data</li>
+<li>Reinforcement: learn from rewards</li>
+</ul>
+<h2 id="inductive-learning">Inductive Learning</h2>
+<ul>
+<li>Given a set of observations, derive a hypothesis to predict unseen observations</li>
+<li>Ockham's Razor: Choose the simplest hypothesis</li>
+</ul>
+<h2 id="learning-decision-trees">Learning Decision Trees</h2>
+<ul>
+<li>Decision is reached by performing a sequence of tests</li>
+<li>Input: set of attributes</li>
+<li>Output: decision
+<ul>
+<li>Discrete-value = classification</li>
+<li>Continuous function = regression</li>
+</ul></li>
+<li>Constructing the tree:
+<ul>
+<li>Choose the best splitting attribute</li>
+<li>If no attributes are left, the data is noisy</li>
+</ul></li>
+</ul>
+<h2 id="training-methodology">Training Methodology</h2>
+<ol style="list-style-type: decimal">
+<li>Construct large set of examples</li>
+<li>Divide data into <em>training</em> set and <em>test</em> set</li>
+<li>Apply learning algorithm to training set to obtain a hypothesis</li>
+<li>Measure percentage of correctly classified examples in the test set</li>
+</ol>
+<h3 id="overfitting">Overfitting</h3>
+<ul>
+<li>If data is overfitted, it is only good for the training data, and not generally</li>
+<li>Use a third dataset: validation data
+<ul>
+<li>Tunes the parameters</li>
+</ul></li>
+</ul>
+<h1 id="statistical-learning">Statistical Learning</h1>
+<h2 id="naive-bayes-model">Naive Bayes Model</h2>
+<p><br /><span class="math display"><em>P</em>(<em>C</em>|<em>x</em><sub>1</sub>, …, <em>x</em><sub><em>m</em></sub>)=<em>α</em><em>P</em>(<em>x</em><sub>1</sub>, …, <em>x</em><sub><em>n</em></sub>|<em>C</em>)<em>P</em>(<em>C</em>)=<em>α</em><em>P</em>(<em>C</em>)∏<sub><em>i</em></sub><em>P</em>(<em>x</em><sub><em>i</em></sub>|<em>C</em>)</span><br /></p>
+<h2 id="bayes-classifier">Bayes Classifier</h2>
+<ul>
+<li>Does not assume that attributes are independent</li>
+<li>Use a multivariate distribution</li>
+<li>Must have amount of data &gt;&gt; number of parameters</li>
+</ul>
+<h3 id="procedure-of-classification">Procedure of Classification</h3>
+<ol style="list-style-type: decimal">
+<li>Collect large amount of training data</li>
+<li>Feature extraction of representative features</li>
+<li>Data is point in d-dimensional vector space
+<ul>
+<li>Perform classification</li>
+<li>Dimension reduction if d is too large</li>
+</ul></li>
+<li>Divide data into training and test data</li>
+<li>Train on training data
+<ul>
+<li>Find decision serfaces for different classes</li>
+<li>Find the probability distribution of the objects</li>
+</ul></li>
+<li>Test on testing data to determine performance</li>
+</ol>
+<h3 id="small-data-set-problems">Small Data Set problems</h3>
+<ul>
+<li>Overfitting may occur
+<ul>
+<li>Solve with dimension reduction</li>
+</ul></li>
+<li>Test set will not be a good indicator
+<ul>
+<li>Solve with cross validation
+<ul>
+<li>Divide training data into k subsets</li>
+<li>Train with k-1 subsets and test using the remaining subset</li>
+<li>Repeat k times</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="neural-networks">Neural Networks</h2>
+<ul>
+<li>Output of previous neuron is linked to input of current neuron</li>
+<li>Input: linear combination of input signals</li>
+<li>Activation function: non-linear function that maps input to a range (e.g (0,1))</li>
+<li>Output: linked to other neurons</li>
+<li>Bias Weight (W_0): provides a constant term</li>
+</ul>
+<h3 id="network-structures">Network Structures</h3>
+<ul>
+<li>Feed-forward networks
+<ul>
+<li>e.g. Single-layer perceptrons</li>
+<li>e.g. Multi-layer perceptrons</li>
+<li>Represents a function of its current input</li>
+<li>Has no internal state other than the weights</li>
+</ul></li>
+<li>Recurrent networks
+<ul>
+<li>Contains cycles for feedback</li>
+<li>Internal states for short-term memory</li>
+</ul></li>
+</ul>
+<h3 id="single-layer-perceptrons">Single-Layer Perceptrons</h3>
+<ul>
+<li>1 input layer, 1 output layer</li>
+<li>Output node only depends on links leading to it</li>
+<li>Output unit with largest output value wins</li>
+<li>Non-linear function must be monotonic, increasing
+<ul>
+<li>Cannot change ordering of values</li>
+</ul></li>
+<li>Cannot implement XOR</li>
+</ul>
+<h3 id="perceptron-learning">Perceptron Learning</h3>
+<ul>
+<li>Adject weights of network to reduce erroro n the training set
+<ul>
+<li>Calculus</li>
+</ul></li>
+<li>Better at majority function vs decision tree</li>
+</ul>
+<h3 id="multilayer-perceptrons">Multilayer Perceptrons</h3>
+<ul>
+<li>Layers are (usually) fully connected</li>
+<li>Hidden units are usually chosen by hand</li>
+<li>Learn through back-propagation</li>
+</ul>
+<h3 id="neural-network-training">Neural Network Training</h3>
+<ol style="list-style-type: decimal">
+<li>Select next training pair from the training set and apply input to the network</li>
+<li>Calculate the output of network</li>
+<li>Calculate error between network output and desired output</li>
+<li>Adjust weights of network by gradient descent</li>
+<li>If error is larger than the threshold, repeat</li>
+</ol>
+<h3 id="improvments">Improvments</h3>
+<ul>
+<li>Momentum
+<ul>
+<li>Keep a fraction of weights from the previous cycle</li>
+</ul></li>
+<li>Weight Decay
+<ul>
+<li>Decay weights every cycle</li>
+<li>Unneeded weights will eventually become insignificant</li>
+</ul></li>
 </ul>
 </body>
 </html>
