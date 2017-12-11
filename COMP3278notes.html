@@ -307,64 +307,409 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <li>Models lower-level operations of a relational DBMS</li>
 </ul>
 <h2 id="basic-operators">Basic Operators</h2>
-<h3 id="select-σ">Select (σ)</h3>
+<table style="width:22%;">
+<colgroup>
+<col width="5%"></col>
+<col width="5%"></col>
+<col width="5%"></col>
+<col width="5%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Name</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>σ</td>
+<td>Select</td>
+<td>Filter on a condition</td>
+<td><span class="math inline"><em>σ</em><sub>name=&quot;May&quot;</sub>(Author)</span></td>
+</tr>
+<tr class="even">
+<td>π</td>
+<td>Projection</td>
+<td>Copy with fewer attributes</td>
+<td><span class="math inline"><em>π</em><sub>id, name</sub>(Users)</span></td>
+</tr>
+<tr class="odd">
+<td>∪</td>
+<td>Union</td>
+<td>Combine two sets with the same attributes</td>
+<td><span class="math inline"><em>π</em><sub>name</sub>(Students)∪<em>π</em><sub>name</sub>(Teachers)</span></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>Set difference</td>
+<td>Difference of two sets with the same attributes</td>
+<td><span class="math inline"><em>π</em><sub>id</sub>(Students)−<em>π</em><sub>id</sub>(Enrolled)</span></td>
+</tr>
+<tr class="odd">
+<td>×</td>
+<td>Cartesian product</td>
+<td>Join of all possible combinations</td>
+<td><span class="math inline">Items × Orders</span></td>
+</tr>
+<tr class="even">
+<td>ρ</td>
+<td>Rename</td>
+<td>Rename a table</td>
+<td><span class="math inline"><em>ρ</em><sub>c</sub>(Course)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-operators">Additional Operators</h2>
+<table style="width:22%;">
+<colgroup>
+<col width="5%"></col>
+<col width="5%"></col>
+<col width="5%"></col>
+<col width="5%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Name</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>∩</td>
+<td>Set intersection</td>
+<td>Intersection of two sets with the same attributes</td>
+<td><span class="math inline">(<em>σ</em><sub>department_id=1</sub>(Works_in)) ∪ (<em>σ</em><sub>department_id=3</sub>(Works_in))</span></td>
+</tr>
+<tr class="even">
+<td>⋈</td>
+<td>Natural Join</td>
+<td>Join on matching attributes</td>
+<td>Items ⋈ Orders</td>
+</tr>
+<tr class="odd">
+<td>←</td>
+<td>Assignment</td>
+<td>Create a temporary relation</td>
+<td><span class="math inline">temp1 ← <em>π</em><sub><em>a</em></sub>(R)</span></td>
+</tr>
+<tr class="even">
+<td>⟕ ⟖</td>
+<td>Left/Right outer join</td>
+<td>Natural join including non-matching tuples</td>
+<td>Users ⟕ Orders</td>
+</tr>
+<tr class="odd">
+<td>÷</td>
+<td>Division</td>
+<td>Returns entries in R that cover all values in S</td>
+<td>R ÷ S</td>
+</tr>
+</tbody>
+</table>
+<h2 id="extended-operators">Extended Operators</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Name</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="aggregation-1">Aggregation</h3>
 <ul>
-<li><span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>R</em>)={<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>p</em>(<em>t</em>)}</span>
+<li>avg, min, max, sum, count, count-distinct</li>
+<li><span class="math inline"><em></em><sub><em>G</em><sub>1</sub>, <em>G</em><sub>2</sub></sub>g<sub><em>F</em><sub>1</sub>(<em>A</em><sub>1</sub>),<em>F</em><sub>2</sub>(<em>A</em><sub>2</sub>)</sub>(R)</span>
 <ul>
-<li><code>SELECT * FROM Author WHERE name = &quot;May&quot;</code></li>
-<li><span class="math inline"><em>σ</em><sub>name=&quot;May&quot;</sub>(Author)</span></li>
+<li><span class="math inline"><em>G</em><sub>1</sub>, <em>G</em><sub>2</sub></span> = attributes to group by</li>
+<li><span class="math inline"><em>F</em><sub>1</sub>(<em>A</em><sub>1</sub>),<em>F</em><sub>2</sub>(<em>A</em><sub>2</sub>)</span> = aggregate functions to apply</li>
 </ul></li>
 </ul>
-<h3 id="projection-π">Projection (π)</h3>
+<h2 id="algebraic-properties">Algebraic Properties</h2>
+<h3 id="equivalence-rules">Equivalence Rules</h3>
+<p>10 of them that are pretty important for optimizing queries</p>
+<h1 id="database-design">Database Design</h1>
+<h2 id="functional-dependency-fd">Functional Dependency (FD)</h2>
 <ul>
-<li><span class="math inline"><em>π</em><sub><em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>, …, <em>A</em><sub><em>k</em></sub></sub>(<em>R</em>)</span></li>
-<li>A copy of R with only the attributes <code>A_i, ..., A_k</code>
+<li>Certain set of attributes uniquely determine the values for another set of attributes</li>
+<li>e.g {employee_id} -&gt; {name, phone}</li>
+</ul>
+<h3 id="armstrongs-axioms">Armstrong's Axioms</h3>
+<ol style="list-style-type: decimal">
+<li>Reflexivity: if B ⊆ A, then A → B</li>
+<li>Transitivity: if A → B and B -&gt; C, then A → C</li>
+<li>Augmentation: if A → B, then CA → CB</li>
+<li>Union: if A → B and A → C, then A → BC</li>
+<li>Decomposition: if A → BC, then A → B and A → C</li>
+<li>Pseudo-transitivity: if A → B and BC → D, then AC → D</li>
+</ol>
+<h2 id="attribute-set-closure">Attribute Set Closure</h2>
 <ul>
-<li><code>SELECT id, name FROM Users</code></li>
-<li><span class="math inline"><em>π</em><sub>id, name</sub>(<em>U</em><em>s</em><em>e</em><em>r</em><em>s</em>)</span></li>
+<li>The **closure* of α (denoted α^+) is the set of attributes that can be functionally determined by α
+<ul>
+<li>e.g F = {A→B, B→C}
+<ul>
+<li>{A}^+ = {A, B, C}</li>
+<li>{C}^+ = {C}</li>
+</ul></li>
 </ul></li>
 </ul>
-<h3 id="union">Union (∪)</h3>
+<h3 id="candidate-key">Candidate Key</h3>
 <ul>
-<li><span class="math inline"><em>R</em> ∪ <em>S</em> = {<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∨ <em>t</em> ∈ <em>S</em>}</span></li>
-<li>R and S must have
+<li>α is a candidate key if:
 <ul>
-<li>the same number of attributes</li>
-<li>compatible attribute domains</li>
+<li>α is a <strong>superkey</strong>
+<ul>
+<li>α^+ contains all attributes of R</li>
 </ul></li>
-<li>Example:
+<li>α is minimum
 <ul>
-<li><code>SELECT name FROM Students UNION SELECT name FROM Teachers</code></li>
-<li><span class="math inline"><em>π</em><sub>name</sub>(Students)∪<em>π</em><sub>name</sub>(Teachers)</span></li>
+<li>No subset of α is a superkey</li>
 </ul></li>
-</ul>
-<h3 id="set-difference--">Set difference (-)</h3>
-<ul>
-<li><span class="math inline"><em>R</em> − <em>S</em> = {<em>t</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>t</em> ∉ <em>S</em>}</span></li>
-<li>R and S must have
-<ul>
-<li>the same number of attributes</li>
-<li>compatible attribute domains</li>
-</ul></li>
-<li>Example:
-<ul>
-<li><code>SELECT id FROM Students EXCEPT SELECT id FROM Enrolled</code></li>
-<li><span class="math inline"><em>π</em><sub>id</sub>(Students)−<em>π</em><sub>id</sub>(Enrolled)</span></li>
 </ul></li>
 </ul>
-<h3 id="cartesian-product">Cartesian product (×)</h3>
+<h2 id="fd-closure">FD Closure</h2>
 <ul>
-<li><span class="math inline"><em>R</em> × <em>S</em> = {<em>t</em><em>q</em> ∣ <em>t</em> ∈ <em>R</em> ∧ <em>q</em> ∈ <em>S</em>}</span></li>
-<li>No common attributes in R and S</li>
-<li>Example
+<li>Set of all functional dependencies that can be logically implied by the set</li>
+<li>To compute F^+ in relation R
+<ol style="list-style-type: decimal">
+<li>For every subset α of R, compute α^+</li>
+<li>For every subset of α^+, generate a FD with α as the LHS</li>
+<li>F^+ = all the FD's</li>
+</ol></li>
+</ul>
+<h2 id="decomposition">Decomposition</h2>
+<h3 id="lossless-join">Lossless-join</h3>
 <ul>
-<li><code>SELECT * FROM Items, Orders WHERE Items.id = Orders.item_id;</code></li>
+<li>Can a relation R be seperated into <span class="math inline"><em>R</em><sub>1</sub></span> and <span class="math inline"><em>R</em><sub>2</sub></span>, such that no information is lost?</li>
+<li><span class="math inline"><em>R</em> = <em>R</em><sub>1</sub> ∪ <em>R</em><sub>2</sub></span></li>
+<li>A decomposition is a lossless-join IFF at least one of the following is true:
+<ul>
+<li>Schema of R_1 ∩ Schema of R_2 → Schema of R_1</li>
+<li>Schema of R_1 ∩ Schema of R_2 → Schema of R_2</li>
 </ul></li>
 </ul>
-<h3 id="rename-ρ">Rename (ρ)</h3>
+<h3 id="dependency-preserving">Dependency Preserving</h3>
 <ul>
-<li><span class="math inline"><em>ρ</em><sub><em>x</em></sub>(<em>E</em>)</span></li>
-<li>Renames expression E to the name X</li>
+<li>Is the dependency X → Y preserved in R, if R is decomposed into <span class="math inline"><em>R</em><sub>1</sub></span> and <span class="math inline"><em>R</em><sub>2</sub></span>?</li>
+<li>Test:
+<ul>
+<li><span class="math inline"><em>F</em><sub>1</sub></span> = projection of F^+ on <span class="math inline"><em>R</em><sub>1</sub></span></li>
+<li><span class="math inline"><em>F</em><sub>2</sub></span> = projection of F^+ on <span class="math inline"><em>R</em><sub>2</sub></span></li>
+<li>Decomposition is dependency preserving if <span class="math inline">(<em>F</em><sub>1</sub> ∪ <em>F</em><sub>2</sub>)<sup>+</sup> = <em>F</em><sup>+</sup></span></li>
+</ul></li>
 </ul>
+<h2 id="boyce-codd-normal-form">Boyce-Codd Normal Form</h2>
+<ul>
+<li>No redundencies in F</li>
+<li>For all FD's in F^+ of the form α→β, at least one of the following holds:
+<ul>
+<li>α→β is trivial</li>
+<li>α is a <em>superkey</em> for R</li>
+</ul></li>
+<li>Test:
+<ul>
+<li>Check non-trivial α→β dependencies in F for if α^+ covers the whole relation</li>
+<li>(Don't need to check all of F^+)</li>
+</ul></li>
+</ul>
+<h3 id="bcnf-decomposition-algorithm">BCNF Decomposition Algorithm</h3>
+<ul>
+<li>Chapter 5B, Slide 50</li>
+</ul>
+<h2 id="normalization">Normalization</h2>
+<ul>
+<li>Goals when decomposing a relation
+<ol style="list-style-type: decimal">
+<li>Lossless-join</li>
+<li>No redundancy</li>
+<li>Dependency preserving # Files and Storage</li>
+</ol></li>
+</ul>
+<h2 id="storage-media">Storage Media</h2>
+<h3 id="cpu-cache">CPU Cache</h3>
+<ul>
+<li>Extremely fast memory built into the CPU</li>
+<li>Unimportant to database storage XD</li>
+</ul>
+<h3 id="main-memory">Main Memory</h3>
+<ul>
+<li>Volatile, fast storage</li>
+<li>Too small to store the entire database</li>
+</ul>
+<h3 id="magnetic-disk">Magnetic Disk</h3>
+<ul>
+<li>Large, non-volatile long-term storage</li>
+<li>Slow access time</li>
+<li>Read using read-write heads</li>
+<li>Has many platters, each with two surfaces of information with many tracks</li>
+<li>Tracks are divided into sectores</li>
+<li>Read time:
+<ol style="list-style-type: decimal">
+<li>Seek: Position read-write head to the right track</li>
+<li>Rotation: Spin disk to position data area</li>
+<li>Transfer data: Read and transfer the data</li>
+</ol></li>
+</ul>
+<h3 id="magnetic-tap">Magnetic Tap</h3>
+<ul>
+<li>Used for backup</li>
+<li>Slow, non-volatile, cheap</li>
+</ul>
+<h3 id="optical-storage">Optical Storage</h3>
+<ul>
+<li>Non-volatile, slow, small</li>
+</ul>
+<h3 id="flash-memory-ssd">Flash Memory (SSD)</h3>
+<ul>
+<li>Read is fast, write is slower</li>
+<li>Limited write cycles</li>
+</ul>
+<h2 id="storage-hierarchy">Storage Hierarchy</h2>
+<ul>
+<li>Data on disks</li>
+<li>Memory for temporary storage and data manipulation</li>
+<li>Backups on tertiary storage</li>
+</ul>
+<h2 id="reliability-and-efficiency">Reliability and Efficiency</h2>
+<ul>
+<li>Hard disks may fail</li>
+<li>Disks are slow compared to CPU<br />
+</li>
+<li>e.g RAID (Redundant Arrays of Independent Disks)
+<ul>
+<li>Level 0: Striping only, no mirroring</li>
+<li>Level 1/10/1+0: Mirroring and Striping</li>
+<li>Level 5: Strips all disks including parity disk</li>
+</ul></li>
+</ul>
+<h3 id="solution-mirroring">Solution: Mirroring</h3>
+<ul>
+<li>Store a redundant copy on another disk</li>
+<li>Reads can be handled twice as quickly</li>
+<li>High reliability, but expensive</li>
+</ul>
+<h3 id="solution-data-striping">Solution: Data Striping</h3>
+<ul>
+<li>Partition data into several disks that can be read in parallel</li>
+<li>Higher data-transfer rate, but no effect on reliability</li>
+</ul>
+<h3 id="solution-parity-check">Solution: Parity Check</h3>
+<ul>
+<li>Use an extra disk to store parity bits</li>
+<li>If a disk fails, the parity bit can be used to reconstruct the data</li>
+</ul>
+<h2 id="file-organization">File Organization</h2>
+<ul>
+<li>Records are stored in files, managed by the database system</li>
+<li>Files are partitioned into blocks which contain records</li>
+</ul>
+<h3 id="records">Records</h3>
+<h4 id="fixed-length-records">Fixed-Length Records</h4>
+<ul>
+<li>e.g INT, CHAR</li>
+<li>Place data into blocks without crossing blocks</li>
+<li>Store pointers to deleted records in the header and free spaces</li>
+</ul>
+<h4 id="variable-length-records">Variable-Length Records</h4>
+<ul>
+<li>e.g VARCHAR(20), TEXT</li>
+<li>Stored using a slotted-page structure
+<ul>
+<li>Block header contains information about entires in the block</li>
+</ul></li>
+</ul>
+<h3 id="organizing-blocks-in-files">Organizing Blocks in Files</h3>
+<h4 id="heap-file">Heap File</h4>
+<ul>
+<li>Records are unordered and can be placed anywhere</li>
+<li>Simple</li>
+<li>Data is scattered</li>
+<li>All data needs to be scanned to locate a record</li>
+</ul>
+<h4 id="sequential-file">Sequential File</h4>
+<ul>
+<li>Store records sequentially based on search key</li>
+<li>Order maintained through overflow blocks</li>
+</ul>
+<h4 id="hashing">Hashing</h4>
+<ul>
+<li>Block is chosen based on hash value</li>
+</ul>
+<h4 id="multitable-clustering">Multitable Clustering</h4>
+<ul>
+<li>Put related relations in the same file</li>
+<li>Joins are faster</li>
+</ul>
+<h2 id="buffer">Buffer</h2>
+<ul>
+<li>Aim to minimize block transfers between disk and memory</li>
+<li>Buffer cases:
+<ul>
+<li>Buffer Miss
+<ul>
+<li>Data is not in buffer; read it from disk</li>
+</ul></li>
+<li>Buffer Hit
+<ul>
+<li>Read is from buffer</li>
+</ul></li>
+<li>Write
+<ul>
+<li>Update buffer</li>
+<li>Update disk when flushing buffer</li>
+</ul></li>
+<li>Buffer Full
+<ul>
+<li>Replace data by LRU or LFU</li>
+</ul></li>
+</ul></li>
+<li>Data dictionary is always kept in buffer
+<ul>
+<li>Contains information about relations, statistics, file organization # Indexing</li>
+</ul></li>
+<li>Used to speed up access to data</li>
+<li>Indexed based on a search key</li>
+<li>Indexes are smaller than the original file</li>
+<li>Primary vs Secondary
+<ul>
+<li>Primary index = main search key</li>
+<li>Secondary index = secondary search key</li>
+</ul></li>
+<li>Index Classes
+<ul>
+<li>Ordered</li>
+<li>Hash</li>
+</ul></li>
+<li>Factors
+<ul>
+<li>Access types supported
+<ul>
+<li>Equality, range, multi-attribute</li>
+</ul></li>
+<li>Access time</li>
+<li>Insertion / Deletion time</li>
+<li>Space overhead</li>
+</ul></li>
+</ul>
+<h2 id="b-tree">B+ Tree</h2>
+<ul>
+<li>All paths from root to leaf are the same length</li>
+<li>Efficient processing of equality and range queries</li>
+<li>Node contains <code>n-1</code> search-key values and <code>n</code> pointers</li>
+<li>Leaf node has <code>((n-1)/2, n-1]</code> values</li>
+<li>Non-leaf nodes have <code>(n/2, n]</code> pointers</li>
+<li><em>Know how to search, insert, delete</em></li>
+</ul>
+<h2 id="hashing-1">Hashing</h2>
+<h3 id="static-hashing">Static Hashing</h3>
+<h2 id="indexing-in-sql">Indexing in SQL</h2>
 </body>
 </html>

@@ -43,7 +43,7 @@
 ### Mapping cardinalities
 - Directed Line (->): one
 - Undirected Line (--): many
-  ![image](01_mapping_cardinalities.png)
+  ![image](2_mapping_cardinalities.png)
 
 ### Participation constraints
 - Total participaction (=): every entity participates in at least one relationship
@@ -77,7 +77,7 @@
 ## Role
 - Relationship between entities in the same entity set
 - Labeled with the different roles of the relationship
-  ![image](01_role.png)
+  ![image](2_role.png)
 
 ## Specialization
 - Represented by a Triangle with relationship type (e.g ISA)
@@ -86,7 +86,7 @@
 - e.g Student can be full-time or part-time
 - Disjoint vs Overlapping
     - Disjoint: entities can only belong to one specialization
-      ![image](01_specialization.png)    
+      ![image](2_specialization.png)    
 
 # Structured Query Language
 - Language for defining, modifying and querying data
@@ -248,41 +248,236 @@ CHECK (
 - Models lower-level operations of a relational DBMS
 
 ## Basic Operators
-### Select (σ)
-- $\sigma_{p}(R) = \{t \mid t \in R \land p(t)\}$
-    - `SELECT * FROM Author WHERE name = "May"`
-    - $\sigma_{\text{name="May"}}(\text{Author})$
+Symbol | Name | Description | Example
+---|---|---|---
+σ | Select | Filter on a condition |$\sigma_{\text{name="May"}}(\text{Author})$
+π | Projection | Copy with fewer attributes | $\pi_{\text{id, name}}(\text{Users})$
+∪ | Union | Combine two sets with the same attributes | $\pi_{\text{name}}(\text{Students}) \cup \pi_{\text{name}}(\text{Teachers})$
+- | Set difference | Difference of two sets with the same attributes | $\pi_{\text{id}}(\text{Students}) - \pi_{\text{id}}(\text{Enrolled})$
+× | Cartesian product | Join of all possible combinations | $\text{Items} \times \text{Orders}$
+ρ | Rename | Rename a table | $\rho_\text{c}(\text{Course})$
 
-### Projection (π)
-- $\pi_{A_1, A_2, \dots, A_k}(R)$
-- A copy of R with only the attributes `A_i, ..., A_k`
-    - `SELECT id, name FROM Users`
-    - $\pi_{\text{id, name}}(Users)$
+## Additional Operators
+Symbol | Name | Description | Example
+---|---|---|---
+∩ | Set intersection | Intersection of two sets with the same attributes | $(\sigma_\text{department_id=1}(\text{Works_in})) \cup (\sigma_\text{department_id=3}(\text{Works_in}))$
+⋈| Natural Join | Join on matching attributes | Items ⋈ Orders
+← | Assignment | Create a temporary relation | $\text{temp1} \leftarrow \pi_a(\text{R})$
+⟕ ⟖| Left/Right outer join | Natural join including non-matching tuples | Users ⟕ Orders
+÷ | Division | Returns entries in R that cover all values in S | R ÷ S
 
-### Union (∪)
-- $R\cup S = \{t \mid t \in R \lor t \in S\}$
-- R and S must have
-    - the same number of attributes 
-    - compatible attribute domains
-- Example:
-    - `SELECT name FROM Students UNION SELECT name FROM Teachers`
-    - $\pi_{\text{name}}(\text{Students}) \cup \pi_{\text{name}}(\text{Teachers})$
- 
-### Set difference (-)
-- $R-S = \{t \mid t \in R \land t \notin S\}$
-- R and S must have
-    - the same number of attributes 
-    - compatible attribute domains
-- Example:
-    - `SELECT id FROM Students EXCEPT SELECT id FROM Enrolled`
-    - $\pi_{\text{id}}(\text{Students}) - \pi_{\text{id}}(\text{Enrolled})$
+## Extended Operators
+Symbol | Name | Description | Example
+---|---|---|---
 
-### Cartesian product (×)
-- $R \times S = \{tq \mid t \in R \land q \in S\}$
-- No common attributes in R and S
-- Example
-    - `SELECT * FROM Items, Orders WHERE Items.id = Orders.item_id;`
+### Aggregation
+- avg, min, max, sum, count, count-distinct
+- $_{G_1, G_2}\text{g}_{F_1(A_1), F_2(A_2)}(\text{R})$
+    - $G_1, G_2$ = attributes to group by
+    - $F_1(A_1), F_2(A_2)$ = aggregate functions to apply
 
-### Rename (ρ)
-- $\rho_x(E)$
-- Renames expression E to the name X
+## Algebraic Properties
+### Equivalence Rules
+10 of them that are pretty important for optimizing queries
+
+# Database Design
+
+## Functional Dependency (FD)
+- Certain set of attributes uniquely determine the values for another set of attributes
+- e.g {employee_id} -> {name, phone}
+
+### Armstrong's Axioms
+1. Reflexivity: if B ⊆ A, then A → B
+2. Transitivity: if A → B and B -> C, then A → C
+3. Augmentation: if A → B, then CA → CB
+4. Union: if A → B and A → C, then A → BC
+5. Decomposition: if A → BC, then A → B and A → C
+6. Pseudo-transitivity: if A → B and BC → D, then AC → D
+
+## Attribute Set Closure
+- The **closure* of α (denoted α^+) is the set of attributes that can be functionally determined by α
+    - e.g F = {A→B, B→C}
+        - {A}^+ = {A, B, C}
+        - {C}^+ = {C}
+
+### Candidate Key
+- α is a candidate key if:
+    - α is a **superkey**
+        - α^+ contains all attributes of R
+    - α is minimum
+        - No subset of α is a superkey
+
+## FD Closure
+- Set of all functional dependencies that can be logically implied by the set
+- To compute F^+ in relation R
+    1. For every subset α of R, compute α^+
+    2. For every subset of α^+, generate a FD with α as the LHS
+    3. F^+ = all the FD's
+
+## Decomposition
+### Lossless-join
+- Can a relation R be seperated into $R_1$ and $R_2$, such that no information is lost?
+- $R = R_1 \cup R_2$
+- A decomposition is a lossless-join IFF at least one of the following is true:
+    - Schema of R\_1 ∩ Schema of R\_2 → Schema of R\_1
+    - Schema of R\_1 ∩ Schema of R\_2 → Schema of R\_2
+
+### Dependency Preserving
+- Is the dependency X → Y preserved in R, if R is decomposed into $R_1$ and $R_2$?
+- Test:
+    - $F_1$ = projection of F^+ on $R_1$
+    - $F_2$ = projection of F^+ on $R_2$
+    - Decomposition is dependency preserving if $(F_1 \cup F_2)^+ = F^+$
+
+## Boyce-Codd Normal Form
+- No redundencies in F
+- For all FD's in F^+ of the form α→β, at least one of the following holds:
+    - α→β is trivial
+    - α is a _superkey_ for R
+- Test:
+    - Check non-trivial α→β dependencies in F for if α^+ covers the whole relation
+    - (Don't need to check all of F^+)
+
+### BCNF Decomposition Algorithm
+- Chapter 5B, Slide 50
+
+## Normalization
+- Goals when decomposing a relation
+    1. Lossless-join
+    2. No redundancy
+    3. Dependency preserving 
+# Files and Storage
+
+## Storage Media
+### CPU Cache
+- Extremely fast memory built into the CPU
+- Unimportant to database storage XD
+
+### Main Memory
+- Volatile, fast storage
+- Too small to store the entire database
+
+### Magnetic Disk
+- Large, non-volatile long-term storage
+- Slow access time
+- Read using read-write heads
+- Has many platters, each with two surfaces of information with many tracks
+- Tracks are divided into sectores 
+- Read time:
+    1. Seek: Position read-write head to the right track
+    2. Rotation: Spin disk to position data area
+    3. Transfer data: Read and transfer the data
+
+### Magnetic Tap
+- Used for backup
+- Slow, non-volatile, cheap
+
+### Optical Storage
+- Non-volatile, slow, small
+
+### Flash Memory (SSD)
+- Read is fast, write is slower
+- Limited write cycles
+
+## Storage Hierarchy
+- Data on disks
+- Memory for temporary storage and data manipulation
+- Backups on tertiary storage
+
+## Reliability and Efficiency
+- Hard disks may fail
+- Disks are slow compared to CPU  
+- e.g RAID (Redundant Arrays of Independent Disks)
+    - Level 0: Striping only, no mirroring
+    - Level 1/10/1+0: Mirroring and Striping
+    - Level 5: Strips all disks including parity disk
+
+### Solution: Mirroring
+- Store a redundant copy on another disk
+- Reads can be handled twice as quickly
+- High reliability, but expensive
+
+### Solution: Data Striping
+- Partition data into several disks that can be read in parallel
+- Higher data-transfer rate, but no effect on reliability
+
+### Solution: Parity Check
+- Use an extra disk to store parity bits
+- If a disk fails, the parity bit can be used to reconstruct the data
+
+## File Organization
+- Records are stored in files, managed by the database system
+- Files are partitioned into blocks which contain records
+
+### Records
+#### Fixed-Length Records
+- e.g INT, CHAR
+- Place data into blocks without crossing blocks
+- Store pointers to deleted records in the header and free spaces
+
+#### Variable-Length Records
+- e.g VARCHAR(20), TEXT
+- Stored using a slotted-page structure
+    - Block header contains information about entires in the block
+
+### Organizing Blocks in Files
+#### Heap File
+- Records are unordered and can be placed anywhere
+- Simple
+- Data is scattered
+- All data needs to be scanned to locate a record
+
+#### Sequential File
+- Store records sequentially based on search key
+- Order maintained through overflow blocks
+
+#### Hashing
+- Block is chosen based on hash value
+
+#### Multitable Clustering
+- Put related relations in the same file
+- Joins are faster
+
+## Buffer
+- Aim to minimize block transfers between disk and memory
+- Buffer cases:
+    - Buffer Miss
+        - Data is not in buffer; read it from disk
+    - Buffer Hit
+        - Read is from buffer
+    - Write
+        - Update buffer
+        - Update disk when flushing buffer
+    - Buffer Full
+        - Replace data by LRU or LFU
+- Data dictionary is always kept in buffer
+    - Contains information about relations, statistics, file organization
+# Indexing
+- Used to speed up access to data
+- Indexed based on a search key
+- Indexes are smaller than the original file
+- Primary vs Secondary
+    - Primary index = main search key
+    - Secondary index = secondary search key
+- Index Classes
+    - Ordered
+    - Hash
+- Factors
+    - Access types supported
+        - Equality, range, multi-attribute
+    - Access time
+    - Insertion / Deletion time
+    - Space overhead
+
+## B+ Tree
+- All paths from root to leaf are the same length
+- Efficient processing of equality and range queries
+- Node contains `n-1` search-key values and `n` pointers
+- Leaf node has `((n-1)/2, n-1]` values
+- Non-leaf nodes have `(n/2, n]` pointers
+- _Know how to search, insert, delete_
+
+## Hashing
+### Static Hashing
+
+## Indexing in SQL

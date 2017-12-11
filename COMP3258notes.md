@@ -16,7 +16,7 @@ length [1,2,3,4,5]  -- length
 [1,2,3] ++ [4,5]    -- append lists
 1 : [2,3,4,5]       -- cons
 null []             -- empty?
-init [1,2,3,4,5,6]  -- last element
+init [1,2,3,4,5,6]  -- all except last element
 take 3 [1,2,3,4,5]
 drop 3 [1,2,3,4,5]
 reverse [1,2,3,4,5]
