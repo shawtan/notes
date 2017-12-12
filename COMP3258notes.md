@@ -1,8 +1,11 @@
 # COMP3258 Functional Programming
 
 ## Functional Programming
-- No side-effects
-- Computation by applying functions to arguments
+- Programming with first class functions (e.g. map, foldr)
+- Programming with mathematical functions
+    - No side-effects
+    - Calling functions with the same arguments results in the same result
+    - Computation by applying functions to arguments
 
 ## Haskell
 ### Prelude
