@@ -264,7 +264,7 @@ Symbol | Name | Description | Example
 ⋈| Natural Join | Join on matching attributes | Items ⋈ Orders
 ← | Assignment | Create a temporary relation | $\text{temp1} \leftarrow \pi_a(\text{R})$
 ⟕ ⟖| Left/Right outer join | Natural join including non-matching tuples | Users ⟕ Orders
-÷ | Division | Returns entries in R that cover all values in S | R ÷ S
+÷ | Division | Returns entries in R that cover all values in S | $\text{StoreFeatures} \div π_\text{feature_id}(\text{Features})$
 
 ## Extended Operators
 Symbol | Name | Description | Example
@@ -278,7 +278,27 @@ Symbol | Name | Description | Example
 
 ## Algebraic Properties
 ### Equivalence Rules
-10 of them that are pretty important for optimizing queries
+1. $\pi_1(\pi_2(\dots(\pi_n(E)))) = \pi_1(E)$
+2. $\sigma_{p \land q}(E) = \sigma_p(\sigma_q(E))$
+3. $\sigma_p(\sigma_q(E)) = \sigma_q(\sigma_p(E))$
+4. $(E_1 \bowtie E_2) \bowtie E_3 = E_1 \bowtie (E_2 \bowtie E_3)$
+5. 
+    - 5a. $\sigma_p(E_1 \bowtie E_2) = \sigma_p(E_1) \bowtie E_2$
+    - 5b. $\sigma_{p \land q}(E_1 \bowtie E_2) = \sigma_p(E_1)\bowtie \sigma_q(E_2)$
+6. $\pi_{L_1 \cup L_2}(E_1 \bowtie E_2) = \pi_{L_1 \cup L_2}(\pi_{L_1 \cup L_3}(E_1)\bowtie \pi_{L_2 \cup L_3}(E_2)$
+7. $E_1 \cup E_2 = E_2 \cup E_1$  
+    $E_1 \cap E_2 = E_2 \cap E_1$
+8. $(E_1 \cup E_2) \cup E_3 = E_1 \cup (E_2 \cup E_3)$  
+    $(E_1 \cap E_2) \cap E_3 = E_1 \cap (E_2 \cap E_3)$
+9. $\sigma_p(E_1 \cup E_2) = \sigma_p(E_1) \cup \sigma_p(E_2)$  
+    $\sigma_p(E_1 \cap E_2) = \sigma_p(E_1) \cap \sigma_p(E_2)$  
+    $\sigma_p(E_1 - E_2) = \sigma_p(E_1) - \sigma_p(E_2)$
+10. $\pi_L(E_1 \cup E_2) = \pi_L(E_1)\cup\pi_L(E_2)$
+
+## Query Optimization
+- Join smaller tables first
+- Perform selection as early as possible
+- Reduce attributes involved in joins
 
 # Database Design
 
@@ -295,48 +315,48 @@ Symbol | Name | Description | Example
 6. Pseudo-transitivity: if A → B and BC → D, then AC → D
 
 ## Attribute Set Closure
-- The **closure* of α (denoted α^+) is the set of attributes that can be functionally determined by α
+- The **closure** of α (denoted α+) is the set of attributes that can be functionally determined by α
     - e.g F = {A→B, B→C}
-        - {A}^+ = {A, B, C}
-        - {C}^+ = {C}
+        - {A}+ = {A, B, C}
+        - {C}+ = {C}
 
 ### Candidate Key
 - α is a candidate key if:
     - α is a **superkey**
-        - α^+ contains all attributes of R
+        - α+ contains all attributes of R
     - α is minimum
         - No subset of α is a superkey
 
 ## FD Closure
 - Set of all functional dependencies that can be logically implied by the set
-- To compute F^+ in relation R
-    1. For every subset α of R, compute α^+
-    2. For every subset of α^+, generate a FD with α as the LHS
-    3. F^+ = all the FD's
+- To compute F+ in relation R
+    1. For every subset α of R, compute α+
+    2. For every subset of α+, generate a FD with α as the LHS
+    3. F+ = all the FD's
 
 ## Decomposition
 ### Lossless-join
 - Can a relation R be seperated into $R_1$ and $R_2$, such that no information is lost?
 - $R = R_1 \cup R_2$
-- A decomposition is a lossless-join IFF at least one of the following is true:
+- A decomposition is a lossless-join IFF at least one of the following is true in F+:
     - Schema of R\_1 ∩ Schema of R\_2 → Schema of R\_1
     - Schema of R\_1 ∩ Schema of R\_2 → Schema of R\_2
 
 ### Dependency Preserving
 - Is the dependency X → Y preserved in R, if R is decomposed into $R_1$ and $R_2$?
 - Test:
-    - $F_1$ = projection of F^+ on $R_1$
-    - $F_2$ = projection of F^+ on $R_2$
+    - $F_1$ = projection of F+ on $R_1$
+    - $F_2$ = projection of F+ on $R_2$
     - Decomposition is dependency preserving if $(F_1 \cup F_2)^+ = F^+$
 
 ## Boyce-Codd Normal Form
 - No redundencies in F
-- For all FD's in F^+ of the form α→β, at least one of the following holds:
+- For all FD's in F+ of the form α→β, at least one of the following holds:
     - α→β is trivial
     - α is a _superkey_ for R
 - Test:
-    - Check non-trivial α→β dependencies in F for if α^+ covers the whole relation
-    - (Don't need to check all of F^+)
+    - Check non-trivial α→β dependencies in F for if α+ covers the whole relation
+    - (Don't need to check all of F+)
 
 ### BCNF Decomposition Algorithm
 - Chapter 5B, Slide 50
@@ -346,6 +366,7 @@ Symbol | Name | Description | Example
     1. Lossless-join
     2. No redundancy
     3. Dependency preserving 
+
 # Files and Storage
 
 ## Storage Media
@@ -362,13 +383,15 @@ Symbol | Name | Description | Example
 - Slow access time
 - Read using read-write heads
 - Has many platters, each with two surfaces of information with many tracks
-- Tracks are divided into sectores 
+- Tracks are divided into sectors 
+- Number of Cylinders = number of tracks per surface
+- Blocks consist of multiple consecutive sectors
 - Read time:
     1. Seek: Position read-write head to the right track
     2. Rotation: Spin disk to position data area
     3. Transfer data: Read and transfer the data
 
-### Magnetic Tap
+### Magnetic Tape
 - Used for backup
 - Slow, non-volatile, cheap
 
@@ -452,6 +475,7 @@ Symbol | Name | Description | Example
         - Replace data by LRU or LFU
 - Data dictionary is always kept in buffer
     - Contains information about relations, statistics, file organization
+
 # Indexing
 - Used to speed up access to data
 - Indexed based on a search key
@@ -478,6 +502,22 @@ Symbol | Name | Description | Example
 - _Know how to search, insert, delete_
 
 ## Hashing
+- Efficient equality queries
+- Not for ordering or ranges
+
 ### Static Hashing
+- Buckets for each hash value, with overflow buckets
+- Problem: As database grows larger, performance degrades due to searching in overflow buckets
+- Problem: Large space taken up in the beginning
+
+### Extendable Hashing
+- Dynamic hashing
+- Create more specific buckets as    needed
 
 ## Indexing in SQL
+```sql
+CREATE (UNIQUE) INDEX index_name ON relation_name
+index_type -- USING {BTREE | HASH}
+
+DROP INDEX index_name;
+```

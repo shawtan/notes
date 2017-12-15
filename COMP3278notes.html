@@ -406,7 +406,7 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <td>÷</td>
 <td>Division</td>
 <td>Returns entries in R that cover all values in S</td>
-<td>R ÷ S</td>
+<td><span class="math inline">StoreFeatures ÷ <em>π</em><sub>feature_id</sub>(Features)</span></td>
 </tr>
 </tbody>
 </table>
@@ -434,7 +434,31 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 </ul>
 <h2 id="algebraic-properties">Algebraic Properties</h2>
 <h3 id="equivalence-rules">Equivalence Rules</h3>
-<p>10 of them that are pretty important for optimizing queries</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline"><em>π</em><sub>1</sub>(<em>π</em><sub>2</sub>(…(<em>π</em><sub><em>n</em></sub>(<em>E</em>)))) = <em>π</em><sub>1</sub>(<em>E</em>)</span></li>
+<li><span class="math inline"><em>σ</em><sub><em>p</em> ∧ <em>q</em></sub>(<em>E</em>)=<em>σ</em><sub><em>p</em></sub>(<em>σ</em><sub><em>q</em></sub>(<em>E</em>))</span></li>
+<li><span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>σ</em><sub><em>q</em></sub>(<em>E</em>)) = <em>σ</em><sub><em>q</em></sub>(<em>σ</em><sub><em>p</em></sub>(<em>E</em>))</span></li>
+<li><span class="math inline">(<em>E</em><sub>1</sub> ⋈ <em>E</em><sub>2</sub>)⋈<em>E</em><sub>3</sub> = <em>E</em><sub>1</sub> ⋈ (<em>E</em><sub>2</sub> ⋈ <em>E</em><sub>3</sub>)</span></li>
+<li><ul>
+<li>5a. <span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub> ⋈ <em>E</em><sub>2</sub>)=<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub>)⋈<em>E</em><sub>2</sub></span></li>
+<li>5b. <span class="math inline"><em>σ</em><sub><em>p</em> ∧ <em>q</em></sub>(<em>E</em><sub>1</sub> ⋈ <em>E</em><sub>2</sub>)=<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub>)⋈<em>σ</em><sub><em>q</em></sub>(<em>E</em><sub>2</sub>)</span></li>
+</ul></li>
+<li><span class="math inline"><em>π</em><sub><em>L</em><sub>1</sub> ∪ <em>L</em><sub>2</sub></sub>(<em>E</em><sub>1</sub> ⋈ <em>E</em><sub>2</sub>)=<em>π</em><sub><em>L</em><sub>1</sub> ∪ <em>L</em><sub>2</sub></sub>(<em>π</em><sub><em>L</em><sub>1</sub> ∪ <em>L</em><sub>3</sub></sub>(<em>E</em><sub>1</sub>)⋈<em>π</em><sub><em>L</em><sub>2</sub> ∪ <em>L</em><sub>3</sub></sub>(<em>E</em><sub>2</sub>)</span></li>
+<li><span class="math inline"><em>E</em><sub>1</sub> ∪ <em>E</em><sub>2</sub> = <em>E</em><sub>2</sub> ∪ <em>E</em><sub>1</sub></span><br />
+<span class="math inline"><em>E</em><sub>1</sub> ∩ <em>E</em><sub>2</sub> = <em>E</em><sub>2</sub> ∩ <em>E</em><sub>1</sub></span></li>
+<li><span class="math inline">(<em>E</em><sub>1</sub> ∪ <em>E</em><sub>2</sub>)∪<em>E</em><sub>3</sub> = <em>E</em><sub>1</sub> ∪ (<em>E</em><sub>2</sub> ∪ <em>E</em><sub>3</sub>)</span><br />
+<span class="math inline">(<em>E</em><sub>1</sub> ∩ <em>E</em><sub>2</sub>)∩<em>E</em><sub>3</sub> = <em>E</em><sub>1</sub> ∩ (<em>E</em><sub>2</sub> ∩ <em>E</em><sub>3</sub>)</span></li>
+<li><span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub> ∪ <em>E</em><sub>2</sub>)=<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub>)∪<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>2</sub>)</span><br />
+<span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub> ∩ <em>E</em><sub>2</sub>)=<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub>)∩<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>2</sub>)</span><br />
+<span class="math inline"><em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub> − <em>E</em><sub>2</sub>)=<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>1</sub>)−<em>σ</em><sub><em>p</em></sub>(<em>E</em><sub>2</sub>)</span></li>
+<li><span class="math inline"><em>π</em><sub><em>L</em></sub>(<em>E</em><sub>1</sub> ∪ <em>E</em><sub>2</sub>)=<em>π</em><sub><em>L</em></sub>(<em>E</em><sub>1</sub>)∪<em>π</em><sub><em>L</em></sub>(<em>E</em><sub>2</sub>)</span></li>
+</ol>
+<h2 id="query-optimization">Query Optimization</h2>
+<ul>
+<li>Join smaller tables first</li>
+<li>Perform selection as early as possible</li>
+<li>Reduce attributes involved in joins</li>
+</ul>
 <h1 id="database-design">Database Design</h1>
 <h2 id="functional-dependency-fd">Functional Dependency (FD)</h2>
 <ul>
@@ -452,12 +476,12 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 </ol>
 <h2 id="attribute-set-closure">Attribute Set Closure</h2>
 <ul>
-<li>The **closure* of α (denoted α^+) is the set of attributes that can be functionally determined by α
+<li>The <strong>closure</strong> of α (denoted α+) is the set of attributes that can be functionally determined by α
 <ul>
 <li>e.g F = {A→B, B→C}
 <ul>
-<li>{A}^+ = {A, B, C}</li>
-<li>{C}^+ = {C}</li>
+<li>{A}+ = {A, B, C}</li>
+<li>{C}+ = {C}</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -467,7 +491,7 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <ul>
 <li>α is a <strong>superkey</strong>
 <ul>
-<li>α^+ contains all attributes of R</li>
+<li>α+ contains all attributes of R</li>
 </ul></li>
 <li>α is minimum
 <ul>
@@ -478,11 +502,11 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <h2 id="fd-closure">FD Closure</h2>
 <ul>
 <li>Set of all functional dependencies that can be logically implied by the set</li>
-<li>To compute F^+ in relation R
+<li>To compute F+ in relation R
 <ol style="list-style-type: decimal">
-<li>For every subset α of R, compute α^+</li>
-<li>For every subset of α^+, generate a FD with α as the LHS</li>
-<li>F^+ = all the FD's</li>
+<li>For every subset α of R, compute α+</li>
+<li>For every subset of α+, generate a FD with α as the LHS</li>
+<li>F+ = all the FD's</li>
 </ol></li>
 </ul>
 <h2 id="decomposition">Decomposition</h2>
@@ -490,7 +514,7 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <ul>
 <li>Can a relation R be seperated into <span class="math inline"><em>R</em><sub>1</sub></span> and <span class="math inline"><em>R</em><sub>2</sub></span>, such that no information is lost?</li>
 <li><span class="math inline"><em>R</em> = <em>R</em><sub>1</sub> ∪ <em>R</em><sub>2</sub></span></li>
-<li>A decomposition is a lossless-join IFF at least one of the following is true:
+<li>A decomposition is a lossless-join IFF at least one of the following is true in F+:
 <ul>
 <li>Schema of R_1 ∩ Schema of R_2 → Schema of R_1</li>
 <li>Schema of R_1 ∩ Schema of R_2 → Schema of R_2</li>
@@ -501,23 +525,23 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <li>Is the dependency X → Y preserved in R, if R is decomposed into <span class="math inline"><em>R</em><sub>1</sub></span> and <span class="math inline"><em>R</em><sub>2</sub></span>?</li>
 <li>Test:
 <ul>
-<li><span class="math inline"><em>F</em><sub>1</sub></span> = projection of F^+ on <span class="math inline"><em>R</em><sub>1</sub></span></li>
-<li><span class="math inline"><em>F</em><sub>2</sub></span> = projection of F^+ on <span class="math inline"><em>R</em><sub>2</sub></span></li>
+<li><span class="math inline"><em>F</em><sub>1</sub></span> = projection of F+ on <span class="math inline"><em>R</em><sub>1</sub></span></li>
+<li><span class="math inline"><em>F</em><sub>2</sub></span> = projection of F+ on <span class="math inline"><em>R</em><sub>2</sub></span></li>
 <li>Decomposition is dependency preserving if <span class="math inline">(<em>F</em><sub>1</sub> ∪ <em>F</em><sub>2</sub>)<sup>+</sup> = <em>F</em><sup>+</sup></span></li>
 </ul></li>
 </ul>
 <h2 id="boyce-codd-normal-form">Boyce-Codd Normal Form</h2>
 <ul>
 <li>No redundencies in F</li>
-<li>For all FD's in F^+ of the form α→β, at least one of the following holds:
+<li>For all FD's in F+ of the form α→β, at least one of the following holds:
 <ul>
 <li>α→β is trivial</li>
 <li>α is a <em>superkey</em> for R</li>
 </ul></li>
 <li>Test:
 <ul>
-<li>Check non-trivial α→β dependencies in F for if α^+ covers the whole relation</li>
-<li>(Don't need to check all of F^+)</li>
+<li>Check non-trivial α→β dependencies in F for if α+ covers the whole relation</li>
+<li>(Don't need to check all of F+)</li>
 </ul></li>
 </ul>
 <h3 id="bcnf-decomposition-algorithm">BCNF Decomposition Algorithm</h3>
@@ -530,9 +554,10 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <ol style="list-style-type: decimal">
 <li>Lossless-join</li>
 <li>No redundancy</li>
-<li>Dependency preserving # Files and Storage</li>
+<li>Dependency preserving</li>
 </ol></li>
 </ul>
+<h1 id="files-and-storage">Files and Storage</h1>
 <h2 id="storage-media">Storage Media</h2>
 <h3 id="cpu-cache">CPU Cache</h3>
 <ul>
@@ -550,7 +575,9 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <li>Slow access time</li>
 <li>Read using read-write heads</li>
 <li>Has many platters, each with two surfaces of information with many tracks</li>
-<li>Tracks are divided into sectores</li>
+<li>Tracks are divided into sectors</li>
+<li>Number of Cylinders = number of tracks per surface</li>
+<li>Blocks consist of multiple consecutive sectors</li>
 <li>Read time:
 <ol style="list-style-type: decimal">
 <li>Seek: Position read-write head to the right track</li>
@@ -558,7 +585,7 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <li>Transfer data: Read and transfer the data</li>
 </ol></li>
 </ul>
-<h3 id="magnetic-tap">Magnetic Tap</h3>
+<h3 id="magnetic-tape">Magnetic Tape</h3>
 <ul>
 <li>Used for backup</li>
 <li>Slow, non-volatile, cheap</li>
@@ -673,8 +700,11 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 </ul></li>
 <li>Data dictionary is always kept in buffer
 <ul>
-<li>Contains information about relations, statistics, file organization # Indexing</li>
+<li>Contains information about relations, statistics, file organization</li>
 </ul></li>
+</ul>
+<h1 id="indexing">Indexing</h1>
+<ul>
 <li>Used to speed up access to data</li>
 <li>Indexed based on a search key</li>
 <li>Indexes are smaller than the original file</li>
@@ -709,7 +739,25 @@ LOAD <span class="kw">DATA</span> <span class="kw">LOCAL</span> INFILE <span cla
 <li><em>Know how to search, insert, delete</em></li>
 </ul>
 <h2 id="hashing-1">Hashing</h2>
+<ul>
+<li>Efficient equality queries</li>
+<li>Not for ordering or ranges</li>
+</ul>
 <h3 id="static-hashing">Static Hashing</h3>
+<ul>
+<li>Buckets for each hash value, with overflow buckets</li>
+<li>Problem: As database grows larger, performance degrades due to searching in overflow buckets</li>
+<li>Problem: Large space taken up in the beginning</li>
+</ul>
+<h3 id="extendable-hashing">Extendable Hashing</h3>
+<ul>
+<li>Dynamic hashing</li>
+<li>Create more specific buckets as needed</li>
+</ul>
 <h2 id="indexing-in-sql">Indexing in SQL</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> (<span class="kw">UNIQUE</span>) <span class="kw">INDEX</span> index_name <span class="kw">ON</span> relation_name
+index_type <span class="co">-- USING {BTREE | HASH}</span>
+
+<span class="kw">DROP</span> <span class="kw">INDEX</span> index_name;</code></pre></div>
 </body>
 </html>
