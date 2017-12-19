@@ -459,7 +459,7 @@
 - $P(a \lor b) = P(a) + P(b) - P(a \land b)$
 
 ###  Bayes' Rule
-$$P(a \vert b) = \frac{P(b \vert a) P(a)}{P(b)}$$
+$P(a \vert b) = \frac{P(b \vert a) P(a)}{P(b)}$
 
 ### Prior Probability
 - Unconditional probability
@@ -504,7 +504,7 @@ $$P(a \vert b) = \frac{P(b \vert a) P(a)}{P(b)}$$
 # Statistical Learning
 
 ## Naive Bayes Model
-$$P(C \vert x_1, \dots, x_m) = \alpha P(x_1, \dots, x_n\vert C)P({}C) = \alpha P({}C) \prod_iP(x_i \vert C)$$
+$P(C \vert x_1, \dots, x_m) = \alpha P(x_1, \dots, x_n\vert C)P({}C) = \alpha P({}C) \prod_iP(x_i \vert C)$
 
 ## Bayes Classifier
 - Does not assume that attributes are independent
