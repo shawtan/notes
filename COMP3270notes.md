@@ -14,8 +14,8 @@
 - Initial state
 - Possible actions
     - Successor function: state reached by applying an action
-    - <action, successor> pair
-    - e.g <Go(HKU), In(HKU)>
+    - \<action, successor\> pair
+    - e.g \<Go(HKU), In(HKU)\>
 - Goal test: determines if the state is a goal state
 - Path cost: numeric cost for each path (can be all 0)
 - e.g 8 sliding block puzzle
@@ -183,11 +183,11 @@
 ### Optimal Strategies
 - Fair game: Perfect play results in a draw
 - Assume game is fair and the root node has utility 0
-- \\[\text{MINIMAX-VALUE}(n)=\begin{cases}\text{UTILITY}(n) & \text{if $n$ is a terminal state}\\ \max_{s \in Successor(n)} \text{MINIMAX-VALUE}(s) & \text{if $n$ is a $\max$ node}\\ \min_{s \in Successor(n)} \text{MINIMAX-VALUE}(s) & \text{if $n$ is a $\min$ node}\end{cases}\\]
+- $\text{MINIMAX-VALUE}(n)=\begin{cases}\text{UTILITY}(n) & \text{if n is a terminal state}\\\ \max_{s \in Successor(n)} \text{MINIMAX-VALUE}(s) & \text{if n is a MAX node}\\\ \min_{s \in Successor(n)} \text{MINIMAX-VALUE}(s) & \text{if n is a MAX node}\end{cases}$
   - Complete if tree is finite
   - Optimal
-  - Time: $$O(b^m)$$, b is number of legal moves at each point, m is bax depth
-  - Space: $$O(bm)$$ if all successors are generated at the same time. $$O(m)$$ if only one successor is generated at the same time
+  - Time: $O(b^m)$, b is number of legal moves at each point, m is bax depth
+  - Space: $O(bm)$ if all successors are generated at the same time. $O(m)$ if only one successor is generated at the same time
 
 ### Multiplayer Games
 - Need to calculate utlity for each player
@@ -195,12 +195,12 @@
 
 ### Improvements
 
-#### $$\alpha$$-$$\beta$$ Pruning
+#### $\alpha$-$\beta$ Pruning
 - Prune away branches that will not influence the final decision
-- $$\alpha$$: highest-value found so far along the MAX path
-- $$\beta$$: lowest-value found so far along MIN path
-- If cost of $$n$$ is worse than minimax($$\alpha$$), that branch can be pruned for MAX
-- If cost of $$n$$ is worse than minimax($$\beta$$), that branch can be pruned for MIN
+- $\alpha$: highest-value found so far along the MAX path
+- $\beta$: lowest-value found so far along MIN path
+- If cost of $n$ is worse than minimax($\alpha$), that branch can be pruned for MAX
+- If cost of $n$ is worse than minimax($\beta$), that branch can be pruned for MIN
 
 #### Evaluation Function
 - Infeasible to expand until goal state
@@ -580,3 +580,26 @@ $P(C \vert x_1, \dots, x_m) = \alpha P(x_1, \dots, x_n\vert C)P({}C) = \alpha P(
 - Weight Decay
     - Decay weights every cycle
     - Unneeded weights will eventually become insignificant
+# Deep Learning and Convolutional Neural Networks
+
+## Convolutional Neural Networks
+- Nodes are not fully connected
+- Used for image recognition
+
+### Convolution
+- Combine local features into a larger  feature information
+
+### Pooling
+- Input is partitioned into non-overlapping sub-regions that each output a pooled value
+- Images are 'stationary', meaning features useful in one region are useful in another
+- Pooled stats are lower in dimension and result in less over-fitting
+
+### Layering
+- Convolutional layers alternate with pooling layers
+- Then classified by fully-connected layers
+- Softmax layer squaches a vector to add up to 1
+
+### Parameters
+- Number of filters: Number of features and pixel positions influence cost
+- Filter Shape: Find the right granularity for abstraction
+- Max pooling shape
