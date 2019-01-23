@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dfamily%3A%20Helvetica%2C%20arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E6%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%2010px%3B%0Abackground%2Dcolor%3A%20white%3B%0Apadding%3A%2030px%3B%20%7D%0Abody%20%3E%20%2A%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%20%21important%3B%20%7D%0Abody%20%3E%20%2A%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%20%21important%3B%20%7D%0Aa%20%7B%0Acolor%3A%20%234183C4%3B%20%7D%0Aa%2Eabsent%20%7B%0Acolor%3A%20%23cc0000%3B%20%7D%0Aa%2Eanchor%20%7B%0Adisplay%3A%20block%3B%0Apadding%2Dleft%3A%2030px%3B%0Amargin%2Dleft%3A%20%2D30px%3B%0Acursor%3A%20pointer%3B%0Aposition%3A%20absolute%3B%0Atop%3A%200%3B%0Aleft%3A%200%3B%0Abottom%3A%200%3B%20%7D%0Ah1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Amargin%3A%2020px%200%2010px%3B%0Apadding%3A%200%3B%0Afont%2Dweight%3A%20bold%3B%0A%2Dwebkit%2Dfont%2Dsmoothing%3A%20antialiased%3B%0Acursor%3A%20text%3B%0Aposition%3A%20relative%3B%20%7D%0Ah1%3Ahover%20a%2Eanchor%2C%20h2%3Ahover%20a%2Eanchor%2C%20h3%3Ahover%20a%2Eanchor%2C%20h4%3Ahover%20a%2Eanchor%2C%20h5%3Ahover%20a%2Eanchor%2C%20h6%3Ahover%20a%2Eanchor%20%7B%0Abackground%3A%20url%28data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw%2FeHBhY2tldCBiZWdpbj0i77u%2FIiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8%2BIDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI%2FPsQhXeAAAABfSURBVHjaYvz%2F%2Fz8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg%3D%3D%29%20no%2Drepeat%2010px%20center%3B%0Atext%2Ddecoration%3A%20none%3B%20%7D%0Ah1%20tt%2C%20h1%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah2%20tt%2C%20h2%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah3%20tt%2C%20h3%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah4%20tt%2C%20h4%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah5%20tt%2C%20h5%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah6%20tt%2C%20h6%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah1%20%7B%0Afont%2Dsize%3A%2028px%3B%0Acolor%3A%20black%3B%20%7D%0Ah2%20%7B%0Afont%2Dsize%3A%2024px%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23cccccc%3B%0Acolor%3A%20black%3B%20%7D%0Ah3%20%7B%0Afont%2Dsize%3A%2018px%3B%20%7D%0Ah4%20%7B%0Afont%2Dsize%3A%2016px%3B%20%7D%0Ah5%20%7B%0Afont%2Dsize%3A%2014px%3B%20%7D%0Ah6%20%7B%0Acolor%3A%20%23777777%3B%0Afont%2Dsize%3A%2014px%3B%20%7D%0Ap%2C%20blockquote%2C%20ul%2C%20ol%2C%20dl%2C%20li%2C%20table%2C%20pre%20%7B%0Amargin%3A%2015px%200%3B%20%7D%0Ahr%20%7B%0Amargin%3A%200%200%2019px%3B%0Aborder%3A%200%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%7D%0Abody%20%3E%20h2%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h1%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h1%3Afirst%2Dchild%20%2B%20h2%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h3%3Afirst%2Dchild%2C%20body%20%3E%20h4%3Afirst%2Dchild%2C%20body%20%3E%20h5%3Afirst%2Dchild%2C%20body%20%3E%20h6%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Aa%3Afirst%2Dchild%20h1%2C%20a%3Afirst%2Dchild%20h2%2C%20a%3Afirst%2Dchild%20h3%2C%20a%3Afirst%2Dchild%20h4%2C%20a%3Afirst%2Dchild%20h5%2C%20a%3Afirst%2Dchild%20h6%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Ah1%20p%2C%20h2%20p%2C%20h3%20p%2C%20h4%20p%2C%20h5%20p%2C%20h6%20p%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Ali%20p%2Efirst%20%7B%0Adisplay%3A%20inline%2Dblock%3B%20%7D%0Ali%20%7B%0Amargin%3A%200%3B%20%7D%0Aul%2C%20ol%20%7B%0Apadding%2Dleft%3A%2030px%3B%20%7D%0Aul%20%3Afirst%2Dchild%2C%20ol%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20%7B%0Apadding%3A%200%3B%20%7D%0Adl%20dt%20%7B%0Afont%2Dsize%3A%2014px%3B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dstyle%3A%20italic%3B%0Apadding%3A%200%3B%0Amargin%3A%2015px%200%205px%3B%20%7D%0Adl%20dt%3Afirst%2Dchild%20%7B%0Apadding%3A%200%3B%20%7D%0Adl%20dt%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20dt%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Adl%20dd%20%7B%0Amargin%3A%200%200%2015px%3B%0Apadding%3A%200%2015px%3B%20%7D%0Adl%20dd%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20dd%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Ablockquote%20%7B%0Aborder%2Dleft%3A%204px%20solid%20%23dddddd%3B%0Apadding%3A%200%2015px%3B%0Acolor%3A%20%23777777%3B%20%7D%0Ablockquote%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Ablockquote%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Atable%20%7B%0Apadding%3A%200%3Bborder%2Dcollapse%3A%20collapse%3B%20%7D%0Atable%20tr%20%7B%0Aborder%2Dtop%3A%201px%20solid%20%23cccccc%3B%0Abackground%2Dcolor%3A%20white%3B%0Amargin%3A%200%3B%0Apadding%3A%200%3B%20%7D%0Atable%20tr%3Anth%2Dchild%282n%29%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%20%7D%0Atable%20tr%20th%20%7B%0Afont%2Dweight%3A%20bold%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Amargin%3A%200%3B%0Apadding%3A%206px%2013px%3B%20%7D%0Atable%20tr%20td%20%7B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Amargin%3A%200%3B%0Apadding%3A%206px%2013px%3B%20%7D%0Atable%20tr%20th%20%3Afirst%2Dchild%2C%20table%20tr%20td%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Atable%20tr%20th%20%3Alast%2Dchild%2C%20table%20tr%20td%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%20%7D%0Aspan%2Eframe%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%20%7D%0Aspan%2Eframe%20%3E%20span%20%7B%0Aborder%3A%201px%20solid%20%23dddddd%3B%0Adisplay%3A%20block%3B%0Afloat%3A%20left%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%200%200%3B%0Apadding%3A%207px%3B%0Awidth%3A%20auto%3B%20%7D%0Aspan%2Eframe%20span%20img%20%7B%0Adisplay%3A%20block%3B%0Afloat%3A%20left%3B%20%7D%0Aspan%2Eframe%20span%20span%20%7B%0Aclear%3A%20both%3B%0Acolor%3A%20%23333333%3B%0Adisplay%3A%20block%3B%0Apadding%3A%205px%200%200%3B%20%7D%0Aspan%2Ealign%2Dcenter%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Aclear%3A%20both%3B%20%7D%0Aspan%2Ealign%2Dcenter%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%20auto%200%3B%0Atext%2Dalign%3A%20center%3B%20%7D%0Aspan%2Ealign%2Dcenter%20span%20img%20%7B%0Amargin%3A%200%20auto%3B%0Atext%2Dalign%3A%20center%3B%20%7D%0Aspan%2Ealign%2Dright%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Aclear%3A%20both%3B%20%7D%0Aspan%2Ealign%2Dright%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%200%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Aspan%2Ealign%2Dright%20span%20img%20%7B%0Amargin%3A%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Aspan%2Efloat%2Dleft%20%7B%0Adisplay%3A%20block%3B%0Amargin%2Dright%3A%2013px%3B%0Aoverflow%3A%20hidden%3B%0Afloat%3A%20left%3B%20%7D%0Aspan%2Efloat%2Dleft%20span%20%7B%0Amargin%3A%2013px%200%200%3B%20%7D%0Aspan%2Efloat%2Dright%20%7B%0Adisplay%3A%20block%3B%0Amargin%2Dleft%3A%2013px%3B%0Aoverflow%3A%20hidden%3B%0Afloat%3A%20right%3B%20%7D%0Aspan%2Efloat%2Dright%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%20auto%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Acode%2C%20tt%20%7B%0Amargin%3A%200%202px%3B%0Apadding%3A%200%205px%3B%0Awhite%2Dspace%3A%20nowrap%3B%0Aborder%3A%201px%20solid%20%23eaeaea%3B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20code%20%7B%0Amargin%3A%200%3B%0Apadding%3A%200%3B%0Awhite%2Dspace%3A%20pre%3B%0Aborder%3A%20none%3B%0Abackground%3A%20transparent%3B%20%7D%0A%2Ehighlight%20pre%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%2019px%3B%0Aoverflow%3A%20auto%3B%0Apadding%3A%206px%2010px%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%2019px%3B%0Aoverflow%3A%20auto%3B%0Apadding%3A%206px%2010px%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20code%2C%20pre%20tt%20%7B%0Abackground%2Dcolor%3A%20transparent%3B%0Aborder%3A%20none%3B%20%7D%0Asup%20%7B%0Afont%2Dsize%3A%200%2E83em%3B%0Avertical%2Dalign%3A%20super%3B%0Aline%2Dheight%3A%200%3B%0A%7D%0A%2A%20%7B%0A%2Dwebkit%2Dprint%2Dcolor%2Dadjust%3A%20exact%3B%0A%7D%0A%40media%20screen%20and%20%28min%2Dwidth%3A%20914px%29%20%7B%0Abody%20%7B%0Awidth%3A%20854px%3B%0Amargin%3A0%20auto%3B%0A%7D%0A%7D%0A%40media%20print%20%7B%0Atable%2C%20pre%20%7B%0Apage%2Dbreak%2Dinside%3A%20avoid%3B%0A%7D%0Apre%20%7B%0Aword%2Dwrap%3A%20break%2Dword%3B%0A%7D%0A%7D%0A" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1 id="engl-306a-linguistics">ENGL 306A: Linguistics</h1>
+<h2 id="lecture-3-0115">Lecture 3 (01/15)</h2>
+<h3 id="saussure">Saussure</h3>
+<ul>
+<li>A 'word' only has value, identity within a particular linguistic system</li>
+<li>System change = word change</li>
+<li>The past (etymology) is irrelevant</li>
+</ul>
+<h3 id="patterns">Patterns</h3>
+<ul>
+<li>Evolution of language creates consistent patterns and rules</li>
+<li>e.g Plural forms follow patterns (-s)</li>
+</ul>
+<h4 id="exceptions">Exceptions</h4>
+<ul>
+<li>Languages are not designed, they evolve due to historical events (e.g wars, contact with foreign language)</li>
+<li>e.g am/is/are/was/were</li>
+<li>Languages will change when used</li>
+</ul>
+<h3 id="language-system-levels">Language System levels</h3>
+<ol style="list-style-type: decimal">
+<li>System of sound patterns (Phonology)</li>
+<li>System of words (Morphology)</li>
+<li>Rules for combining words into sentences (Syntax)</li>
+<li>Rules for employing sentences in discourse (Pragmatics)</li>
+</ol>
+<h3 id="phonology">Phonology</h3>
+<ul>
+<li>Each language uses certain sounds and not others
+<ul>
+<li>e.g 'th' sound in english is not in italian/german</li>
+<li>This makes new, differnet words possible</li>
+</ul></li>
+</ul>
+<h3 id="morphology">Morphology</h3>
+<ul>
+<li>Endings that change the meanings of words (e.g -tion, -ment, -er)</li>
+<li>Endings that change the grammatical significance of words (e.g -s)</li>
+<li>Plurals
+<ul>
+<li>English has single or multiple</li>
+<li>Hebrew differentiates single, dual, multiple</li>
+</ul></li>
+</ul>
+<h3 id="syntax">Syntax</h3>
+<ul>
+<li>English: Subject - verb - object</li>
+</ul>
+<h3 id="challenge-chomsky">Challenge: Chomsky</h3>
+<ul>
+<li>Agrees: linguistics is used to describe the system of language a native speaker knows</li>
+<li>Conflict: Linguistics needs to explain how speakers create and understant new sentences</li>
+</ul>
+<h2 id="phonetics">Phonetics</h2>
+<ul>
+<li>Study of the production of linguistic sounds</li>
+<li>How are sounds produced?</li>
+<li>Which elements of sound are important?</li>
+</ul>
+<h3 id="elements-of-sound">Elements of sound</h3>
+<ol style="list-style-type: decimal">
+<li>Initiation
+<ul>
+<li>Breathe through diaphram, lungs</li>
+</ul></li>
+<li>Phonation
+<ul>
+<li>Sound moves up esophagus</li>
+<li>Vocal cord vibrations produce voicing or voiced consonants (e.g 'z' instead of 's', 'b' instead of 'p', 'g' vs 'k', 'v' vs 'f')</li>
+</ul></li>
+<li>Articulation
+<ul>
+<li>Tongue, teeth, mouth movement to make different sounds by changing flow of air</li>
+<li>Consonant = airflow is obstructed or constricted in some way</li>
+<li>Vowel = no airflow constriction, vocal cavity is shaped</li>
+<li>Actually not a clear distinction</li>
+</ul></li>
+<li>Resonation
+<ul>
+<li>Sound resonate in nasal cavity and oral cavity</li>
+</ul></li>
+</ol>
+<h3 id="letters-and-sound">Letters and Sound</h3>
+<ul>
+<li>Letters are a poor representation of sound (e.g -ough, /f/)</li>
+<li>Writing systems are usually borrowed and don't work well with the languages</li>
+<li>So double letters or diacritical marks are used to represent sounds</li>
+<li>Writing systems stablize, while sounds still change</li>
+<li>Words are borrowed from other languages</li>
+<li>Word derivation wants to keep consistent spelling even if it's pronounced differently (e.g canada vs canadian, photo vs photograph)</li>
+<li>Solution: Phonetic Transcription</li>
+</ul>
+<h3 id="phonetic-transcription">Phonetic Transcription</h3>
+<ul>
+<li>International Phonetic Alphabet aims to transcribe sounds as accurately as possible</li>
+</ul>
+<h3 id="articulation-consonants">Articulation: Consonants</h3>
+<ul>
+<li>Defined by manner of articulation and place of articulation</li>
+<li>Manner of articulation
+<ul>
+<li>Obstruents: airflow is obstructed (t,f,g,s)</li>
+<li>Sonorants: airflow not obstructed (r,l,m,n)</li>
+</ul></li>
+</ul>
+<h4 id="obstruents">Obstruents</h4>
+<ul>
+<li>Stops (plosives): airflow is blocked
+<ul>
+<li>unvoiced: [p,k,t],</li>
+<li>voiced: [b,g,d]</li>
+</ul></li>
+<li>Fricatives: narrow gap for air to pass through
+<ul>
+<li>unvoiced: [f,s,th,sh],</li>
+<li>voiced: [v,z,the,g]</li>
+</ul></li>
+<li>Affricates: stop followed by ficative
+<ul>
+<li>unvoiced: [ch]</li>
+<li>voiced: [j]</li>
+</ul></li>
+</ul>
+<h4 id="sonorants">Sonorants</h4>
+<ul>
+<li>Nasals: air forced through nasal cavity: [m,n]</li>
+<li>Approximants:
+<ul>
+<li>Liquids: [r, l]</li>
+<li>Glides: [y,w] are actually unstable vowels (combo of two vowel sounds)</li>
+</ul></li>
+</ul>
+<h4 id="place-of-articulation">Place of Articulation</h4>
+<ul>
+<li>Movable aritculaor (tongue / lips) moves towards a setable articulator (teeth, palate, etc)</li>
+<li>Bilabial: lips together
+<ul>
+<li>[p,b,m,w]</li>
+</ul></li>
+<li>Labiodental: lower lip to upper teeth
+<ul>
+<li>[f,v]</li>
+</ul></li>
+<li>Dental: tip of tongue to upper teeth
+<ul>
+<li>[th,the]</li>
+</ul></li>
+<li>Alveolar: top of tongue to alveolar ridge
+<ul>
+<li>[t,d,s,z,n,l]</li>
+</ul></li>
+<li>Palatal: tonge to back part of ridge
+<ul>
+<li>[sh,j,y,ch]</li>
+</ul></li>
+<li>Velar: tongue back to soft palate
+<ul>
+<li>[k,g,n]</li>
+</ul></li>
+<li>Glottal: used in british and other langs</li>
+</ul>
+<p>See chart</p>
+<h3 id="vowels">Vowels</h3>
+<ul>
+<li>Hard to define</li>
+<li>Frontness
+<ul>
+<li>Front vs Back: [i,e,o]</li>
+</ul></li>
+<li>Height
+<ul>
+<li>Close vs Open</li>
+</ul></li>
+<li>Diphthongs: double vowels that move from one articulation to another (very common in english) (e.g [ai]: pie, eye, [ao]: now)
+<ul>
+<li>Rising dipthongs: move towards high vowel</li>
+<li>Centring diphthongs: move towards eh</li>
+</ul></li>
+</ul>
+<h2 id="phonology-1">Phonology</h2>
+<ul>
+<li>Meaning of sounds</li>
+</ul>
+<h3 id="phonemes">Phonemes</h3>
+<ul>
+<li>Languages differ by which distinctive features they make <em>constrastive</em> (significant in distinguishing sounds)</li>
+<li>Language takes all possible sounds and divides them into phonemes</li>
+<li>Phonemes = families of similar sounds (similar enough that differences don't matter in that language)</li>
+<li>e.g /t/ in english (stem, ten, trip, atom, atlas, bottle, pants)</li>
+<li>e.g In english 'd' and 'th' are different ('den' vs 'then')
+<ul>
+<li>The difference does not matter in spanish</li>
+</ul></li>
+<li><em>Allophones</em> are the different versions of a phoneme that a language allows
+<ul>
+<li>e.g 'l' in leaopart, illness, apple</li>
+</ul></li>
+<li>e.g New Zealand accent crosses phoneme boundaries and words sound like different words</li>
+<li><em>Free Variation</em> is if allophones are randomly distributed</li>
+<li><em>Complementary distribution</em> is when allophones vary according to a scheme or rule
+<ul>
+<li>Following rules of a different language is what causes accents</li>
+<li>e.g Canadians raise the first vowel of dipthongs</li>
+</ul></li>
+</ul>
+<h3 id="syllables">Syllables</h3>
+<ul>
+<li>Syllables are combinations of phonemes centred on vowel sounds, liquids or nasals</li>
+<li>Syllables are grouped into words</li>
+<li>e.g English allows consonant clusters</li>
+<li>Syllables can be stressed</li>
+<li>Consists of: onset, nucleus, coda</li>
+</ul>
+<h3 id="phonological-processes">Phonological Processes</h3>
+<ul>
+<li>Sounds get altered in use (e.g I don't know -&gt; I dunno)</li>
+</ul>
+<h4 id="elision-deletion">Elision / Deletion</h4>
+<ul>
+<li>Subtracting of a phoneme in certain contexts</li>
+<li>e.g I dunno, you n me,</li>
+<li>e.g I saw him -&gt; I saw 'em,</li>
+<li>e.g political -&gt; plitical</li>
+</ul>
+<h4 id="epenthesis">Epenthesis</h4>
+<ul>
+<li>Additional of a phoneme</li>
+<li>e.g warmth -&gt; warmpth</li>
+<li>e.g athlete -&gt; athelete</li>
+</ul>
+<h4 id="assimilation">Assimilation</h4>
+<ul>
+<li>One phoneme acquires a feature of a neighbouring phoneme</li>
+<li>In english -s is voiced if it vollows a voiced consonant / vowel, unvoiced if following unvoiced
+<ul>
+<li>e.g dogs vs pets, cats vs dogs</li>
+</ul></li>
+<li>Voiced consonants lowe their voice is followed by an unvoiced consonant
+<ul>
+<li>e.g news vs newspaper</li>
+</ul></li>
+</ul>
+<h4 id="palatalization">Palatalization</h4>
+<ul>
+<li>Consonants followed by the glide /j/('y') are palatized</li>
+<li>e.g did you -&gt; didya</li>
+</ul>
+<h4 id="vowel-reduction">Vowel Reduction</h4>
+<ul>
+<li>Unstressed vowels are reduced to /ǝ/</li>
+<li>e.g canada -&gt; can-eh-da, canadian -&gt; ku-nai-dian</li>
+<li>e.g department -&gt; duh partment</li>
+</ul>
+<h3 id="phonological-rules">Phonological Rules</h3>
+<ul>
+<li>Relevant for complementary distributed allophones</li>
+<li>&quot;A -&gt; B / X__Y&quot;</li>
+<li>A becomes B when preceeded by X and followed by Y</li>
+</ul>
+<h4 id="notation">Notation</h4>
+<ul>
+<li>C = consonant, V = vowel</li>
+<li>Specify the phoneme (/f/)</li>
+<li>Classify the phoneme (voiceless stop)</li>
+<li>Enumerate the features of the phoneme (e.g +consonant +nasal)</li>
+<li>σ = syllable</li>
+<li><h1 id="word">= word</h1></li>
+<li>∅ = null (deletion or absence)</li>
+</ul>
+<h4 id="nasalization">Nasalization</h4>
+<ul>
+<li>V -&gt; [+ nasal] / ____ [nasal consonant]</li>
+<li>e.g hang</li>
+</ul>
+<h4 id="aspiration-of-voiceless-stops">Aspiration of voiceless stops</h4>
+<ul>
+<li>voiceless stop -&gt; [+aspiration] / 'beginning of syllable'__[stressed syllable]</li>
+</ul>
+<h4 id="flap">Flap</h4>
+<ul>
+<li>[+stop +alveolar] --&gt; /r/[+vowel], [+stress]__[+vowel -stress]</li>
+<li>e.g writer, rider</li>
+</ul>
+<p>^ Will be tested</p>
+<h2 id="language-changes-over-time">Language Changes Over Time</h2>
+<ul>
+<li>First (historical) law of language: Languages change</li>
+<li>Phonological Rules are similar to how languages change over time</li>
+</ul>
+<h3 id="types-of-language-change">Types of Language Change</h3>
+<ul>
+<li>Phonetic change
+<ul>
+<li>e.g processees</li>
+</ul></li>
+<li>New vocabulary</li>
+<li>Semantic change
+<ul>
+<li>e.g That's so &quot;random&quot;</li>
+</ul></li>
+<li>Morphological change: change in affixes, declensions</li>
+<li>Syntactic change
+<ul>
+<li>e.g That's &quot;so&quot; 2016</li>
+</ul></li>
+</ul>
+<h3 id="phonetic-change-sound-laws">Phonetic change: sound laws</h3>
+<ul>
+<li>Addition, subtraction or changing of sounds within words</li>
+<li>There are 'regular' changes and 'sporadic' changes</li>
+<li>Regular changes alter words throughout the language
+<ul>
+<li>Take place throughout language without regard for meaning of words</li>
+</ul></li>
+<li>Sporadic changes only affect a random word/words</li>
+</ul>
+<h3 id="grimms-law">Grimm's law</h3>
+<ul>
+<li>Laws by which Latin (PIE) changed to Gothic</li>
+<li>PIE (Proto Indo-European) voiceless stops become voiceless fricatives
+<ul>
+<li>e.g pater -&gt; fadar -&gt; father</li>
+</ul></li>
+<li>PIE voiced stops become voiceless stops
+<ul>
+<li>e.g decem -&gt; taihun -&gt; ten</li>
+<li>e.g fero -&gt; baira -&gt; bear</li>
+</ul></li>
+<li>PIE voiced aspirates become voiced stops or fricatives</li>
+</ul>
+<h4 id="exceptions-1">Exceptions</h4>
+<ul>
+<li>Latin <code>sto</code> -&gt; <code>stand</code> (voiceless t didnt fricative)
+<ul>
+<li>New rule: voiceless stops after fricative don't change</li>
+</ul></li>
+<li>Latin <code>dies</code> -&gt; <code>day</code> (voiced stop stayed voiced)
+<ul>
+<li>Reason: English 'day' is not from 'dies', 'dies' became 'tues' (in Tuesday)</li>
+</ul></li>
+</ul>
+<h3 id="types-of-phonetic-change">Types of Phonetic change</h3>
+<ul>
+<li>Assimilation
+<ul>
+<li>When a sound acquires characteristics of a neighbouring sound</li>
+<li>e.g English plurals</li>
+</ul></li>
+<li>Weakening
+<ul>
+<li>Vocal articulation necessary to produce a sound is weakened</li>
+<li>e.g better 't' becomes a glottal stop / flap</li>
+<li>e.g Latin 'videre' -&gt; Spanish 'veer'</li>
+</ul></li>
+<li>Loss
+<ul>
+<li>Loss often affects endings</li>
+<li>Loss of consonant causes compensatory lengthing of vowel</li>
+<li>e.g stanas -&gt; stones</li>
+</ul></li>
+<li>Gain (Epenthesis)
+<ul>
+<li>Addition of vowel before consonant clusters</li>
+</ul></li>
+<li>Chain shift
+<ul>
+<li>One sound change causes other sounds to shift in response</li>
+<li>e.g Chicago
+<ul>
+<li>Ann -&gt; Ian</li>
+<li>John -&gt; Jan</li>
+</ul></li>
+<li>e.g The Great Vowel Shift (1400 - 1800)
+<ul>
+<li>bat -&gt; bate -&gt; beat -&gt; beet -&gt; bite</li>
+<li>boat -&gt; boot -&gt; bout</li>
+</ul></li>
+</ul></li>
+</ul>
+</body>
+</html>
