@@ -1,6 +1,6 @@
 # ENGL 306A: Linguistics
 
-## Lecture 3 (01/15)
+## Introduction
 
 ### Saussure
 - A 'word' only has value, identity within a particular linguistic system
@@ -41,6 +41,8 @@
 - Agrees: linguistics is used to describe the system of language a native speaker knows
 - Conflict: Linguistics needs to explain how speakers create and understant new sentences
 
+
+# Phonology
 ## Phonetics
 - Study of the production of linguistic sounds
 - How are sounds produced?
@@ -263,3 +265,21 @@ See chart
     - e.g The Great Vowel Shift (1400 - 1800)
         - bat -> bate -> beat -> beet -> bite
         - boat -> boot -> bout
+# Morphology
+
+## Challenges
+- A word can be two words (e.g wet suit)
+- A word often has multiple meaningful units (e.g establish/ment/s)
+
+## Morphology
+- Study of smallest meaningful units in a language
+- Study of how words are composed (put together)
+- Morphological unit is made of phonemes
+
+## Morpheme
+- Smallest possible unit of meaningful language
+- e.g house/bound
+- e.g hous/ing
+- e.g house/s
+- e.g house
+

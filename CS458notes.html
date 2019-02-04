@@ -1,25 +1,374 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dfamily%3A%20Helvetica%2C%20arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E6%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%2010px%3B%0Abackground%2Dcolor%3A%20white%3B%0Apadding%3A%2030px%3B%20%7D%0Abody%20%3E%20%2A%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%20%21important%3B%20%7D%0Abody%20%3E%20%2A%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%20%21important%3B%20%7D%0Aa%20%7B%0Acolor%3A%20%234183C4%3B%20%7D%0Aa%2Eabsent%20%7B%0Acolor%3A%20%23cc0000%3B%20%7D%0Aa%2Eanchor%20%7B%0Adisplay%3A%20block%3B%0Apadding%2Dleft%3A%2030px%3B%0Amargin%2Dleft%3A%20%2D30px%3B%0Acursor%3A%20pointer%3B%0Aposition%3A%20absolute%3B%0Atop%3A%200%3B%0Aleft%3A%200%3B%0Abottom%3A%200%3B%20%7D%0Ah1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Amargin%3A%2020px%200%2010px%3B%0Apadding%3A%200%3B%0Afont%2Dweight%3A%20bold%3B%0A%2Dwebkit%2Dfont%2Dsmoothing%3A%20antialiased%3B%0Acursor%3A%20text%3B%0Aposition%3A%20relative%3B%20%7D%0Ah1%3Ahover%20a%2Eanchor%2C%20h2%3Ahover%20a%2Eanchor%2C%20h3%3Ahover%20a%2Eanchor%2C%20h4%3Ahover%20a%2Eanchor%2C%20h5%3Ahover%20a%2Eanchor%2C%20h6%3Ahover%20a%2Eanchor%20%7B%0Abackground%3A%20url%28data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw%2FeHBhY2tldCBiZWdpbj0i77u%2FIiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8%2BIDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI%2FPsQhXeAAAABfSURBVHjaYvz%2F%2Fz8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg%3D%3D%29%20no%2Drepeat%2010px%20center%3B%0Atext%2Ddecoration%3A%20none%3B%20%7D%0Ah1%20tt%2C%20h1%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah2%20tt%2C%20h2%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah3%20tt%2C%20h3%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah4%20tt%2C%20h4%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah5%20tt%2C%20h5%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah6%20tt%2C%20h6%20code%20%7B%0Afont%2Dsize%3A%20inherit%3B%20%7D%0Ah1%20%7B%0Afont%2Dsize%3A%2028px%3B%0Acolor%3A%20black%3B%20%7D%0Ah2%20%7B%0Afont%2Dsize%3A%2024px%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23cccccc%3B%0Acolor%3A%20black%3B%20%7D%0Ah3%20%7B%0Afont%2Dsize%3A%2018px%3B%20%7D%0Ah4%20%7B%0Afont%2Dsize%3A%2016px%3B%20%7D%0Ah5%20%7B%0Afont%2Dsize%3A%2014px%3B%20%7D%0Ah6%20%7B%0Acolor%3A%20%23777777%3B%0Afont%2Dsize%3A%2014px%3B%20%7D%0Ap%2C%20blockquote%2C%20ul%2C%20ol%2C%20dl%2C%20li%2C%20table%2C%20pre%20%7B%0Amargin%3A%2015px%200%3B%20%7D%0Ahr%20%7B%0Amargin%3A%200%200%2019px%3B%0Aborder%3A%200%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%7D%0Abody%20%3E%20h2%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h1%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h1%3Afirst%2Dchild%20%2B%20h2%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Abody%20%3E%20h3%3Afirst%2Dchild%2C%20body%20%3E%20h4%3Afirst%2Dchild%2C%20body%20%3E%20h5%3Afirst%2Dchild%2C%20body%20%3E%20h6%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Aa%3Afirst%2Dchild%20h1%2C%20a%3Afirst%2Dchild%20h2%2C%20a%3Afirst%2Dchild%20h3%2C%20a%3Afirst%2Dchild%20h4%2C%20a%3Afirst%2Dchild%20h5%2C%20a%3Afirst%2Dchild%20h6%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%20%7D%0Ah1%20p%2C%20h2%20p%2C%20h3%20p%2C%20h4%20p%2C%20h5%20p%2C%20h6%20p%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Ali%20p%2Efirst%20%7B%0Adisplay%3A%20inline%2Dblock%3B%20%7D%0Ali%20%7B%0Amargin%3A%200%3B%20%7D%0Aul%2C%20ol%20%7B%0Apadding%2Dleft%3A%2030px%3B%20%7D%0Aul%20%3Afirst%2Dchild%2C%20ol%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20%7B%0Apadding%3A%200%3B%20%7D%0Adl%20dt%20%7B%0Afont%2Dsize%3A%2014px%3B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dstyle%3A%20italic%3B%0Apadding%3A%200%3B%0Amargin%3A%2015px%200%205px%3B%20%7D%0Adl%20dt%3Afirst%2Dchild%20%7B%0Apadding%3A%200%3B%20%7D%0Adl%20dt%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20dt%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Adl%20dd%20%7B%0Amargin%3A%200%200%2015px%3B%0Apadding%3A%200%2015px%3B%20%7D%0Adl%20dd%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Adl%20dd%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Ablockquote%20%7B%0Aborder%2Dleft%3A%204px%20solid%20%23dddddd%3B%0Apadding%3A%200%2015px%3B%0Acolor%3A%20%23777777%3B%20%7D%0Ablockquote%20%3E%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Ablockquote%20%3E%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Atable%20%7B%0Apadding%3A%200%3Bborder%2Dcollapse%3A%20collapse%3B%20%7D%0Atable%20tr%20%7B%0Aborder%2Dtop%3A%201px%20solid%20%23cccccc%3B%0Abackground%2Dcolor%3A%20white%3B%0Amargin%3A%200%3B%0Apadding%3A%200%3B%20%7D%0Atable%20tr%3Anth%2Dchild%282n%29%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%20%7D%0Atable%20tr%20th%20%7B%0Afont%2Dweight%3A%20bold%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Amargin%3A%200%3B%0Apadding%3A%206px%2013px%3B%20%7D%0Atable%20tr%20td%20%7B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Amargin%3A%200%3B%0Apadding%3A%206px%2013px%3B%20%7D%0Atable%20tr%20th%20%3Afirst%2Dchild%2C%20table%20tr%20td%20%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%20%7D%0Atable%20tr%20th%20%3Alast%2Dchild%2C%20table%20tr%20td%20%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%20%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%20%7D%0Aspan%2Eframe%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%20%7D%0Aspan%2Eframe%20%3E%20span%20%7B%0Aborder%3A%201px%20solid%20%23dddddd%3B%0Adisplay%3A%20block%3B%0Afloat%3A%20left%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%200%200%3B%0Apadding%3A%207px%3B%0Awidth%3A%20auto%3B%20%7D%0Aspan%2Eframe%20span%20img%20%7B%0Adisplay%3A%20block%3B%0Afloat%3A%20left%3B%20%7D%0Aspan%2Eframe%20span%20span%20%7B%0Aclear%3A%20both%3B%0Acolor%3A%20%23333333%3B%0Adisplay%3A%20block%3B%0Apadding%3A%205px%200%200%3B%20%7D%0Aspan%2Ealign%2Dcenter%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Aclear%3A%20both%3B%20%7D%0Aspan%2Ealign%2Dcenter%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%20auto%200%3B%0Atext%2Dalign%3A%20center%3B%20%7D%0Aspan%2Ealign%2Dcenter%20span%20img%20%7B%0Amargin%3A%200%20auto%3B%0Atext%2Dalign%3A%20center%3B%20%7D%0Aspan%2Ealign%2Dright%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Aclear%3A%20both%3B%20%7D%0Aspan%2Ealign%2Dright%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%200%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Aspan%2Ealign%2Dright%20span%20img%20%7B%0Amargin%3A%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Aspan%2Efloat%2Dleft%20%7B%0Adisplay%3A%20block%3B%0Amargin%2Dright%3A%2013px%3B%0Aoverflow%3A%20hidden%3B%0Afloat%3A%20left%3B%20%7D%0Aspan%2Efloat%2Dleft%20span%20%7B%0Amargin%3A%2013px%200%200%3B%20%7D%0Aspan%2Efloat%2Dright%20%7B%0Adisplay%3A%20block%3B%0Amargin%2Dleft%3A%2013px%3B%0Aoverflow%3A%20hidden%3B%0Afloat%3A%20right%3B%20%7D%0Aspan%2Efloat%2Dright%20%3E%20span%20%7B%0Adisplay%3A%20block%3B%0Aoverflow%3A%20hidden%3B%0Amargin%3A%2013px%20auto%200%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Acode%2C%20tt%20%7B%0Amargin%3A%200%202px%3B%0Apadding%3A%200%205px%3B%0Awhite%2Dspace%3A%20nowrap%3B%0Aborder%3A%201px%20solid%20%23eaeaea%3B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20code%20%7B%0Amargin%3A%200%3B%0Apadding%3A%200%3B%0Awhite%2Dspace%3A%20pre%3B%0Aborder%3A%20none%3B%0Abackground%3A%20transparent%3B%20%7D%0A%2Ehighlight%20pre%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%2019px%3B%0Aoverflow%3A%20auto%3B%0Apadding%3A%206px%2010px%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Aborder%3A%201px%20solid%20%23cccccc%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%2019px%3B%0Aoverflow%3A%20auto%3B%0Apadding%3A%206px%2010px%3B%0Aborder%2Dradius%3A%203px%3B%20%7D%0Apre%20code%2C%20pre%20tt%20%7B%0Abackground%2Dcolor%3A%20transparent%3B%0Aborder%3A%20none%3B%20%7D%0Asup%20%7B%0Afont%2Dsize%3A%200%2E83em%3B%0Avertical%2Dalign%3A%20super%3B%0Aline%2Dheight%3A%200%3B%0A%7D%0A%2A%20%7B%0A%2Dwebkit%2Dprint%2Dcolor%2Dadjust%3A%20exact%3B%0A%7D%0A%40media%20screen%20and%20%28min%2Dwidth%3A%20914px%29%20%7B%0Abody%20%7B%0Awidth%3A%20854px%3B%0Amargin%3A0%20auto%3B%0A%7D%0A%7D%0A%40media%20print%20%7B%0Atable%2C%20pre%20%7B%0Apage%2Dbreak%2Dinside%3A%20avoid%3B%0A%7D%0Apre%20%7B%0Aword%2Dwrap%3A%20break%2Dword%3B%0A%7D%0A%7D%0A" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CS458notes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">body {
+font-family: Helvetica, arial, sans-serif;
+font-size: 14px;
+line-height: 1.6;
+padding-top: 10px;
+padding-bottom: 10px;
+background-color: white;
+padding: 30px; }
+body > *:first-child {
+margin-top: 0 !important; }
+body > *:last-child {
+margin-bottom: 0 !important; }
+a {
+color: #4183C4; }
+a.absent {
+color: #cc0000; }
+a.anchor {
+display: block;
+padding-left: 30px;
+margin-left: -30px;
+cursor: pointer;
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0; }
+h1, h2, h3, h4, h5, h6 {
+margin: 20px 0 10px;
+padding: 0;
+font-weight: bold;
+-webkit-font-smoothing: antialiased;
+cursor: text;
+position: relative; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+text-decoration: none; }
+h1 tt, h1 code {
+font-size: inherit; }
+h2 tt, h2 code {
+font-size: inherit; }
+h3 tt, h3 code {
+font-size: inherit; }
+h4 tt, h4 code {
+font-size: inherit; }
+h5 tt, h5 code {
+font-size: inherit; }
+h6 tt, h6 code {
+font-size: inherit; }
+h1 {
+font-size: 28px;
+color: black; }
+h2 {
+font-size: 24px;
+border-bottom: 1px solid #cccccc;
+color: black; }
+h3 {
+font-size: 18px; }
+h4 {
+font-size: 16px; }
+h5 {
+font-size: 14px; }
+h6 {
+color: #777777;
+font-size: 14px; }
+p, blockquote, ul, ol, dl, li, table, pre {
+margin: 15px 0; }
+hr {
+margin: 0 0 19px;
+border: 0;
+border-bottom: 1px solid #ccc;
+}
+body > h2:first-child {
+margin-top: 0;
+padding-top: 0; }
+body > h1:first-child {
+margin-top: 0;
+padding-top: 0; }
+body > h1:first-child + h2 {
+margin-top: 0;
+padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+margin-top: 0;
+padding-top: 0; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+margin-top: 0;
+padding-top: 0; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+margin-top: 0; }
+li p.first {
+display: inline-block; }
+li {
+margin: 0; }
+ul, ol {
+padding-left: 30px; }
+ul :first-child, ol :first-child {
+margin-top: 0; }
+dl {
+padding: 0; }
+dl dt {
+font-size: 14px;
+font-weight: bold;
+font-style: italic;
+padding: 0;
+margin: 15px 0 5px; }
+dl dt:first-child {
+padding: 0; }
+dl dt > :first-child {
+margin-top: 0; }
+dl dt > :last-child {
+margin-bottom: 0; }
+dl dd {
+margin: 0 0 15px;
+padding: 0 15px; }
+dl dd > :first-child {
+margin-top: 0; }
+dl dd > :last-child {
+margin-bottom: 0; }
+blockquote {
+border-left: 4px solid #dddddd;
+padding: 0 15px;
+color: #777777; }
+blockquote > :first-child {
+margin-top: 0; }
+blockquote > :last-child {
+margin-bottom: 0; }
+table {
+padding: 0;border-collapse: collapse; }
+table tr {
+border-top: 1px solid #cccccc;
+background-color: white;
+margin: 0;
+padding: 0; }
+table tr:nth-child(2n) {
+background-color: #f8f8f8; }
+table tr th {
+font-weight: bold;
+border: 1px solid #cccccc;
+margin: 0;
+padding: 6px 13px; }
+table tr td {
+border: 1px solid #cccccc;
+margin: 0;
+padding: 6px 13px; }
+table tr th :first-child, table tr td :first-child {
+margin-top: 0; }
+table tr th :last-child, table tr td :last-child {
+margin-bottom: 0; }
+img {
+max-width: 100%; }
+span.frame {
+display: block;
+overflow: hidden; }
+span.frame > span {
+border: 1px solid #dddddd;
+display: block;
+float: left;
+overflow: hidden;
+margin: 13px 0 0;
+padding: 7px;
+width: auto; }
+span.frame span img {
+display: block;
+float: left; }
+span.frame span span {
+clear: both;
+color: #333333;
+display: block;
+padding: 5px 0 0; }
+span.align-center {
+display: block;
+overflow: hidden;
+clear: both; }
+span.align-center > span {
+display: block;
+overflow: hidden;
+margin: 13px auto 0;
+text-align: center; }
+span.align-center span img {
+margin: 0 auto;
+text-align: center; }
+span.align-right {
+display: block;
+overflow: hidden;
+clear: both; }
+span.align-right > span {
+display: block;
+overflow: hidden;
+margin: 13px 0 0;
+text-align: right; }
+span.align-right span img {
+margin: 0;
+text-align: right; }
+span.float-left {
+display: block;
+margin-right: 13px;
+overflow: hidden;
+float: left; }
+span.float-left span {
+margin: 13px 0 0; }
+span.float-right {
+display: block;
+margin-left: 13px;
+overflow: hidden;
+float: right; }
+span.float-right > span {
+display: block;
+overflow: hidden;
+margin: 13px auto 0;
+text-align: right; }
+code, tt {
+margin: 0 2px;
+padding: 0 5px;
+white-space: nowrap;
+border: 1px solid #eaeaea;
+background-color: #f8f8f8;
+border-radius: 3px; }
+pre code {
+margin: 0;
+padding: 0;
+white-space: pre;
+border: none;
+background: transparent; }
+.highlight pre {
+background-color: #f8f8f8;
+border: 1px solid #cccccc;
+font-size: 13px;
+line-height: 19px;
+overflow: auto;
+padding: 6px 10px;
+border-radius: 3px; }
+pre {
+background-color: #f8f8f8;
+border: 1px solid #cccccc;
+font-size: 13px;
+line-height: 19px;
+overflow: auto;
+padding: 6px 10px;
+border-radius: 3px; }
+pre code, pre tt {
+background-color: transparent;
+border: none; }
+sup {
+font-size: 0.83em;
+vertical-align: super;
+line-height: 0;
+}
+* {
+-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+body {
+width: 854px;
+margin:0 auto;
+}
+}
+@media print {
+table, pre {
+page-break-inside: avoid;
+}
+pre {
+word-wrap: break-word;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <h1 id="cs-458">CS 458</h1>
 <h1 id="introduction-to-security-and-privacy">Introduction to Security and Privacy</h1>
+<h2 id="security">Security</h2>
 <ul>
-<li>TODO</li>
+<li>Confidentiality
+<ul>
+<li>Access to systems or data is limited to authorized parties</li>
+</ul></li>
+<li>Integrity
+<ul>
+<li>Data is correct</li>
+</ul></li>
+<li>Availabilty
+<ul>
+<li>System or data is there when you want it</li>
+</ul></li>
+</ul>
+<h2 id="privacy">Privacy</h2>
+<ul>
+<li><em>Informational self-determination</em>: You get to control information about yourself</li>
+<li>e.g PIPEDA is Canadian legislation for personal privacy</li>
+</ul>
+<blockquote>
+<p>Privacy vs Confidentiality For example, a company collecting your private information with your consent but then using it in ways that you don’t understand without disclosing their methods to you is a breach of privacy because you don’t have to ability to determine <em>how</em> your personal information is used. It is not a breach of confidentiality because you have consent and full knowledge that they have access to your information. On the other hand, a breach where company secrets (say a soft drink recipe) are leaked to the public is a violation of confidentiality because information is seen by unauthorized parties. It is not a breach of privacy however because (however much the legal system wants them to be) companies are not people and so there was not personally private information that was leaked.</p>
+</blockquote>
+<h2 id="other-definitions">Other Definitions</h2>
+<ul>
+<li>Assets: Things we want to protect
+<ul>
+<li>e.g Hardware, Software, Data</li>
+</ul></li>
+<li>Vulnerabilities: Weaknesses in a system that can be exploited</li>
+<li>Threats: Loss or harm that can occur to a system
+<ol type="1">
+<li>Interception: unauthorized access</li>
+<li>Interruption: making service unavailable</li>
+<li>Modification: tampering</li>
+<li>Fabrication: counterfeit records</li>
+</ol></li>
+<li>Threat model: What threats do we need to defend against</li>
+<li>Attack: Action that exploits a vulnerability to execute a threat</li>
+<li>Control/Defence: Removing or reducing a vulnerability
+<ol type="1">
+<li>Prevention: Prevent the attack</li>
+<li>Deterence: Make attack harder or more expensive</li>
+<li>Deflection: Make self self attractive to attack</li>
+<li>Detection: Notice attacks occuring / occured</li>
+<li>Recovery: Mitigate attack effects</li>
+</ol></li>
+</ul>
+<h2 id="principles">Principles</h2>
+<ul>
+<li>Principle of Easiest Penetration
+<ul>
+<li>System only as strong as weakest link</li>
+</ul></li>
+<li>Principle of Adequate Protection
+<ul>
+<li>Security should be relative to value of the system</li>
+</ul></li>
+</ul>
+<h2 id="defense">Defense</h2>
+<ul>
+<li>Cryptography
+<ul>
+<li>Makes data unreadable to attacker</li>
+</ul></li>
+<li>Software Controls
+<ul>
+<li>e.g passwords</li>
+</ul></li>
+<li>Hardware Controls
+<ul>
+<li>e.g fingerprint reader</li>
+</ul></li>
+<li>Physical Controls
+<ul>
+<li>e.g locks</li>
+</ul></li>
+<li>Policies and Procedures
+<ul>
+<li>e.g user privileges, password rules</li>
+</ul></li>
 </ul>
 <h1 id="program-security">Program Security</h1>
 <h2 id="format-string-vulnerabilities">Format String Vulnerabilities</h2>
 <ul>
 <li>Seg fault means you are in the right place</li>
-<li>Print '%s'x1000 until you get a seg fault</li>
-<li>Execute with '%n'</li>
+<li>Print ’%s’x1000 until you get a seg fault</li>
+<li>Execute with ‘%n’</li>
 </ul>
 <h2 id="malware">Malware</h2>
 <h3 id="viruses">Viruses</h3>
@@ -40,7 +389,7 @@
 <li>Payload code, infection code are usually unique</li>
 <li>Can also identify system locations and propagation means</li>
 <li>Cons: Fooled by polymorphic viruses</li>
-<li>Cons: Can't identify new viruses</li>
+<li>Cons: Can’t identify new viruses</li>
 <li>No false positives</li>
 <li>High false negatives</li>
 </ul></li>
@@ -68,7 +417,7 @@
 <h3 id="worms">Worms</h3>
 <ul>
 <li>Spreads with no or little user involvement
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Infects your computer</li>
 <li>Searches for other computers (over network) to infect</li>
 <li>May have a payload that activates by a trigger</li>
@@ -89,7 +438,7 @@
 <p>Ransomware</p>
 </blockquote>
 <ul>
-<li>Cryptolocker demanded bitcoin to decrypt user's files</li>
+<li>Cryptolocker demanded bitcoin to decrypt user’s files</li>
 </ul></li>
 </ul>
 <h3 id="logic-bombs">Logic Bombs</h3>
@@ -132,9 +481,9 @@
 <ul>
 <li>Goal of many attacks</li>
 <li>Raises the privilege level of the attacker</li>
-<li>e.g rlogin host -l userid=&quot;value&quot;
+<li>e.g rlogin host -l userid=“value”
 <ul>
-<li>use &quot;-froot&quot; as the userid</li>
+<li>use “-froot” as the userid</li>
 </ul></li>
 <li>e.g Packet sniffing of HTTP packets</li>
 </ul>
@@ -173,7 +522,7 @@
 <li>We expect interfaces to look a certain way and trust them</li>
 <li>Defense: hard to defend against. Focus on mitigation instead
 <ul>
-<li>OS requires 'ctrl-alt-del' to login</li>
+<li>OS requires ‘ctrl-alt-del’ to login</li>
 <li>Banks have security images</li>
 </ul></li>
 </ul>
@@ -195,9 +544,9 @@
 <h3 id="man-in-the-middle-attacks">Man-in-the-middle attacks</h3>
 <ul>
 <li>Category for keyboard logging, inferface illusions and phishing</li>
-<li>The website/program/system you're communicating with is fake</li>
-<li>User doesn't notice problems because the program passes things on the actual site</li>
-<li>Can edit output to hide it's attack</li>
+<li>The website/program/system you’re communicating with is fake</li>
+<li>User doesn’t notice problems because the program passes things on the actual site</li>
+<li>Can edit output to hide it’s attack</li>
 </ul>
 <h2 id="non-malicious-flaws">Non-malicious Flaws</h2>
 <h3 id="covert-channels">Covert Channels</h3>
@@ -238,7 +587,7 @@
 </ul></li>
 <li>Information Hiding
 <ul>
-<li>Internals of one module shouldn't be visible to the other modules</li>
+<li>Internals of one module shouldn’t be visible to the other modules</li>
 </ul></li>
 <li>Mutual Suspicion
 <ul>
@@ -249,6 +598,680 @@
 <ul>
 <li>Sandbox potentially untrustworthy code</li>
 </ul></li>
+</ul>
+<h3 id="implementation">Implementation</h3>
+<ul>
+<li>Don’t use C</li>
+<li>Static code analysis
+<ul>
+<li>Existing software products for various languages</li>
+</ul></li>
+<li>Formal methods
+<ul>
+<li>Prove code does what it says it does</li>
+<li>Difficult to do</li>
+</ul></li>
+<li>Genetic diversity
+<ul>
+<li>Use different HTTP servers, code, etc</li>
+</ul></li>
+</ul>
+<h3 id="change-management">Change Management</h3>
+<ul>
+<li>Track source code / config changes</li>
+</ul>
+<h3 id="code-review">Code Review</h3>
+<ul>
+<li>Most effective method</li>
+<li>Code Review Types
+<ul>
+<li>Reviewers look over the code</li>
+<li>Guided walk-through: Author explains code to reviewers</li>
+</ul></li>
+<li>Reviewers might get lazy and miss things
+<ul>
+<li>Solution: Add easter-egg vulnerabilities</li>
+</ul></li>
+</ul>
+<h3 id="testing">Testing</h3>
+<ul>
+<li>Black-box testing:
+<ul>
+<li>Test completed function / module / program / system without knowing the implementation</li>
+<li>Fuzz-testing: give completely random data as input
+<ul>
+<li>Will often cause crashes (availability concern)</li>
+</ul></li>
+</ul></li>
+<li>White-box testing:
+<ul>
+<li>Testing while knowing design and implementation</li>
+<li>Good for regression testing (write a test suite and re-run tests on new versions)</li>
+</ul></li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li>Write down and explain design choices</li>
+<li>Record things that didn’t work</li>
+</ul>
+<h3 id="maintenance">Maintenance</h3>
+<ul>
+<li>Should have no flaws when the product is done</li>
+<li>There will be flaws</li>
+</ul>
+<h3 id="standards-process-audit">Standards, process, audit</h3>
+<ul>
+<li>Org should have <em>standards</em> for how each stage of software development is done</li>
+<li><em>Processes</em> specify how the standards are enforced</li>
+<li><em>Audits</em> verify that processes are followed</li>
+</ul>
+<h1 id="operating-system-security">Operating System Security</h1>
+<h2 id="operating-systems">Operating Systems</h2>
+<ul>
+<li>Allows users to access to different resources in a shared way</li>
+<li>Identification and authorization are needed to control access</li>
+<li>Protects users from each other and themselves
+<ul>
+<li>Threats: attacks, mistakes, resource over comsumption, malware</li>
+</ul></li>
+</ul>
+<h2 id="seperation">Seperation</h2>
+<ul>
+<li>Physical seperation
+<ul>
+<li>User difference physical resources</li>
+<li>Easy implementation</li>
+<li>Expensive and inefficient</li>
+</ul></li>
+<li>Temporal seperation
+<ul>
+<li>Execute different programs at different times</li>
+</ul></li>
+<li>Logical seperation
+<ul>
+<li>User cannot see other users</li>
+</ul></li>
+<li>Cryptographic seperation
+<ul>
+<li>Encrypt data so others cannot read it</li>
+<li>Complex</li>
+</ul></li>
+</ul>
+<h2 id="sharing">Sharing</h2>
+<ul>
+<li>Some resources should be shared (e.g library routines, files)</li>
+<li>Flexible sharing: ability for some files to be shared, but not all</li>
+</ul>
+<h2 id="memory-and-address-protection">Memory and Address Protection</h2>
+<ul>
+<li>Prevent one program from corrupting others</li>
+<li>Use virtual addresses instead of physical</li>
+<li>Techniques
+<ul>
+<li>Fence register
+<ul>
+<li>Exception if user tries to access memory below a ‘fence’</li>
+<li>Protects system from user</li>
+<li>Single user only</li>
+</ul></li>
+<li>Base/bounds register pair
+<ul>
+<li>Exception if user accesses memory below base / above bounds</li>
+<li>Different values for each program</li>
+<li>Limited flexibility</li>
+</ul></li>
+<li>Tagged architecture
+<ul>
+<li>Additional bit in memory to indicate access rights</li>
+<li>Flexible</li>
+<li>Large overhead</li>
+</ul></li>
+<li>Segmentation
+<ul>
+<li>Each program has multiple address spaces</li>
+<li>Segments for code, data, stack</li>
+<li>Virtual addresses contain a segment name and offset within segment</li>
+<li>Segment table maps segment names to physical addresses</li>
+<li>Segment table tracks protection attributes</li>
+<li>Pro: Addresses are hardware checked for protection
+<ul>
+<li>Different levels of protection are possible</li>
+<li>Users can share access</li>
+</ul></li>
+<li>Con: External fragmentation
+<ul>
+<li>Costly out-of-bounds checks</li>
+</ul></li>
+</ul></li>
+<li>Paging
+<ul>
+<li>Virtual memory is divided into pages</li>
+<li>Physical memory is divided into frames</li>
+<li>Virtual addresses contain page number and offset</li>
+<li>Page table maps page number to physical address</li>
+<li>Page table tracks protection attributes</li>
+<li>Pro: Addresses are hardware checked for protection
+<ul>
+<li>Users can share access</li>
+<li>Pages can be moved to disk</li>
+</ul></li>
+<li>Con: Internal fragmentation
+<ul>
+<li>Cannot have different levels of protection</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="access-control">Access Control</h2>
+<ul>
+<li>Goals
+<ul>
+<li>Check every access</li>
+<li>Enforce least privilege</li>
+<li>Verify acceptable use</li>
+</ul></li>
+</ul>
+<h3 id="access-control-structures">Access Control Structures</h3>
+<h4 id="access-control-matrix">Access Control Matrix</h4>
+<ul>
+<li>Objects (O): Files / database records</li>
+<li>Subjects (S): users, processes</li>
+<li>Rights (R): read, write, execute, own</li>
+<li>Table permissions for each user and file</li>
+<li>Matrix very sparse</li>
+</ul>
+<h4 id="access-control-list">Access Control List</h4>
+<ul>
+<li>Implementation of access control matrix</li>
+<li>More space efficient</li>
+<li>Each object has a list of subjects and their rights</li>
+<li>Use cases
+<ul>
+<li>Determine set of allowed users per object: fast</li>
+<li>Determine set of objects a user can access: slow</li>
+<li>Revoke a user’s access right to an object or all objects: 1 object: medium, all objects: slow</li>
+</ul></li>
+</ul>
+<h4 id="capabilities">Capabilities</h4>
+<ul>
+<li>A capability is an <strong>unforgeable token</strong> that gives its owner some access rights to an object</li>
+<li>More versatile than access control lists</li>
+<li>Can be transferable (if anonymous)</li>
+<li>e.g seL4 is an OS that uses capabilities</li>
+<li>Use cases
+<ul>
+<li>Determine set of allowed users per object: slow</li>
+<li>Determine set of objects a user can access: fast</li>
+<li>Revoke a user’s access right to an object or all objects: 1 object: fast, all objects: slow</li>
+</ul></li>
+</ul>
+<h4 id="combined-acl-and-capabilities">Combined ACL and Capabilities</h4>
+<ul>
+<li>Faster access checking</li>
+<li>e.g UNIX: every file has an ACL, if access is granted, caller is given a capability stored in kernel</li>
+<li>Problem: TOCTTOU vulnerability</li>
+</ul>
+<h4 id="role-based-access-control">Role-based access control</h4>
+<ul>
+<li>Access depends on group that user belongs in</li>
+<li>Advantage: Role changes are easy to change permissions for</li>
+<li>Extensions: Hierarchical roles
+<ul>
+<li>Multiple roles</li>
+<li>Separation of duty</li>
+</ul></li>
+</ul>
+<h2 id="user-authentication">User Authentication</h2>
+<ul>
+<li>Computer systems must <em>identify</em> and <em>authenticate</em> users before <em>authorizing</em> them</li>
+<li><em>Identification</em>: Who are you</li>
+<li><em>Authentication</em>: Prove identity</li>
+</ul>
+<h3 id="authentication-factors">Authentication Factors</h3>
+<ul>
+<li>4 classes of authentication factors using something that the user…
+<ol type="1">
+<li>Knows (e.g Password, PIN, secret question)</li>
+<li>Has (ATM card, badge, browser cookie, physical key)</li>
+<li>Is (Biometrics)</li>
+<li>Context (Location, time, devices in proximity)</li>
+</ol></li>
+<li>Combine factors for multifactor / 2-factor authentication</li>
+</ul>
+<h4 id="passwords">Passwords</h4>
+<ul>
+<li>Oldest authentication mechanism</li>
+<li>Usability problems:
+<ul>
+<li>Inconvenient</li>
+<li>Password composition rules</li>
+<li>Updating shared passwords</li>
+</ul></li>
+<li>Security problems
+<ul>
+<li>Leaked passwords are easy to use</li>
+<li>Shoulder surfing</li>
+<li>Keystroke logging</li>
+<li>Interface illusions</li>
+<li>Password re-use</li>
+<li>Password guessing</li>
+<li>Interception attacks</li>
+</ul></li>
+</ul>
+<h5 id="password-guessing">Password guessing</h5>
+<ul>
+<li>Brute-force
+<ul>
+<li>$2700 can break a 8 character password in 6 minutes</li>
+<li>Exponential difficulty depending on number of characters</li>
+</ul></li>
+<li>Dictionary attack
+<ul>
+<li>Passwords are not uniformly random</li>
+<li>Prefix or postfix numbers</li>
+</ul></li>
+<li>Offline attack
+<ul>
+<li>Requires access to encrypted password file</li>
+</ul></li>
+<li>Online attack
+<ul>
+<li>Detectable by bank server (n login attempts)</li>
+</ul></li>
+<li>Defense: use a MAC (hash with a key)
+<ul>
+<li>Key must be stored elsewhere</li>
+</ul></li>
+</ul>
+<h5 id="password-hygiene">Password Hygiene</h5>
+<ul>
+<li>Use a password manager
+<ul>
+<li>At least for low- and medium-security passwords</li>
+<li>Helps agaisnt phishing attacks</li>
+</ul></li>
+<li>Or Use a pass phrase of randomly chosen words
+<ul>
+<li>More random and secure</li>
+</ul></li>
+<li>Have site-specific passwords</li>
+<li>Don’t reveal passwords to others</li>
+<li>Don’t enter passwords on public computers</li>
+</ul>
+<h5 id="password-policies">Password Policies</h5>
+<ul>
+<li>No composition rules</li>
+<li>8 &lt;= len &lt;= &gt;64</li>
+<li>Allows any characters including space, unicode, emoji</li>
+<li>Blacklist common passwords, compromised passwords</li>
+<li>Avoid password hints</li>
+<li>Dont require password cycling</li>
+<li>Allow copy-pasting passwords in fields</li>
+<li>Use two-factore authentication
+<ul>
+<li>Don’t use SMS: it can be intercepted</li>
+</ul></li>
+</ul>
+<h5 id="storing-passwords">Storing Passwords</h5>
+<ul>
+<li>Store a <em>digital fingerprint</em> of the password, not plain-text</li>
+<li>Use a crytographic hash to create the fingerprint
+<ul>
+<li>Don’t use standard ones (SHA-1, SHA-512) that are cheap to compute</li>
+<li>Use an iterated hash function that are expensive to compute (bcrypt) and lots of memory (scrypt)</li>
+<li>^Same requirements of cryptocurrencies</li>
+</ul></li>
+<li>Include a user-specific salt in the fingerprint
+<ul>
+<li>This changes the fingerprints even if the password is the same</li>
+</ul></li>
+</ul>
+<h5 id="password-recovery">Password Recovery</h5>
+<ul>
+<li>Not recommended</li>
+<li>Cannot be recovered from the fingerprint (otherwise the attacker can too)</li>
+<li>Encrypt the password so that it can be decrypted</li>
+<li>e.g Adobe Password Hack when Adobe did not use a secure password encryption</li>
+</ul>
+<h4 id="alternative-passwords">Alternative Passwords</h4>
+<ul>
+<li>Android unlock patterns
+<ul>
+<li>Easy to dictionary attack</li>
+<li>Can’t be automated</li>
+</ul></li>
+<li>Graphical passwords
+<ul>
+<li>e.g Re-Identify a picture</li>
+<li>e.g Choose a set of places in a picture</li>
+<li>Problem: Shoulder surfing</li>
+</ul></li>
+<li>Biometrics
+<ul>
+<li>Can accept someone else that is sufficiently close</li>
+<li>Doesn’t work well for remote authentication</li>
+<li>Identification is harder (expensive search problem)
+<ul>
+<li>Base rate fallacy for identifying criminals</li>
+</ul></li>
+<li>Privacy issues</li>
+<li>Accuracy issues: False negatives, appearance changes</li>
+<li>Secrecy: Face, fingerprints aren’t very secret</li>
+<li>Legal Protection: Police can make you use your finger, but not reveal your password</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>End Midterm material No security policies and models (it’s outdated XD) Format: Written, no calculators Study: Look at notes &gt; Definitions &gt; No fine details (names of malware) &gt; High level understanding of assignment</p>
+</blockquote>
+<h2 id="security-policies-and-models">Security Policies and Models</h2>
+<h3 id="trusted-operating-systems">Trusted Operating Systems</h3>
+<ul>
+<li>We have <em>confidence</em> that it provides security services
+<ul>
+<li>Memory and file protection</li>
+<li>Access control and user authentication</li>
+</ul></li>
+<li>4 factors
+<ul>
+<li>Policy: rules outlining what’s secured and why</li>
+<li>Model: implements the policy</li>
+<li>Design: specs of how the model is implemented</li>
+<li>Trust: assurance implementation is to design</li>
+</ul></li>
+</ul>
+<h3 id="trusted-software">Trusted Software</h3>
+<ul>
+<li>Trust that code does what is expected and nothing more</li>
+<li>Factors
+<ul>
+<li>Functional correctness: works correctly</li>
+<li>Enforcement of integrity: wrong inputs don’t impact data correctness</li>
+<li>Limited privilege: access rights are minimized</li>
+<li>Appropriate confidence level: rated as required by environment</li>
+</ul></li>
+</ul>
+<h3 id="security-policies">Security Policies</h3>
+<h4 id="military">Military</h4>
+<ul>
+<li>Everything has a sensitivity
+<ul>
+<li>“Top Secret” &gt; “Secret” &gt; “Confidential” &gt; “Unclassified”</li>
+</ul></li>
+<li>Everything has 1+ compartment
+<ul>
+<li>i.e Groups</li>
+</ul></li>
+<li>Subject s can access object o if and only if
+<ul>
+<li>level(s) &gt;= level(o)</li>
+<li>compartments(s) <span class="math inline">⊇</span> comparments(o)</li>
+</ul></li>
+</ul>
+<h4 id="commercial">Commercial</h4>
+<ul>
+<li>Classification levels different
+<ul>
+<li>e.g external vs internal</li>
+</ul></li>
+<li>Clearance levels less formally defined</li>
+</ul>
+<h4 id="other">Other</h4>
+<ul>
+<li>Non confidentiality policies</li>
+<li>Integrity policy: Clark-Wilson Security Policy
+<ul>
+<li>Use <em>well-formed transactions</em> to ensure state is always consistent</li>
+</ul></li>
+<li>Conflicts of interest: Chinese Wall Security Policy
+<ul>
+<li>Once you are on a side, it is hard to switch</li>
+<li>Once you access information about a company, you cannot access information of similar companies</li>
+<li>Requirements
+<ul>
+<li>History of object access</li>
+<li>Changing access rights</li>
+</ul></li>
+<li>use cases: Consulting, legal, accounting</li>
+<li><em>ss-property</em>: Subject <code>s</code> can access object <code>o</code> if and only if
+<ul>
+<li>each previously accessed object belongs to the same company of <code>o</code> or belongs to a different kind of company</li>
+</ul></li>
+<li><em>*-property</em>: For <code>s</code> to write to <code>o</code>,
+<ul>
+<li>all objects readable by <code>s</code> belong to the same company as <code>o</code> or have been sanitized</li>
+<li>This prevents indirect information flow</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="security-models">Security Models</h3>
+<ul>
+<li>2 multilevel security (MLS) policies</li>
+</ul>
+<h4 id="side-lattice">Side: Lattice</h4>
+<ul>
+<li>Multilevel security (MLS) policies contain clearance and classification levels</li>
+</ul>
+<h4 id="bell-la-padula-confidentiality-model">Bell-La Padula Confidentiality Model</h4>
+<ul>
+<li>Regulates information flow in lattice</li>
+<li>Information only flows <em>up</em></li>
+<li><em>ss-property</em>: “No read up”
+<ul>
+<li><code>s</code> can only read <code>o</code> if</li>
+</ul></li>
+<li><em>*-property</em>: “No write down”</li>
+</ul>
+<h4 id="biba-integrity-model">Biba Integrity Model</h4>
+<ul>
+<li>Prevents inappropriate data modification</li>
+<li>Write:
+<ul>
+<li><code>s</code> can modify <code>o</code> if ….</li>
+</ul></li>
+<li>Read: TODO</li>
+<li>Very restrictive access rules</li>
+<li>Information flows down</li>
+</ul>
+<h5 id="low-watermark-property">Low Watermark Property</h5>
+<h2 id="todo-rest-of-security-policies-and-models">TODO: Rest of Security policies and models</h2>
+<h2 id="trusted-operating-system-design">Trusted operating system design</h2>
+<ul>
+<li>Reading</li>
+</ul>
+<h3 id="security-design-principles">Security design principles</h3>
+<ul>
+<li>Least privilege
+<ul>
+<li>Operate using fewest privileges possible</li>
+</ul></li>
+<li>Economy of mechanism
+<ul>
+<li>Protection mechanism should be as simple as possible</li>
+</ul></li>
+<li>Open design
+<ul>
+<li>Avoid security by obscurity</li>
+<li>Don’t use secret algorithms</li>
+</ul></li>
+<li>Complete mediation
+<ul>
+<li>Every access attempt must be checked (TOCTTOU)</li>
+</ul></li>
+<li>Permission based / fail-safe defaults
+<ul>
+<li>Default to no access</li>
+</ul></li>
+<li>Seperation of privileges
+<ul>
+<li>Check multiple conditions to get access</li>
+</ul></li>
+<li>Least common mechanism</li>
+<li>Ease of use</li>
+</ul>
+<h2 id="todo">TODO</h2>
+<h3 id="trusted-computing-base-tcb">Trusted computing base (TCB)</h3>
+<h3 id="virtualization">Virtualization</h3>
+<ul>
+<li>Virtual memory
+<ul>
+<li>Illusion that every device is the only device that has access to the machine</li>
+</ul></li>
+<li>Virtual machine
+<ul>
+<li>Sandbox for applications</li>
+<li>Higher security</li>
+<li>Attackers can launch your OS in a VM
+<ul>
+<li>Hard to detect, and attackers can see everything</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="application-insulation">Application Insulation</h3>
+<ul>
+<li>Use encryption to sheild memory of one application from another</li>
+<li>Seperate application into trusted and untrusted code</li>
+<li>API to communicate between untrusted and trusted code</li>
+<li>e.g Intel SGX (Software guard extension)
+<ul>
+<li>CPU stores a key for encryption</li>
+<li>Originally for DRM -&gt; realized DRM is not worth it</li>
+</ul></li>
+<li>e.g AMD memory encryption</li>
+</ul>
+<h3 id="signal-contact-discovery">Signal Contact Discovery</h3>
+<ul>
+<li>Signal = contacts?</li>
+<li>How do you know something has signal, so that you can use it to communicate?
+<ul>
+<li>Users send hash of their contacts phone numbers to signal server</li>
+<li>Server matches up hashes to determine if two users can use Signal send encrypted numbers</li>
+</ul></li>
+<li>Hashes are not salted so attackers can easily construct social graphs</li>
+<li>Solution: Seperate out trusted and untrusted code
+<ul>
+<li>Secure Enclave (i.e SGX) receives encrypted contacts information and decrypts it</li>
+<li>Rest of server does not have access to decrypted information</li>
+<li>^ <strong>Remote attestation</strong></li>
+</ul></li>
+</ul>
+<h3 id="least-privilege-in-popular-os">Least Privilege in popular OS</h3>
+<ul>
+<li>OS privilege control was really bad</li>
+<li>Windows:
+<ul>
+<li>pre-NT: any user can do anything</li>
+<li>pre-Vista: needs admin account to do some things (but everyone just ran as admin)</li>
+<li>Vista: temporary access rights, integrity levels</li>
+</ul></li>
+<li>UNIX:
+<ul>
+<li>root has every access</li>
+<li>root was removed in some later UNIX OS</li>
+</ul></li>
+<li>iOS:
+<ul>
+<li>Original iphone had user run everything as root (only 1st party apps, so more ok)</li>
+<li>Every app had a user id with different access</li>
+</ul></li>
+</ul>
+<h3 id="seperation-techniques">Seperation Techniques</h3>
+<h4 id="chroot">Chroot</h4>
+<ul>
+<li><code>chroot /new/root command</code></li>
+<li>Create a ‘jail’ which is the only space the command is allow to touch</li>
+<li>The root directory for the command is changed to something else</li>
+<li>Can be broken out of</li>
+</ul>
+<h4 id="compartmentalization">Compartmentalization</h4>
+<ul>
+<li>Split application into parts that have least privilege</li>
+<li>Have an unprivileged, jailed child that takes unsafe unput</li>
+</ul>
+<h4 id="setuid-suid-bit"><code>setuid</code> / <code>suid</code> bit</h4>
+<ul>
+<li>Makes the executable run under identity of the owner, not caller
+<ul>
+<li>e.g <code>pwgen</code> runs under <code>root</code>, not <code>user</code></li>
+</ul></li>
+<li>Vulnerable to privilege escalation attack</li>
+<li>Confused deputy attack: impersonate another user</li>
+</ul>
+<h3 id="assurance">Assurance</h3>
+<ul>
+<li>How to convince people an OS is secure?</li>
+<li>Testing
+<ul>
+<li>Cannot prove no problems exist</li>
+<li>(halting problem…?)</li>
+</ul></li>
+<li>Formal verification
+<ul>
+<li>Use math to prove OS correctness</li>
+<li>Not advanced enough for large OSs</li>
+</ul></li>
+<li>Validation
+<ul>
+<li>Requirements checking, design, code reviews, system testing</li>
+</ul></li>
+<li>Evaluation
+<ul>
+<li>Have a trusted entity evaluate and certify the OS</li>
+<li><em>Orange Book</em> gives a D to A1 rating</li>
+<li><em>Common Criteria</em> replaces the Orange book
+<ul>
+<li>Has Protection Profiles</li>
+<li>Rating from EAL1 (worst) to EAL7 (best)</li>
+</ul></li>
+<li>Most OSs have C rating</li>
+</ul></li>
+</ul>
+<h1 id="network-security">Network Security</h1>
+<ul>
+<li>Not built with security in mind</li>
+</ul>
+<h2 id="network-concepts">Network Concepts</h2>
+<h3 id="architecture">Architecture</h3>
+<ul>
+<li>Information is routed between endpoints
+<ul>
+<li>e.g router, server, mobile, doorbell, thermostat</li>
+</ul></li>
+<li>local ISP -&gt; regional ISP -&gt; backbone -&gt; regional ISP -&gt; company netword</li>
+</ul>
+<h3 id="characteristics">Characteristics</h3>
+<ul>
+<li>No single entity controls the internet
+<ul>
+<li>fuzzy… Amazon going down would take down a lot of websites</li>
+</ul></li>
+<li>Traffic flows through nodes controlled by different entities</li>
+<li>Cannot control path of traffic flow</li>
+<li>TCP/IP is a network protocol</li>
+</ul>
+<h4 id="tcpip-protocol-suite">TCP/IP Protocol Suite</h4>
+<ul>
+<li>4 layers
+<ul>
+<li>Link
+<ul>
+<li>How things are physically connected (wifi, ethernet)</li>
+</ul></li>
+<li>Network
+<ul>
+<li>IP addresses</li>
+</ul></li>
+<li>Transport
+<ul>
+<li>TCP or UDP</li>
+<li>Control information</li>
+</ul></li>
+<li>Application
+<ul>
+<li>HTTP, FTP, email, SSL</li>
+</ul></li>
+</ul></li>
+<li>Was designed for local network connections between trusted entities</li>
+<li>Design did not address malicious errors</li>
 </ul>
 </body>
 </html>
