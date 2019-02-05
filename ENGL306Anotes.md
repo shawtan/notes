@@ -49,7 +49,7 @@
 
 ### Elements of sound
 1. Initiation
-    - Breathe through diaphram, lungs
+    - Breathe through diaphragm, lungs
 2. Phonation
     - Sound moves up esophagus
     - Vocal cord vibrations produce voicing or voiced consonants (e.g 'z' instead of 's', 'b' instead of 'p', 'g' vs 'k', 'v' vs 'f')
@@ -65,7 +65,7 @@
 - Letters are a poor representation of sound (e.g -ough, /f/)
 - Writing systems are usually borrowed and don't work well with the languages
 - So double letters or diacritical marks are used to represent sounds
-- Writing systems stablize, while sounds still change
+- Writing systems stabilize, while sounds still change
 - Words are borrowed from other languages
 - Word derivation wants to keep consistent spelling even if it's pronounced differently (e.g canada vs canadian, photo vs photograph)
 - Solution: Phonetic Transcription
@@ -78,6 +78,15 @@
 - Manner of articulation
     - Obstruents: airflow is obstructed (t,f,g,s)
     - Sonorants: airflow not obstructed (r,l,m,n)
+- Place of Articulation
+    - Bilabial
+    - Labiodental
+    - Dental
+    - Alveolar
+    - Palatal
+    - Velar
+    - Glottal
+
 
 #### Obstruents
 - Stops (plosives): airflow is blocked
@@ -86,7 +95,7 @@
 - Fricatives: narrow gap for air to pass through
     - unvoiced: [f,s,th,sh],
     - voiced: [v,z,the,g]
-- Affricates: stop followed by ficative
+- Affricates: stop followed by fricative
     - unvoiced: [ch]
     - voiced: [j]
 
@@ -110,16 +119,18 @@
     - [sh,j,y,ch]
 - Velar: tongue back to soft palate
     - [k,g,n]
-- Glottal: used in british and other langs
+- Glottal: obstruct airflow in vocal tract
+    - used in british and other langs
+    - `h` in 'hat'
 
 See chart
 
 ### Vowels
 - Hard to define
 - Frontness
-    - Front vs Back: [i,e,o]
+    - Front vs Back: [beat, boot, bought]
 - Height
-    - Close vs Open
+    - Close vs Open [beat, bit, bet, bat]
 - Diphthongs: double vowels that move from one articulation to another (very common in english) (e.g [ai]: pie, eye, [ao]: now)
     - Rising dipthongs: move towards high vowel
     - Centring diphthongs: move towards eh
@@ -167,7 +178,7 @@ See chart
 - One phoneme acquires a feature of a neighbouring phoneme
 - In english -s is voiced if it vollows a voiced consonant / vowel, unvoiced if following unvoiced
     - e.g dogs vs pets, cats vs dogs
-- Voiced consonants lowe their voice is followed by an unvoiced consonant
+- Voiced consonants lose their voice if followed by an unvoiced consonant
     - e.g news vs newspaper
 
 #### Palatalization
@@ -230,11 +241,15 @@ See chart
 ### Grimm's law
 - Laws by which Latin (PIE) changed to Gothic
 - PIE (Proto Indo-European) voiceless stops become voiceless fricatives
+    - [p, t, k] -> [f, th, h]
     - e.g pater -> fadar -> father
+    - e.g tres -> three
 - PIE voiced stops become voiceless stops
+    - [b, d, g] -> [p, t, k]
     - e.g decem -> taihun -> ten
-    - e.g fero -> baira -> bear
 - PIE voiced aspirates become voiced stops or fricatives
+    - [bh, dh, gh] -> [b, d, g]
+    - e.g fero -> baira -> bear
 
 #### Exceptions
 - Latin `sto` -> `stand` (voiceless t didnt fricative)
@@ -348,8 +363,8 @@ See chart
     1. Appears to be out + rage
     2. Actually from latin 'ultrage' (e.g ultra)
     3. Latin 'ult-' -> French 'out-'
-    - Mistakenly analysed by langauge users
-    - Altered pronounciation to 'outrAge' vs 'outrage' (garbage)
+    - Mistakenly analyzed by language users
+    - Altered pronunciation to 'outrAge' vs 'outrage' (garbage)
     - Altered meaning to do with anger
 
 ### Derivations
@@ -359,10 +374,13 @@ See chart
     - Infixes: not in english
     - Circumfixes: em---en (embolden)
 
-#### Derivational cs Inflectional effixes
-- Inflectional affixes change the grammatical category of a word
-- Derivatio al affixes are fussier
-- TODO
+#### Derivational vs Inflectional affixes
+- Inflectional affixes
+    - change the grammatical category of a word
+    - Apply to all members of a linguistic category
+- Derivational affixes
+    - create new words
+    - can only be attached to certain free morphemes (stems)
 
 ## Inflectional Morphology
 - **Inflection** occurs when something (an affix) is added to a word to provide grammatical information
@@ -384,7 +402,7 @@ See chart
     - English: word order tells us who liked whom, subject precedes verb followed by object
     - Russian: suffixes for persons will indicate who loves whom
     - Mohawk: prefix determines who loves whom, and genders
-- In some landuages, every word is a single morpheme
+- In some languages, every word is a single morpheme
 - Isolating / Analytic language
     - e.g Mandarin
 - Synthetic language
@@ -441,18 +459,16 @@ See chart
 
 ## Morphological Analysis
 - Break a word into its constituent morphemes by retracing the steps of building it
+    - DA = Derivational Affix
+    - IA = Inflectional Affix
+    - V = Verb
+    - Adj = adjective
+    - N = Noun
+    - BL = Bound lexical morpheme?
 - e.g Refocusing
     1. Split into parts: re/focus/ing
     2. Determine order parts were combined (usually derivations > inflections): ((re)(focus))(ing)
-    3. TODO <Insert morphological tree image>
-```
-    V
-   / \
-  V    \
- /   \   \
- DeAff
- re     focus   ing
-```
+![morphological tree](morphological_tree.png)
 
 ### Ambiguities
 - e.g Reusable
@@ -493,7 +509,7 @@ See chart
 - A broken down sentence is a sequence of words
 - Languages are a collection of words (**lexicon**)
 - Words bear meaning
-    - Words can develop new meanings seperate from their parts
+    - Words can develop new meanings separate from their parts
         - e.g trailer =/= trail-er
         - e.g establishment =/= establish-ment
         - e.g officious =/= office-ous
@@ -526,7 +542,7 @@ See chart
 
 ### Determining Word Class
 - Semantically: by its meaning
-- Morphology: what kind of affixes and morpological change does it employ
+- Morphology: what kind of affixes and morphological change does it employ
     - e.g Can you make it plural
 - Syntactically: Where and how is it used in a sentence
 
@@ -563,7 +579,7 @@ See chart
 
 ### Pronouns
 - Semantics: refers to a person or thing already referred to
-- Morpology: declined for genitive, sccusative/dative cases
+- Morphology: declined for genitive, sccusative/dative cases
     - inflected
     - e.g he, his, him
 - Syntax: like nouns
@@ -571,7 +587,7 @@ See chart
 ### Prepositions
 - e.g in, to, for, at, with, about, near, of
 - Semantics: refers to relations between things or between an action and its object
-- Morpology: invariant
+- Morphology: invariant
 - Syntax: always linked to a prepositional object
     - prepositional phrases can function as complements to verbs
     - or modifying a verb or noun phrase
@@ -579,13 +595,13 @@ See chart
 ### Determiners
 - e.g the, a, this, that, these/those
 - Semantics:
-- Morpology: generally invariant, except these/those
+- Morphology: generally invariant, except these/those
 - Syntax: front of noun phrases
 
 ### Conjunctions
 - e.g and, or, but
 - Semantics:
-- Morpology: invariant
+- Morphology: invariant
 - Syntax: connect words, phrases or independent clauses
 - Types:
     - coordinating: elements are conjoined in parallel
@@ -598,7 +614,7 @@ See chart
 ### Degree Words
 - e.g very, so, too, always, perhaps
 - Semantics:
-- Morpology: invariant
+- Morphology: invariant
 - Syntax: appear before adjectives and adverbs
 
 ### Ambiguities
@@ -609,14 +625,110 @@ See chart
 - Verbs can be used as nouns (gerunds)
     - e.g "Running was his favourite sport"
 - Adjectives can be used as nouns
-    - e.g "Empy was the feeling he had"
+    - e.g "Empty was the feeling he had"
 - Adverbs can be used as a degree word
     - e.g "he was terribly dull"
-- Phrase or clauses (composed of differnt word classes) can function like an adverb, adjective
+- Phrase or clauses (composed of different word classes) can function like an adverb, adjective
     - e.g "He taught his class with extraordinary enthusiasm"
 
-- Semantics:
-- Morpology:
-- Syntax:
+## Sources of New words
+- Derivation (adding affixes)
+- Borrowing from other languages
+- Formal processes (compounding, clipping, blending, acronyms, word-class conversion, back-derivation)
+- Word can change its meaning (this makes it a new word)
+
+### Borrowing
+- People move around, trade and interact with other languages
+- Words are adapted to sound patterns of host language
+- 70%+ of modern english is borrowed
+- e.g Pronouns
+    - German: I, thou, she/he, you
+    - Scandinavian: they
+- e.g Adaptation
+    - pay-jamahs (Persian) -> pyjamas
+    - segankw (Abenaki) -> skunk
+- Loan words look different from other english words
+
+### Formal Processes
+- Compounding: Make new words by sticking together existing words
+    - e.g air + port
+    - e.g wind + surfing
+- Clipping: Take a word and delete part of it
+    - e.g hamburger -> burger
+    - e.g professor -> prof
+    - e.g demonstration -> demo
+    - e.g network -> internet -> net
+- Blending: take a bit of each word and combine them
+    - e.g smoke + fog -> smog
+    - e.g motor + hotel -> motel
+    - e.g breakfast + lunch -> brunch
+    - e.g wireless + fidelity -> wifi (also analogy to `hifi`)
+    - e.g waterloo + card -> watcard
+- Acronyms
+    - Letter enunciation:
+        - e.g PR, TV, R&R, USA,
+    - Pronounced:
+        - e.g RADAR, NASA, AIDS, DOS,
+- Back-derivation: create new words based on another new word
+    - e.g stage + manager -> stagemanager -> stagemanage
+    - e.g tele + vision -> television -> televise
+    - e.g firefighter -> firefight
+
+### Meaning to make words
+- A sound pattern is not a word until it becomes meaningful
+- e.g Same sound, different meaning
+    - 'Yellow blue tibia' means 'I love you' in russian
+
+#### What does meaning mean?
+- *Signifier*: Concept or idea attached to the sound pattern
+- *Reference*: Thing in the world that the sound pattern refers to
+- We call signifier 'meaning'
+
+### Semantics
+- Study of the meanings of words
+- Concerned with
+    - nature of meaning
+
+#### Networks of meaning
+- Words acquire new meanings over time
+- Words gain a network of related meanings
+- e.g Trip has many related meanings (walk, journey, stumble, stumble in speech)
+- e.g School
+    1. Institute of learning
+    2. Lessons
+    3. Students and staff
+    4. Group of people with similar views ('school of thought')
+    5. group of artists with the same style
+    6. group of fish (actually from dutch)
+    7. an educational experience ('school of life')
+    8. to outwit or display mastery ('to school someone')
+
+#### Meaning Evolution
+- Metonym: refer to something they represent as the whole thing
+    - e.g 'Ottawa' as a parliament hill
+- Metaphor: the thing said is like the thing referred to
+    - Way for words to acquire new meaning
+- Generalization
+    - e.g 'Schooling is important' refers to every kind of education
+- Word-class conversion: When one kind of word is used like another kind of word
+    - e.g old school ('school' as adjective)
+    - e.g to school someone ('school' has a verb)
+    - Often the stress on the word changes
+    - e.g 'computer' was a person who made calculations
+        - > Device/machine for preforming calculations
+
+### Onomasiology
+- Look at the meaning, of the word and then the name
+
+#### Lexical Fields
+- e.g lexical field of animals
+    - dogs, cats, snakes
+    - No unity
+    - Comes from a variety of sources
+        - Adjective forms are from latin
+        - Food forms are from french
+    - Has distinctive words for males, females, children, groups
+- e.g lexical field of chemistry is more homogeneous
+- Lexical field reveals historical technologies
 
 
