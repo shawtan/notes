@@ -41,7 +41,6 @@
 - Agrees: linguistics is used to describe the system of language a native speaker knows
 - Conflict: Linguistics needs to explain how speakers create and understant new sentences
 
-
 # Phonology
 ## Phonetics
 - Study of the production of linguistic sounds
@@ -191,7 +190,7 @@ See chart
 - Classify the phoneme (voiceless stop)
 - Enumerate the features of the phoneme (e.g +consonant +nasal)
 - σ = syllable
-- # = word
+- \# = word
 - ∅ = null (deletion or absence)
 
 #### Nasalization
@@ -265,6 +264,7 @@ See chart
     - e.g The Great Vowel Shift (1400 - 1800)
         - bat -> bate -> beat -> beet -> bite
         - boat -> boot -> bout
+
 # Morphology
 
 ## Challenges
@@ -282,4 +282,341 @@ See chart
 - e.g hous/ing
 - e.g house/s
 - e.g house
+
+### Distinctions
+- **Free morpheme**: A morpheme that can exist on its own
+    - e.g 'house'
+- **Bound morpheme**: Morpheme that must be attached to a free morpheme
+    - e.g Affixes
+    - e.g '-ing'
+- **Lexical morpheme**: Carries semantic weight, are an open class
+    - e.g 'house', 'dog', 'carry'
+    - Usually free
+    - Rare bound lexical morphemes
+        - e.g (de)funct, funct(ion)
+        - e.g (in)flate, (de)flate, (con)flate
+- **Grammatical morpheme**: Creates or alters grammatical relations between other units, usually closed class
+    - Free grammatical morphemes (Function Words): 'to', 'for', 'in'
+    - Bound grammatical morphemes: '-ing', 'ly' '-s', 'in-', 'de-', 'con-'
+        - **Derivational affixes**: Used to create new words
+        - **Inflectional affixes**: Used to attach grammatical information
+    - Grammatical morphemes cannot be combined to make new words
+
+## Word-formation
+1. Compounding: By combining two free morphemes
+    - e.g Girlfriend
+2. Derivation: By combining a free morpheme with a bound grammatical morpheme
+    - e.g Friendly
+    - If you change the grammatical form, it's a inflection
+        - e.g friends
+3. Clipping / Acronyms: By reducing a word, subtracting from it
+
+### Compounds
+- First morpheme usually  receives the stree
+- Latter morpheme 'head' determines its word class (noun, verb, adjective)
+    - Categorized as: Noun compounds, verb compounds, adjective compounds
+
+#### Noun Compounds
+- Noun + Noun
+    - e.g Wheelchair, horsehair, skylight
+- Adjective + Noun
+    - e.g Blueberry, small talk
+- Verb + Noun
+    - e.g breaking point, flipchart
+
+#### Verb Compounds
+- Verb + verb
+    - e.g blow-dry, sleepwalk
+- Noun + verb
+    - e.g manhandle
+- Adjective
+    - e.g dryclean
+
+#### Adjective Compounds
+- Adjective + adjective
+    - e.g clear-sighted
+- Adjective + noun
+    - e.g gunshy, colourblind
+- Adjective + verb
+    - e.g stinking rich, soaking wet
+
+#### Analysability
+- Most compounds are analysable (we can see how the compound comes from the combination)
+- **Darkened compound**: Some words started as compounds, have parts that are no longer analysable (due to sound changes)
+    - e.g Cranberry (Used to be crane+berry)
+- 'Outrage'
+    1. Appears to be out + rage
+    2. Actually from latin 'ultrage' (e.g ultra)
+    3. Latin 'ult-' -> French 'out-'
+    - Mistakenly analysed by langauge users
+    - Altered pronounciation to 'outrAge' vs 'outrage' (garbage)
+    - Altered meaning to do with anger
+
+### Derivations
+- Free morpheme + 1+ bound lexical morphemes
+- e.g Prefixes: un-, re-
+    - Suffixes: -ful, -less, -tion
+    - Infixes: not in english
+    - Circumfixes: em---en (embolden)
+
+#### Derivational cs Inflectional effixes
+- Inflectional affixes change the grammatical category of a word
+- Derivatio al affixes are fussier
+- TODO
+
+## Inflectional Morphology
+- **Inflection** occurs when something (an affix) is added to a word to provide grammatical information
+- Affix is often 'fused' with the free morpheme or stem
+- Meaning of word doesn't change, but we know about the context
+- Not all languages are inflected
+
+### Affixes
+- Bound grammatical morphemes
+- Can be derivational or inflectional
+- Classified by how they attach to other morphemes
+    - Prefixes: (re)turn, (pre)view, (dis)engage
+    - Suffixes: turn(ing), engage(ment), view(er)
+    - Infixes: Not in english, goes in the middle of a word
+    - Circumfixes: (em)bold(en), (en)light(en)
+
+### How Grammar Information is conveyed
+- e.g "My father loves my sister"
+    - English: word order tells us who liked whom, subject precedes verb followed by object
+    - Russian: suffixes for persons will indicate who loves whom
+    - Mohawk: prefix determines who loves whom, and genders
+- In some landuages, every word is a single morpheme
+- Isolating / Analytic language
+    - e.g Mandarin
+- Synthetic language
+    - Agglutinative: morphemes are added to a stem and each morpheme contains one bit of information
+        - e.g Finnish, Turkish
+    - Inflecting (Fusional): morphemes are added and usually fuse with the stem
+        - Morphemes contain several bits of information
+    - Polysysnthetic
+        - Words are composed of several morphemes and 1+ stem
+        - e.g Mohawk: words get really long and descriptive
+
+### Inflecting languages
+- More than one morpheme per word
+- Bound grammatical morphemes express more than one grammatical distinction
+    - e.g Italian parl(o), -o means 1st person, singular, present tense, indicative
+    - e.g Latin has a lot of inflection
+    - e.g French (conjugations)
+
+#### English Inflections
+- Nouns
+    - Plural: -s (Cars)
+    - Genitive: -'s (Bob's car)
+- Adjective
+    - Comparative: -er
+    - Superlative: -est
+- Pronouns
+    - Nominative he, she, they
+    - Accusative/Dative/Prepositional: him, her, them
+    - Genitive: his, her(s), their(s)
+- Verbs
+    - 3rd person singular: -s
+    - Progressive: -ing
+    - Past: -ed
+    - Past participle: -en, -ed
+- e.g `she talks`
+    - Indicates: 3rd person, present, not continuous, indicative mood
+- Inflected verb must agree with pronoun
+
+#### Agreement
+- Pronoun and verb inflections must agree
+- e.g 'I talks', 'one cows'
+- Important in inflected langauges
+
+### Alternatives to inflection
+- Ablaut (Vowel Mutation)
+    - e.g I write vs I wrote vs I have written
+- Suppletion
+    - e.g I go, they went
+
+### Inflection vs Word Order
+- English determines objects and subjects using word order
+- Word order: 'The woman gave the man a sandwich' vs 'The woman gave the sandwich a man'
+- Inflection: 'She gave him a sandwich', 'Him she gave a sandwich'
+
+## Morphological Analysis
+- Break a word into its constituent morphemes by retracing the steps of building it
+- e.g Refocusing
+    1. Split into parts: re/focus/ing
+    2. Determine order parts were combined (usually derivations > inflections): ((re)(focus))(ing)
+    3. TODO <Insert morphological tree image>
+```
+    V
+   / \
+  V    \
+ /   \   \
+ DeAff
+ re     focus   ing
+```
+
+### Ambiguities
+- e.g Reusable
+    - re/use/able
+    - ((re)(use))(able)
+- e.g Unusable
+    - un/use/able
+    - (un)((use)(able))
+- e.g Housebuying
+    - house/buy/ing
+    - (house)((buy)(ing))
+    - Is a gerund
+- e.g Reasonableness
+    - Reason/able/ness
+    - (Reason/able)/ness
+    - N, DA, DA
+    - Adj,
+    - Noun
+- e.g blowdryer
+    - blow/dry/er
+    - blow/(dry/er)
+    - verb, adj, derivational adjective
+    - n
+    - n
+- e.g Intentionally
+    - In/tent/ion/al/ly
+    - (((In/tent)/ion)/al)ly
+    - D-aff, BL, DN, DA, D-Affix
+    - V > N > Adj > Adv
+- e.g Deregulation
+    - De/regul/at/ion (de-/regul(ar)/-ate/-tion)
+    - DA, V, DN
+    - Verb > Noun
+
+# Syntax
+## Words as Language Units
+- Words are the immediate constituents of sentences
+- A broken down sentence is a sequence of words
+- Languages are a collection of words (**lexicon**)
+- Words bear meaning
+    - Words can develop new meanings seperate from their parts
+        - e.g trailer =/= trail-er
+        - e.g establishment =/= establish-ment
+        - e.g officious =/= office-ous
+
+## Word
+- Not defined by meaningful unit
+    - Suffixes have meaning
+    - Some words don't have meaning by itself (e.g in)
+- Not defined by spacing
+    - Some two word words have its own meaning
+- Defined by ability to be moved around in a sentence
+    - Different words fit different slots -> Word classes
+
+## Word Classes
+- Content Words
+    - Nouns
+    - Verbs
+    - Adjectives
+    - Adverbs
+    - _Open class_
+    - Semantically important
+- Function Words
+    - Pronouns
+    - Propositions
+    - Determiners
+    - Conjunctions
+    - Determiners ('the', 'a', demonstratives, possessives, quantifiers)
+    - Degree words
+    - _Closed class_
+
+### Determining Word Class
+- Semantically: by its meaning
+- Morphology: what kind of affixes and morpological change does it employ
+    - e.g Can you make it plural
+- Syntactically: Where and how is it used in a sentence
+
+### Nouns
+- Semantics: Signifies concrete or abstract 'objects'
+    - e.g cars, birds, love, dedication
+- Morphology: Can take plural endings (-s, -es) and genitive clitics (-'s)
+- Syntax: Part of subject or object of sentence
+    - Agrees with verbs
+    - Can be preceded by adjectives and determiners
+
+### Verbs
+- Semantics: designate processes, activities
+- Morphology: conjugated according to person, number, tense, aspect, mood
+- Syntax: connect to a subject
+    - Can be modified by an adverb or adverbial phrase
+    - Take complements (verb is used as the object of another verb)
+        - e.g I *asked* her to *leave*
+
+### Adjectives
+- Semantics: designate an attribute of something or a quality
+- Morphology: no case endings, can take comparative endings (-er, -est)
+    - can be derived from nouns using suffixes (-y, -ful, -less)
+- Syntax: can be a complement to a verb phrase (e.g "The sky is blue")
+    - Can be before a noun that it modifies
+    - Cannot be the subject or object in a sentence
+
+### Adverbs
+- Semantics: designate an attribute of an activity
+- Morphology: no case endings
+    - many end in `-ly`
+- Syntax: Appear before or after what they modify
+    - Can modify anything but a noun (including adjectives)
+
+### Pronouns
+- Semantics: refers to a person or thing already referred to
+- Morpology: declined for genitive, sccusative/dative cases
+    - inflected
+    - e.g he, his, him
+- Syntax: like nouns
+
+### Prepositions
+- e.g in, to, for, at, with, about, near, of
+- Semantics: refers to relations between things or between an action and its object
+- Morpology: invariant
+- Syntax: always linked to a prepositional object
+    - prepositional phrases can function as complements to verbs
+    - or modifying a verb or noun phrase
+
+### Determiners
+- e.g the, a, this, that, these/those
+- Semantics:
+- Morpology: generally invariant, except these/those
+- Syntax: front of noun phrases
+
+### Conjunctions
+- e.g and, or, but
+- Semantics:
+- Morpology: invariant
+- Syntax: connect words, phrases or independent clauses
+- Types:
+    - coordinating: elements are conjoined in parallel
+        - e.g and, or, but, yet, so
+    - subordinating: one element becomes a subpart of the other
+        - e.g that, when, if, after, because, although, wherever
+    - correlative: links things, but requires both parts
+        - e.g TODO
+
+### Degree Words
+- e.g very, so, too, always, perhaps
+- Semantics:
+- Morpology: invariant
+- Syntax: appear before adjectives and adverbs
+
+### Ambiguities
+- Words in different classes may have the same suffixes
+    - e.g approaches
+- Words in different classes may have the same form
+    - e.g "the fast bus" vs "he runs fast"
+- Verbs can be used as nouns (gerunds)
+    - e.g "Running was his favourite sport"
+- Adjectives can be used as nouns
+    - e.g "Empy was the feeling he had"
+- Adverbs can be used as a degree word
+    - e.g "he was terribly dull"
+- Phrase or clauses (composed of differnt word classes) can function like an adverb, adjective
+    - e.g "He taught his class with extraordinary enthusiasm"
+
+- Semantics:
+- Morpology:
+- Syntax:
+
 
