@@ -11,7 +11,7 @@
 ### Places
 - Dynamic - changes properties and boundaries due to environment and human factors
 - Influences people's physical well-being, opportunities, lifestyle choices
-- Places hold meaning for differnet people
+- Places hold meaning for different people
 - **Identity**: the sense that you make of yourself through your subjective feelings based on your everyday experiences and social relations
 - Significant events occur in places
 - Social interaction occurs in places
@@ -23,7 +23,7 @@
 
 ### Human Geography
 - **Physical Geography**: Earth's natural processes and outcomes
-- **Regional Geography**: How environmental and human factors produce terriorties with distinctive landscapes and cultural attributes
+- **Regional Geography**: How environmental and human factors produce territories with distinctive landscapes and cultural attributes
 - Tools
     - Observation
         - Fieldwork
@@ -41,8 +41,8 @@
     - Thematic: Spatial dimensions of conditions / processes/ events
         - Isoline maps connect equal data value (e.g precipitation)
         - Proportional symbols use density to represent frequency
-    - Dot: Single dot/symbol for num occurences
-    - Choropleth: Gradient tonal shadings reflects numver variations
+    - Dot: Single dot/symbol for number of occurrences
+    - Choropleth: Gradient tonal shadings reflects number variations
 - Map scale: ratio between linear distance on a map and linear distance on Earth's surface
     - Corresponding lengths or Representative fraction (ratio)
 - Map projections: systematic rendering of earth on a flat surface
@@ -119,7 +119,7 @@
 
 #### Regionalization
 - Classifying **areal units** (individual places)
-- Look at regions with coherent structure, econimics, politics, social organization
+- Look at regions with coherent structure, economics, politics, social organization
 - *Core-Domain-Sphere* model: 
     - Core: Distinctive attribute very clear
     - Domain: Dominant, but not exclusive
@@ -136,7 +136,7 @@
     - Shared dress code, speech patterns
     - 'Third places'
 - Outsiders
-    - Local landmarks, ways of life that are familar
+    - Local landmarks, ways of life that are familiar
 
 ### Developing a Geographical Imagination
 - lol why
@@ -250,14 +250,14 @@
     - Leaving skilled workers in Cuba
     - Influx of cheap migrants in US
     - 'Brain drain'
-- **Gross Mirgation**: Total number of migrants moving in or out
+- **Gross Migration**: Total number of migrants moving in or out
 - **Net Migration**: gain or loss in population due to migration
 - **Push factors** cause people to move away
 - **Pull factors** attracts people to a place
 
 #### International Voluntary Migration
 - Canada receives a lot of voluntary immigrants
-    - Initial settlers from asia
+    - Initial settlers from Asia
     - French and British
     - Asian immigrants
 - **Transnational migrants**: migrants with homes in multiple countries

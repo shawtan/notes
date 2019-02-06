@@ -1,5 +1,34 @@
 # ENGL 306A: Linguistics
 
+## History of Linguistics
+
+### Medieval Grammar
+- Grammar is combined with philosophy
+- Assumed that grammar mirrors thought
+- Nouns = permanent
+- Verbs = change
+
+### The Renaissance Europe
+- More languages being studied beyond latin and greek
+    - French, German, Italian, Spanish, English
+- Thoughts about pronunciation and spelling
+- Thoughts about evolution of language
+
+### Some more stuff
+
+### Reorientation
+- Saussure creates a linguistic system that students publish as 'Course on General Linguistics'
+- Challenges existing linguistics
+    1. Are words the same when the sound and meaning changes?
+    2. Need more order, instead of an abstract, old language
+    3. Linguistics should take the speaker's point of view
+        - Speakers don't know the history of a language
+- Proposal:
+    - Reconstruct what a speaker needs to know to speak and understand a language
+    - Includes unconscious knowledge
+    - History of a language is irrelevant
+    - 'Synchronic' approach
+
 ## Introduction
 
 ### Saussure
@@ -539,6 +568,7 @@ See chart
     - Determiners ('the', 'a', demonstratives, possessives, quantifiers)
     - Degree words
     - _Closed class_
+    - Syntactically important
 
 ### Determining Word Class
 - Semantically: by its meaning
@@ -609,7 +639,7 @@ See chart
     - subordinating: one element becomes a subpart of the other
         - e.g that, when, if, after, because, although, wherever
     - correlative: links things, but requires both parts
-        - e.g TODO
+        - e.g either ... or, both ... and, not only ... but also
 
 ### Degree Words
 - e.g very, so, too, always, perhaps
@@ -631,7 +661,13 @@ See chart
 - Phrase or clauses (composed of different word classes) can function like an adverb, adjective
     - e.g "He taught his class with extraordinary enthusiasm"
 
-## Sources of New words
+
+### Semantics
+- Study of the meanings of words
+- Concerned with
+    - nature of meaning
+
+### Sources of New words
 - Derivation (adding affixes)
 - Borrowing from other languages
 - Formal processes (compounding, clipping, blending, acronyms, word-class conversion, back-derivation)
@@ -670,6 +706,7 @@ See chart
     - Pronounced:
         - e.g RADAR, NASA, AIDS, DOS,
 - Back-derivation: create new words based on another new word
+    - Removing supposed affixes
     - e.g stage + manager -> stagemanager -> stagemanage
     - e.g tele + vision -> television -> televise
     - e.g firefighter -> firefight
@@ -680,14 +717,9 @@ See chart
     - 'Yellow blue tibia' means 'I love you' in russian
 
 #### What does meaning mean?
-- *Signifier*: Concept or idea attached to the sound pattern
+- *Signifier*: Concept or idea attached to the sound pattern (the *signified*)
 - *Reference*: Thing in the world that the sound pattern refers to
 - We call signifier 'meaning'
-
-### Semantics
-- Study of the meanings of words
-- Concerned with
-    - nature of meaning
 
 #### Networks of meaning
 - Words acquire new meanings over time
@@ -704,12 +736,14 @@ See chart
     8. to outwit or display mastery ('to school someone')
 
 #### Meaning Evolution
-- Metonym: refer to something they represent as the whole thing
+- Metonym: refer to something by something closely associated
     - e.g 'Ottawa' as a parliament hill
 - Metaphor: the thing said is like the thing referred to
     - Way for words to acquire new meaning
-- Generalization
+- Generalization: new meaning is broader
     - e.g 'Schooling is important' refers to every kind of education
+- Specialization: acquire new meaning that is more specific than basic meaning
+    - e.g Summer school
 - Word-class conversion: When one kind of word is used like another kind of word
     - e.g old school ('school' as adjective)
     - e.g to school someone ('school' has a verb)
@@ -718,9 +752,13 @@ See chart
         - Became: Device/machine for preforming calculations
 
 ### Onomasiology
+- Theory of naming
 - Look at the meaning, of the word and then the name
+- **Conceptual domain**: Group of signifieds (sound patterns)
+    - e.g animals, human body
 
 #### Lexical Fields
+- Words that cover a conceptual domain
 - e.g lexical field of animals
     - dogs, cats, snakes
     - No unity
