@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GEOG101notes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">body {
+font-family: Helvetica, arial, sans-serif;
+font-size: 14px;
+line-height: 1.6;
+padding-top: 10px;
+padding-bottom: 10px;
+background-color: white;
+padding: 30px; }
+body > *:first-child {
+margin-top: 0 !important; }
+body > *:last-child {
+margin-bottom: 0 !important; }
+a {
+color: #4183C4; }
+a.absent {
+color: #cc0000; }
+a.anchor {
+display: block;
+padding-left: 30px;
+margin-left: -30px;
+cursor: pointer;
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0; }
+h1, h2, h3, h4, h5, h6 {
+margin: 20px 0 10px;
+padding: 0;
+font-weight: bold;
+-webkit-font-smoothing: antialiased;
+cursor: text;
+position: relative; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+text-decoration: none; }
+h1 tt, h1 code {
+font-size: inherit; }
+h2 tt, h2 code {
+font-size: inherit; }
+h3 tt, h3 code {
+font-size: inherit; }
+h4 tt, h4 code {
+font-size: inherit; }
+h5 tt, h5 code {
+font-size: inherit; }
+h6 tt, h6 code {
+font-size: inherit; }
+h1 {
+font-size: 28px;
+color: black; }
+h2 {
+font-size: 24px;
+border-bottom: 1px solid #cccccc;
+color: black; }
+h3 {
+font-size: 18px; }
+h4 {
+font-size: 16px; }
+h5 {
+font-size: 14px; }
+h6 {
+color: #777777;
+font-size: 14px; }
+p, blockquote, ul, ol, dl, li, table, pre {
+margin: 15px 0; }
+hr {
+margin: 0 0 19px;
+border: 0;
+border-bottom: 1px solid #ccc;
+}
+body > h2:first-child {
+margin-top: 0;
+padding-top: 0; }
+body > h1:first-child {
+margin-top: 0;
+padding-top: 0; }
+body > h1:first-child + h2 {
+margin-top: 0;
+padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+margin-top: 0;
+padding-top: 0; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+margin-top: 0;
+padding-top: 0; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+margin-top: 0; }
+li p.first {
+display: inline-block; }
+li {
+margin: 0; }
+ul, ol {
+padding-left: 30px; }
+ul :first-child, ol :first-child {
+margin-top: 0; }
+dl {
+padding: 0; }
+dl dt {
+font-size: 14px;
+font-weight: bold;
+font-style: italic;
+padding: 0;
+margin: 15px 0 5px; }
+dl dt:first-child {
+padding: 0; }
+dl dt > :first-child {
+margin-top: 0; }
+dl dt > :last-child {
+margin-bottom: 0; }
+dl dd {
+margin: 0 0 15px;
+padding: 0 15px; }
+dl dd > :first-child {
+margin-top: 0; }
+dl dd > :last-child {
+margin-bottom: 0; }
+blockquote {
+border-left: 4px solid #dddddd;
+padding: 0 15px;
+color: #777777; }
+blockquote > :first-child {
+margin-top: 0; }
+blockquote > :last-child {
+margin-bottom: 0; }
+table {
+padding: 0;border-collapse: collapse; }
+table tr {
+border-top: 1px solid #cccccc;
+background-color: white;
+margin: 0;
+padding: 0; }
+table tr:nth-child(2n) {
+background-color: #f8f8f8; }
+table tr th {
+font-weight: bold;
+border: 1px solid #cccccc;
+margin: 0;
+padding: 6px 13px; }
+table tr td {
+border: 1px solid #cccccc;
+margin: 0;
+padding: 6px 13px; }
+table tr th :first-child, table tr td :first-child {
+margin-top: 0; }
+table tr th :last-child, table tr td :last-child {
+margin-bottom: 0; }
+img {
+max-width: 100%; }
+span.frame {
+display: block;
+overflow: hidden; }
+span.frame > span {
+border: 1px solid #dddddd;
+display: block;
+float: left;
+overflow: hidden;
+margin: 13px 0 0;
+padding: 7px;
+width: auto; }
+span.frame span img {
+display: block;
+float: left; }
+span.frame span span {
+clear: both;
+color: #333333;
+display: block;
+padding: 5px 0 0; }
+span.align-center {
+display: block;
+overflow: hidden;
+clear: both; }
+span.align-center > span {
+display: block;
+overflow: hidden;
+margin: 13px auto 0;
+text-align: center; }
+span.align-center span img {
+margin: 0 auto;
+text-align: center; }
+span.align-right {
+display: block;
+overflow: hidden;
+clear: both; }
+span.align-right > span {
+display: block;
+overflow: hidden;
+margin: 13px 0 0;
+text-align: right; }
+span.align-right span img {
+margin: 0;
+text-align: right; }
+span.float-left {
+display: block;
+margin-right: 13px;
+overflow: hidden;
+float: left; }
+span.float-left span {
+margin: 13px 0 0; }
+span.float-right {
+display: block;
+margin-left: 13px;
+overflow: hidden;
+float: right; }
+span.float-right > span {
+display: block;
+overflow: hidden;
+margin: 13px auto 0;
+text-align: right; }
+code, tt {
+margin: 0 2px;
+padding: 0 5px;
+white-space: nowrap;
+border: 1px solid #eaeaea;
+background-color: #f8f8f8;
+border-radius: 3px; }
+pre code {
+margin: 0;
+padding: 0;
+white-space: pre;
+border: none;
+background: transparent; }
+.highlight pre {
+background-color: #f8f8f8;
+border: 1px solid #cccccc;
+font-size: 13px;
+line-height: 19px;
+overflow: auto;
+padding: 6px 10px;
+border-radius: 3px; }
+pre {
+background-color: #f8f8f8;
+border: 1px solid #cccccc;
+font-size: 13px;
+line-height: 19px;
+overflow: auto;
+padding: 6px 10px;
+border-radius: 3px; }
+pre code, pre tt {
+background-color: transparent;
+border: none; }
+sup {
+font-size: 0.83em;
+vertical-align: super;
+line-height: 0;
+}
+* {
+-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+body {
+width: 854px;
+margin:0 auto;
+}
+}
+@media print {
+table, pre {
+page-break-inside: avoid;
+}
+pre {
+word-wrap: break-word;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="geog-101">GEOG 101</h1>
+<h2 id="ch1-introduction-to-human-geography">Ch1: Introduction to Human Geography</h2>
+<ul>
+<li>Pages E-Text: 2-33</li>
+<li>The Arab Spring was the result of many global events that led to higher bread prices</li>
+<li><strong>Places</strong>: specific geographic settings with distinctive physical, social and cultural attributes</li>
+<li><strong>Regions</strong>: territories that encompass many <em>places</em> that share attributes</li>
+<li>Geography helps use understand the world</li>
+<li><strong>Human Geography</strong>: study of spatial organization of human activity and people’s relationships with their environment</li>
+</ul>
+<h3 id="places">Places</h3>
+<ul>
+<li>Dynamic - changes properties and boundaries due to environment and human factors</li>
+<li>Influences people’s physical well-being, opportunities, lifestyle choices</li>
+<li>Places hold meaning for differnet people</li>
+<li><strong>Identity</strong>: the sense that you make of yourself through your subjective feelings based on your everyday experiences and social relations</li>
+<li>Significant events occur in places</li>
+<li>Social interaction occurs in places
+<ul>
+<li>Structures daily routines</li>
+<li>Provides opportunities and constraints</li>
+<li>Context for common-sense and experience</li>
+<li>Setting for socialization</li>
+<li>Arena for contesting social norms</li>
+</ul></li>
+</ul>
+<h3 id="human-geography">Human Geography</h3>
+<ul>
+<li><strong>Physical Geography</strong>: Earth’s natural processes and outcomes</li>
+<li><strong>Regional Geography</strong>: How environmental and human factors produce terriorties with distinctive landscapes and cultural attributes</li>
+<li>Tools
+<ul>
+<li>Observation
+<ul>
+<li>Fieldwork</li>
+<li>Lab experiments</li>
+<li>Remote sensing (Using aerial photography / satellite imagery to collect information)</li>
+</ul></li>
+<li>Visualization and Representation</li>
+<li>Analysis</li>
+</ul></li>
+</ul>
+<h4 id="maps">Maps</h4>
+<ul>
+<li>Representations of the world</li>
+<li>What they contain and omit reveal experiences, priorities, interpretations and intentions of their authors</li>
+<li>Types
+<ul>
+<li>Topographic: Form of earth’s surface
+<ul>
+<li>Contour lines connect equal elevation</li>
+</ul></li>
+<li>Thematic: Spatial dimensions of conditions / processes/ events
+<ul>
+<li>Isoline maps connect equal data value (e.g precipitation)</li>
+<li>Proportional symbols use density to represent frequency</li>
+</ul></li>
+<li>Dot: Single dot/symbol for num occurences</li>
+<li>Choropleth: Gradient tonal shadings reflects numver variations</li>
+</ul></li>
+<li>Map scale: ratio between linear distance on a map and linear distance on Earth’s surface
+<ul>
+<li>Corresponding lengths or Representative fraction (ratio)</li>
+</ul></li>
+<li>Map projections: systematic rendering of earth on a flat surface
+<ul>
+<li>Equidistant: distance is accurate in one direction</li>
+<li>Conformal: renders compass directions accurately</li>
+<li>Azimuthal: compass directions are correct from one point</li>
+<li>Equivalent / Equal-area: Areas are portrayed in true proportions</li>
+<li>Cartogram: space is transformed based on some stat</li>
+</ul></li>
+</ul>
+<h4 id="geographic-information-systems-gis">Geographic Information Systems (GIS)</h4>
+<ul>
+<li>Organized set of computer hardware, software and spatially coded data to capture, store, update, manipulate, and display geographic references</li>
+<li>Data must have longitude, latitude, elevation</li>
+<li>Allows merging of data from different sources and topics</li>
+</ul>
+<h3 id="spatial-analysis">Spatial Analysis</h3>
+<ul>
+<li>Study of geography as their arrangement on a map</li>
+</ul>
+<h4 id="location">Location</h4>
+<ul>
+<li>Can be
+<ul>
+<li>Nominal: expressed in terms of names</li>
+<li>Absolute: expressed in terms of coordinates
+<ul>
+<li>Latitude = how north / south</li>
+<li>Longitude = how east / west</li>
+</ul></li>
+<li>Relative: in terms of site or situation
+<ul>
+<li>Site: physical attributes of location (terrain, soil, etc)</li>
+<li>Situation: location relative to other places / activities</li>
+</ul></li>
+<li>Cognitive (mental map): psychological representations of locations</li>
+</ul></li>
+</ul>
+<h4 id="distance">Distance</h4>
+<ul>
+<li>Absolute: in km</li>
+<li>Relative: in terms of time, effort, or cost</li>
+<li>Cognitive: perceived distance</li>
+<li><strong>Friction of distance</strong>: deterrent / inhibiting effect of distance on human activity</li>
+<li><strong>Distance-decay function</strong>: rate where an activity decreases with distance
+<ul>
+<li>e.g Don’t commute to Waterloo for a job</li>
+</ul></li>
+<li>Nearness principle
+<ol type="1">
+<li>Max overall utility of places at min effort</li>
+<li>Max connections between places at min cost</li>
+<li>Locate related activities close together</li>
+</ol></li>
+</ul>
+<h4 id="space">Space</h4>
+<ul>
+<li>Absolute</li>
+<li>Topological: connections between points in space
+<ul>
+<li>Measured by nature and degree of connectivity</li>
+</ul></li>
+<li>Relative:
+<ul>
+<li>Socioeconomic: measures of cost, profit, productivity</li>
+<li>Cognitive: People’s values, feelings, beliefs, perceptions</li>
+</ul></li>
+<li>Activities produce space (e.g setting up a town center)</li>
+</ul>
+<h4 id="accessibility">Accessibility</h4>
+<ul>
+<li>Opportunity for contact/interaction from a location relative to other locations</li>
+<li><em>Connectivity</em>: channels of communication and transportation</li>
+</ul>
+<h4 id="spatial-interaction">Spatial Interaction</h4>
+<ul>
+<li>Movement and flows involving human activity</li>
+<li>Principles
+<ul>
+<li>Complementarity
+<ol type="1">
+<li>Demand and supply must match</li>
+<li>International division of labour</li>
+<li>Specialization + economies of scale</li>
+</ol></li>
+<li>Transferability
+<ul>
+<li>Cost of moving an item vs ability of item to bear costs</li>
+<li>Improved by <em>infrastructure</em> and <em>time-space convergence</em></li>
+</ul></li>
+<li>Intervening opportunities
+<ul>
+<li>Alternative origins or destinations</li>
+</ul></li>
+<li>Spatial diffusion
+<ul>
+<li>How things (e.g innovation, disease, politics, music) spread through space and time</li>
+<li>Expansion: spread due to proximity</li>
+<li>Hierarchical: spread that skips in-between places</li>
+<li>Relocation: spread due to people movement</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="regional-analysis">Regional Analysis</h3>
+<ul>
+<li>Similarities and differences among and between places</li>
+</ul>
+<h4 id="regionalization">Regionalization</h4>
+<ul>
+<li>Classifying <strong>areal units</strong> (individual places)</li>
+<li>Look at regions with coherent structure, econimics, politics, social organization</li>
+<li><em>Core-Domain-Sphere</em> model:
+<ul>
+<li>Core: Distinctive attribute very clear</li>
+<li>Domain: Dominant, but not exclusive</li>
+<li>Sphere: Present, but not dominant</li>
+</ul></li>
+</ul>
+<h4 id="landscape">Landscape</h4>
+<ul>
+<li>Complex repository of society</li>
+<li><strong>Ordinary</strong> (vernacular) landscape: everyday landscapes created from life</li>
+<li><strong>Symbolic</strong> lanscape: particular values / aspirations leaders want to impart on the public</li>
+</ul>
+<h4 id="sense-of-place">Sense of Place</h4>
+<ul>
+<li>People’s feelings towards a place due to experiences and memories</li>
+<li>Insiders
+<ul>
+<li>Shared dress code, speech patterns</li>
+<li>‘Third places’</li>
+</ul></li>
+<li>Outsiders
+<ul>
+<li>Local landmarks, ways of life that are familar</li>
+</ul></li>
+</ul>
+<h3 id="developing-a-geographical-imagination">Developing a Geographical Imagination</h3>
+<ul>
+<li>lol why</li>
+</ul>
+<h2 id="ch-3-population-geography">Ch 3: Population Geography</h2>
+<ul>
+<li>Pages E-Text: 72-109</li>
+<li>Population counts are political
+<ul>
+<li>Determines number of representatives in government</li>
+<li>Determines amount of tax revenue the region receives</li>
+<li>e.g Iraq does not want to conduct a census because it will determine who controls the oil fields</li>
+</ul></li>
+<li><strong>Demographics</strong>: characteristics of a <em>human population</em> including gender, race, age, income, disabilities, education, migration patterns</li>
+</ul>
+<h3 id="demographic-tools">Demographic Tools</h3>
+<ul>
+<li><strong>Demography</strong>: Study of characteristics of human populations</li>
+<li>Try to study distribution of people</li>
+</ul>
+<h4 id="censuses-and-vital-records">Censuses and Vital Records</h4>
+<ul>
+<li>Census: Count of people in a country / region / city
+<ul>
+<li>Lots of data</li>
+<li>Only a snapshot</li>
+</ul></li>
+<li>Vital record: reports of birth, death, marriage, divorce, disease
+<ul>
+<li>Limited individuals</li>
+<li>Tracks changes over time</li>
+</ul></li>
+<li>Combining census and vital record gives more information, much has privacy implications</li>
+<li>Limitations:
+<ul>
+<li>Expensive</li>
+<li>Not comprehensive (underrepresents non-mainstream households)</li>
+</ul></li>
+<li>India held a biometric census that was cheap and through</li>
+</ul>
+<h4 id="population-distribution-and-structure">Population Distribution and Structure</h4>
+<h5 id="population-distribution">Population Distribution</h5>
+<ul>
+<li>Population is shaped by
+<ul>
+<li>accessibility, topography, soil fertility, climate, water, natural resources</li>
+<li>a country’s politics and economics</li>
+<li>religious reasons</li>
+</ul></li>
+<li>Asia is most populated</li>
+<li>Most people are near oceans or rivers</li>
+<li>90% people are north of equator</li>
+</ul>
+<h5 id="population-density-and-composition">Population density and composition</h5>
+<ul>
+<li><strong>Crude Density</strong>: number of people / total land area</li>
+<li><strong>Nutritional Density</strong>: total population / cultivated land</li>
+<li><strong>Health care density</strong>: total population / number of physicians</li>
+<li>Composition information
+<ul>
+<li>Proportion of older people helps us allocate health care</li>
+<li>Proportion of child-bearing aged females helps predict population growth
+<ul>
+<li>Also education of females</li>
+</ul></li>
+</ul></li>
+</ul>
+<h5 id="age-sex-pyramids">Age-Sex pyramids</h5>
+<ul>
+<li>e.g Can reveal effects of WWI, WWII on Germany’s population</li>
+<li>Rapid growth pyramid (Peripheral Country):
+<ul>
+<li>Wider base than middle</li>
+<li>Need resources to care for children</li>
+<li>Need to create more jobs when children grow up</li>
+</ul></li>
+<li>Slow/No growth pyramid (Core country):
+<ul>
+<li>More middle cohort than youth</li>
+<li>Below replacement level</li>
+<li>Population evenly distributed among cohorts</li>
+</ul></li>
+<li><em>Dependency Ratio</em>: economic impact of young and old on working members of population</li>
+<li>Cohorts:
+<ul>
+<li>Youth: &lt;15 years</li>
+<li>Middle: age 15 - 64</li>
+<li>Old: &gt;65 years</li>
+</ul></li>
+<li>Baby Boom
+<ul>
+<li>Occurred after WWII</li>
+<li>Caused by positive outlook of life</li>
+<li>Ended by contraceptives and women entering workforce</li>
+<li>Currently more older people than children</li>
+</ul></li>
+</ul>
+<h3 id="population-dynamics-and-processes">Population Dynamics and Processes</h3>
+<ul>
+<li>Population Growth = Births - Deaths + (Immigration - Emigration)</li>
+</ul>
+<h4 id="birth-rates">Birth Rates</h4>
+<ul>
+<li><strong>Crude birth rate</strong>: live births in a year / every thousand people
+<ul>
+<li>Rich countries have lower CBR</li>
+</ul></li>
+<li><strong>Total fertility rate</strong>: average number of children a woman will have during her childbearing years (15-49)</li>
+</ul>
+<h4 id="death-rates">Death Rates</h4>
+<ul>
+<li><strong>Crude death rate</strong>: deaths in a year / 1000 people</li>
+<li>Men and elderly have higher death rates</li>
+<li>Poorer groups have higher death rates</li>
+<li>Variations
+<ul>
+<li>Infant mortality rate: infants &lt; 1 year / 1000 live births</li>
+<li>Life expectancy: average number of years an infant is expected to live
+<ul>
+<li>Differs by sex and race</li>
+</ul></li>
+</ul></li>
+<li>Epidemics affect life expectancy
+<ul>
+<li>HIV/AIDS
+<ul>
+<li>USA: more drug users and homosexual males</li>
+<li>Canada: more aboriginals and inmates</li>
+<li>Africa: more hetero-sexual non-drug users</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="demographic-transition-theory">Demographic Transition Theory</h4>
+<ul>
+<li>Fertility and mortality rates are tied to level of economic development</li>
+<li><strong>Demographic Transition</strong>: Model where high birth and death rates become low birth and death rates
+<ul>
+<li>Occurs with higher economic production and standards of living</li>
+<li>First death rate falls, then birth rate falls</li>
+<li>Based on industrialized countries. May not be generalizable to peripheral countries</li>
+</ul></li>
+</ul>
+<h3 id="population-movement-and-migration">Population Movement and Migration</h3>
+<ul>
+<li>Migration changes population</li>
+</ul>
+<h4 id="mobility-and-migration">Mobility and Migration</h4>
+<ul>
+<li><strong>Mobility</strong>: ability to move from a place to another
+<ul>
+<li>permanent or temporary</li>
+<li>short or long distance</li>
+</ul></li>
+<li><strong>Migration</strong>: long-distance move to a new location
+<ul>
+<li>change of residence</li>
+</ul></li>
+<li>Migration is tracked
+<ul>
+<li>Leaving skilled workers in Cuba</li>
+<li>Influx of cheap migrants in US</li>
+<li>‘Brain drain’</li>
+</ul></li>
+<li><strong>Gross Mirgation</strong>: Total number of migrants moving in or out</li>
+<li><strong>Net Migration</strong>: gain or loss in population due to migration</li>
+<li><strong>Push factors</strong> cause people to move away</li>
+<li><strong>Pull factors</strong> attracts people to a place</li>
+</ul>
+<h4 id="international-voluntary-migration">International Voluntary Migration</h4>
+<ul>
+<li>Canada receives a lot of voluntary immigrants
+<ul>
+<li>Initial settlers from asia</li>
+<li>French and British</li>
+<li>Asian immigrants</li>
+</ul></li>
+<li><strong>Transnational migrants</strong>: migrants with homes in multiple countries
+<ul>
+<li>e.g HK people that bought Vancouver housing</li>
+</ul></li>
+<li>Temporary labour migration: when workers go abroad and send money back
+<ul>
+<li>Reduces unemployment back home</li>
+<li>Money from workers sending remittances back</li>
+</ul></li>
+</ul>
+<h4 id="international-forced-migration">International Forced Migration</h4>
+<ul>
+<li>Refugees and Internally Displaced Persons (IDPs)
+<ul>
+<li>Only 1/3 of people leaving cross a border</li>
+</ul></li>
+<li>Reasons
+<ul>
+<li>War
+<ul>
+<li>e.g War on Terror in Iraq</li>
+<li>e.g Arab-Israeli War</li>
+</ul></li>
+<li>Famine</li>
+<li>Government coercion or oppression</li>
+<li>Slavery from Africa</li>
+<li>Modern slavery
+<ul>
+<li>Undocumented workers cannot go to authorities</li>
+</ul></li>
+<li>Natural disasters</li>
+<li>Eco-migration
+<ul>
+<li>Due to degradation of land and natural resources</li>
+<li>e.g Flat islands (Maldives, Seychelles)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="internal-voluntary-migration">Internal Voluntary Migration</h4>
+<ul>
+<li>People move due to economic opportunities in provinces</li>
+<li>Population changes - migrants are usually young and educated</li>
+<li>China: Large migration of rural to urban
+<ul>
+<li>Government wants to increase industrial productivity</li>
+</ul></li>
+</ul>
+<h4 id="internal-forced-migration">Internal Forced Migration</h4>
+<ul>
+<li>USA: Aboriginals were forced to leave their homelands</li>
+<li>Canada: Relocated Inuit people to High Arctic</li>
+</ul>
+<h3 id="population-debates-and-policies">Population Debates and Policies</h3>
+<ul>
+<li>How many people can Earth sustain?</li>
+</ul>
+<h4 id="population-resources-and-the-environment">Population, Resources, and the Environment</h4>
+<ul>
+<li>Malthus: Population growth will exceed available resources</li>
+<li>Need to prevent population from outgrowing available jobs and resources</li>
+</ul>
+<h4 id="population-policies">Population Policies</h4>
+<ul>
+<li>Official government strategy to change the size, composition or distribution of a population</li>
+<li>Urbanization naturally decreases fertility rate</li>
+<li>e.g China One Child Policy (1979 - 2014)
+<ul>
+<li>TFR drop from 5.5 to 1.7</li>
+<li>Average age increase from 25 to 35</li>
+<li>Challenge to support aging population</li>
+<li>Potential economic crisis (like Japan)</li>
+<li>Gender imbalance</li>
+</ul></li>
+<li>Other population control
+<ul>
+<li>Offer contraceptives</li>
+<li>Family planing</li>
+<li>Incentives to have less children</li>
+<li>Educate women
+<ul>
+<li>So they don’t need children for social recognition</li>
+</ul></li>
+<li>Gender equality</li>
+</ul></li>
+</ul>
+<h4 id="sustainable-development">Sustainable Development</h4>
+<ul>
+<li>UN has 17 sustainable development goals (SDG), replacing the Millennium Development Goals (MDG)
+<ul>
+<li>Focus on all countries improving, instead of rich helping poor</li>
+<li>Call for peace and good governance</li>
+<li>Specific goals addressing biodiversity, deforestation, marine life</li>
+<li>Reflects exploding urbanization by calling for sustainable and resilient cities</li>
+</ul></li>
+<li>To slow population growth, we need
+<ul>
+<li>good quality of life</li>
+<li>empower women</li>
+</ul></li>
+</ul>
+<h3 id="population-health-and-environment">Population, Health and Environment</h3>
+<ul>
+<li><strong>Epidemiological Transition model</strong>: theory that the prevailing illness changes from infectious to degenerative after the demographic transition
+<ul>
+<li>degenerative diseases are caused by aging, changing life-styles and environmental toxicity</li>
+</ul></li>
+<li>Urban areas have better health care than rural</li>
+<li>Higher income people live longer</li>
+<li>Life expectancy in regions across canada seem random</li>
+<li>Life expectancy influenced by
+<ul>
+<li>Health-threatening activities (e.g smoking)</li>
+<li>Health-promoting activities (e.g sports, healthy eating)</li>
+</ul></li>
+</ul>
+</body>
+</html>

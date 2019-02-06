@@ -120,7 +120,7 @@
 - Velar: tongue back to soft palate
     - [k,g,n]
 - Glottal: obstruct airflow in vocal tract
-    - used in british and other langs
+    - used in british and other languages
     - `h` in 'hat'
 
 See chart
@@ -176,7 +176,7 @@ See chart
 
 #### Assimilation
 - One phoneme acquires a feature of a neighbouring phoneme
-- In english -s is voiced if it vollows a voiced consonant / vowel, unvoiced if following unvoiced
+- In english -s is voiced if it follows a voiced consonant / vowel, unvoiced if following unvoiced
     - e.g dogs vs pets, cats vs dogs
 - Voiced consonants lose their voice if followed by an unvoiced consonant
     - e.g news vs newspaper
@@ -193,7 +193,7 @@ See chart
 ### Phonological Rules
 - Relevant for complementary distributed allophones
 - "A -> B / X__Y"
-- A becomes B when preceeded by X and followed by Y
+- A becomes B when preceded by X and followed by Y
 
 #### Notation
 - C = consonant, V = vowel
@@ -267,7 +267,7 @@ See chart
     - e.g Latin 'videre' -> Spanish 'veer'
 - Loss
     - Loss often affects endings
-    - Loss of consonant causes compensatory lengthing of vowel
+    - Loss of consonant causes compensatory lengthening of vowel
     - e.g stanas -> stones
 - Gain (Epenthesis)
     - Addition of vowel before consonant clusters
@@ -356,8 +356,8 @@ See chart
     - e.g stinking rich, soaking wet
 
 #### Analysability
-- Most compounds are analysable (we can see how the compound comes from the combination)
-- **Darkened compound**: Some words started as compounds, have parts that are no longer analysable (due to sound changes)
+- Most compounds are analyzable (we can see how the compound comes from the combination)
+- **Darkened compound**: Some words started as compounds, have parts that are no longer analyzable (due to sound changes)
     - e.g Cranberry (Used to be crane+berry)
 - 'Outrage'
     1. Appears to be out + rage
@@ -444,7 +444,7 @@ See chart
 #### Agreement
 - Pronoun and verb inflections must agree
 - e.g 'I talks', 'one cows'
-- Important in inflected langauges
+- Important in inflected languages
 
 ### Alternatives to inflection
 - Ablaut (Vowel Mutation)
@@ -715,7 +715,7 @@ See chart
     - e.g to school someone ('school' has a verb)
     - Often the stress on the word changes
     - e.g 'computer' was a person who made calculations
-        - > Device/machine for preforming calculations
+        - Became: Device/machine for preforming calculations
 
 ### Onomasiology
 - Look at the meaning, of the word and then the name
