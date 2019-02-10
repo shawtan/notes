@@ -1,11 +1,11 @@
 # GEOG 101
 
-## Ch1: Introduction to Human Geography
+## Ch 1: Introduction to Human Geography
 - Pages E-Text: 2-33
 - The Arab Spring was the result of many global events that led to higher bread prices
 - **Places**: specific geographic settings with distinctive physical, social and cultural attributes
 - **Regions**: territories that encompass many _places_ that share attributes
-- Geography helps use understand the world
+- Geography helps us understand the world
 - **Human Geography**: study of spatial organization of human activity and people's relationships with their environment
 
 ### Places
@@ -166,7 +166,7 @@
 - Limitations:
     - Expensive
     - Not comprehensive (underrepresents non-mainstream households)
-- India held a biometric census that was cheap and through
+- India held a biometric census that was cheap and thorough
 
 #### Population Distribution and Structure
 ##### Population Distribution
@@ -336,5 +336,121 @@
 - Life expectancy influenced by
     - Health-threatening activities (e.g smoking)
     - Health-promoting activities (e.g sports, healthy eating)
+
+## Ch 4: Geography of Health and Disease
+- **Medical Geography**: application of geographic ideas, information, and theories to the study of disease, health, and health care
+- e.g disease diffusion
+- e.g health care distribution
+
+### Health and Geography
+- Human-Environment Relationships
+    - Wet, swampy areas = mosquito breeding grounds that spread disease
+    - Diets differ depending on cold vs warm, wet vs dry
+    - Some places are more prone to natural disasters
+    - Pollution linked to epidemics
+- Culture
+    - e.g Cultural views on abortion
+    - e.g Polygyny means higher spread of STDs (AIDS)
+- Movement
+    - How does disease move between areas?
+
+### Human Ecology of Disease
+- **Ecology**: relationship between organisms and their environment
+- **Human ecology**: interconnections between human populations and the physical world
+- e.g A farmed out area results in nutrition deficiencies in the community
+- Insults/Stimuli: factors that affect health
+    - Chemical: drugs, carbon monoxide exposure, etc
+    - Physical: accidents, radiation poisoning, electrical shock
+    - Infectious: viruses, bacteria, protozoa
+    - Psychosocial: crowding, anxiety, love, sense of belonging
+- Insults can manifest at different scales
+- **Population**: a group's age, gender and genetic characteristics
+    - e.g Older populations have more cancer
+    - e.g Chinese metabolize alcohol slower
+- **Habitat**: natural, cultural and human-made aspects of an environment
+    - e.g Urban environments have higher asthma
+- **Behaviour**: effect of cultural beliefs and social organization
+    - e.g Some cultures practice traditional medicine
+    - e.g American eating habits
+
+### Disease Basics
+- Patterns:
+    - **Endemic**: A disease that is always present
+        - e.g Chicken pox
+    - **Epidemic**: Disease that occurs in large numbers than expected
+        - e.g Flu, AIDS
+    - **Pandemic**: Epidemic that covers a large area or the world
+        - e.g HIV/AIDS
+- Transmission:
+    - **Agent**: organism that causes a disease
+        - e.g bacteria, virus
+    - **Host**: life form that got the disease
+        - e.g human, pig
+    - **Vector**: how the agent transmitted to the host
+        - e.g mosquito, flies
+
+### HIV/AIDS
+- Disease spread differently in different regions
+    - USA was mostly gay men
+    - Africa was heterosexuals, truck drivers
+    - More in urban than rural areas
+- Prevention: abstinence, protection, monogamy
+- Poor countries have less to spend on health care
+
+### Common Diseases
+- Malaria
+    - Spread by mosquitoes
+    - Infects red blood cells
+    - Can be dormant for 3 years
+    - Mosquitoes live in stagnant water
+    - Control: Bug spray walls and bug nets
+- Tuberculosis
+    - Infects lungs
+    - Very contagious (coughing, speaking, sneezing)
+    - Control: isolate infected patients
+- Yellow Fever
+    - Spread by mosquitoes
+    - Causes high fever
+    - Endemic in Africa
+    - Control: vaccination
+- Diarrhea
+    - Symptom of many agents
+    - Control: provide clean drinking water (very expensive)
+    - Focus: combat dehydration effect
+- Influenza
+    - Can cause pneumonia
+    - Control: vaccination
+        - Challenging to identify the new strain
+
+### Snapshot of Global Health
+- Physicians per 10000 people
+    - Higher in Russia, Argentina, Europe, North Korea
+    - Reason: Communism, Cultural values
+- Access to Safe Drinking Water
+    - Low in Africa
+    - Reason: Poverty
+- Access to Proper Sanitation
+    - Low in Africa
+    - High in developed countries
+    - Reason: poverty
+- Undernourished Population
+    - More in Africa
+
+### Geography of Health Care
+- Poverty reduces access to good health care
+- Some countries (UK, Canada) have universal health care
+- Location of Health Care
+    - Not evenly dispersed by region
+    - Poorer neighbourhoods usually have worse health care availability
+- Access of Health Care
+    - Cultural effects
+        - e.g Spanish-speaking Americans have a harder time getting health care
+- Factors
+    - **Functional**: presence / absence of health care resources
+        - e.g Location of hospitals
+    - **Geographical**: proximity of resources to population
+        - e.g Urban vs Rural
+    - **Social**: racism, sexism
+    - **Financial**: cost
 
 
