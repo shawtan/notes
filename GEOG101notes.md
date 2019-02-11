@@ -265,6 +265,7 @@
     - Caused by positive outlook of life
     - Ended by contraceptives and women entering workforce
     - Currently more older people than children    
+![germany_population_pyramid](germany_population_pyramid.png)
 
 ### Population Dynamics and Processes
 - Population Growth = Births - Deaths + (Immigration - Emigration)
@@ -316,6 +317,7 @@
     3. Transitional: Low death rate, dropping birth rate, growing population
     4. Industrial: Low birth and death rate, high population
     5. (Post-Industrial): Slightly-increasing death rate, dropping population
+![demographic_transition_model](demographic_transition_model.png)
 
 ### Population Movement and Migration
 - Migration changes population

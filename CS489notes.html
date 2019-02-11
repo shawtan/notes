@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CS489notes</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/shaw/School/shawnotes.css" />
+  <script src="&#39;&#39;" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<script type="text/javascript">
+  var fileref=document.createElement('script')
+  fileref.setAttribute("type","text/javascript")
+  fileref.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full")
+  document.getElementsByTagName("head")[0].appendChild(fileref)
+</script>
+<h1 id="cs-489-neural-networks">CS 489: Neural Networks</h1>
+<pre><code>Notes by Shaw Tan</code></pre>
+
+<h1 id="supervised-learning">Supervised Learning</h1>
+<h2 id="learning">Learning</h2>
+<ol type="1">
+<li><strong>Supervised Learning</strong>:
+<ul>
+<li>Output is known</li>
+<li>Can compute error and use it to adjust the network</li>
+</ul></li>
+<li><strong>Unsupervised Learning</strong>:
+<ul>
+<li>Output unknown</li>
+<li>Learning by finding efficient representations on the input</li>
+<li>Bottleneck layer?</li>
+</ul></li>
+<li><strong>Reinforcement Learning</strong>:
+<ul>
+<li>General feedback given</li>
+<li>e.g Win or loss in chess</li>
+</ul></li>
+</ol>
+<h2 id="supervised-learning-1">Supervised Learning</h2>
+<ul>
+<li>Neural network is a map from input space to output space</li>
+<li>We feed the network input and target, and want to get the weights close to the target</li>
+</ul>
+<h3 id="mappings">Mappings</h3>
+<ol type="1">
+<li><strong>Regression</strong>
+<ul>
+<li>Output is continuous in a range</li>
+</ul></li>
+<li><strong>Classification</strong>
+<ul>
+<li>Output is in categories</li>
+<li>e.g MNIST</li>
+</ul></li>
+</ol>
+<h3 id="optimization">Optimization</h3>
+<ul>
+<li>Learning with a cost function is just an optimization problem</li>
+<li>We want to find the weights and biases that minimize the expected cost between output and target</li>
+</ul>
+<p>Let <span class="math inline">\(\vec{x}\)</span> be the input<br />
+Let <span class="math inline">\(\theta\)</span> be the weights and biases<br />
+Let <span class="math inline">\(\vec{t}\)</span> be the target<br />
+Let <span class="math inline">\(\vec{y} = f(\vec{x}; \theta)\)</span> be the network mapping</p>
+<p><span class="math display">\[
+\min_\theta E \left[ E(f(\vec{x};\theta), \vec{t}(\vec{x})) \right]
+\]</span></p>
+</body>
+</html>
