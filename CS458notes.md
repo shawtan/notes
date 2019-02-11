@@ -669,7 +669,7 @@
 ### Architecture
 - Information is routed between endpoints
     - e.g router, server, mobile, doorbell, thermostat
-- local ISP -> regional ISP -> backbone -> regional ISP -> company netword
+- local ISP -> regional ISP -> backbone -> regional ISP -> company network
 
 ### Characteristics
 - No single entity controls the internet
@@ -691,4 +691,143 @@
         - HTTP, FTP, email, SSL
 - Was designed for local network connections between trusted entities
 - Design did not address malicious errors
+
+## Threats in Networks
+- "No one knows if you're a dog on the internet"
+- Things on the internet are very visible
+- DOS: Attack on availability
+
+### Confidentiality Attacks
+
+#### Port Scan
+- Attacker sees which ports are open on a server
+    - Indicates which applications are running on the server
+- Server responses can reveal software versions being used
+- Loose lipped Login pages can reveal which user_id's are valid
+    - Timing Attack: Response times differ if the user exists because password hashing takes time
+    - e.g Ashley Madison has a different password recovery screen if the email exists
+
+#### Intelligence
+- Social Engineering
+    - e.g Twitter handle attacks
+    - Attacker impersonates the user and attempts to reset password
+- Dumpster Diving
+    - Collecting as much information as possible
+- Eavesdropping
+- Google
+    - Lots of information on the internet that can be found
+- Social Networks
+    - Lots of personal information on social networks
+
+#### Eavesdropping
+- Owner of node can monitor communication flowing through node
+    - End-to-end encryption makes this better
+- Active wiretapping: modification or fabrication of communication
+- Communication can be accidentally sent to an attacker's node
+- Assume your communication is wiretapped
+
+##### Communication Media
+- Copper cable
+    - Inductance allows nearby attackers to eavesdrop
+    - Can also splice in a secondary cable
+- Optical fibre
+    - No inductance, and splicing will cause detectable signal loss
+- Microwave / Satellite communication
+    - Attackers close to receiver can eavesdrop
+- These attacks involve physical expenses and effort
+- WiFi
+    - Easily intercepted by anyone with a WiFi-capable device with the right software
+    - Can be tapped by people kilometers away
+
+#### Misdelivered information
+- Local Area Network (LAN)
+    - Connects all computers in a company
+    - Packets may be sent to multiple nodes
+    - Simple configuration to keep the packets instead of deleting them
+- Email
+    - Wrongly addressed emails
+    - Accidental reply-all
+
+#### Impersonation
+- Impersonate people by stealing their password
+    - Guessing password
+    - Using default passwords
+    - Password sniffing (e.g unsecured networks)
+    - Social engineering
+- Exploit trust between machines or accounts
+    - `rhosts` allows (user A on machine X) to specify (user B on machine Y) can act as (A on X) without a password
+    - `ssh` has a similar mechanic in `.ssh/authorized_keys`
+
+#### Spoofing
+- An Object masquerades as another one
+- URL spoofing (phishing websites)
+    - Exploit typos, ambiguities, similarities
+    - Defence: buy out domains that look similar
+- "Evil Twin" attack
+    - Create WiFi access points that are named the same
+    - You can get people's credentials when they log into your network
+- Cellphone tower spoofing (MSI catchers)
+    - Gets identities of people
+- Session hijacking
+    - TCP protocol has state that keeps track of lost packets
+    - Attacker can perform TCP hijacking and masquerade as one of the endpoints
+        - Also used to bypass censorship firewalls
+    - Cookies can be sniffed or stolen and used to masquerade as the client
+- Man-in-the-middle attacks
+    - Attacker becomes a stealth intermediate node, and passes traffic on to the end node
+
+#### Traffic Analysis
+- The existence of communication is sensitive
+    - e.g Whistle blowers
+    - e.g Large pizza order = meeting
+- TCP/IP packets include sender and receiver node information
+    - Easy to analyze
+
+### Integrity Attacks
+- Attackers can modify packs while they are being transmitted
+    - Change payloads
+    - Change sender or receiver
+    - Replay previous packets
+    - Delete or create packets
+- There are checks to detect natural packet drops and corruption
+    - e.g TCP checksum
+    - Attackers can get around the checks
+- DNS cache poisoning
+    - Domain Name System maps host names to IP addresses
+    - Attacker can create wrong mappings
+        - Run own DNS server
+        - Modify traffic
+    - Defence: DNSSEC
+        - Still being rolled out
+
+#### Protocol Failures
+- TCP/IP assumes all nodes implement protocols faithfully
+- Congestion control that asks a sender node to slow down can be ignored
+- Check that packets are well formatted
+    - Vulnerable to out of bounds errors from bad lengths
+- Some protocols are complex and hard to implement correctly
+    - e.g TLS
+- Some protocols are just broken
+    - e.g WEP
+
+### Website Vulnerabilities
+- Website defacement
+- HTML response can reveal server version information (loose-lips)
+- Malicious URLs can be sent to a server 
+    - Buffer overflow attacks
+    - Sensitive file access
+    - Feed malicious input to a server-side script
+- HTTP doesn't have state, and relies on client to keep state
+    - Attackers can modify the state
+- XSS, CSRF
+- Embedding HTML code into someone else's webpage
+
+#### Denial of Service (DoS)
+
+
+
+
+
+
+
 

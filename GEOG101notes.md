@@ -1,7 +1,7 @@
 # GEOG 101
 
 ## Ch 1: Introduction to Human Geography
-- Pages E-Text: 2-33
+- Pages: 2-33
 - The Arab Spring was the result of many global events that led to higher bread prices
 - **Places**: specific geographic settings with distinctive physical, social and cultural attributes
     - Physical setting for human activity
@@ -50,14 +50,14 @@
 - Types
     - Topographic: Form of earth's surface
         - Contour lines connect equal elevation
-    - Thematic: Shows the distribution, flow or connection of characteristic
+    - **Thematic**: Shows the distribution, flow or connection of characteristic
         <!-- - Spatial dimensions of conditions / processes/ events -->
-        - Isoline maps have lines connecting equal data value 
+        - **Isoline** maps have lines connecting equal data value
             - e.g precipitation
         - Proportional symbols use density to represent frequency
-    - Dot: Single dot/symbol for number of occurrences
+    - **Dot**: Single dot/symbol for number of occurrences
         - Shows dispersion or clustering of a distribution
-    - Choropleth: Shows quantity or type of phenomena by area
+    - **Choropleth**: Shows quantity or type of phenomena by area
         - e.g Shaded heat maps
     <!-- Gradient tonal shadings reflects number variations -->
 - Map scale: ratio between linear distance on a map and linear distance on Earth's surface
@@ -91,13 +91,13 @@
 - Can be
     - Nominal: names
     - Absolute: precise coordinates
-        - Latitude = how north / south
-        - Longitude = how east / west
-    - Relative: position relative to other features
+        - **Latitude** = how north / south
+        - **Longitude** = how east / west
+    - **Relative**: position relative to other features
         - in terms of site or situation
             - Site: physical attributes of location (terrain, soil, etc)
             - Situation: location relative to other places / activities
-    - Cognitive (mental map): psychological representations of locations
+    - Cognitive (**mental map**): psychological representations of locations
         - Reveals knowledge, priorities, psychology, lack of awareness, incorrect knowledge
         - Used to identity service gaps, awareness gaps, invisible (e.g gang) features, differences between people, personal attributes
 
@@ -111,7 +111,7 @@
     - rate where an activity decreases with distance
     - e.g Don't commute to Waterloo for a job
 - **Frictionless zone**: distance where you're so close it doesn't matter
-- Nearness principle
+- **Nearness principle**
     1. Max overall utility of places at min effort
     2. Max connections between places at min cost
     3. Locate related activities close together
@@ -198,7 +198,7 @@
 
 
 ## Ch 3: Population Geography
-- Pages E-Text: 72-109
+- Pages: 72-109
 - Population counts are political
     - Determines number of representatives in government
     - Determines amount of tax revenue the region receives
@@ -215,7 +215,7 @@
 - **Vital records**: reports of birth, death, marriage, divorce, disease
     - Limited individuals
     - Tracks changes over time
-- Combining census and vital record gives more information, much has privacy implications
+- Combining census and vital record gives more information, but has privacy implications
 - Limitations:
     - Expensive
     - Not comprehensive (underrepresents non-mainstream households)
@@ -428,7 +428,7 @@
     - Gender equality
 - Coercive vs Non-coercive policies
     - **Coercive**
-        - Set my government
+        - Set by government
         - Incentives and penalties
         - Tracking mechanisms
         - Social engineering
@@ -463,7 +463,7 @@
     - Campaigns to promote gender equality
 - Americans go to China to adopt kids
 - Increase in twins from fertility treatment
-- Birth tourism
+- Birth tourism: Chinese going overseas to have their children
 - Progress on gender equity
 
 
@@ -571,6 +571,9 @@
     - Can be dormant for 3 years
     - Mosquitoes live in stagnant water
     - Control: 
+        - Population:
+            - Resettle humans
+            - Economic development
         - Habitat:
             - Bug spray walls
             - bug nets
@@ -579,9 +582,6 @@
         - Behaviour:
             - Increase awareness
             - Vaccination
-        - Population:
-            - Resettle humans
-            - Economic development
 - Tuberculosis
     - Infects lungs
     - Very contagious (coughing, speaking, sneezing)

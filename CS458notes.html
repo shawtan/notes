@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>CS458notes</title>
-  <style type="text/css">
+  <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
@@ -75,7 +75,7 @@ h6 {
 color: #777777;
 font-size: 14px; }
 p, blockquote, ul, ol, dl, li, table, pre {
-margin: 15px 0; }
+margin: 0 0 10px; }
 hr {
 margin: 0 0 19px;
 border: 0;
@@ -1236,7 +1236,7 @@ word-wrap: break-word;
 <ul>
 <li>e.g router, server, mobile, doorbell, thermostat</li>
 </ul></li>
-<li>local ISP -&gt; regional ISP -&gt; backbone -&gt; regional ISP -&gt; company netword</li>
+<li>local ISP -&gt; regional ISP -&gt; backbone -&gt; regional ISP -&gt; company network</li>
 </ul>
 <h3 id="characteristics">Characteristics</h3>
 <ul>
@@ -1273,5 +1273,213 @@ word-wrap: break-word;
 <li>Was designed for local network connections between trusted entities</li>
 <li>Design did not address malicious errors</li>
 </ul>
+<h2 id="threats-in-networks">Threats in Networks</h2>
+<ul>
+<li>“No one knows if you’re a dog on the internet”</li>
+<li>Things on the internet are very visible</li>
+<li>DOS: Attack on availability</li>
+</ul>
+<h3 id="confidentiality-attacks">Confidentiality Attacks</h3>
+<h4 id="port-scan">Port Scan</h4>
+<ul>
+<li>Attacker sees which ports are open on a server
+<ul>
+<li>Indicates which applications are running on the server</li>
+</ul></li>
+<li>Server responses can reveal software versions being used</li>
+<li>Loose lipped Login pages can reveal which user_id’s are valid
+<ul>
+<li>Timing Attack: Response times differ if the user exists because password hashing takes time</li>
+<li>e.g Ashley Madison has a different password recovery screen if the email exists</li>
+</ul></li>
+</ul>
+<h4 id="intelligence">Intelligence</h4>
+<ul>
+<li>Social Engineering
+<ul>
+<li>e.g Twitter handle attacks</li>
+<li>Attacker impersonates the user and attempts to reset password</li>
+</ul></li>
+<li>Dumpster Diving
+<ul>
+<li>Collecting as much information as possible</li>
+</ul></li>
+<li>Eavesdropping</li>
+<li>Google
+<ul>
+<li>Lots of information on the internet that can be found</li>
+</ul></li>
+<li>Social Networks
+<ul>
+<li>Lots of personal information on social networks</li>
+</ul></li>
+</ul>
+<h4 id="eavesdropping">Eavesdropping</h4>
+<ul>
+<li>Owner of node can monitor communication flowing through node
+<ul>
+<li>End-to-end encryption makes this better</li>
+</ul></li>
+<li>Active wiretapping: modification or fabrication of communication</li>
+<li>Communication can be accidentally sent to an attacker’s node</li>
+<li>Assume your communication is wiretapped</li>
+</ul>
+<h5 id="communication-media">Communication Media</h5>
+<ul>
+<li>Copper cable
+<ul>
+<li>Inductance allows nearby attackers to eavesdrop</li>
+<li>Can also splice in a secondary cable</li>
+</ul></li>
+<li>Optical fibre
+<ul>
+<li>No inductance, and splicing will cause detectable signal loss</li>
+</ul></li>
+<li>Microwave / Satellite communication
+<ul>
+<li>Attackers close to receiver can eavesdrop</li>
+</ul></li>
+<li>These attacks involve physical expenses and effort</li>
+<li>WiFi
+<ul>
+<li>Easily intercepted by anyone with a WiFi-capable device with the right software</li>
+<li>Can be tapped by people kilometers away</li>
+</ul></li>
+</ul>
+<h4 id="misdelivered-information">Misdelivered information</h4>
+<ul>
+<li>Local Area Network (LAN)
+<ul>
+<li>Connects all computers in a company</li>
+<li>Packets may be sent to multiple nodes</li>
+<li>Simple configuration to keep the packets instead of deleting them</li>
+</ul></li>
+<li>Email
+<ul>
+<li>Wrongly addressed emails</li>
+<li>Accidental reply-all</li>
+</ul></li>
+</ul>
+<h4 id="impersonation">Impersonation</h4>
+<ul>
+<li>Impersonate people by stealing their password
+<ul>
+<li>Guessing password</li>
+<li>Using default passwords</li>
+<li>Password sniffing (e.g unsecured networks)</li>
+<li>Social engineering</li>
+</ul></li>
+<li>Exploit trust between machines or accounts
+<ul>
+<li><code>rhosts</code> allows (user A on machine X) to specify (user B on machine Y) can act as (A on X) without a password</li>
+<li><code>ssh</code> has a similar mechanic in <code>.ssh/authorized_keys</code></li>
+</ul></li>
+</ul>
+<h4 id="spoofing">Spoofing</h4>
+<ul>
+<li>An Object masquerades as another one</li>
+<li>URL spoofing (phishing websites)
+<ul>
+<li>Exploit typos, ambiguities, similarities</li>
+<li>Defence: buy out domains that look similar</li>
+</ul></li>
+<li>“Evil Twin” attack
+<ul>
+<li>Create WiFi access points that are named the same</li>
+<li>You can get people’s credentials when they log into your network</li>
+</ul></li>
+<li>Cellphone tower spoofing (MSI catchers)
+<ul>
+<li>Gets identities of people</li>
+</ul></li>
+<li>Session hijacking
+<ul>
+<li>TCP protocol has state that keeps track of lost packets</li>
+<li>Attacker can perform TCP hijacking and masquerade as one of the endpoints
+<ul>
+<li>Also used to bypass censorship firewalls</li>
+</ul></li>
+<li>Cookies can be sniffed or stolen and used to masquerade as the client</li>
+</ul></li>
+<li>Man-in-the-middle attacks
+<ul>
+<li>Attacker becomes a stealth intermediate node, and passes traffic on to the end node</li>
+</ul></li>
+</ul>
+<h4 id="traffic-analysis">Traffic Analysis</h4>
+<ul>
+<li>The existence of communication is sensitive
+<ul>
+<li>e.g Whistle blowers</li>
+<li>e.g Large pizza order = meeting</li>
+</ul></li>
+<li>TCP/IP packets include sender and receiver node information
+<ul>
+<li>Easy to analyze</li>
+</ul></li>
+</ul>
+<h3 id="integrity-attacks">Integrity Attacks</h3>
+<ul>
+<li>Attackers can modify packs while they are being transmitted
+<ul>
+<li>Change payloads</li>
+<li>Change sender or receiver</li>
+<li>Replay previous packets</li>
+<li>Delete or create packets</li>
+</ul></li>
+<li>There are checks to detect natural packet drops and corruption
+<ul>
+<li>e.g TCP checksum</li>
+<li>Attackers can get around the checks</li>
+</ul></li>
+<li>DNS cache poisoning
+<ul>
+<li>Domain Name System maps host names to IP addresses</li>
+<li>Attacker can create wrong mappings
+<ul>
+<li>Run own DNS server</li>
+<li>Modify traffic</li>
+</ul></li>
+<li>Defence: DNSSEC
+<ul>
+<li>Still being rolled out</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="protocol-failures">Protocol Failures</h4>
+<ul>
+<li>TCP/IP assumes all nodes implement protocols faithfully</li>
+<li>Congestion control that asks a sender node to slow down can be ignored</li>
+<li>Check that packets are well formatted
+<ul>
+<li>Vulnerable to out of bounds errors from bad lengths</li>
+</ul></li>
+<li>Some protocols are complex and hard to implement correctly
+<ul>
+<li>e.g TLS</li>
+</ul></li>
+<li>Some protocols are just broken
+<ul>
+<li>e.g WEP</li>
+</ul></li>
+</ul>
+<h3 id="website-vulnerabilities">Website Vulnerabilities</h3>
+<ul>
+<li>Website defacement</li>
+<li>HTML response can reveal server version information (loose-lips)</li>
+<li>Malicious URLs can be sent to a server
+<ul>
+<li>Buffer overflow attacks</li>
+<li>Sensitive file access</li>
+<li>Feed malicious input to a server-side script</li>
+</ul></li>
+<li>HTTP doesn’t have state, and relies on client to keep state
+<ul>
+<li>Attackers can modify the state</li>
+</ul></li>
+<li>XSS, CSRF</li>
+<li>Embedding HTML code into someone else’s webpage</li>
+</ul>
+<h4 id="denial-of-service-dos">Denial of Service (DoS)</h4>
 </body>
 </html>
