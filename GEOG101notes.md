@@ -64,10 +64,18 @@
     - Corresponding lengths or Representative fraction (ratio)
 - Map projections: systematic rendering of earth on a flat surface
     - Equidistant: distance is accurate in one direction
+        - e.g Polyconic
     - Conformal: renders compass directions accurately
-    - Azimuthal: compass directions are correct from one point
+        - e.g Mercator
+    - Azimuthal: compass directions are correct only from one point
+        - e.g Azimuthal equidistant
     - Equivalent / Equal-area: Areas are portrayed in true proportions
+        - e.g Mollweide
+    - Robinson projection: looks nice
+        - e.g National Geographic
     - Cartogram: space is transformed based on some stat
+        - e.g Relative country size based on proportion of people living on <$10 a day
+![map projections](map_projections.png)
 
 #### Geographic Information Systems (GIS)
 - Organized set of computer hardware, software and spatially coded data to capture, store, update, manipulate, and display geographic references
