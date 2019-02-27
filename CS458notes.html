@@ -1481,5 +1481,451 @@ word-wrap: break-word;
 <li>Embedding HTML code into someone else’s webpage</li>
 </ul>
 <h4 id="denial-of-service-dos">Denial of Service (DoS)</h4>
+<ul>
+<li>Damaging or congesting internet infrastructure</li>
+<li>Cut a wire or jam a wireless signal (rare)</li>
+<li>Flood a node by overloading its Internet connection (common)
+<ul>
+<li>Ping flood
+<ul>
+<li>Send a packet to the victim that they must respond to</li>
+<li>Overload with ping responses</li>
+</ul></li>
+<li>Smurf attack
+<ul>
+<li>Spoof ping sender address to many machines</li>
+<li>Overload with ping replies</li>
+</ul></li>
+</ul></li>
+<li>Exploit implementation details of a node
+<ul>
+<li>SYN flood
+<ul>
+<li>TCP initializes state by sending (SYN, SYN-ACK, ACK) packets</li>
+<li>Can send many SYNs without any ACKS and server over queues them</li>
+</ul></li>
+<li>Network traffic is sent in chunks
+<ul>
+<li>Send packet fragments that cannot be reassembled</li>
+</ul></li>
+<li>Craft packets that hash to the same bucket
+<ul>
+<li>Causes inefficiencies</li>
+<li>Need to know the hash function</li>
+</ul></li>
+<li>Back hole attack
+<ul>
+<li>Packet routing is a distributed protocol</li>
+<li>Each router reports its cost to reach destinations</li>
+<li>Malicious router can report a low cost to victim to get the traffic</li>
+<li>Actually drops all the traffic so victim doesn’t get anything</li>
+<li>e.g YouTube block in Pakistan</li>
+</ul></li>
+<li>DNS attacks
+<ul>
+<li>Poison DNS cache</li>
+<li>Packets get routed to the wrong host</li>
+</ul></li>
+</ul></li>
+<li>Reflection and Amplification DDOS
+<ul>
+<li>Victim gets flooded with traffic from many nodes</li>
+<li>Amplification: small data results in large work / response
+<ul>
+<li>Attacker does less work than victim</li>
+</ul></li>
+<li>Reflection: spoof source address to redirect queries</li>
+<li>Difficult to defend
+<ul>
+<li>Actually following protocol, just with unreasonable volume</li>
+</ul></li>
+</ul></li>
+<li>Distributed Denial of Service (DDOS)
+<ul>
+<li>Launching DOS attacks from many machines</li>
+<li>Hard to block</li>
+<li>Usually from unknowing machines that were infected with malware</li>
+</ul></li>
+<li>Botnets
+<ul>
+<li>Machines get infected with malware and become a ‘zombie’/‘bot’
+<ul>
+<li>Waits for an attack command</li>
+</ul></li>
+<li>Current botnets are very sophisticated
+<ul>
+<li>more stealthy</li>
+<li>don’t have a central command node</li>
+<li>Dynamic and redundant control infrastructure
+<ul>
+<li>To allow reuse</li>
+<li>P2P system to distribute update</li>
+<li><em>Fast Flux</em>
+<ul>
+<li>Keep changing ip address</li>
+</ul></li>
+<li>Domain Generation Algorithm
+<ul>
+<li>Have a large collection of domain names</li>
+<li>Connect to a different domain everyday</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Worms are now written for profit
+<ul>
+<li>Rented out to criminal organizations</li>
+<li>Spreads slowly and waits before activating</li>
+</ul></li>
+<li>e.g Storm, Mirai <!-- No active code / script kiddies --></li>
+</ul></li>
+</ul>
+<h2 id="network-security-controls">Network security controls</h2>
+<h3 id="design-and-implementation">Design and implementation</h3>
+<ul>
+<li>Same polices for secure programs apply
+<ul>
+<li>Economic of mechanism</li>
+<li>Always check inputs
+<ul>
+<li>Use a whitelist, not a blacklist</li>
+</ul></li>
+</ul></li>
+<li>Segmentation and separation
+<ul>
+<li>Don’t put all company servers on a single machine</li>
+<li>Have different access requirements for different machines</li>
+<li>Modularize services</li>
+<li>e.g Public accessible web server should not be trusted</li>
+</ul></li>
+<li>Redundancy
+<ul>
+<li>Have backup disks, power, locations</li>
+<li>Backup frequently so its easier to recover</li>
+</ul></li>
+<li>Access controls
+<ul>
+<li>Have ACLs on routers
+<ul>
+<li>Can configure ACL to block attacking addresses</li>
+</ul></li>
+<li>Firewalls
+<ul>
+<li>Can do more specific filtering</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="firewalls">Firewalls</h2>
+<ul>
+<li>All traffic in/out of company goes through choke points where it is checked</li>
+<li><em>Choke points</em> examine traffic and may refuse access
+<ul>
+<li>Whitelist or blacklist approach</li>
+</ul></li>
+<li>Does not protect from attacks within the network
+<ul>
+<li>Need additional defences</li>
+</ul></li>
+<li>Firewalls can be attacked too</li>
+<li>Types:
+<ul>
+<li>Packet filtering gateways
+<ul>
+<li>Makes fast decision based on header of packet
+<ul>
+<li>Source, destination, Port numbers</li>
+</ul></li>
+<li>Does not look at packet payload</li>
+<li>Can detect spoofed traffic
+<ul>
+<li>Egress filtering: outgoing packet but origin not within network</li>
+<li>Ingress filtering: incoming packet with destination from within network</li>
+<li>Doesn’t cover all spoofed traffic</li>
+</ul></li>
+</ul></li>
+<li>Stateful inspection firewalls
+<ul>
+<li>Maintains state to identify packets grouped together</li>
+<li>Can block unreasonable packet amounts</li>
+<li>TCP inspection</li>
+<li>Packets can be fragmented by IP layer and need to be reassembled</li>
+</ul></li>
+<li>Application proxies
+<ul>
+<li>Application connects to proxy which then sends it to server</li>
+<li>Proxy can do sophisticated processes</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="honeypotshoneynets">Honeypots/Honeynets</h2>
+<ul>
+<li>Set up an unprotected, unused machine / network</li>
+<li>Any activity on machine is suspicious</li>
+<li>Helps <em>detect</em> if system is under attack, and type of attack</li>
+<li>Diverts attacker energy away from attacking the new system</li>
+<li>Honey pot = 1 machine, honey net = multiple machines</li>
+<li>Types:
+<ul>
+<li>Low interaction
+<ul>
+<li>Daemon Service that emulates host</li>
+<li>Easy to install and maintain</li>
+<li>Can’t gather much information</li>
+<li>Easy for attacker to detect</li>
+</ul></li>
+<li>High interaction
+<ul>
+<li>Deploy real hardware and software</li>
+<li>Have stealth network switches or keyloggers for logging data</li>
+<li>Complex to deploy</li>
+<li>Can capture more information</li>
+<li>Can capture unexpected behaviour by attacker</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="intrusion-detection-systems-idss">Intrusion detection systems (IDSs)</h2>
+<ul>
+<li>Protects from attackers inside network</li>
+<li>Next line of defence after firewall</li>
+<li>Monitors activity for suspicious events</li>
+<li>Host-based or Network-based
+<ul>
+<li><strong>Host-based</strong>
+<ul>
+<li>Runs on the host</li>
+<li>Lots of information from host</li>
+<li>Misses information from other attacked hosts</li>
+<li>Can be subverted from malware with root</li>
+</ul></li>
+<li><strong>Network-based</strong>
+<ul>
+<li>Runs on a dedicated node</li>
+<li>Only sees information between the machines</li>
+<li>Harder to subvert</li>
+</ul></li>
+</ul></li>
+<li>Signature-based or Heuristic/anomaly-based
+<ul>
+<li><strong>Signature-based</strong>
+<ul>
+<li>Knows signatures of known attacks</li>
+<li>Fails for new attacks or polymorphic worms</li>
+<li>Can do statistical analysis
+<ul>
+<li>e.g more traffic than usual</li>
+</ul></li>
+</ul></li>
+<li><strong>Heuristic/anomaly-based</strong>
+<ul>
+<li>Whitelist: model good behaviour and alert when activity changes</li>
+<li>Blacklist: model bad behaviour and alert when activity matches</li>
+<li>Improved by machine learning &lt;!– - e.g Tripwire</li>
+</ul></li>
+<li>Host-based, Anomaly-based</li>
+<li>Detects file modifications</li>
+<li>Fingerprint files and alerts when print changes
+<ul>
+<li>Look for abnormal behaviour –&gt;</li>
+</ul></li>
+</ul></li>
+<li>Other behaviour
+<ul>
+<li>Stealth
+<ul>
+<li>IDS systems should be stealthy so attacker does not know they’ve been discovered</li>
+<li>Two network interfaces
+<ol type="1">
+<li>monitors traffic</li>
+<li>administration and alerts, unpublished address</li>
+</ol></li>
+</ul></li>
+<li>Responding to alarms
+<ul>
+<li>Have multiple levels of response
+<ul>
+<li>e.g Logging, calling human</li>
+</ul></li>
+<li>Response for false positives</li>
+</ul></li>
+<li>Base rate fallacy</li>
+</ul></li>
+</ul>
+<h3 id="host-based">Host-based</h3>
+<h1 id="internet-application-security-and-privacy">Internet Application Security and Privacy</h1>
+<h2 id="message-threats">Message Threats</h2>
+<ul>
+<li>Interception: packet sniffing</li>
+<li>Interruption: man-in-the-middle attack</li>
+<li>Modification: integrity attack</li>
+<li>Fabrication: impersonating other users
+<ul>
+<li>Authenticity</li>
+</ul></li>
+</ul>
+<h2 id="cryptography">Cryptography</h2>
+<ul>
+<li>Art/science of keeping messages secure
+<ul>
+<li>Kryptos = hidden</li>
+<li>Graphem = writing</li>
+</ul></li>
+<li>Turn <strong>plaintext</strong> into <strong>ciphertext</strong></li>
+<li>Allows us to send secure messages over an insecure medium</li>
+<li>Ensures information transfer is not the weakest link (Principle of Easiest Penetration)</li>
+<li>Cryptanalysis: art/science of secret message breaking</li>
+<li>Cryptology: cryptography = cryptanalysis</li>
+</ul>
+<h3 id="basic-cryptographic-scheme">Basic Cryptographic Scheme</h3>
+<ul>
+<li>Plaintext (P) -&gt; [encryption/encoding/enciphering] -&gt; ciphertext (C) -&gt; [decryption, decoding, deciphering] -&gt; original plaintext (P)</li>
+<li>Notation
+<ul>
+<li><code>M</code> plaintext</li>
+<li><code>C</code> ciphertext</li>
+<li><code>Enc(M) -&gt; C</code> encryption function</li>
+<li><code>Dec(C) -&gt; M</code> decryption function</li>
+</ul></li>
+<li>Correctness: for all plaintext <code>M</code>, <code>Dec(Enc(M)) = M</code></li>
+<li>Security: for all possible <code>C = Enc(M)</code>, it is <em>hard</em> to learn anything about <code>M</code></li>
+<li>People:
+<ul>
+<li>Honest communicators: Alice, Bob, Carol, Dave</li>
+<li>Trusted third party: Trent</li>
+<li>Passive eavesdropper: Eve
+<ul>
+<li>Listens to any transmitted messages</li>
+</ul></li>
+<li>Active man-in-the-middle: Mallory
+<ul>
+<li>Listens, modifies, inserts or deletes transmitted messages</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="cryptography-components">Cryptography Components</h3>
+<ul>
+<li>Confidentiality: prevent Eve from <em>reading</em> Alice’s messages</li>
+<li>Integrity: Prevent Mallory from <em>modifying</em> Alice’s messages without being detected</li>
+<li>Authenticity: Prevent Mallory from <em>impersonating</em> Alice</li>
+</ul>
+<h3 id="kerckhoffs-principle">Kerckhoff’s Principle</h3>
+<ul>
+<li>A cryptosystem should be secure even if everything about the system, except the key, is public knowledge.
+<ul>
+<li>All crypto algorithms must be public</li>
+<li>No security by obscurity</li>
+<li>Keys are kept secret</li>
+</ul></li>
+<li>Implementation:
+<ul>
+<li>Have a large class of encryption methods (ideally equally strong) that is public information</li>
+<li>Use a secret key to specify which one to use</li>
+<li>Implication: system at most as secure as the number of keys</li>
+</ul></li>
+</ul>
+<h3 id="strong-crytosystem">Strong crytosystem:</h3>
+<ul>
+<li>Has a large keyspace</li>
+<li>Produces ciphertext that appears random to statistical tests</li>
+<li>Resists known attacks</li>
+<li>The attacker can have knowledge of:
+<ul>
+<li>The algorithm</li>
+<li>Part of the plaintext</li>
+<li>A number of corresponding plaintext/ciphertext pairs</li>
+<li>Access to an encryption or decryption oracle</li>
+</ul></li>
+</ul>
+<h2 id="types-of-cryptosystems">Types of cryptosystems</h2>
+<ul>
+<li>Secret Key (Symmetric)
+<ul>
+<li>Stream ciphers</li>
+<li>Block ciphers</li>
+</ul></li>
+<li>Public Key (Asymmetric)</li>
+</ul>
+<h3 id="secret-key-encryption">Secret Key Encryption</h3>
+<ul>
+<li>Encryption key and decryption key are the same</li>
+<li>e.g One-Time Pad
+<ul>
+<li>Perfectly secure</li>
+<li>Key is a truly random bitstring with the same length as the message</li>
+<li>XOR the message with the key or encryption and decryption</li>
+<li>Difficult to use correctly
+<ul>
+<li>Key must be truly random</li>
+<li>Key can only be used once
+<ul>
+<li>Otherwise you can XOR the result messages and a plaintext to get the other plaintext
+<ul>
+<li><code>C_1 = P_1 XOR K</code></li>
+<li><code>C_2 = P_2 XOR K</code></li>
+<li><code>C_1 XOR C_2 = P_1 XOR P_2</code></li>
+<li><code>P_2 = C_1 XOR C_2 XOR P_1</code></li>
+</ul></li>
+</ul></li>
+<li>Hard to share this key</li>
+</ul></li>
+</ul></li>
+<li>Computational secure
+<ul>
+<li>Most cryptosystems only have ‘computational’ security</li>
+<li>Can be broken with enough work
+<ul>
+<li>Claude Shannon: Amount of work should correspond with needed degree of security</li>
+<li>Worst case Eve tries every key
+<ul>
+<li>Unless there are shortcuts</li>
+</ul></li>
+<li>A computer can try about 17 million keys per second</li>
+</ul></li>
+</ul></li>
+<li>e.g <em>40-bit crypto</em>
+<ul>
+<li>Key size of 40 bits = 5 bytes</li>
+<li><code>2^40</code> possible keys</li>
+<li>Low level of security
+<ul>
+<li>Computer: 18 hours, lab: 11 minutes, BOINC: 5 ms</li>
+</ul></li>
+</ul></li>
+<li>e.g <em>56-bit crypto</em>
+<ul>
+<li>DES standard</li>
+<li>Computer: 134 years, lab: 16 months, BOINC: 5 minutes</li>
+</ul></li>
+<li>e.g <em>128-bit crypto</em>
+<ul>
+<li>Modern standard</li>
+<li>One computer: 635 thousand million million million years</li>
+<li>One lab: 6 thousand million million million years</li>
+<li>BOINC: 49 thousand million million years</li>
+<li>Actually faster because computers will get more powerful by Moore’s Law</li>
+</ul></li>
+</ul>
+<h4 id="stream-ciphers">Stream Ciphers</h4>
+<ul>
+<li>Use a pseudorandom keystream with the One-Time Pad</li>
+<li>Cipertext = (1 char of plaintext) XOR (1 char of keystream)</li>
+<li>e.g RC4 (deprecated)</li>
+<li>Usage:
+<ul>
+<li>Very fast</li>
+<li>Hard to use correctly
+<ul>
+<li>What if the same key was used for two different messages?</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="block-ciphers">Block Ciphers</h4>
+<ul>
+<li>Operate on 1 block of message instead of one bit</li>
+<li>Usually 64 bits or 128 bits long</li>
+<li>e.g AES (today’s standard)</li>
+</ul>
+<h2 id="integrity">Integrity</h2>
+<h2 id="authentication">Authentication</h2>
+<h2 id="security-controls-using-cryptography">Security controls using cryptography</h2>
+<h2 id="cryptography-in-network-security">Cryptography in network security</h2>
 </body>
 </html>
