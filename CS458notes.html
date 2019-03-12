@@ -1718,15 +1718,16 @@ word-wrap: break-word;
 <ul>
 <li>Whitelist: model good behaviour and alert when activity changes</li>
 <li>Blacklist: model bad behaviour and alert when activity matches</li>
-<li>Improved by machine learning &lt;!– - e.g Tripwire</li>
+<li>Improved by machine learning</li>
 </ul></li>
-<li>Host-based, Anomaly-based</li>
-<li>Detects file modifications</li>
-<li>Fingerprint files and alerts when print changes
+</ul></li>
+</ul>
+<!-- - e.g Tripwire
+    - Host-based, Anomaly-based
+    - Detects file modifications
+    - Fingerprint files and alerts when print changes
+        - Look for abnormal behaviour -->
 <ul>
-<li>Look for abnormal behaviour –&gt;</li>
-</ul></li>
-</ul></li>
 <li>Other behaviour
 <ul>
 <li>Stealth
@@ -1922,10 +1923,320 @@ word-wrap: break-word;
 <li>Operate on 1 block of message instead of one bit</li>
 <li>Usually 64 bits or 128 bits long</li>
 <li>e.g AES (today’s standard)</li>
+<li>Mode of operation determines what happens when text is larger than one block
+<ul>
+<li>Electronic Code Book (ECB)
+<ul>
+<li>Encrypt each successive block separately</li>
+<li>Patterns in the plaintext will cause patterns in the ciphertext</li>
+</ul></li>
+<li>Cipher Block Chaining, Counter, Galois Counter
+<ul>
+<li>Will not expose patterns in plaintext</li>
+<li>Requires an initial value</li>
+</ul></li>
+</ul></li>
 </ul>
+<h4 id="key-exchange">Key Exchange</h4>
+<ul>
+<li>The two parties need to exchange the secret key somehow
+<ul>
+<li>Meet in person (difficult)</li>
+<li>AES (Advanced Encryption Standard)</li>
+</ul></li>
+</ul>
+<h3 id="public-key-cryptography">Public Key Cryptography</h3>
+<ul>
+<li>Allows Alice to send a secret message to Bob <em>without</em> a prearranged shared secret</li>
+<li>Encryption key and decryption key are different</li>
+<li>e.g RSA, ECC</li>
+<li>Bob publishes his public encryption key which others use to encrypt his messages</li>
+<li>Bob uses his private decryption key to decrypt the message</li>
+<li>Problems
+<ul>
+<li>Public keys need to be larger to have the same computational security as symmetric encryption</li>
+<li>Public key cryptography is slower</li>
+</ul></li>
+</ul>
+<h4 id="hybrid-cryptography">Hybrid cryptography</h4>
+<ol type="1">
+<li>Pick a random 128-bit key <code>K</code></li>
+<li>Encrypt the large message with <code>K</code> using symmetric encryption</li>
+<li>Encrypt the key <code>K</code> using a public-key cryptosystem</li>
+<li>Send the encrypted message and key to Bob</li>
+</ol>
 <h2 id="integrity">Integrity</h2>
+<ul>
+<li>Prevent Mallory from modifying the message in transit</li>
+<li>Detecting message changes by including a checksum
+<ul>
+<li>Checksum must be a <em>cryptographic checksum</em></li>
+<li>Need to be able to send the message digest in a secure manner</li>
+</ul></li>
+</ul>
+<h3 id="cryptographic-hash-functions">Cryptographic Hash Functions</h3>
+<ul>
+<li>A <strong>hash function</strong> <code>h</code> takes an arbitrary length string <code>x</code> and computes a fixed length message digest <code>y = h(x)</code>
+<ul>
+<li>e.g MD5, SHA-1, SHA-2, SHA-3</li>
+</ul></li>
+<li>Properties
+<ol type="1">
+<li>Preimage-resistance
+<ul>
+<li>Given <code>y</code>, hard to find <code>x</code> such that <code>h(x) = y</code></li>
+</ul></li>
+<li>Second preimage-resistance
+<ul>
+<li>Given <code>x</code>, hard to find <code>x&#39; != x</code> such that <code>h(x) = h(x&#39;)</code></li>
+</ul></li>
+<li>Collision-resistance
+<ul>
+<li>Hard to find two distinct values <code>x</code>, <code>x&#39;</code> such that <code>h(x) = h(x&#39;)</code></li>
+<li>Collisions are easier to find than preimages (birthday paradox)</li>
+</ul></li>
+</ol></li>
+</ul>
 <h2 id="authentication">Authentication</h2>
+<ul>
+<li>Have a large class of hash functions</li>
+<li>Shared secret key used to pick the ‘correct’ hash function</li>
+<li>Only those with the secret key can generate and check the hash digest (‘<em>tag</em>’) -<strong>Message Authentication Codes (MAC)</strong>: keyed hash function
+<ul>
+<li>e.g SHA-1-HMAC, SHA-256-HMAC, CBC-MAC</li>
+</ul></li>
+</ul>
+<h3 id="confidentiality-and-integrity">Confidentiality and Integrity</h3>
+<ul>
+<li>Combine cipher and MAC</li>
+<li><em>Encrypt-then-MAC</em>
+<ul>
+<li>Not MAC-then-Encrypt or Encrypt-and-MAC</li>
+</ul></li>
+</ul>
+<h3 id="repudiation">Repudiation</h3>
+<ul>
+<li>e.g
+<ol type="1">
+<li>Alice and Bob share a MAC key K</li>
+<li>Bob receives a message M, and a valid tag T computed using key K</li>
+</ol></li>
+<li>Bob is sure that Alice sent message M, and it hasn’t been modified</li>
+<li>If Bob showed Carol message M and tag T, she wouldn’t be sure it’s from Alice
+<ul>
+<li>Alice can claim Bob made up message M, and calculated tag T</li>
+</ul></li>
+<li><strong>Repudiation</strong>: when Alice can deny the authenticity of her signature</li>
+<li>Repudiable interactions: private conversations</li>
+<li>Non-repudiable interactions: electronic commerce</li>
+</ul>
+<h4 id="digital-signatures">Digital Signatures</h4>
+<ul>
+<li>Used for non-repudiation</li>
+<li>If Bob receives a message with Alice’s <em>digital signature</em>, we know that
+<ul>
+<li>Alice sent the message</li>
+<li>Message has not been altered</li>
+<li>Bob can prove this to a third party</li>
+</ul></li>
+<li>Making a digital signature
+<ul>
+<li>Separate keys for encryption and decryption
+<ul>
+<li>Public encryption key (<strong>verification key</strong>)</li>
+<li>Private decryption key (<strong>signature key</strong>)</li>
+</ul></li>
+<li>Alice signs with private <em>signature key</em></li>
+<li>Verification: Bob verifies using public <em>verification key</em></li>
+</ul></li>
+</ul>
+<h4 id="hybrid-signatures">Hybrid Signatures</h4>
+<ul>
+<li>Signing large message is slow</li>
+<li>Solution: hybrid signatures
+<ul>
+<li>Alice sends
+<ul>
+<li>the unsigned message, and</li>
+<li>a signature on a <em>hash</em> of the message</li>
+</ul></li>
+<li>Easier to sign and verify the message hash since it is smaller</li>
+</ul></li>
+</ul>
+<h4 id="combining-public-key-encryption-and-digital-signatures">Combining Public-key encryption and digital signatures</h4>
+<ul>
+<li>Need both to have authenticity and confidentiality
+<ol start="0" type="1">
+<li>Alice and Bob each have different (encryption, decryption) and (signature, verification) key pairs</li>
+<li>Alice uses Bob’s encryption key to encrypt a message</li>
+<li>Alice uses Alice’s signature key to sign the ciphertext</li>
+<li>Bob uses Alice’s verification key to check the signature</li>
+<li>Bob uses Bob’s decryption key to decrypt the ciphertext</li>
+</ol></li>
+<li>(signature, verification) key pair is long-lived (for forward secrecy)</li>
+<li>(encryption, decryption) key pair is short-lived
+<ul>
+<li>Use signing key to sign the new encryption key</li>
+</ul></li>
+<li>Note: if Alice and Bob’s communication is interactive, they can use secret-key encryption instead of (encryption, decryption) key pairs
+<ul>
+<li>e.g TLS, SSH</li>
+<li>TODO: why?</li>
+</ul></li>
+</ul>
+<h3 id="key-management">Key Management</h3>
+<ul>
+<li>How does Bob find Alice’s verification key?</li>
+<li><strong>Manual keying</strong>: personally know it (e.g SSH)</li>
+<li><strong>Web of trust</strong>: trust a friend to tell him (e.g PGP)</li>
+<li><strong>Certificate Authorities (CAs)</strong>: trust a third party (e.g TLS, SSL)</li>
+</ul>
+<h4 id="certificate-authorities-ca">Certificate Authorities (CA)</h4>
+<ul>
+<li>Trusted third party that keeps track of people/organization’s verification keys</li>
+<li>Alice sends the signed verification key and signed personal information to the CA</li>
+<li>CA verifies that the information is correct</li>
+<li>CA generates a certificate with Alice’s information and verification key signed with CA’s signature key</li>
+<li>Assume everyone has a copy of the CA’s verification key</li>
+<li>Can have multiple levels of CA’s, where higher levels issue certificates for lower levels
+<ul>
+<li>e.g Public-key infrastructure (PKI)</li>
+</ul></li>
+<li>Only need the verification key of root CA to verify the certificate chain</li>
+</ul>
 <h2 id="security-controls-using-cryptography">Security controls using cryptography</h2>
+<ul>
+<li>How do you make secrets available to legitimate users but not adversaries?</li>
+<li>e.g If the web browser can decrypt the password file, an adversary who accesses the web browser can as well</li>
+</ul>
+<h3 id="os-security">OS Security</h3>
+<ul>
+<li>Secret-key cryptography is problematic</li>
+<li>Public-key cryptography is fine</li>
+<li>You can only do encryption and signature verification</li>
+<li>e.g Only install signed apps (Android)</li>
+<li>e.g Only execute signed programs (iOS)</li>
+</ul>
+<h3 id="encrypted-code">Encrypted Code</h3>
+<ul>
+<li>Processor that only executes encrypted code</li>
+<li>Processor-dependent decryption key used to decrypt instructions before executing</li>
+<li>Malware needs the processor’s key to spread</li>
+<li>Downsides: Need to encrypt program for each processor</li>
+</ul>
+<h3 id="encrypted-data">Encrypted Data</h3>
+<ul>
+<li>Harddrive encryption protects data on a stolen laptop</li>
+<li>Does not protect data against legitimate users of the laptop
+<ul>
+<li>e.g User installed malware</li>
+<li>e.g Extracting the decryption key from laptop memory</li>
+</ul></li>
+</ul>
+<h3 id="os-authentication">OS Authentication</h3>
+<ul>
+<li>Authentication uses cryptography
+<ul>
+<li>e.g Salted hashes</li>
+</ul></li>
+<li>Also hardware tokens
+<ul>
+<li>e.g Yubikey</li>
+</ul></li>
+</ul>
 <h2 id="cryptography-in-network-security">Cryptography in network security</h2>
+<ul>
+<li>Primary use of cryptography</li>
+<li>Entities on the network are not trustworthy</li>
+<li>Each layer of the network uses cryptography
+<ul>
+<li>Link: WEP, WPA, WPA2</li>
+<li>Network: VPN, IPsec</li>
+<li>Transport: TLS / SSL, Tor</li>
+<li>Application: ssh, PGP, Mixminion, OTR</li>
+</ul></li>
+</ul>
+<h3 id="link-layer-security-controls">Link-layer Security Controls</h3>
+<ul>
+<li>Used to protect <em>local area networks</em></li>
+</ul>
+<h4 id="wep-wired-equivalent-privacy">WEP (Wired Equivalent Privacy)</h4>
+<ul>
+<li>3 goals:
+<ul>
+<li>confidentiality (protect contents of traffic),</li>
+<li>access control (prevent others from using your wireless infrastructure),</li>
+<li>data integrity</li>
+<li><em>Does not enforce any of these</em></li>
+</ul></li>
+<li>Description
+<ul>
+<li>Sender and receiver share a 40-bit or 104-bit secret <code>k</code></li>
+<li>To transmit message <code>M</code>:
+<ol type="1">
+<li>Compute checksum <code>c(M)</code></li>
+<li>Pick a random number <code>v</code> and generate a keystream <code>RC4(v,k)</code></li>
+<li><code>XOR(M, c(M))</code> with keystream to produce ciphertext <code>C</code></li>
+<li>Transmit <code>v</code> and ciphertext over wireless link</li>
+</ol></li>
+<li>Receiver:
+<ol type="1">
+<li>Use <code>v</code> and <code>k</code> to generate keystream <code>RC4(v,k)</code></li>
+<li><code>XOR(C, RC4(v,k))</code> to get <code>M&#39;, c&#39;</code></li>
+<li>Check if <code>c&#39; = c(M&#39;)</code></li>
+<li>If so, accept <code>M&#39;</code> as the message</li>
+</ol></li>
+</ul></li>
+<li>Problems:
+<ol type="1">
+<li><code>v</code> is only 24 bits long</li>
+<li>Checksum is <code>CRC-32</code> which is <em>linear</em> (insecure when used with a stream cipher)</li>
+<li>Plaintext/ciphertext pair is given for free</li>
+<li>Attacker can execute the authentication protocol with the Plaintext/ciphertext pair</li>
+</ol></li>
+<li>TODO: figure out WEP details (5-93)</li>
+</ul>
+<h3 id="network-layer-security">Network-layer Security</h3>
+<ul>
+<li>We need end-to-end security across networks</li>
+</ul>
+<h4 id="vpn-virtual-private-network">VPN (Virtual Private Network)</h4>
+<ul>
+<li>Connects 2+ networks that are physically isolated and make them appear to be a single network
+<ul>
+<li>Or connect a single remote host to a network</li>
+</ul></li>
+<li>Goal: Adversaries between the networks can’t read/modify traffic in the VPN
+<ul>
+<li>DoS and traffic analysis still possible</li>
+</ul></li>
+<li>Setup:
+<ul>
+<li>A host on each side is the <strong>VPN gateway</strong></li>
+<li>Traffic is sent through the local VPN gateway</li>
+<li>Local VPN gateway uses cryptography to send traffic to the remote VPN gateway (usually <em>tunnelling</em>)</li>
+<li>Remote VPN gateway decrypts messages and sends them to the destination</li>
+</ul></li>
+</ul>
+<h4 id="tunnelling">Tunnelling</h4>
+<ul>
+<li>Sending of messages of one protocol as the payload of messages of another protocol, out of the usual protocol nesting sequence
+<ul>
+<li>e.g IP-over-TCP, IP-over-IP, PPP-over-DNS</li>
+<li>e.g NOT TCP-over-IP (since it is the typical sequence)</li>
+</ul></li>
+</ul>
+<h4 id="ipsec">IPsec</h4>
+<ul>
+<li>Two modes
+<ul>
+<li><em>Transport</em> mode
+<ul>
+<li>Used to connect a single laptop to a home network</li>
+<li>Only contents of original IP packet are encrypted + authenticated</li>
+</ul></li>
+<li><em>Tunnel</em> mode</li>
+</ul></li>
+</ul>
 </body>
 </html>

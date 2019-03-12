@@ -1507,6 +1507,10 @@ word-wrap: break-word;
 <ul>
 <li>‘crates’ = complement</li>
 </ul></li>
+<li>‘Dumb subjects’: Subjects that don’t actually mean anything
+<ul>
+<li>e.g it, there</li>
+</ul></li>
 </ul>
 <h5 id="the-noun-rule">The noun rule</h5>
 <ul>
@@ -1651,6 +1655,19 @@ word-wrap: break-word;
 <ul>
 <li>NP immediately dominates the specifier and a N’</li>
 <li>Adjunct will be sister to an N’ and daughter to an N’</li>
+<li>e.g “a strikingly hairy dog”
+<ul>
+<li><code>[NP [Det a] [N&#39; [AP [Adv strikingly] [A hairy]] [N dog]]]</code></li>
+</ul></li>
+<li>e.g “the strikingly hairy dog on sale”
+<ul>
+<li><code>[NP [Det the] [N&#39; [AP [Adv strikingly] [A hairy]] [N&#39; [N dog] [PP [P on] [N sale]]]]]</code></li>
+<li><img src="data:image/png;base64,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" alt="syntax_noun_phrase1.png" /></li>
+</ul></li>
+<li>e.g “the strikingly hairy dog that he saw in the park”
+<ul>
+<li><code>[NP [Det the] [N&#39; [AP [Adv strikingly] [A hairy]] [N&#39; [N dog] [CP [C that] [S [N he] [VP [V saw] [PP [P in] [NP [Det the] [N park]]]]]]]]]</code></li>
+</ul></li>
 </ul>
 <h3 id="distinguishing-complements-and-adjuncts">Distinguishing Complements and Adjuncts</h3>
 <ul>
@@ -1667,7 +1684,330 @@ word-wrap: break-word;
 <h3 id="x-bar-theory">X-bar theory</h3>
 <ul>
 <li>For each phrase, there is a ‘bar’ constituent (V’, A’, etc)</li>
-<li>X’ is mother to the head and the complement, and sister to adjuncts</li>
+<li>X’ is mother to the head and the complement, and sister to adjuncts <img src="data:image/png;base64,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" /></li>
+</ul>
+<h2 id="complex-sentences">Complex Sentences</h2>
+<ul>
+<li>Sentences with more than one subject and predicate</li>
+</ul>
+<h3 id="clauses">Clauses</h3>
+<ul>
+<li><strong>Clause</strong>: Syntactic unit that contains a subject and a predicate
+<ul>
+<li>Includes a verb phrase</li>
+</ul></li>
+<li><em>Simple sentence</em>: sentence with one clause
+<ul>
+<li>e.g “Most students enjoy long, difficult examinations”</li>
+</ul></li>
+<li><em>Complex sentence</em>: sentence with multiple clauses
+<ul>
+<li>e.g “(Most students enjoy examinations) (when they are extremely difficult)”</li>
+<li>e.g “Most students (enjoy examinations) that (really test their knowledge)”</li>
+<li>e.g “(Professors like to write examinations) when they (have nothing better to do)”</li>
+<li>e.g “Exams that (last for hours and hours) (make students deliriously happy)”</li>
+</ul></li>
+<li><strong>Independent clause</strong>: Clause that stands on its own and doesn’t need anything else</li>
+</ul>
+<h3 id="verbs-1">Verbs</h3>
+<ul>
+<li>All clauses contain a verb phrase</li>
+<li>Independent clauses must contain a <strong>finite verb</strong>
+<ul>
+<li>Marked for tense, person, number, aspect, etc. (Displays agreement)</li>
+<li>In English the verb may not appear marked (e.g ‘enjoy’)</li>
+</ul></li>
+</ul>
+<h4 id="auxiliary-verbs">Auxiliary Verbs</h4>
+<ul>
+<li>VP -&gt; (Aux) V (NP) (NP) (PP)*</li>
+<li>Verb phrases may contain auxiliary verbs</li>
+<li>e.g ‘can’, ‘has’, ‘might’, ‘is’, ‘doesn’t’
+<ul>
+<li>“He <em>can</em> run very fast”, “He <em>has</em> spoken to her about it”</li>
+</ul></li>
+<li>Types
+<ul>
+<li><strong>Modal Auxiliaries</strong>
+<ul>
+<li><code>Can/could, shall/should, may/might, will/would</code></li>
+<li>Expresses possibility, ability, permission or allowance</li>
+<li>Does not inflect like ordinary verbs
+<ul>
+<li>No <code>-s</code> suffix in the 3rd person singular</li>
+</ul></li>
+</ul></li>
+<li><strong>Aspectual Auxiliaries</strong>
+<ul>
+<li><code>is, have</code></li>
+<li>Expressed ‘aspect’, if something is completed or continuous</li>
+</ul></li>
+</ul></li>
+<li>Used in combination with main verbs
+<ul>
+<li>Becomes the finite verb, and the main verb is not finite</li>
+<li>e.g “You have run”, “He has run”, not “He have ran”</li>
+<li><em>Note</em>: ‘have’ and ‘is’ are also main verbs</li>
+<li>Can have multiple auxiliaries
+<ul>
+<li>e.g “He <em>would</em> <em>have</em> been a terrific Prime Minister”</li>
+<li>e.g “They <em>may have been</em> working late”</li>
+<li>In these cases, the initial verb is the true auxiliary (it is the only finite one)
+<ul>
+<li>If turned into a question, the initial verb is at the front
+<ul>
+<li>e.g “Would he have been a terrific Prime Minister?”</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Don’t need to indicate tense on Auxilliary nodes
+<ul>
+<li>Just make I the mother of the Aux node with no sisters</li>
+</ul></li>
+</ul>
+<h4 id="infinitive-verbs">Infinitive Verbs</h4>
+<ul>
+<li>Non-finite</li>
+<li>Non-marked, general form of the verb</li>
+<li>Accompanied by the preposition <code>to</code>
+<ul>
+<li>e.g “To run for President, you must be an idiot.”</li>
+<li>e.g “He had to admit it was dumb.”</li>
+</ul></li>
+</ul>
+<h4 id="participles">Participles</h4>
+<ul>
+<li>Non-finite</li>
+<li>Used in conjunction with aspectual auxiliaries</li>
+<li>Present participle:
+<ul>
+<li>Suffix <code>-ing</code></li>
+<li>e.g “He is admitting the patient now.”</li>
+<li>e.g “Thinking quickly, he admitted nothing.”</li>
+</ul></li>
+<li>Past participle
+<ul>
+<li>Lots of variations</li>
+<li>End in <code>-ed</code>: ‘made’, ‘viewed’, wanted’</li>
+<li>End in <code>-en</code>: ‘written’, ‘broken’, ‘given’<br />
+</li>
+<li>Use ablaut: ‘rung’, ‘swum’
+<ul>
+<li>e.g “She was defeated by a better player.”</li>
+<li>e.g “He had written her a long letter.”</li>
+<li>e.g “He as rung her repeatedly.”</li>
+</ul></li>
+<li>Can also be used as adjectives
+<ul>
+<li>e.g “He was a broken man.”</li>
+<li>e.g “His written notes were hard to read.”</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="diagramming-finite-verbs">Diagramming Finite Verbs</h3>
+<ul>
+<li><code>I</code> node indicating inflection
+<ul>
+<li><code>VP</code> complement</li>
+<li><code>I&#39;</code> mother</li>
+</ul></li>
+<li>Combined with sister <code>NP</code> node with mother <code>IP</code> node</li>
+</ul>
+<figure>
+<img src="data:image/png;base64,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" alt="syntax_finite_diagram" /><figcaption>syntax_finite_diagram</figcaption>
+</figure>
+<h3 id="complex-sentences-1">Complex Sentences</h3>
+<ul>
+<li>Consists of a <em>main clause</em> and a <em>subordinate clause</em></li>
+<li><em>Main Clause</em> contains a finite verb</li>
+<li><em>Subordinate Clause</em>
+<ul>
+<li>Can have finite or non-finite verbs
+<ul>
+<li>Don’t need to diagram finiteness of verbs in the subordinate clause</li>
+</ul></li>
+<li>Does not need a noun phrase</li>
+</ul></li>
+<li>Tree Diagram:
+<ul>
+<li><code>C</code>: Complementizer
+<ul>
+<li>e.g that, to, when
+<ul>
+<li>‘to’ is a complementizer when it precedes a verb, preposition when it precedes a noun</li>
+</ul></li>
+<li>Can be skipped</li>
+</ul></li>
+<li><code>CP</code>: complement phrase</li>
+<li><code>S</code>: subordinate clause</li>
+<li><code>IP</code> at the top</li>
+</ul></li>
+</ul>
+<h1 id="discourse">Discourse</h1>
+<ul>
+<li>4th level of language analysis</li>
+<li>Actual speech and use of language</li>
+<li>Subfields: pragmatics, stylistics, sociolinguistics, conversation analysis, politeness theory</li>
+</ul>
+<h2 id="elements-of-discourse">Elements of Discourse</h2>
+<ul>
+<li>Intonation
+<ul>
+<li>Lacked by text-to-speech software</li>
+<li>Indicates questions</li>
+</ul></li>
+<li>Bodily movements and facial expression</li>
+<li>Colloquial and idiomatic expression</li>
+<li>Abbreviations (e.g Later, Whatever, LOL)</li>
+<li>Stylistic features (formal and informal language, slang, technical and ordinary language, etc.)</li>
+<li>Conventions of politeness, conversational norms</li>
+</ul>
+<h2 id="émile-benveniste">Émile Benveniste</h2>
+<ul>
+<li>Language takes meaning from discourse</li>
+</ul>
+<h3 id="pronouns-1">Pronouns</h3>
+<ul>
+<li>Traditional division
+<ul>
+<li>1st person: I/we</li>
+<li>2nd person: thou/you</li>
+<li>3rd person: he/she/they</li>
+</ul></li>
+<li>They are used differently
+<ul>
+<li>I/You refer to specific people (speaker, addressee) that only make sense in discourse</li>
+<li>He/she/they refers to someone else you bring up</li>
+</ul></li>
+</ul>
+<h3 id="deixis">Deixis</h3>
+<ul>
+<li><em>Deictic</em>: Expressions that ‘point’ to an object
+<ul>
+<li>e.g <code>this, that, these, those</code></li>
+</ul></li>
+<li>Don’t mean anything outside of a context where they point to something</li>
+<li>Similar: expressions of time
+<ul>
+<li>e.g <code>now, later, tomorrow</code></li>
+</ul></li>
+<li>Objective vs ‘instance of discourse’:
+<ul>
+<li>here : there</li>
+<li>today : the very day</li>
+<li>tomorrow : the following day</li>
+<li>three days ago : three days before</li>
+</ul></li>
+</ul>
+<h3 id="verbs-2">Verbs</h3>
+<h4 id="finite-verbs">Finite Verbs</h4>
+<ul>
+<li>Finite verbs have tense, so they refer to events relative to the moment of discourse</li>
+<li>e.g “I was going far away from here”
+<ul>
+<li>“here” refers to current location</li>
+<li>“was” relative to current time</li>
+</ul></li>
+</ul>
+<h4 id="verbal-meaning">Verbal Meaning</h4>
+<ul>
+<li>Some verbs change meaning depending on first or third person
+<ul>
+<li>e.g “he swears” (description of action) vs “I swear” (pledge)</li>
+<li>e.g “he promises” vs “I promise”</li>
+</ul></li>
+</ul>
+<h2 id="jakobsons-model-of-language">Jakobson’s model of language</h2>
+<ul>
+<li>Every speech even has 6 elements
+<ul>
+<li>Context</li>
+<li>Message</li>
+<li>Contacta</li>
+<li>Code</li>
+<li>Addresser</li>
+<li>Addressee</li>
+</ul></li>
+</ul>
+<h3 id="referential-function">Referential Function</h3>
+<h3 id="emotive-function">Emotive function</h3>
+<ul>
+<li>Aspect of message oriented towards feelings or attitudes of the addresser</li>
+<li>Expresses outwardly something the speaker thinks/feels inwardly</li>
+<li>e.g “My tooth hurts”, “I’m bored”, “That’s disgusting”</li>
+</ul>
+<h3 id="conative-function">Conative function</h3>
+<ul>
+<li>Aspect of message oriented towards influencing the addressee</li>
+<li>Orders, persuasive, insulting, etc.</li>
+<li>e.g “Stand over there”, “You shouldn’t do that”</li>
+</ul>
+<h3 id="phatic-function">Phatic function</h3>
+<ul>
+<li>Aspect of message oriented towards link between addresser and addressee</li>
+<li>Maintains relationships through language</li>
+<li>Not much meaning, but it ‘oils the wheels of conversation’</li>
+<li>e.g “Hi!”, How are you?“,”…isn’t it?“,”Who knew?&quot;</li>
+</ul>
+<h3 id="poetic-function">Poetic function</h3>
+<ul>
+<li>Aspect of message oriented towards the language of the message itself</li>
+<li><em>Literary</em> element where forms of language are stressed</li>
+<li>e.g “I have eaten / the plums that were in / the icebox / …”</li>
+</ul>
+<h3 id="metalingual-function">Metalingual function</h3>
+<ul>
+<li>Aspect of message concerned with underlying structure or code of language itself</li>
+<li>Reflecting upon language within language</li>
+<li>e.g Linguistics class, grammar correction</li>
+</ul>
+<h2 id="conversation-and-politeness">Conversation and Politeness</h2>
+<h3 id="conversation-initiating">Conversation: Initiating</h3>
+<ul>
+<li>There are routines used to initiate conversations</li>
+<li>‘Summons-Answer’ sequence
+<ul>
+<li>A: summons
+<ul>
+<li>Takes form of:
+<ul>
+<li>Physical movement (e.g waving, tap on shoulder)</li>
+<li>Term of address (e.g “John?”, “Miss?”)</li>
+<li>Courtesy phrase (e.g “Excuse me”, “Hey you”)</li>
+</ul></li>
+<li>The term of address can be inserted anywhere without regard for grammar</li>
+</ul></li>
+<li>B: Answers in order to continue conversation
+<ul>
+<li>Has a time limit</li>
+</ul></li>
+<li>Sequence must be continued</li>
+<li>Sequence can’t be repeated</li>
+<li>Establishes willingness to converse
+<ul>
+<li>vs sulking, cold shoulder</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="conversation-turn-taking">Conversation: Turn-taking</h3>
+<ul>
+<li>People take turns in a conversation</li>
+<li>1 person speaks at a time</li>
+<li>Ways of marking where a change of speakers (a <em>transfer</em>) can occur
+<ul>
+<li>Stoppage points where someone else can take a turn</li>
+</ul></li>
+<li>There are rules for who can speak next at time of transfer
+<ul>
+<li>Current speaker can choose or self-selection depending on who speaks first</li>
+</ul></li>
+<li>Rules for dealing with silences
+<ul>
+<li>Natural gaps between turns</li>
+<li><em>Lapse</em>: Substantial gap between turns</li>
+<li>If the next speaker has been selected, it’s just a <em>pause</em></li>
+</ul></li>
 </ul>
 </body>
 </html>
