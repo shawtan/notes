@@ -2199,6 +2199,7 @@ word-wrap: break-word;
 <h3 id="network-layer-security">Network-layer Security</h3>
 <ul>
 <li>We need end-to-end security across networks</li>
+<li>Send individual IP packets securely from one network to another</li>
 </ul>
 <h4 id="vpn-virtual-private-network">VPN (Virtual Private Network)</h4>
 <ul>
@@ -2235,7 +2236,1117 @@ word-wrap: break-word;
 <li>Used to connect a single laptop to a home network</li>
 <li>Only contents of original IP packet are encrypted + authenticated</li>
 </ul></li>
-<li><em>Tunnel</em> mode</li>
+<li><em>Tunnel</em> mode
+<ul>
+<li>Connecting two networks</li>
+<li>Contents and header of of original IP packet are encrypted and authenticated</li>
+<li>Encrypted package is placed in a new IP packet destined for the remote VPN gateway</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="other-vpns">Other VPNs</h4>
+<ul>
+<li>PPTP
+<ul>
+<li>Microsoft</li>
+<li>Has design flaws</li>
+</ul></li>
+<li>ssh
+<ul>
+<li>Tunnel PPP over ssh
+<ul>
+<li>IP-over-PPP-over-ssh-over-TCP-over-IP</li>
+<li>Efficiency concerns</li>
+<li>Simple to set up on Unix</li>
+</ul></li>
+<li>OpenSSH
+<ul>
+<li>IP-over-SSH</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="transport-layer-security">Transport-layer Security</h3>
+<ul>
+<li>Transform arbitrary TCP connections to add security</li>
+<li>Security: TLS</li>
+<li>Privacy: Tor</li>
+</ul>
+<h4 id="privacy-enhancing-technology">Privacy Enhancing Technology</h4>
+<ul>
+<li>Technologies that enhance user control and remove personal identifiers</li>
+<li>May want to hide message metadata, or existence of messages
+<ul>
+<li>e.g Message target</li>
+</ul></li>
+<li>Categories
+<ul>
+<li>Encryption tools (e.g SSL)</li>
+<li>Policy tools (e.g P3P, TRUSTe)</li>
+<li>Filtering tools (e.g Spyware)</li>
+<li>Anonymity tools (e.g Anonymizer, iPrivacy)</li>
+</ul></li>
+</ul>
+<h4 id="nymity-levels">Nymity levels</h4>
+<ul>
+<li><strong>Verinymity</strong>
+<ul>
+<li>Government ID, SIN, credit card #, address</li>
+</ul></li>
+<li><strong>Persistent pseudonymity</strong>
+<ul>
+<li>Pen name (”Noms de plume”), many blogs</li>
+</ul></li>
+<li><strong>Linkable anonymity</strong>
+<ul>
+<li>Prepaid phone cards, loyalty cards</li>
+</ul></li>
+<li><strong>Unlinkable anonymity</strong>
+<ul>
+<li>Cash payments</li>
+</ul></li>
+<li>Nymity Slider:
+<ul>
+<li>Easy to modify system to have higher nymity levels, harder to have lower level</li>
+</ul></li>
+</ul>
+<h4 id="tls-ssl">TLS / SSL</h4>
+<ul>
+<li>Transport Layer Security</li>
+<li>Protocol to protect any TCP-based connection
+<ul>
+<li>HTTP + SSL = HTTPS</li>
+</ul></li>
+<li>How it works
+<ul>
+<li>Exists between the application and transport layers</li>
+<li>Two protocol layers
+<ul>
+<li>Handshake layer
+<ul>
+<li>Responsible for initial handshake in SSL/TLS</li>
+</ul>
+<ol type="1">
+<li>Client connects to server, indicates it wants to use TLS, and the supported <strong>ciphersuites</strong></li>
+<li>Server sends its certificate (host name, verification key, admin information, CA signature) and chooses a <em>ciphersuite</em></li>
+<li>Client validates server certificate</li>
+<li>Client and server run key agreement protocol to establish symmetric encryption keys and MAC algorithms</li>
+<li>Communicate proceeds using chosen symmetric encryption and MAC algorithms</li>
+</ol></li>
+<li>Record layer
+<ol type="1">
+<li>Gets data from application</li>
+<li>encrypts data</li>
+<li>(optionally) compresses or decompresses data</li>
+<li>fragments data into appropriate size</li>
+<li>send to transport layer</li>
+</ol></li>
+</ul></li>
+</ul></li>
+<li>Security Properties
+<ul>
+<li>Server authentication</li>
+<li>Message integrity</li>
+<li>Message confidentiality</li>
+<li>Client authentication</li>
+</ul></li>
+<li>Most successful <em>Privacy Enhancing Technology</em>
+<ul>
+<li>Comes with browser</li>
+<li>Works without user configuration</li>
+</ul></li>
+</ul>
+<h4 id="tor">Tor</h4>
+<ul>
+<li>Privacy enhancing technology at transport layer</li>
+<li>TCP connections normally reveal your IP address</li>
+<li>How it works
+<ul>
+<li>7000 Tor nodes (<em>Onion Routers</em>) scattered around Internet</li>
+<li>Communication:
+<ul>
+<li>Alice establishes encrypted communication channel with a Tor node <code>OR_1</code>
+<ul>
+<li><code>OR1</code> knows Alice is using Tor and the next node is <code>OR2</code></li>
+</ul></li>
+<li>Alice tells <code>OR_1</code> to establish a new encrypted communication channel with <code>OR_2</code> (tunnelled within <code>OR_1</code> connection)</li>
+<li>Alice tells <code>OR_2</code> to establish a new encrypted communication channel with <code>OR_3</code> (tunnelled within <code>OR_2</code> connection)</li>
+<li>… so on or as many desired steps</li>
+<li>Alice tells the last node to connect to the website
+<ul>
+<li><code>OR3</code> knows a Tor user is connecting to a particular website</li>
+</ul></li>
+</ul></li>
+<li>Alice has secret keys with each OR</li>
+<li>To send message M, she sends <code>E_k1(E_k2(E_k3(M)))</code></li>
+<li>To receive response R, each OR encrypts it and Alice receives <code>E_k1(E_k2(E_k3(R)))</code></li>
+</ul></li>
+<li>Provides short-term <em>linkably</em>, but long-term <em>unlinkably</em> <em>anonymity</em> in TCP connections</li>
+</ul>
+<h3 id="application-layer">Application-Layer</h3>
+<h4 id="remote-login">Remote Login</h4>
+<ul>
+<li>Usage
+<ol type="1">
+<li>Client connects to server</li>
+<li>Server sends verification key that client verifies</li>
+<li>Client and server run key agreement protocol
+<ul>
+<li>Use encryption and MAC after this</li>
+</ul></li>
+<li>Client authenticates server</li>
+<li>Server accepts authentication</li>
+</ol></li>
+<li>Two authentication methods
+<ul>
+<li>Send a password
+<ul>
+<li>Server needs a hash of your password</li>
+</ul></li>
+<li>Sign a random challenge with private signature key
+<ul>
+<li>Server needs your public verification key</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="email">Email</h4>
+<ul>
+<li><em>Remailers</em> allow email sending without revealing own email address
+<ul>
+<li>Not for conversations</li>
+</ul></li>
+<li>Type 0:
+<ul>
+<li>e.g <code>anon.penet.fi</code></li>
+<li>Forwards and receives email for you</li>
+<li>Remailer service keeps table to id to email address</li>
+<li>Pseudonymity</li>
+</ul></li>
+<li>Type I:
+<ul>
+<li>Cypherpunk</li>
+<li>Send messages through a chain of several remailers</li>
+<li>No pseudonymity, so replies not possible
+<ul>
+<li>Fix: ‘nym servers’ that map pseudonyms to reply blocks containing a nested encryption chain of Type I remailers</li>
+</ul></li>
+</ul></li>
+<li>Type II
+<ul>
+<li>Mixmaster</li>
+<li>Constant-length messages</li>
+<li>Protection against replay attacks</li>
+<li>Requires special email client to construct message fragments</li>
+</ul></li>
+<li>Type III
+<ul>
+<li>Mixminion</li>
+<li>Native support for pseudonymity (instead of Type I reply blocks)</li>
+<li>Improved protection against replay and key compromise attacks</li>
+</ul></li>
+</ul>
+<h5 id="pretty-good-privacy-pgp">Pretty Good Privacy (PGP)</h5>
+<ul>
+<li>Protects contents of email messages</li>
+<li>Use public-key cryptography to provide
+<ul>
+<li>encrypted email messages (hybrid encryption)</li>
+<li>digital signatures on email messages (hash-then-sign)</li>
+</ul></li>
+<li>Functions
+<ul>
+<li>Creates 4 keys: encryption, decryption, signature, verification</li>
+<li>Message encryption (using their encryption key)</li>
+<li>Message decryption using your decryption key</li>
+<li>Message signature using your signature key</li>
+<li>Signature verification using their verification key</li>
+<li>Sign other keys using your signature key</li>
+</ul></li>
+<li>Key verification
+<ul>
+<li><strong>Fingerprints</strong>: Keys have a crytographic hash used to verify keys</li>
+<li><strong>Key signatures</strong>: Alice can sign Bob’s key to verify it for Carol who trusts Alice
+<ul>
+<li>Creates a <strong>Web of Trust</strong></li>
+</ul></li>
+</ul></li>
+<li>What if attackers got hold of Bob’s key material
+<ul>
+<li>This leaks the contents and participants of Bob’s past conversations</li>
+<li>Includes signatures of who said what</li>
+<li>Goes against forward secrecy and deniable authentication</li>
+</ul></li>
+<li>Perfect forward secrecy
+<ul>
+<li>Future key compromises should not reveal past communication</li>
+<li>Use <em>session keys</em> instead that are securely erased after use</li>
+<li>Diffie-Hellman key exchange protocol</li>
+</ul></li>
+<li>Deniable Authenication
+<ul>
+<li>Good for contracts, but not for private conversations</li>
+<li>Use <em>Message Authentication Codes</em>
+<ul>
+<li>Anyone who can verify can also forge a message</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="instant-messaging">Instant Messaging</h4>
+<ul>
+<li>Off-the-Record Messaging (OTR)
+<ul>
+<li>Allows private conversations over instant messaging</li>
+<li>Provides confidentiality, authentication, perfect forward secrecy and deniability</li>
+<li>e.g Signal (used by WhasApp, FB Messenger, Google Allo) # Database Security and Privacy</li>
+</ul></li>
+</ul>
+<h2 id="introduction-to-databases">Introduction to databases</h2>
+<ul>
+<li><strong>Relational Database</strong>: structured, queryable collection of <em>records</em></li>
+<li><strong>Records</strong>: data consisting of fields (<strong>elements</strong>)</li>
+<li><strong>Schema</strong>: structure set by database administrator</li>
+<li><strong>DBMS</strong> provides support for queries and management
+<ul>
+<li>Most popular DBMS are based on the <em>relational model</em></li>
+</ul></li>
+<li>Advantages
+<ul>
+<li>Shared access</li>
+<li>Controlled access</li>
+<li>Minimal redundancy</li>
+<li>Data consistency</li>
+<li>Data integrity</li>
+</ul></li>
+</ul>
+<h3 id="relations">Relations</h3>
+<ul>
+<li>Records are stored in one or multiple tables (<em>relations</em>)
+<ul>
+<li>Table has named columns (<em>attributes</em>) and rows (<em>tuples</em>)</li>
+<li>Tables can have relationships between them</li>
+</ul></li>
+</ul>
+<h3 id="queries">Queries</h3>
+<ul>
+<li>Most popular query language is SQL</li>
+<li><strong>Subschema</strong>: query result</li>
+</ul>
+<h2 id="security-requirements">Security requirements</h2>
+<ul>
+<li>Physical database integrity</li>
+<li>Logical database integrity</li>
+<li>Element integrity</li>
+<li>Referential integrity</li>
+<li>Auditability</li>
+<li>Access control</li>
+<li>User authentication</li>
+<li>Availability</li>
+</ul>
+<h3 id="database-integrity">Database Integrity</h3>
+<ul>
+<li>Logical integrity: protect against database corruption
+<ul>
+<li>Only allow authorized individuals to perform updates</li>
+</ul></li>
+<li>Physical integrity: recover from physical problems
+<ul>
+<li>Perform periodic backups</li>
+<li>Keep log of transactions to replay transactions</li>
+</ul></li>
+</ul>
+<h3 id="element-integrity">Element integrity</h3>
+<ul>
+<li>Ensure correctness/accuracy of database elements</li>
+<li><em>Access control</em> to limit who can update elements</li>
+<li><em>Element check</em> to validate correctness
+<ul>
+<li>Prevents user mistakes</li>
+<li>e.g Datatype</li>
+<li>e.g Only one employee can be president</li>
+<li>Enforced with <em>triggers</em></li>
+</ul></li>
+<li><em>Change log / Shadow fields</em>: to undo erroneous changes
+<ul>
+<li>In case previous checks fail</li>
+<li>Requires additional DB space</li>
+</ul></li>
+<li><em>Error detection codes</em> to protect against OS / hard disk problems</li>
+</ul>
+<h3 id="integrity-1">Integrity</h3>
+<ul>
+<li>Two-Phase Update
+<ul>
+<li>For a set of operations, either all or none of them should be performed
+<ul>
+<li>Causes integrity problems if only some are performed</li>
+</ul></li>
+<li>Phase 1: gather information required for changes</li>
+<li>Phase 2: Make changes permanent</li>
+</ul></li>
+<li>Concurrency Control
+<ul>
+<li>Concurrent modifications lead to integrity violations</li>
+<li>Operations need to be <strong>atomic</strong></li>
+</ul></li>
+</ul>
+<h3 id="referential-integrity">Referential Integrity</h3>
+<ul>
+<li>Every table has a primary key (minimal attribute set) that uniquely identifies each tuple</li>
+<li>Table can have foreign keys</li>
+<li><em>Referential integrity</em> ensures there are no dangling foreign keys</li>
+</ul>
+<h3 id="auditability">Auditability</h3>
+<ul>
+<li>Keep an audit log of all database accesses (read and write)</li>
+<li>Allows identification of users who accessed forbidden data, instead of relying on access control</li>
+<li>Combination of allowed accesses can result in disclosure</li>
+</ul>
+<h3 id="access-control-1">Access control</h3>
+<ul>
+<li>Problems
+<ul>
+<li>Many operation types (SELECT, INSERT, UPDATE, CREATE, DROP, etc.)</li>
+<li>Need to control access at relation, record or element level</li>
+<li>Relationships between objects allow indirect information access
+<ul>
+<li><em>Inference problem</em></li>
+</ul></li>
+<li>Efficiency problem with many records</li>
+<li>Need to consider past queries</li>
+<li>Need to consider types of queries
+<ul>
+<li>e.g <code>SELECT last name, salary FROM staff</code> vs <code>SELECT last name FROM staff</code></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="user-authentication-1">User authentication</h3>
+<ul>
+<li>Done by database</li>
+<li>Can do additional checks (e.g time of day)</li>
+</ul>
+<h3 id="availability">Availability</h3>
+<ul>
+<li>Availability problems when multiple users want to access at the same time</li>
+<li>e.g Update operations</li>
+</ul>
+<h2 id="data-disclosure-and-inference">Data disclosure and inference</h2>
+<h3 id="types-of-data-disclosure">Types of data disclosure</h3>
+<ul>
+<li><strong>Exact data</strong></li>
+<li><strong>Metadata</strong>
+<ul>
+<li>Bounds: indicate a value is between two values
+<ul>
+<li>Attacker can binary search</li>
+</ul></li>
+<li>Negative result: disclose that <code>z</code> is NOT <code>y</code></li>
+<li>Existence: disclose that data exists</li>
+<li>Probable value: probability a certain element has a certain value</li>
+</ul></li>
+</ul>
+<h3 id="security-vs-precision">Security vs Precision</h3>
+<ul>
+<li>Precision: reveal as much non-sensitive data as possible
+<ul>
+<li>Aggregated result should reveal as much non-sensitive data as possible</li>
+<li>Attacker can use disclosed data to infer hidden data</li>
+</ul></li>
+<li>Security: reveal only non-sensitive data
+<ul>
+<li>Reject any query that mentions a sensitive field</li>
+<li>Aggregated: Reject queries that access sensitive data even if aggregated result is non-sensitive</li>
+<li>May reject reasonable, non-disclosing queries</li>
+</ul></li>
+<li>Want perfect confidentiality with maximum precision</li>
+</ul>
+<h3 id="data-inference">Data Inference</h3>
+<ul>
+<li>Deriving sensitive data from non-sensitive data</li>
+<li>Direct attack
+<ul>
+<li>Query that directly yields sensitive data</li>
+<li>Possibly obfuscated</li>
+<li>e.g <code>SELECT SUM(salary) FROM staff WHERE lastname = ’Adams’ OR (sex = ’M’ AND sex = ’F’)</code></li>
+<li>Control: <strong>“n items over k percent” rule</strong>
+<ul>
+<li>Data should be withheld if <code>n</code> items represent over <code>k</code>% of the result</li>
+<li>Don’t reveal results where a small number of records make up a large proportion of the category</li>
+</ul></li>
+</ul></li>
+<li>Indirect attack
+<ul>
+<li>Statistical Inference attack
+<ul>
+<li>Infer sensitive data from statistical results</li>
+<li><code>SUM</code>: leaks data if only one record, or if attacker can control set of covered records</li>
+<li><code>COUNT</code>: useful for SUM attack</li>
+<li><code>MEAN</code>: sum = count * mean</li>
+<li><code>MEDIAN</code>: intersecting medians can leak data</li>
+</ul></li>
+<li>Tracker attack</li>
+</ul></li>
+</ul>
+<h4 id="tracker-attack">Tracker Attack</h4>
+<ul>
+<li>Variables:
+<ul>
+<li>N: number of records in a database</li>
+<li>q(): result of a query (e.g COUNT, SUM)</li>
+<li>S: set of all records</li>
+</ul></li>
+<li>Situation: DBMS refuses to answer query C if it matches fewer than <code>k</code> or more than <code>N - k</code> (but not all <code>N</code>) records</li>
+<li>A tracker <code>T</code> is a query whose result matches between <code>2k</code> and <code>N - 2k</code> records
+<ul>
+<li>DBMS will answer query T and query <em>not</em> T</li>
+</ul></li>
+<li><strong>q(C) = q(C or T) + q(C or !T) - q(S)</strong>
+<ul>
+<li>Use if q(C) matches less than k records</li>
+</ul></li>
+<li><strong>q(C) = 2q(S) - q(!C or T) - q(!C or !T)</strong>
+<ul>
+<li>Use if q(C) matches more than N-k records</li>
+</ul></li>
+</ul>
+<h4 id="control-for-statistical-inference-attack">Control for Statistical Inference Attack</h4>
+<ul>
+<li>Controlling query is difficult</li>
+<li>Control data item
+<ul>
+<li><strong>Suppression</strong> of sensitive data from result
+<ul>
+<li>Sensitive data values are not provided</li>
+<li>Reject queries without response</li>
+</ul></li>
+<li><strong>Concealing</strong> of sensitive data
+<ul>
+<li>Give answer close to, but equal to data value</li>
+</ul></li>
+<li><em>n-item k-percent rule</em>
+<ul>
+<li>If there is a subset of <code>n</code> records responsible for over <code>k</code> percent of result, omit the <code>n</code> records</li>
+<li>Omission leaks information</li>
+</ul></li>
+<li>Combined results
+<ul>
+<li>Report set or range of possible values</li>
+</ul></li>
+<li>Random sample
+<ul>
+<li>Compute result on random sample of database</li>
+<li>Equivalent queries need to use the same sample</li>
+</ul></li>
+<li>Random data perturbation
+<ul>
+<li>Add/subtract small random error from each value</li>
+<li>Statistical properties will still be maintained</li>
+</ul></li>
+<li>Query analysis
+<ul>
+<li>Maintain history of user queries to observe possible inferences</li>
+<li>Expensive</li>
+<li>Fails for colluding users</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="differential-privacy">Differential Privacy</h3>
+<ul>
+<li>Maximize accuracy while minimizing privacy impact</li>
+<li>Typically achieved by adding noise to query result before release</li>
+<li>Response to query should not depend on individual’s existence in dataset</li>
+<li>Query <code>K</code> has <strong>ε-differential privacy</strong> if
+<ul>
+<li>For all datasets DB and DB’, where DB and DB’ differ in at most 1 row</li>
+<li><code>Pr[K(DB) in S] &lt;= e^ε * Pr[K(DB&#39;) in S]</code></li>
+<li>“the probability that K(DB) has a particular output is at most e^ε × the probability that K(DB′) has this output”</li>
+</ul></li>
+</ul>
+<h3 id="data-aggregation">Data Aggregation</h3>
+<ul>
+<li>Can build sensitive results from less sensitive inputs</li>
+<li>Outside of DBMS and difficult to control</li>
+<li>Similar to Data Mining</li>
+</ul>
+<h2 id="multilevel-security-databases">Multilevel security databases</h2>
+<ul>
+<li>Supports classification / compartmentalization of information according to confidentiality</li>
+<li>Can be element level classification
+<ul>
+<li>e.g Salary only sensitive for some employees</li>
+</ul></li>
+<li>Each object has a sensitivity classification and optional set of compartments
+<ul>
+<li>Object = element, aggregate, column or row</li>
+</ul></li>
+</ul>
+<h3 id="security-issues">Security Issues</h3>
+<h4 id="integrity-2">Integrity</h4>
+<ul>
+<li>Need to enforce “No write down” (*-property)</li>
+<li>Difficult to implement
+<ul>
+<li>Users doing write-ups are writing blind</li>
+<li>Write-downs need to be sanitized</li>
+<li>Trusted processes are able to do anything</li>
+</ul></li>
+<li>DBMS needs to answer queries, perform back-ups, etc.
+<ul>
+<li>DBMS needs to have all level read/write access</li>
+</ul></li>
+</ul>
+<h4 id="confidentiality">Confidentiality</h4>
+<ul>
+<li>Different users at different levels may get different query results
+<ul>
+<li>Leads to redundancy</li>
+</ul></li>
+<li>Existence of a record can be confidential
+<ul>
+<li><strong>Polyinstantiation</strong>: have multiple records with the same primary key but different sensitivities</li>
+<li>e.g Admin sees no record for “Bob” and creates one
+<ul>
+<li>However, “Bob” already has a record, but is secret</li>
+<li>DBMS needs to allow Admin’s request to not leak information</li>
+<li>Results in two “Bob” records</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="solutions">Solutions</h3>
+<h4 id="partitioning">Partitioning</h4>
+<ul>
+<li>Have a separate database for each classification level</li>
+<li>Pros:
+<ul>
+<li>Simple</li>
+</ul></li>
+<li>Cons:
+<ul>
+<li>Can lead to data redundancy in multiple databases</li>
+<li>High-level user may need to combine low-level and high-level data</li>
+</ul></li>
+</ul>
+<h4 id="encryption">Encryption</h4>
+<ul>
+<li>Encrypt data with key unique to its classification level</li>
+<li>Cons
+<ul>
+<li>Need to choose encryption scheme carefully</li>
+<li>Query processing becomes expensive (need to decrypt records)</li>
+</ul></li>
+</ul>
+<h4 id="integrity-lock">Integrity Lock</h4>
+<ul>
+<li>Each data item consist of:
+<ul>
+<li>Actual data</li>
+<li>Integrity level</li>
+<li>Cryptographic signature / MAC covering (data, integrity level, attribute name, record number)</li>
+</ul></li>
+<li>Signature protects against attacks trying to modify the fields, or move the record
+<ul>
+<li>Does not protect against replay attacks</li>
+</ul></li>
+<li>A trusted procedure interfaces between the database and DBMS and handles access control and integrity locks
+<ul>
+<li>Untrusted databases can store data items and their integrity locks
+<ul>
+<li>Locks take a lot of space</li>
+</ul></li>
+<li>Trusted procedure handles access control and manages integrity locks
+<ul>
+<li>e.g Update integrity level or re-computing signature</li>
+<li>Expensive operation</li>
+</ul></li>
+<li>If the sensitive database can be accessed by another way, then we need to encrypt the database as well
+<ul>
+<li>Expensive query processing</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="designs-of-secure-databases">Designs of secure databases</h2>
+<h3 id="trusted-front-end">Trusted Front End</h3>
+<ul>
+<li>Front end authenticates user</li>
+<li>Front end forwards user query to untrusted DBMS</li>
+<li>Front end removes confidential data from DMBS result</li>
+<li>Pro: allows usage of existing DBMS and databases</li>
+<li>Con: inefficient since items returned by DBMS are being dropped</li>
+</ul>
+<h3 id="commutative-filters">Commutative Filters</h3>
+<ul>
+<li>Front end re-writes user query according to user’s classification
+<ul>
+<li>Remove confidential attributes</li>
+<li>Add constraints expressing classsification</li>
+</ul></li>
+<li>Pro: Benefit from DBMS’s query processing capabilities</li>
+<li>Con: Front end may still need to do post processing</li>
+</ul>
+<h3 id="distributed-federated-databases">Distributed / Federated Databases</h3>
+<ul>
+<li>Based on partitioning</li>
+<li>Front end forwards user query only to databases that user has clearance for</li>
+<li>Con: front end needs to combine results from multiple databases</li>
+<li>Con: doesn’t scale to many classification labels</li>
+</ul>
+<h3 id="views">Views</h3>
+<ul>
+<li>Logical database representing a subset of another database</li>
+<li>Elements in view correspond to an element in the underlying database, or an aggregation</li>
+<li>Access control:
+<ul>
+<li>User’s view consists only of data the user is allowed to access</li>
+<li>Hide attributes and rows that the user cannot access at least one element of</li>
+<li>Set elements user cannot access to <code>UNDEFINED</code></li>
+</ul></li>
+</ul>
+<h3 id="truman">Truman</h3>
+<ul>
+<li>Truman semantics: DBMS pretends the data that the user is allowed to access is all there is
+<ul>
+<li>All queries succeed (even if results are incorrect)</li>
+</ul></li>
+<li>Non-Truman semantics: DBMS rejects queries for data the user cannot access
+<ul>
+<li>Successful queries are precise</li>
+<li>Some queries will fail</li>
+</ul></li>
+</ul>
+<h2 id="data-mining-and-data-release">Data mining and data release</h2>
+<h3 id="data-mining">Data Mining</h3>
+<ul>
+<li>Combining sensitive information stored in multiple databases</li>
+<li>Not just a single entity controlling data</li>
+<li>Data mining tries to <em>automatically</em> find interesting patterns in data
+<ul>
+<li>Technologies: stats, machine learning, pattern recognition</li>
+<li>Need humans to judge if the pattern makes sense (causality vs coincidence)</li>
+</ul></li>
+<li>Can be useful for security
+<ul>
+<li>e.g Learning intrusion information from logs</li>
+</ul></li>
+</ul>
+<h4 id="security-problems">Security Problems</h4>
+<ul>
+<li>Confidentiality: Derivation of sensitive information
+<ul>
+<li>Data mining can reveal sensitive information about humans or companies</li>
+<li>e.g Firestone and Ford Tires
+<ul>
+<li>Firestone and Ford both had some evidence of tire problems, but could not share it</li>
+<li>US gov combined the data and revealed problems with Ford Explorer + Firestone tires</li>
+</ul></li>
+<li>e.g Data Disclosure of (City, Gender, Date of Birth)
+<ul>
+<li>50% of US population can be uniquely identified by (place, gender, date of birth)</li>
+</ul></li>
+<li>e.g Netflix Price
+<ul>
+<li>Netflix released 100 million anonymized ratings from 480189 users to 17770 movies</li>
+<li>Can map Netflix ratings with IMDB ratings for an isolation attack</li>
+</ul></li>
+</ul></li>
+<li>Integrity: Mistakes in data
+<ul>
+<li>Data in database can be wrong</li>
+<li>Leads to wrong conclusions by data miners
+<ul>
+<li>Negatively impacts individuals</li>
+<li>e.g Kennedy mistakenly put on no-fly list</li>
+</ul></li>
+<li>Privacy: individuals should be able to correct mistakes in data about them
+<ul>
+<li>However, data is shared widely and there is no formal procedure</li>
+</ul></li>
+<li>Can have false negatives as well</li>
+</ul></li>
+<li>Availability: (In)compatibility of different databases
+<ul>
+<li>Mined databases are created by different organizations
+<ul>
+<li>Primary keys, attribute semantics are different</li>
+<li>e.g “name” as last name, or full name</li>
+<li>e.g currency</li>
+</ul></li>
+<li>Databases are difficult to combine</li>
+<li>Harder to find correlations</li>
+</ul></li>
+</ul>
+<h4 id="privacy-problems">Privacy Problems</h4>
+<ul>
+<li>Data mining can reveal sensitive information about individuals based on aggregation and inference</li>
+<li>Private companies are doing the data collection and mining
+<ul>
+<li>Controlled by Privacy laws (e.g PIPEDA, HIPAA)</li>
+</ul></li>
+<li>Governments are doing data mining as well
+<ul>
+<li>Secret programs that have no clear procedures</li>
+<li>e.g No-fly lists, phone tapping</li>
+</ul></li>
+</ul>
+<h3 id="privacy-preserving-data-release">Privacy Preserving Data Release</h3>
+<ul>
+<li>We should anonymize data records before releasing them</li>
+<li>Strip names, addresses, phone numbers, etc</li>
+<li>Harder than it looks
+<ul>
+<li>e.g Taxi trip logs
+<ul>
+<li>Used MD5 on medallion and license</li>
+<li>Medallion and license are short with a fixed format</li>
+<li>Hash functions can be reversed if input space is small</li>
+</ul></li>
+<li>e.g AOL search data set
+<ul>
+<li>Assigned random number to each user</li>
+<li>Can identify a person from their search history</li>
+</ul></li>
+<li>87% of US population can be uniquely identified by (ZIP, gender, DOB)
+<ul>
+<li>e.g Look at voter registration lists</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="k-anonymity">k-anonymity</h4>
+<ul>
+<li>Ensure that for each released record, there are at least <code>k-1</code> other released records from which the record cannot be distinguished</li>
+<li>k &gt;= 2</li>
+<li>Methods
+<ul>
+<li><strong>Suppression</strong>: remove data fields</li>
+<li><strong>Generalization</strong>: reduce granularity of data</li>
+</ul></li>
+<li>Attacks
+<ul>
+<li>Homogeneity attack: if there is only one value for a quasi-identifier, you know the value</li>
+<li>Background knowledge attack: if you can eliminate the other values of a quasi-identifier, you know the value</li>
+</ul></li>
+</ul>
+<h4 id="l-diversity">l-diversity</h4>
+<ul>
+<li>For any quasi-identifier, there should be at least <code>l</code> “well-represented” values of the sensitive fields</li>
+</ul>
+<h4 id="t-closeness">t-closeness</h4>
+<ul>
+<li>Ensure that the <em>distributions</em> of the values for any quasi-identifier are within <code>t</code> of the distribution for the whole table</li>
+</ul>
+<h4 id="value-swapping">Value Swapping</h4>
+<ul>
+<li>Perturb data by swapping values of data fields</li>
+<li>Links in released records cannot be considered true</li>
+<li>Increase privacy for less accuracy</li>
+<li>Strong correlations will become weaker, and weak correlations may disappear</li>
+</ul>
+<h4 id="adding-noise">Adding Noise</h4>
+<ul>
+<li>Add small positive or negative error to each value</li>
+<li>Distribution of underlying data should be maintained</li>
+<li>Protects privacy and keeps accuracy</li>
+</ul>
+<h4 id="randomizing-binary-data">Randomizing Binary Data</h4>
+<ul>
+<li>Switch the binary value with probability <code>p</code>
+<ul>
+<li>Can toggle both ways or only one way (if one value is problematic)</li>
+</ul></li>
+<li>Provides plausible deniability</li>
+</ul>
+<h4 id="sampling">Sampling</h4>
+<ul>
+<li>Release only a subset of data
+<ul>
+<li>Geographic coarsening: restrict geographic identifiers to regions with enough population</li>
+<li>Top/bottom-coding: add a ceiling or floor to the values
+<ul>
+<li>e.g Replace ages over 90 with 90 exact</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="synthetic-data">Synthetic Data</h4>
+<ul>
+<li>Build a distribution model based on gathered data and use the model to generate synthetic data with similar characteristics</li>
+</ul>
+<h1 id="non-technical-aspects">Non-technical Aspects</h1>
+<h2 id="ethical-issues">Ethical issues</h2>
+<ul>
+<li>Just because something is legal doesn’t mean you should do it</li>
+</ul>
+<h3 id="codes-of-professional-ethics">Codes of professional ethics</h3>
+<ul>
+<li>Professional societies (e.g ACM, IEEE, CIPS) have codes of professional ethics</li>
+<li>e.g CIPS
+<ul>
+<li>Protect Public Interest and Maintain Integrity</li>
+<li>Demonstrate Competence and Quality of Service</li>
+<li>Maintain Confidential Information and Privacy</li>
+<li>Avoid Conflicts of Interest</li>
+<li>Uphold Responsibility to the IT Profession</li>
+</ul></li>
+</ul>
+<h2 id="administering-security">Administering security</h2>
+<h3 id="security-planning">Security Planning</h3>
+<ul>
+<li><strong>Security plan</strong>: document explaining
+<ul>
+<li>security goals,</li>
+<li>how to meet the goals</li>
+<li>how to keep meeting the goals</li>
+</ul></li>
+</ul>
+<h4 id="parts-of-a-security-plan">Parts of a security plan:</h4>
+<ol type="1">
+<li>Policy
+<ul>
+<li>High-level statement of purpose and intent</li>
+<li>Specifies
+<ul>
+<li>Goals: relative importance of confidentiality, integrity, availability</li>
+<li>Responsibility: who is responsible</li>
+<li>Commitment</li>
+</ul></li>
+</ul></li>
+<li>Current state
+<ul>
+<li>Risk analysis</li>
+<li>Procedure for new assets of vulnerabilities</li>
+<li>Limits of security responsibility</li>
+<li>Privacy Impact Assessment (PIA)</li>
+</ul></li>
+<li>Requirements
+<ul>
+<li>Needs of organization
+<ul>
+<li><em>Who</em> is allowed to do <em>what</em>?</li>
+<li>Which audit logs to keep</li>
+<li>Measurements to make</li>
+</ul></li>
+</ul></li>
+<li>Recommended controls
+<ul>
+<li>Mechanisms to
+<ul>
+<li>control vulnerabilities identified in <em>current state</em></li>
+<li>satisfy needs in <em>requirements</em></li>
+<li>taking into account priorities of <em>policy</em></li>
+</ul></li>
+</ul></li>
+<li>Accountability
+<ul>
+<li>Who is accountable if security controls aren’t implemented properly</li>
+</ul></li>
+<li>Timetable
+<ul>
+<li>Schedule to carry out security plan</li>
+<li>Includes milestones</li>
+</ul></li>
+<li>Continuing attention
+<ul>
+<li>Organization and world will change</li>
+<li>Process for periodic review and updates</li>
+</ul></li>
+</ol>
+<h4 id="security-planning-team">Security planning team:</h4>
+<ul>
+<li>Upper management</li>
+<li>IT</li>
+<li>Sysadmins</li>
+<li>Physical security</li>
+<li>Representative users</li>
+</ul>
+<h4 id="business-continuity-plans">Business continuity plans</h4>
+<ul>
+<li>Type of security plan focused on availability</li>
+<li>What to do for
+<ul>
+<li>Catastrophic failures: large part of computing capability that is suddenly unavailable
+<ul>
+<li>e.g fire, utility failure, pandemic</li>
+<li>Create a plan for
+<ul>
+<li>Who’s in charge</li>
+<li>What to do</li>
+<li>Who to do it</li>
+</ul></li>
+<li>Acquire resources to carry out the plan</li>
+</ul></li>
+<li>Long duration failures: outage expects to last long enough to affect business</li>
+</ul></li>
+</ul>
+<h4 id="incident-response-plans">Incident response plans</h4>
+<ul>
+<li>Plans to respond to a security breach</li>
+<li>Consider:
+<ul>
+<li>Legal ramifications: when to involve law enforcement</li>
+<li>Preserving evidence: recover and still maintain forensic evidence</li>
+<li>Records: keep track of what you notice</li>
+<li>Public relations</li>
+</ul></li>
+<li>After recovery, consider:
+<ul>
+<li>Security control actions</li>
+<li>Whether incident response plan was effective</li>
+</ul></li>
+</ul>
+<h3 id="risk">Risk</h3>
+<ul>
+<li>Risk: potential problem a system or users may experience
+<ul>
+<li>Has probability and impact</li>
+<li>Risk exposure = probability x impact</li>
+</ul></li>
+<li>Risk analysis
+<ul>
+<li>Determine if benefits outweigh the risks</li>
+</ul></li>
+<li>Steps
+<ol type="1">
+<li>Identify assets we want to protect
+<ul>
+<li>Hardware, software, data</li>
+<li>People, documentation, supplies</li>
+</ul></li>
+<li>Determine vulnerabilities
+<ul>
+<li>Confidentiality, integrity, availability, privacy attacks on the above assets</li>
+</ul></li>
+<li>Estimate likelihood of exploitation
+<ul>
+<li>Get experts</li>
+<li>Frequency analysis based on past occurrences of problem</li>
+</ul></li>
+<li>Compute risk exposure
+<ul>
+<li>Identify impact of risk</li>
+</ul></li>
+<li>Survey applicable controls
+<ul>
+<li>Find ways of controlling the vulnerability</li>
+<li>Classify control by how well it protects against each vulnerability</li>
+</ul></li>
+<li>Project savings due to control
+<ul>
+<li>Expected cost of not controlling the risk = risk exposure</li>
+<li>Cost of control is direct cost + expose of controlled risk</li>
+<li>Savings = risk exposure - cost of control</li>
+</ul></li>
+</ol></li>
+</ul>
+<h3 id="physical-security">Physical Security</h3>
+<ul>
+<li>Need to protect physical machines</li>
+<li>Two classes
+<ul>
+<li>Nature
+<ul>
+<li>e.g Fire, Flood, Blackouts</li>
+<li>Have backup generators, other locations</li>
+</ul></li>
+<li>Human
+<ul>
+<li>Need to protect against loss + release of sensitive data</li>
+<li>Vandals
+<ul>
+<li>e.g Concordia Computer center incident</li>
+<li>Make backups</li>
+</ul></li>
+<li>Thieves
+<ul>
+<li>After hardware</li>
+</ul></li>
+<li>Targeted attackers
+<ul>
+<li>After data</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="protecting-offline-data">Protecting Offline Data</h4>
+<ul>
+<li>Data storage devices just sitting on a shelf</li>
+<li>Difficult for network-based attackers, but easy for physical attackers</li>
+<li>Also need to safely dispose of data</li>
+</ul>
+<h3 id="testing-security-procedures">Testing Security Procedures</h3>
+<ul>
+<li>Tiger teams
+<ul>
+<li>Teams of security professionals hired to break into your system</li>
+<li>They inform you about the vulnerabilities afterwards</li>
+</ul></li>
+</ul>
+<h2 id="legal-issues">Legal issues</h2>
+<h3 id="legal-protections">Legal Protections</h3>
+<ul>
+<li>Hardware theft can be changed</li>
+<li>Copying data falls under IP</li>
+</ul>
+<h3 id="intellectual-property">Intellectual Property</h3>
+<ul>
+<li>IP is different from physical property
+<ul>
+<li>Non-depletable</li>
+<li>Replicable</li>
+<li>Minimal marginal cost</li>
+</ul></li>
+<li>IP types differ in kind of intangible, rights, durations, registration requirements</li>
+<li>Types
+<ul>
+<li>Trade secrets
+<ul>
+<li>Protects secret information
+<ul>
+<li>e.g Coca-Cola formula</li>
+<li>e.g Fancy algorithm</li>
+</ul></li>
+<li>Don’t need to tell anyone</li>
+<li>If you tell someone, and they pass it on you have legal protection</li>
+<li>If the secret is <em>reverse engineered</em>, you lose trade secret protection</li>
+</ul></li>
+<li>Trademarks
+<ul>
+<li>Protects names, brands, logos
+<ul>
+<li>e.g RC4</li>
+<li>e.g Domain names</li>
+</ul></li>
+<li>Need to make a legal filing showing you are using the name in commerce</li>
+<li>Can sure others using the same name in a confusing manner</li>
+</ul></li>
+<li>Patents
+<ul>
+<li>Protects inventions that are novel, useful, non-obvious
+<ul>
+<li>e.g Cryptography algorithms</li>
+</ul></li>
+<li>Need to explain how it works</li>
+<li>Get 20 year monopoly</li>
+</ul></li>
+<li>Copyrights
+<ul>
+<li>Protects expressions of ideas in a tangible medium</li>
+<li>No filing requirement</li>
+<li>Limited time protection (more than lifespan)</li>
+<li>Copyright holder has monopoly over uses of work including copies
+<ul>
+<li>Others can copy work in certain circumstances</li>
+<li>USA: fair use
+<ul>
+<li>For purposes such as criticism, comment, news reporting, teaching, scholarship, or research</li>
+</ul></li>
+<li>Canada: fair dealing
+<ul>
+<li>Only: private study, research, criticism, review, news reporting, education, parody, and satire</li>
+<li>Private copying is allowed but audio is murky</li>
+</ul></li>
+</ul></li>
+<li>Paracopyright
+<ul>
+<li>DCMA</li>
+<li>TODO</li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </body>
