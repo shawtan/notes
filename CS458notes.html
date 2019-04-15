@@ -1108,8 +1108,72 @@ word-wrap: break-word;
 <li>Least common mechanism</li>
 <li>Ease of use</li>
 </ul>
-<h2 id="todo">TODO</h2>
+<h3 id="features-of-trusted-os">Features of Trusted OS</h3>
+<ul>
+<li>Identification and authentication</li>
+<li>Access control
+<ul>
+<li>Mandatory access control (MAC)
+<ul>
+<li>Central authority decides what people can access</li>
+<li>Military environments</li>
+</ul></li>
+<li>Discretionary access control (DAC)
+<ul>
+<li>Object owners have control over who can access it</li>
+<li>e.g Give others access to your home directory</li>
+</ul></li>
+<li>RBAC</li>
+</ul></li>
+<li>Object reuse protection
+<ul>
+<li>Erase returned memory before giving it to other users</li>
+<li><strong>Hidden data</strong>: data you think you deleted, but is still hidden somewhere</li>
+</ul></li>
+<li>Complete mediation
+<ul>
+<li>All accesses must be checked</li>
+</ul></li>
+<li>Trusted path
+<ul>
+<li>Give assurance that keystrokes and mouse clicks are sent to the legitimate receiver application</li>
+</ul></li>
+<li>Accountability and audit
+<ul>
+<li>Keep audit log of security-related events</li>
+</ul></li>
+<li>Intrusion detection
+<ul>
+<li>OS should detect intrusions</li>
+<li>Look for actual behaviour that (does not) correlate with normal behaviour</li>
+</ul></li>
+</ul>
 <h3 id="trusted-computing-base-tcb">Trusted computing base (TCB)</h3>
+<ul>
+<li>Part of trusted OS necessary to enforce OS security policy</li>
+<li>Runs below OS kernel</li>
+<li>Rings
+<ul>
+<li>Things in ring <code>n</code> can only access memory/instructions in rings &gt;= <code>n</code></li>
+<li>Rings:
+<ol type="1">
+<li>hardware</li>
+<li>security kernel</li>
+<li>operating system</li>
+<li>user tasks</li>
+</ol></li>
+</ul></li>
+<li>Reference monitor
+<ul>
+<li>Collection of access controls for devices, files, memory, IPC, et.c</li>
+<li>Need to be
+<ul>
+<li>tamperproof</li>
+<li>unbypassable</li>
+<li>analyzable</li>
+</ul></li>
+</ul></li>
+</ul>
 <h3 id="virtualization">Virtualization</h3>
 <ul>
 <li>Virtual memory
@@ -1750,7 +1814,6 @@ word-wrap: break-word;
 <li>Base rate fallacy</li>
 </ul></li>
 </ul>
-<h3 id="host-based">Host-based</h3>
 <h1 id="internet-application-security-and-privacy">Internet Application Security and Privacy</h1>
 <h2 id="message-threats">Message Threats</h2>
 <ul>
@@ -2001,7 +2064,8 @@ word-wrap: break-word;
 <ul>
 <li>Have a large class of hash functions</li>
 <li>Shared secret key used to pick the ‘correct’ hash function</li>
-<li>Only those with the secret key can generate and check the hash digest (‘<em>tag</em>’) -<strong>Message Authentication Codes (MAC)</strong>: keyed hash function
+<li>Only those with the secret key can generate and check the hash digest (‘<em>tag</em>’)</li>
+<li><strong>Message Authentication Codes (MAC)</strong>: keyed hash function
 <ul>
 <li>e.g SHA-1-HMAC, SHA-256-HMAC, CBC-MAC</li>
 </ul></li>
@@ -2496,9 +2560,10 @@ word-wrap: break-word;
 <ul>
 <li>Allows private conversations over instant messaging</li>
 <li>Provides confidentiality, authentication, perfect forward secrecy and deniability</li>
-<li>e.g Signal (used by WhasApp, FB Messenger, Google Allo) # Database Security and Privacy</li>
+<li>e.g Signal (used by WhasApp, FB Messenger, Google Allo)</li>
 </ul></li>
 </ul>
+<h1 id="database-security-and-privacy">Database Security and Privacy</h1>
 <h2 id="introduction-to-databases">Introduction to databases</h2>
 <ul>
 <li><strong>Relational Database</strong>: structured, queryable collection of <em>records</em></li>
@@ -3341,11 +3406,57 @@ word-wrap: break-word;
 <li>Private copying is allowed but audio is murky</li>
 </ul></li>
 </ul></li>
-<li>Paracopyright
-<ul>
-<li>DCMA</li>
-<li>TODO</li>
 </ul></li>
+</ul></li>
+</ul>
+<h4 id="paracopyright">Paracopyright</h4>
+<ul>
+<li>e.g DCMA</li>
+<li>Illegal to circumvent technological copy protection</li>
+<li>Even when you’re breaking copy protection to make a fair use copy</li>
+</ul>
+<h4 id="computer-crime">Computer Crime</h4>
+<ul>
+<li>Previously it was difficult to legally charge computer crime</li>
+<li>Now: Unauthorized access of computers, networks, or services is legally different from physical trespass</li>
+<li>Rules of Evidence
+<ul>
+<li>Hard to produce computer crime evidence that is admissible in court</li>
+<li>e.g Are log files admissible?</li>
+<li>How to preserve electronic evidence?</li>
+</ul></li>
+<li>Cybercrime treaties
+<ul>
+<li>Cyberbullying Law</li>
+<li>Council of Europe says we should make it easier for law enforcement to access telecommunications traffic</li>
+<li>Any ‘public officer’ can demand computer data is a person’s control not be deleted</li>
+</ul></li>
+<li>Back doors
+<ul>
+<li>Back doors are weaknesses that lower security</li>
+<li>If there is a back door, the bad guys can use it too</li>
+<li>e.g Greek wiretapping scandal</li>
+<li><strong>Harmonization</strong> results in back doors being left in everywhere because we don’t want to build multiple versions</li>
+</ul></li>
+</ul>
+<h4 id="redress-for-software-failures">Redress for software failures</h4>
+<ul>
+<li>If your software is broken, you can’t get a refund or exchange for a new one</li>
+<li>Who do you tell about flaws?
+<ul>
+<li>Vendor
+<ul>
+<li>They can sue you if you publicly disclose</li>
+</ul></li>
+<li>Full disclosure: Post to a mailing list of security professionals
+<ul>
+<li>Reasoning: if you found it, the bad guys found it too</li>
+<li>Need to fix ASAP without waiting for vendor</li>
+<li>Put pressure on vendors</li>
+</ul></li>
+<li>Responsible disclosure: Tell vendor first, and give them 30 days before telling the world
+<ul>
+<li>Should contact a <strong>coordinating center</strong> (e.g CERT)</li>
 </ul></li>
 </ul></li>
 </ul>
