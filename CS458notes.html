@@ -1291,7 +1291,7 @@ word-wrap: break-word;
 </ul>
 <h1 id="network-security">Network Security</h1>
 <ul>
-<li>Not built with security in mind</li>
+<li>Networks are not built with security in mind</li>
 </ul>
 <h2 id="network-concepts">Network Concepts</h2>
 <h3 id="architecture">Architecture</h3>
@@ -2107,8 +2107,8 @@ word-wrap: break-word;
 <ul>
 <li>Separate keys for encryption and decryption
 <ul>
-<li>Public encryption key (<strong>verification key</strong>)</li>
-<li>Private decryption key (<strong>signature key</strong>)</li>
+<li>Public <strong>verification key</strong></li>
+<li>Private <strong>signature key</strong></li>
 </ul></li>
 <li>Alice signs with private <em>signature key</em></li>
 <li>Verification: Bob verifies using public <em>verification key</em></li>
@@ -2543,7 +2543,15 @@ word-wrap: break-word;
 <ul>
 <li>Future key compromises should not reveal past communication</li>
 <li>Use <em>session keys</em> instead that are securely erased after use</li>
-<li>Diffie-Hellman key exchange protocol</li>
+<li>Diffie-Hellman key exchange protocol
+<ul>
+<li>Alice and Bob agree on prime <code>p</code> and generator <code>g</code></li>
+<li>Alice chooses secret random number <code>a</code></li>
+<li>Alice sends <code>A = g^a mod p</code></li>
+<li>Bob chooses secret random number <code>b</code></li>
+<li>Bob sends <code>B = g^b mod p</code></li>
+<li>The secret key is <code>K = B^a mod p = A^b mod p</code></li>
+</ul></li>
 </ul></li>
 <li>Deniable Authenication
 <ul>
@@ -3377,7 +3385,7 @@ word-wrap: break-word;
 <li>e.g Domain names</li>
 </ul></li>
 <li>Need to make a legal filing showing you are using the name in commerce</li>
-<li>Can sure others using the same name in a confusing manner</li>
+<li>Can sue others using the same name in a confusing manner</li>
 </ul></li>
 <li>Patents
 <ul>
@@ -3409,6 +3417,7 @@ word-wrap: break-word;
 </ul></li>
 </ul></li>
 </ul>
+<p>^^^END OF EXAM MATERIAL</p>
 <h4 id="paracopyright">Paracopyright</h4>
 <ul>
 <li>e.g DCMA</li>
